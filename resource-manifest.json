@@ -1,13 +1,14 @@
 {
-  "format": "lingotrace-partial-resource-archive-v1",
-  "status": "partial",
-  "created_utc": "2026-10-12T16:58:28Z",
-  "source_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
+  "format": "lingotrace-resource-archive-v1",
+  "status": "all_resource_bytes_preserved_historical_mapping_partial",
+  "resource_bytes_complete": true,
+  "resource_bytes": 130027792,
+  "direct_original_count": 30,
+  "oversized_original_count": 3,
+  "chunk_count": 9,
+  "uploaded_object_count": 39,
+  "frozen_source_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
   "archive_branch": "archive/large-resources-20261012",
-  "completed_originals": 23,
-  "expected_originals": 30,
-  "completed_chunks": 0,
-  "expected_chunks": 9,
   "objects": [
     {
       "blob": "cec8154e1052f38252856eaeb800e05756760215",
@@ -319,7 +320,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/onnx/decoder_model_merged_quantized.onnx.part0"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "b5fc97dfcc25e1a2e5b6560c557dd471d04f01df",
@@ -332,7 +333,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/onnx/decoder_model_merged_quantized.onnx.part1"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "d38e9836a739afa1e04fa424356caad1b21b1b71",
@@ -345,7 +346,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/onnx/decoder_model_merged_quantized.onnx.part2"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "e470741252db8157bb1be9f34d12761fcbba65c3",
@@ -358,7 +359,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/onnx/decoder_model_merged_quantized.onnx.part3"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "29a421694a9deb690fa39ddd5b80b3995b4fad66",
@@ -371,7 +372,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/onnx/encoder_model_quantized.onnx"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "b5bd266de2f9b9a68efe13fb48ac6830ca71c0bb",
@@ -384,7 +385,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/model/tokenizer.json"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "blob": "4eefb9e8416ca118544e0b4d5f8a012b1b0a0890",
@@ -397,7 +398,7 @@
       "source_paths": [
         "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/transformers.min.js"
       ],
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-000.bin",
@@ -407,7 +408,7 @@
       "source_offset": 0,
       "source_blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-001.bin",
@@ -417,7 +418,7 @@
       "source_offset": 8388608,
       "source_blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-002.bin",
@@ -427,7 +428,7 @@
       "source_offset": 16777216,
       "source_blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-000.bin",
@@ -437,7 +438,7 @@
       "source_offset": 0,
       "source_blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-001.bin",
@@ -447,7 +448,7 @@
       "source_offset": 8388608,
       "source_blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-002.bin",
@@ -457,7 +458,7 @@
       "source_offset": 16777216,
       "source_blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-000.bin",
@@ -467,7 +468,7 @@
       "source_offset": 0,
       "source_blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-001.bin",
@@ -477,7 +478,7 @@
       "source_offset": 8388608,
       "source_blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     },
     {
       "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-002.bin",
@@ -487,7 +488,7 @@
       "source_offset": 16777216,
       "source_blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
       "kind": "chunk",
-      "status": "pending_source_recovery"
+      "status": "verified_uploaded"
     }
   ],
   "oversized_originals": [
@@ -495,20 +496,144 @@
       "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
       "bytes": 19584717,
       "sha256": "b2ea5fa763a5687961606061afbef1b7619fcaff3ccd04b3e0b9f14584ffa642",
-      "known_source_path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4"
+      "source_paths": [
+        "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4"
+      ]
     },
     {
       "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
       "bytes": 19581425,
       "sha256": "1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526",
-      "known_source_path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4"
+      "source_paths": [
+        "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4"
+      ]
     },
     {
       "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
       "bytes": 21596019,
       "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
-      "known_source_path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm"
+      "source_paths": [
+        "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm"
+      ]
     }
   ],
-  "historical_oversized_path_mapping_status": "Pending recovery of the full source-commit-to-resource-path map; known source paths and exact original/chunk identities are retained here."
+  "source_path_mapping": {
+    "manifest": "large-resources.json",
+    "verified_original_git_commits": 146,
+    "verified_candidate_snapshots": 1,
+    "covered_source_identities": 159,
+    "original_planned_source_identities": 200,
+    "unrecovered_source_identity_mappings": 41,
+    "candidate_source_identity": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
+    "candidate_verified_projected_tree": "c8a344b1f1d864f944c0370c5bed3be6e80f8fa3",
+    "candidate_original_git_commit_object_available": false,
+    "status": "Only evidence-backed path mappings are included; no missing historical mapping was inferred.",
+    "verified_identical_projected_tree_snapshots": 12,
+    "unresolved_source_identities": [
+      "07f4b849c98bcf18845cf38b88169220885515de",
+      "08285e8a4f5743526a2f223e1e12b6937d0102cc",
+      "0fdc95fd88b88c9e3d957977f453ee3ebe0503ec",
+      "1b693e483b44ddcf3a8c746d15cc543ccb076986",
+      "1d5156ad55ec1f778ddfcb823ef71111db00ca15",
+      "2c48e5f25213f8fc6e5015a8e4a204133c3ebaa5",
+      "324c0f7f68cb4d58f2382355d989034306b200e8",
+      "490562af29bd5f2b06f1a229a369b82a59e5be39",
+      "4d6e573d7cc1f3170ea8bf88069198f99fcb1303",
+      "556bbaca5020925489edb304fb3e68353788fb6d",
+      "577ca5fe0e3e08c05d7880756d7aca15e6114f96",
+      "5bf05b69d046793a5be99e968aa3cae438bcc4e9",
+      "60efbe5cefe54d32c06cd62ab51db9c18769a09b",
+      "626e41daeb17780384f711510a2f33a2254a4295",
+      "62fb19108c4f3ea27dc1cec85dcbd0fd4ba62ed8",
+      "671c27b1175ed921547160df74758063f783a708",
+      "71233c55ccd64b119567db5a76217c7390102635",
+      "760b76efd95fb4de7d629d7ea9fcfd4b36ff9237",
+      "7dabab47b8ff19642334fb193cd674d2b2c94984",
+      "87d3e395149c87af317f51481c4f66bf909f550f",
+      "8e98c54afabe800b5872f86d2c06056556c28b13",
+      "90b7c3fa3a1ab5dfd39e29becb5af3434462f93d",
+      "9b611544a6af74fe3424ec904602786af2dd483f",
+      "9d4ae6e64455a58bc748a9e8d6fc94fb787caa4b",
+      "a4893c6bb3309d21b5e2e78d952e82375c975f16",
+      "a547d412a1f6d19908b8d108ce890bc913f23745",
+      "b178171d250ad02efcefecf563a16cf9b7a6d149",
+      "b1dbaa110ad3e0035171548c8202652e0d48dd72",
+      "b30c7f9fc038c0dee1ab4c4ab2a20b0df5e62018",
+      "bb9223c3a9d603161d893d222bb977837070e5a8",
+      "c4e7ca322abd69e15675333f3cec99f2e1b80e58",
+      "d54a7c6a6b0f5266d60d480db2228acd067296f9",
+      "ddcce6c677b8b7d8cab4bb3b9ef44fca0fc77d60",
+      "e082ca8f429c0f612b427a093761aa58a58319d2",
+      "e177cf05454d56992a64534c9cb4ae3a3389e256",
+      "e1ad54882c03356adb2a33ac18a350b4772cf960",
+      "eabeb7396d42b5367cc908956e240337884255d3",
+      "eaf14fde91ef44ae795338cabe27aacce1dc0e0f",
+      "eb0c1f79ef9c65ac13221a59a69211ddbb074b8a",
+      "f20eb4ab53d222ff6e1ab94b0f670f8c8ea844cb",
+      "fc1f5b21e357e10544700eb3841c71fbaf651245"
+    ],
+    "identical_projected_tree_proofs": [
+      {
+        "original_commit": "38da81874851aab4288e7e3be8dd4b2898cb3d8c",
+        "projected_source_tree": "f68f6d39165e1ed16ea39aac99af8b983be5c12f",
+        "recovered_from_original_commit": "132e492dc06f8345c05b7ef947ffc06589e1acce"
+      },
+      {
+        "original_commit": "57c611f2d8b01c106523c3597bdf9dff790686db",
+        "projected_source_tree": "94ff836f3345597dcd4867fb78d106dc440a1e05",
+        "recovered_from_original_commit": "55302479f8c25ec943376f20566726afa89cae94"
+      },
+      {
+        "original_commit": "721422f65acf9db2da0f0907d1aff54c3272b421",
+        "projected_source_tree": "f5c80dd907aef8e6fe3e207ab0755679d6eb4243",
+        "recovered_from_original_commit": "830270473de141ae4ff2ba42d0a730daf2f7ce8a"
+      },
+      {
+        "original_commit": "b598eb40edb768b354b93998fdc41cba93db8b1d",
+        "projected_source_tree": "0ff05e6b9c0e63befe6104e946fd5dc1d593b9e9",
+        "recovered_from_original_commit": "39b8652688bee3f2ca48fe7c7a743041ccb28c75"
+      },
+      {
+        "original_commit": "6a6163d93d39b545e65b7fc5548b2861c651917e",
+        "projected_source_tree": "57225ea9f3b3fc0f7722068af53ac40b33964dae",
+        "recovered_from_original_commit": "765d90a06887636a47808d23e9ec3312b4113b30"
+      },
+      {
+        "original_commit": "a90e31aaf1261d7e968cf6d5b422f4520736d53e",
+        "projected_source_tree": "ec9c0e24d8640de8e85a84f58cf0baafcb534046",
+        "recovered_from_original_commit": "c3df8fecb7c9539418de92da98580acfcc4e3917"
+      },
+      {
+        "original_commit": "7b414419ae73146f88b444e77e5a0c76cc1f6935",
+        "projected_source_tree": "d3cdc80e37ca47c5d4d8a0100d6de9e65bcf13c0",
+        "recovered_from_original_commit": "571b89b20ece4a37def7580efc3833ea9b866d0b"
+      },
+      {
+        "original_commit": "96bde521258148b29bdd473734cb6f704fc451a5",
+        "projected_source_tree": "4ce382f5cc19a183d63a94faa2540b1d0ee9ee31",
+        "recovered_from_original_commit": "ca7e2fb25a1ecbb1a583d97cd52230d1b86d5716"
+      },
+      {
+        "original_commit": "d5db82edb8a2e58b9108184cbfffa402fb93acea",
+        "projected_source_tree": "24527617f4ecbf41f44500beb9c7ea614129cc53",
+        "recovered_from_original_commit": "45ee1ed3029472e978446bd4485e2dbf22148f53"
+      },
+      {
+        "original_commit": "80a35e11c9835e4570ff2abfe3cdddbb5436b10a",
+        "projected_source_tree": "26f5ec85da9e5651294ae9b09bf61f5a56bdfb73",
+        "recovered_from_original_commit": "6c251d74cc1245c9b6ddd454106fd696d96e4daf"
+      },
+      {
+        "original_commit": "a463151cea2055ba53f3a938edc71c5247153e48",
+        "projected_source_tree": "2a9803aee83ad05f18d6efa1148d945428093789",
+        "recovered_from_original_commit": "6e2173662e41747ffbe594a420ae614ad65720f6"
+      },
+      {
+        "original_commit": "1797507bcc03890f4f1e23f3e40b8f76e533f962",
+        "projected_source_tree": "8e0e550a773698df5aeaa76f7e634248f34f8a44",
+        "recovered_from_original_commit": "47a1df1df2918fb87a56b16d37b63bcda44d22be"
+      }
+    ]
+  }
 }

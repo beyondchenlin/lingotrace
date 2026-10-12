@@ -1,0 +1,1340 @@
+{
+  "format": "lingotrace-offline-resource-archive-v1",
+  "chunk_bytes": 8388608,
+  "archive_ref": "origin/archive/large-resources-20261012",
+  "blobs": [
+    {
+      "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+      "bytes": 19584717,
+      "sha256": "b2ea5fa763a5687961606061afbef1b7619fcaff3ccd04b3e0b9f14584ffa642",
+      "chunks": [
+        {
+          "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-000.bin",
+          "bytes": 8388608,
+          "sha256": "b7a90f0d66d78978b367c274cb7a24cea510932689f672defb6f50c844dea1dc",
+          "blob": "fad9b70e8b0f770c0cc632be0457bb7762530307",
+          "source_offset": 0
+        },
+        {
+          "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-001.bin",
+          "bytes": 8388608,
+          "sha256": "50edae07778feb996d84c48cea377b8f89ff4e9ff6587493b06280b583605c5a",
+          "blob": "177e1223ea91e1255f9080f9ebe2d5d7d44bf16e",
+          "source_offset": 8388608
+        },
+        {
+          "path": "blobs/79281d7826769b8192582b23ab26947e3dd8d2a4/chunk-002.bin",
+          "bytes": 2807501,
+          "sha256": "be4b0a47f3a1eb24200cd9dab61d0f7e5be450155e5ec63ab2f516aaf894393c",
+          "blob": "ffd6cf69a959aa8a74b1ac1e057a465babbe352b",
+          "source_offset": 16777216
+        }
+      ]
+    },
+    {
+      "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+      "bytes": 19581425,
+      "sha256": "1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526",
+      "chunks": [
+        {
+          "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-000.bin",
+          "bytes": 8388608,
+          "sha256": "7e5cc2e430837d3b0d9a194b9cac7241b2712c2b14eb92658c9609bbffb80171",
+          "blob": "cf07b24ca90a375422027cee6e672bef5dd1306b",
+          "source_offset": 0
+        },
+        {
+          "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-001.bin",
+          "bytes": 8388608,
+          "sha256": "40e8e5895d4262f94bd2e6cb7a2ab4cf7baf45795695420ac11eed32fa79dff3",
+          "blob": "54de15ea586404600bc06c62d7ff10ba39dff20e",
+          "source_offset": 8388608
+        },
+        {
+          "path": "blobs/c6e48ac7bbedc8490f852d07bf8a6b4625fac09d/chunk-002.bin",
+          "bytes": 2804209,
+          "sha256": "ae0dfa6e5c88b4ce3aeb753c765bde1a02c564dbd3684525bcb4a32f9d356946",
+          "blob": "63cf452fa500115c74d334768dd0d34bae329821",
+          "source_offset": 16777216
+        }
+      ]
+    },
+    {
+      "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "chunks": [
+        {
+          "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-000.bin",
+          "bytes": 8388608,
+          "sha256": "5431c654215a588a671de09dd14ba656f97d7e4ddbec2b55dcd02f64d44a8f46",
+          "blob": "06c8383f2ae35b15ad052b204f22b12709dd3593",
+          "source_offset": 0
+        },
+        {
+          "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-001.bin",
+          "bytes": 8388608,
+          "sha256": "b2337fd466137fe0031fee7646fdd765e888e20eb0d507e23e00c0f36d0e9fd9",
+          "blob": "b250bdb3f6ce5570a568fa76f7c393e1e6feacf1",
+          "source_offset": 8388608
+        },
+        {
+          "path": "blobs/b05d1adc8304011b9a1110ca33dbf79c168d0b54/chunk-002.bin",
+          "bytes": 4818803,
+          "sha256": "b870ce8426a85ac994ef80359c3a01cd79d01ae49cf19f8a98d24810bbc7b4f4",
+          "blob": "b86657191cf52ce26d4a199059fb7faaaaab1ff7",
+          "source_offset": 16777216
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "01113ad1821b52b7b7f410c4c0c6290157e0fac4": [],
+    "02f69d1deb4e672887b253bc008edac2e786e268": [],
+    "036373f49d177c5a15eb5f73a6b8366b176d71dc": [
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "0790dab7f7dcf33d03a0beb89a1422c5eb5af472": [],
+    "0b5b8bac3c47e24f29c253224118f10dac4f0b82": [],
+    "0f1f0be9d592a28c825325946f074b72cb3e9cbe": [],
+    "132e492dc06f8345c05b7ef947ffc06589e1acce": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "14cd515b18f27124299e3c83b0e77b98c402327f": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "1797507bcc03890f4f1e23f3e40b8f76e533f962": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "18ac500220750949349a29d441ed5c428ee006c7": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "18eaf70df62231e949a608f976c444c68cf84970": [],
+    "191a4b826f6d3f0ff170061fbcaa3d60e23c45c3": [
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "192d770472c61611dd9ecf4bb7817fa9e002d64f": [],
+    "1b46f53195f7a1c86637d72555a972fe1d4a78dd": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "1d220c983d8304bbec0c0094b130383e6c9f3e97": [],
+    "1dcbf79f3d2eff437eadb172d5448a2339f3c873": [],
+    "1e085e77b5d152e16f1a8a5f8c5a2e7904687c39": [],
+    "1f5a0bc807ae04b1fc47409e123d602f379cd5e0": [],
+    "24e5bc1887138d8499020c203d3f7043f4048c95": [],
+    "28a926fed2e3f60c2b1a222d0e48986c3e044629": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "31ec5572734e984b7d17b48ce68b887ccaa4259c": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "330205c4ae35f05949cd9e4a938019ec48a158d5": [],
+    "35df182cd2f04755353f1a9026b9aaa1c83b7f15": [],
+    "37e79aced08d8a18e386cc609fad1549f1e55932": [],
+    "380788d951d37e819ea1a7b2fa3cb0edcafc8ca6": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "38da81874851aab4288e7e3be8dd4b2898cb3d8c": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "3921e15e2b43a02509c6f288b1099c0fe6982f1f": [],
+    "39b8652688bee3f2ca48fe7c7a743041ccb28c75": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "3b3005bdb2a742ee37962a1dcec24a4818683b97": [],
+    "3bc1b98da9c849f2bfe4bdee757762d8bd3aaa01": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "3c7870c7579968fe7b5b5de80cca4126eeb22c74": [],
+    "3e3f7d7f6d54f0b9dc114041d5ae783146bd92c2": [],
+    "45ee1ed3029472e978446bd4485e2dbf22148f53": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "47a1df1df2918fb87a56b16d37b63bcda44d22be": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "488256c0cefe973bffe0c281275c73fc7568a7e7": [],
+    "4a6d00cdaecd8fb7177a5d3e4e6fc6095bf994c9": [],
+    "4d79a6d4fa71e691ee3129a48d83bc812d1f81ac": [],
+    "4ddc504aaa5f62dc52cdf7aa8b5b54abae55fdcb": [],
+    "4f2e504a5407316b7aa4325f06536fffbffd0c06": [],
+    "517010c4f5fa687438b7f66d3db222e7dd1a1988": [],
+    "533121bbd44def687414fad6d7f3ba19b6893a2e": [],
+    "53699dc67b088d50b287017382da90d189feed33": [
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "54e58595a37df9ef42f957191e18969a939ccbf2": [],
+    "54edbb8f387e9ec81949b2511b368737af9faf87": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "55302479f8c25ec943376f20566726afa89cae94": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "561f15fcbe91a678f4256ece15bc600a69093c5f": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "571b89b20ece4a37def7580efc3833ea9b866d0b": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "577b2923b8232a44cc497dcdf19d7403e58b0ecf": [],
+    "57bfa7541f0eeef17f3059a9e10b7d87ee46da9f": [],
+    "57c611f2d8b01c106523c3597bdf9dff790686db": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "59ddf18ae117e2e6f0607ed93f54404036bfd881": [],
+    "5b23a8801a3a3094818320ba08abfd9453560f7d": [],
+    "5dd069bf1cff4200f809ac63643ca62fb40d4c22": [],
+    "5f2285d1eb8cedb0048e05f56d1965307d05fbf7": [],
+    "5fcd7a81c2704d3dce7a1f781f977d1dec5bb169": [],
+    "612636da9d8d6c97cf7b432bd8a36c1b288593e2": [],
+    "6381eb28d40ee88cef8641d8f9fe8910792fa7ba": [],
+    "6385e22a66bcab352ff37a13b0665cff9b9c724a": [],
+    "63ef96b96cb160a219719a86449441a3dd4d3d48": [],
+    "65eeb0f9ea4fa90d66f7ebd3236ffed1bf90523d": [],
+    "68addb6ee41aa01b0a4b2b585e1828d7668ebf67": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "69a6488c4f6490af312721e04d80b8f757f90c57": [
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "6a6163d93d39b545e65b7fc5548b2861c651917e": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "6b3085f357478ad558e5f04228eca85b6b158198": [],
+    "6c251d74cc1245c9b6ddd454106fd696d96e4daf": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "6d5702502889e854ba493b923067fe58bae1fefd": [],
+    "6d59a33def4c339bcf64a5663776f104f96b9f11": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "6de83f62687d42edd2250934c94e6627142183e6": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "6e2173662e41747ffbe594a420ae614ad65720f6": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "721422f65acf9db2da0f0907d1aff54c3272b421": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "727f5505c9acd6e30136097be080ca65909db36d": [],
+    "7526b8fcfa7b08df2b3160f05ccea30a84413d12": [],
+    "765d90a06887636a47808d23e9ec3312b4113b30": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "76eba620c10922cd66628b5ceb754d1386b648cc": [],
+    "778625c4e1e1edc4128d0ce307581aac200485f0": [],
+    "7811adb1adff718ebe58876d354f70b04e6641bb": [],
+    "7932dff65e68099c86d4598355bc95a6aaaea589": [],
+    "7b414419ae73146f88b444e77e5a0c76cc1f6935": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "7ca9f68f26aafd0abaab5c750cb9d615101901d4": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "7d4df1d2e6f602768a311f6003be39999d101f41": [
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "7e57a5c4ca5341fe42577be6bea44d744e158519": [],
+    "7f32c94ded91e356178a17b2221719b72aa904ca": [],
+    "80a35e11c9835e4570ff2abfe3cdddbb5436b10a": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "81160ced91437cdd8b1fdc3275ced3db56626d3a": [],
+    "816f186840f8b36dcaa1b420ebda34d77437fdb2": [],
+    "830270473de141ae4ff2ba42d0a730daf2f7ce8a": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "830654b5b8d269ab7da41fd302d93d6e91a389f9": [],
+    "84f054d769a0397fe38151da6814ae49bbc7ab0e": [],
+    "8addf9e477e614d4bbcdf9e670544e92a74763c1": [],
+    "8c5a465ad70734c440c9dea70e05b8e3f75956c5": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "8fda2346378087a439d593b9d0921b4cac764423": [],
+    "9218137a6949a17012399e7bfac8f87c14c8a70e": [],
+    "96bde521258148b29bdd473734cb6f704fc451a5": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "9753d5b9982eacb9f57dcec911a61d3625be3f8c": [],
+    "978219fc4c4beae657424f13c026719ddf605c95": [],
+    "987cdececf59ff4920c5128452c204c7c3443619": [],
+    "98faf71bd72b09d346e0b89b72fa6a99fc363edc": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "9a86a3f0e6d6a2571574c526be2d5db006f3a900": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "9b5ef22aaae0a8d2701f2869b7e14378a56ee0a6": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "9ea23f8c87b4d1b93477dcb76820cc4eb45b0385": [],
+    "a183baebd36110394d06aef6196398c09dbfb694": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "a342adb845747f4cba28317129b6c032f206d259": [],
+    "a463151cea2055ba53f3a938edc71c5247153e48": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "a4c1b95fa3ffdf324c13c3484bec7f0a0e02cd84": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "a60c1297f4a836d2b0cf97c9aec0c49cdd0964b0": [],
+    "a72f4c2acb173a185221002ebea1f5011c9bf4b5": [],
+    "a7fa4d39fc6d30b0c096737cfc213c83c66f4c10": [],
+    "a90e31aaf1261d7e968cf6d5b422f4520736d53e": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "aa8c65b41ec17a95de48c51546e308dd4b380912": [],
+    "aaf773e93d4013de0518c01c996609a18dc5672f": [],
+    "ad3557f81dd2e745de0e6b1545c87e2ceb5e39be": [],
+    "ad78a4a6a40eec4eef3a49422f4c29a1f4e8b209": [],
+    "b40e643de49804a9d4c47110f21262913b231f20": [],
+    "b432554e352bb76a7a45541b6c879462e9552a06": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "b598eb40edb768b354b93998fdc41cba93db8b1d": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "b8285030fe8889a1de894f7cfe4ecb91b4d3746a": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "b834152bbb6fa36ab9e5ff15ff3e3f2234c03d67": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "bddfa868b27247480428d97d57fe15a56e0722b3": [],
+    "be3c4804b57dc1ba1b3f881c40982d8c5552ade6": [],
+    "c04081bf6f43aa8b94ab31724b3c34a15f957465": [],
+    "c0cecd95bf81cba21dd6b7d5afbeac8d4a8ea919": [],
+    "c3df8fecb7c9539418de92da98580acfcc4e3917": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "c50e27116050a652d0b43b368ef0a46fc952cf0b": [],
+    "c5c22bd6bae0075b111e9af09829425ad4db4c51": [],
+    "c821b57bdd58bfa1d7aa76eef6dbd1b316241786": [],
+    "c8362e16eb02fe8f5754b127439de67aeab78b66": [],
+    "c907e02b7217b1d062866144935f7b067bdcc805": [],
+    "ca770bb15d6b963f5678a6d4717704512a489f4e": [],
+    "ca7e2fb25a1ecbb1a583d97cd52230d1b86d5716": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "cb1bb21e51db23818c95645b4384f5553488fe97": [],
+    "cb42fc8f2f605fa545688a91ffd534b2e7b6def9": [],
+    "d286bf6db5eea2ea16d7f4b7b2a5019257c8f7ed": [],
+    "d36190a5ccd1e3d271c6330df4470ef55db7fd39": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "d567cd04057c696450650eef1e354877f4b3b24e": [],
+    "d5db82edb8a2e58b9108184cbfffa402fb93acea": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "d788facf91147d3717b0f3ba00fe1ea262b61090": [],
+    "db5085c9f67d61ef577e9f0a043aee8667241873": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "dd0cdc301a29e90169a481e4eacd50e3cca6064d": [],
+    "de7622e6c6281960310f8cf37aa5a78d07a837fa": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "df272f98c1158550abfade8c61cee2b536155d2b": [],
+    "e03afb51a63d595d5eeb2aecbfd5521b7b68b417": [],
+    "e41c13f9141a47586543397fdb8ff407038cda56": [],
+    "e7540e9e8942b6f8055884ecbe4187cd791ab770": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "e7c80bafc7ccf58b8e730052d1a83ae53651cf4e": [],
+    "e84b573a82ccf9370a48fbfc0c2f6a0d3063450a": [],
+    "e908adab286207fd8886649b82a9d142c2763aba": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      },
+      {
+        "path": "public/subtitle-workbench/assets/tiny-en-aeaa13760958b03fac5062f457d317d3319c3168-tfjs-3.7.1/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "blob": "b05d1adc8304011b9a1110ca33dbf79c168d0b54",
+        "mode": "100644"
+      }
+    ],
+    "e94abb60f1e70e00681a41d1ec846b3106398450": [],
+    "eaae581f38432562ab438d8816d451280ae3deda": [],
+    "ee5acb4ed57970849c04274c237a404d05cc5ee6": [
+      {
+        "path": "public/studio-assets/nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+        "blob": "c6e48ac7bbedc8490f852d07bf8a6b4625fac09d",
+        "mode": "100644"
+      },
+      {
+        "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+        "blob": "79281d7826769b8192582b23ab26947e3dd8d2a4",
+        "mode": "100644"
+      }
+    ],
+    "ee9a089a43c9c497d74d6f958d6278b4b6f11bde": [],
+    "f220944a877240650ce9ec5cbf16f7b4ee49e8e7": [],
+    "f69e7a2a3d8c736d235f0598da7457b31f890ef1": [],
+    "f6ad21423a636a4deda78440bc75578d7c5bdd3a": [],
+    "f8ed68d75788f098dd502dc31a6052d9e2f98b03": [],
+    "f9cd7f61dc965744a54932ba5f8b4f83054c809f": [],
+    "faf3859e804a229aaeeeb041cce03e09213c792b": [],
+    "fcad96abe61ce4a5d603dff749a97d73308a8a36": [],
+    "fdc12efed8e0b8346ef486485a16b736ae39d3e4": []
+  }
+}
