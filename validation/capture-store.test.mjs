@@ -361,3 +361,185 @@ test('dispose removes timers and releases camera plus recording; snapshots are i
   assert.equal(h.timers.entries.size, 0); assert.equal(h.controller.snapshot.prepared, false);
   assert.throws(() => h.controller.startRecording(), { code: 'DISPOSED' });
 });
+
+// Minimal transaction adapter exercises the production IndexedDB store methods.
+// It simulates structured cloning, asynchronous request callbacks, atomic commit
+// and rollback, and a backend which refuses all Blob values. It is not a browser.
+function idbFixture() {
+  const db = {
+    tables: new Map(['recordings', 'chunks', 'control'].map(name => [name, new Map()])),
+    transactions: 0, rejectBlobs: true, rejectWrite: null, readTransform: null,
+    close() {},
+    transaction(names, mode) {
+      this.transactions++;
+      const database = this;
+      const working = new Map(names.map(name => [name, new Map([...database.tables.get(name)].map(([key, value]) => [key, structuredClone(value)]))]));
+      let pending = 0;
+      let aborted = false;
+      let completed = false;
+      const tx = {
+        error: null,
+        abort() { if (aborted || completed) return; aborted = true; queueMicrotask(() => tx.onabort?.({ target: tx })); },
+        objectStore(name) {
+          const table = working.get(name);
+          const keyFor = value => name === 'chunks' ? JSON.stringify([value.recordingId, value.sequence]) : value[name === 'control' ? 'key' : 'id'];
+          const request = operation => {
+            const req = {}; pending++;
+            queueMicrotask(() => {
+              if (aborted) { pending--; return; }
+              try { req.result = operation(); req.onsuccess?.({ target: req }); }
+              catch (error) { tx.error = error; tx.abort(); }
+              finally { pending--; scheduleComplete(); }
+            });
+            return req;
+          };
+          const containsBlob = value => value instanceof Blob || (value && typeof value === 'object' && Object.values(value).some(containsBlob));
+          const write = (value, add) => {
+            if (database.rejectBlobs && containsBlob(value)) throw new DOMException('Error preparing Blob/File data to be stored in object store', 'DataCloneError');
+            database.rejectWrite?.(name, value);
+            const cloned = structuredClone(value);
+            return request(() => {
+              const key = keyFor(cloned);
+              if (add && table.has(key)) throw new DOMException('Duplicate key', 'ConstraintError');
+              table.set(key, cloned); return key;
+            });
+          };
+          return {
+            put(value) { return write(value, false); }, add(value) { return write(value, true); },
+            get(key) { return request(() => { const value = structuredClone(table.get(key)); return database.readTransform ? database.readTransform(name, value) : value; }); },
+            getAll() { return request(() => [...table.values()].map(value => structuredClone(value))); },
+            delete(key) { return request(() => table.delete(key)); },
+            index() { return { openCursor(recordingId) {
+              const values = [...table.values()].filter(v => v.recordingId === recordingId).sort((a, b) => a.sequence - b.sequence);
+              const req = {}; let position = 0;
+              const next = () => {
+                pending++;
+                queueMicrotask(() => {
+                  if (aborted) { pending--; return; }
+                  try {
+                    const value = values[position++];
+                    req.result = value ? { value: structuredClone(value), continue: next } : null;
+                    req.onsuccess?.({ target: req });
+                  } catch (error) { tx.error = error; tx.abort(); }
+                  finally { pending--; scheduleComplete(); }
+                });
+              };
+              next(); return req;
+            } }; },
+          };
+        },
+      };
+      function scheduleComplete() {
+        setImmediate(() => {
+          if (aborted || completed || pending) return;
+          completed = true;
+          if (mode === 'readwrite') for (const [name, table] of working) database.tables.set(name, table);
+          tx.oncomplete?.({ target: tx });
+        });
+      }
+      scheduleComplete(); return tx;
+    },
+  };
+  const store = new IndexedDBRecordingStore({ indexedDB: {}, IDBKeyRange: { only: id => id } });
+  store.db = db;
+  return { store, db };
+}
+
+test('production IDB probe verifies ArrayBuffer round-trip on a Blob-rejecting backend', async () => {
+  const { store, db } = idbFixture();
+  await store.probe();
+  assert.equal(db.transactions, 3, 'write, read/verify, delete are separate completed transactions');
+  assert.equal(db.tables.get('control').size, 0);
+  db.readTransform = (name, value) => name === 'control' ? { ...value, value: new Uint8Array([99, 1, 127, 128, 255, 42]).buffer } : value;
+  await assert.rejects(store.probe(), { code: 'STORAGE_PROBE_MISMATCH' });
+  assert.equal(db.tables.get('control').size, 0, 'failed verification still cleans the probe');
+});
+
+test('production IDB chunk persistence is binary-exact without storing Blob objects', async () => {
+  const { store, db } = idbFixture();
+  await store.create({ id: 'binary', status: 'recording', chunkCount: 0, bytes: 0 });
+  const expected = new Uint8Array([0, 255, 128, 0, 12, 67]);
+  const record = await store.append('binary', 0, new Blob([expected]), 123);
+  const chunk = db.tables.get('chunks').get(JSON.stringify(['binary', 0]));
+  assert.equal(chunk.encoding, 'arraybuffer'); assert.ok(chunk.data instanceof ArrayBuffer);
+  assert.equal('blob' in chunk, false); assert.equal(record.bytes, expected.length); assert.equal(record.chunkCount, 1);
+  const parts = await store.readChunks('binary', 100);
+  assert.deepEqual(new Uint8Array(await new Blob(parts).arrayBuffer()), expected);
+});
+
+test('production IDB reader supports existing Blob chunks mixed with new buffer chunks', async () => {
+  const { store, db } = idbFixture();
+  db.tables.get('chunks').set('legacy', { recordingId: 'mixed', sequence: 0, blob: new Blob(['old']), size: 3 });
+  db.tables.get('chunks').set('new', { recordingId: 'mixed', sequence: 1, data: new Uint8Array([0, 255]).buffer, encoding: 'arraybuffer', size: 2 });
+  const parts = await store.readChunks('mixed', 5);
+  assert.ok(parts[0] instanceof Blob); assert.ok(parts[1] instanceof ArrayBuffer);
+  assert.deepEqual(new Uint8Array(await new Blob(parts).arrayBuffer()), new Uint8Array([111, 108, 100, 0, 255]));
+  await assert.rejects(store.readChunks('mixed', 4), { code: 'EXPORT_TOO_LARGE' });
+});
+
+test('buffer conversion completes before transaction opens, and rejected conversion writes nothing', async () => {
+  const { store, db } = idbFixture();
+  await store.create({ id: 'delayed', status: 'recording', chunkCount: 0, bytes: 0 });
+  const gate = later(); const before = db.transactions;
+  const writing = store.append('delayed', 0, { size: 3, arrayBuffer: () => gate.promise }, 123);
+  await tick(); assert.equal(db.transactions, before);
+  gate.resolve(new Uint8Array([1, 2, 3]).buffer); await writing;
+  assert.equal(db.transactions, before + 1);
+  const after = db.transactions;
+  await assert.rejects(store.append('delayed', 1, { size: 1, async arrayBuffer() { throw new Error('conversion failed'); } }, 456), /conversion failed/);
+  assert.equal(db.transactions, after); assert.equal(db.tables.get('recordings').get('delayed').chunkCount, 1);
+  await assert.rejects(store.append('delayed', 1, { size: 2, async arrayBuffer() { return new Uint8Array([1]).buffer; } }, 456), { code: 'CHUNK_CONVERSION_FAILED' });
+});
+
+test('production IDB reader rejects invalid encodings, payloads, size corruption and missing sequence', async () => {
+  const { store, db } = idbFixture();
+  const invalid = [
+    { encoding: 'arraybuffer', data: 'not binary', size: 10, sequence: 0 },
+    { encoding: 'arraybuffer', data: new Uint8Array([1]).buffer, size: 2, sequence: 0 },
+    { encoding: 'future-unknown', data: new Uint8Array([1]).buffer, size: 1, sequence: 0 },
+    { blob: new Blob(['one']), size: -1, sequence: 0 },
+  ];
+  for (const chunk of invalid) {
+    db.tables.get('chunks').clear(); db.tables.get('chunks').set('bad', { ...chunk, recordingId: 'bad' });
+    await assert.rejects(store.readChunks('bad', 100), { code: 'CHUNK_INVALID' });
+  }
+  db.tables.get('chunks').clear(); db.tables.get('chunks').set('gap', { recordingId: 'bad', sequence: 1, data: new Uint8Array([1]).buffer, encoding: 'arraybuffer', size: 1 });
+  await assert.rejects(store.readChunks('bad', 100), { code: 'CHUNKS_MISSING' });
+});
+
+test('production IDB rolls back chunk and index together when metadata write fails', async () => {
+  const { store, db } = idbFixture();
+  await store.create({ id: 'quota', status: 'recording', chunkCount: 0, bytes: 0 });
+  await store.append('quota', 0, new Blob(['ok']), 1);
+  db.rejectWrite = (name, value) => { if (name === 'recordings' && value.chunkCount === 2) throw new DOMException('No space', 'QuotaExceededError'); };
+  await assert.rejects(store.append('quota', 1, new Blob(['lost']), 2), { name: 'QuotaExceededError' });
+  assert.equal(db.tables.get('chunks').size, 1); assert.equal(db.tables.get('recordings').get('quota').bytes, 2);
+  assert.equal(db.tables.get('recordings').get('quota').chunkCount, 1);
+});
+
+test('controller reserves pending bytes throughout delayed buffer conversion and waits through stop', async () => {
+  const { store, db } = idbFixture(); const h = harness({}, { store });
+  await h.controller.prepare(); await h.controller.startRecording();
+  const gate = later(); const blob = new Blob(['abc']); blob.arrayBuffer = () => gate.promise;
+  const event = new Event('dataavailable'); event.data = blob; h.recorder.dispatchEvent(event);
+  h.recorder.emit('def'); const stopping = h.controller.stopRecording(); let resolved = false; stopping.then(() => { resolved = true; });
+  await tick(); assert.equal(resolved, false); assert.equal(h.controller._active.pendingBytes, 9);
+  assert.equal(db.tables.get('chunks').size, 0);
+  gate.resolve(new Uint8Array([97, 98, 99]).buffer); const record = await stopping;
+  assert.equal(record.complete, true); assert.equal(record.bytes, 9); assert.equal(record.chunkCount, 3);
+  assert.equal(await (await h.controller.getRecordingBlob(record.id)).text(), 'abcdefend');
+  await h.controller.dispose();
+});
+
+test('controller stops capture as incomplete on buffer conversion failure', async () => {
+  const { store } = idbFixture(); const h = harness({}, { store });
+  await h.controller.prepare(); await h.controller.startRecording(); h.recorder.emit('kept');
+  while (h.controller.snapshot.bytes !== 4) await tick();
+  const blob = new Blob(['lost']); blob.arrayBuffer = async () => { throw new Error('Could not read encoded chunk'); };
+  const event = new Event('dataavailable'); event.data = blob; h.recorder.dispatchEvent(event);
+  await tick(); await tick();
+  const [record] = await h.controller.listRecordings();
+  assert.equal(record.complete, false); assert.equal(record.status, 'incomplete'); assert.equal(record.bytes, 4);
+  assert.equal(h.display.getVideoTracks()[0].readyState, 'ended');
+  assert.equal(await (await h.controller.getRecordingBlob(record.id)).text(), 'kept'); await h.controller.dispose();
+});
