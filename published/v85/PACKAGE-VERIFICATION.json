@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-11T14:37:07.748655+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "source_sha": "7ca9f68f26aafd0abaab5c750cb9d615101901d4",
+  "release_commit": "6de83f62687d42edd2250934c94e6627142183e6",
+  "release_checkout": "/workspace/scratch/dd3f275409c3/lingotrace-mobile-width-release-7ca9f68",
+  "archive": "/tmp/lingotrace-mobile-width-7ca9f68-release.tar.gz",
+  "archive_sha256": "bfcfeeb0bbc54b8e9bd3ca4ef82f0b6deef89517ff4c18c20382f94da7905fb5",
+  "archive_bytes": 129211248,
+  "runtime_file_count": 431,
+  "normalized_hosting_extra_file": 1,
+  "runtime_all_hashes_match_freeze": true,
+  "all_647_source_git_blobs_identical": true,
+  "all_159_docs_retained": true,
+  "public_54_unchanged": true,
+  "old_v82_v83_v84_freezes_archives_unchanged": true,
+  "clean_release_worktree": true,
+  "package_exit_code": 0,
+  "free_tmp": 239595520,
+  "free_overlay": 38162432
+}

@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-10-11T13:40:04.555373+00:00",
+  "authenticated": false,
+  "implementation_sha": "6d59a33def4c339bcf64a5663776f104f96b9f11",
+  "release_sha": "8c5a465ad70734c440c9dea70e05b8e3f75956c5",
+  "saved_version": 84,
+  "build_id": "3yGjsVGCRrcjZj4dxvdR1",
+  "checks": [
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+      "status": 200,
+      "mime": "text/html",
+      "bytes": 14472,
+      "sha256": "a4c26cc6dd441ad79f0c04e5d0d7d049f52fa17a24b756ad77dddb9bb5e4dd4f",
+      "expected_sha256": "a4c26cc6dd441ad79f0c04e5d0d7d049f52fa17a24b756ad77dddb9bb5e4dd4f",
+      "matches_frozen_bytes": true
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/814-5468a3ca91414453.js",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/814-5468a3ca91414453.js",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 906932,
+      "sha256": "e8e347d12381b280b4fd01bc4db537f404142b0b5a562cee4f552a764e9f3a09",
+      "expected_sha256": "e8e347d12381b280b4fd01bc4db537f404142b0b5a562cee4f552a764e9f3a09",
+      "matches_frozen_bytes": true
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-a24d35c87e9e83e2.js",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-a24d35c87e9e83e2.js",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 136,
+      "sha256": "a9f9b39ec518695a6675c5921855029e29ee2f8530fa3598e54310292590cbba",
+      "expected_sha256": "a9f9b39ec518695a6675c5921855029e29ee2f8530fa3598e54310292590cbba",
+      "matches_frozen_bytes": true
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/24da421527a3b2ba.css",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/24da421527a3b2ba.css",
+      "status": 200,
+      "mime": "text/css",
+      "bytes": 32485,
+      "sha256": "d33ef9b874cc3d2aa2d5d01842ce9cb5a6c4f70fe3d14239af006212428409cf",
+      "expected_sha256": "d33ef9b874cc3d2aa2d5d01842ce9cb5a6c4f70fe3d14239af006212428409cf",
+      "matches_frozen_bytes": true
+    }
+  ],
+  "phone_acceptance_claim": false,
+  "media_requests_performed": false
+}

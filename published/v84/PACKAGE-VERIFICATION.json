@@ -1,0 +1,35 @@
+{
+  "status": "SUPPORTED_SOURCE_PACKAGE_VERIFIED_PUBLICATION_HELD",
+  "timestamp": "2026-10-11T13:36:45.525168+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "implementation_source": "6d59a33def4c339bcf64a5663776f104f96b9f11",
+  "release_source": "8c5a465ad70734c440c9dea70e05b8e3f75956c5",
+  "source_helper_opening": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/scratch/dd3f275409c3/lingotrace-native-input-release-6d59a33",
+    "commit_sha": "6d59a33def4c339bcf64a5663776f104f96b9f11"
+  },
+  "source_helper_package": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/scratch/dd3f275409c3/lingotrace-native-input-release-6d59a33",
+    "commit_sha": "8c5a465ad70734c440c9dea70e05b8e3f75956c5",
+    "archive": "/tmp/lingotrace-native-input-6d59a33-release.tar.gz"
+  },
+  "source_push_verified_by_supported_helper": true,
+  "source_only_dist_delta_files": 21,
+  "source_files_unchanged_after_package": 636,
+  "runtime_files": 424,
+  "runtime_manifest_sha256": "5c841ba0c78cd79f07dd55a14a0e2fa29110e36eb9953df13ab7ebc991b74021",
+  "archive_files": 425,
+  "archive_bytes": 128916960,
+  "archive_sha256": "127f7151b3f5dfce0a663ce9f5fa859c676809042f4d3bd60e528e30e23d511f",
+  "archive_runtime_exact": true,
+  "old_v83_v82_freezes_archives_unchanged": true,
+  "previous_v83_release_checkout_clean": true,
+  "new_release_checkout_clean": true,
+  "credentials_cleared": true,
+  "publication": false,
+  "browser_acceptance": "Pending root browser gate",
+  "free_tmp": 349859840,
+  "free_overlay": 48803840
+}
