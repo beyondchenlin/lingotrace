@@ -1,3 +1,15 @@
+# LingoTrace Studio · formal M1 candidate
+
+The formal React/TypeScript implementation is available at `/studio/`. It is built with Next.js static export and a single recordable Canvas scene; the five archived demo routes below remain unchanged. Run `npm ci`, `npm run typecheck`, `npm run test`, and `npm run build`. The build merges only `/studio/`, `/_next/` and `/studio-assets/` into the existing static Site.
+
+M1 targets the selected06 Training Studio at1672×941 and1920×1080 desktop landscape, with real input/data implemented together. Open the top-left title to access tools. Live values start atzero; the explicitly marked reference fixture is only for visual comparison and cannot submit or record. It is not an AI scoring product. The remaining nine styles and dedicated mobile/Pad/TV layouts are later phases.
+
+TypeScript, static export,16 core-data checks,12 synthetic recording/storage checks and2 scene/containment checks pass. Same-renderer program frames have been inspected; they are not real-browser screenshots. Native input/IME, browser media/recording output, refresh behavior and final1:1 visual acceptance still require a usable browser. No actual camera, microphone or OS screen capture was used in testing.
+
+Architecture, metric rules, capture boundaries and visual deviations are in `docs/studio/`. Browser-local records and7-day temporary recordings have separate storage. Download is not permanent-browser retention; interrupted chunks are best effort. Rive remains an asset interface, while current small rewards are Canvas vectors driven by the scene clock.
+
+---
+
 # LingoTrace · five sports HUD demo pages
 
 Static, device-local English training prototype based on the selected five visual concepts and the 2026-10-07 PRD (F01–F08). No accounts, cloud upload, AI grading, or payment. This release replaces the v7 media-sidebar presentation.

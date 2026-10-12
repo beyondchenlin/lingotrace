@@ -1,0 +1,9 @@
+import {readFile,access} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+const html=await readFile('dist/studio/index.html','utf8');
+if(!html.includes('studio-answer')||!html.includes('scene-canvas'))throw Error('Studio shell is missing semantic input or Canvas');
+const refs=[...html.matchAll(/(?:src|href)="(\/_next\/[^"?]+)(?:\?[^\"]*)?"/g)].map(m=>m[1]);
+for(const path of refs)await access(`dist${path}`);
+for(const name of ['06-cafe.mp4','06-cafe-poster.jpg','06-reference.png','rights.json'])await access(`dist/studio-assets/${name}`);
+const old=execFileSync('git',['diff','--name-only','a72f4c2acb173a185221002ebea1f5011c9bf4b5','--','dist/demo','dist/hud','dist/index.html'],{encoding:'utf8'}).trim();if(old)throw Error(`Archived v12 changed: ${old}`);
+console.log(`Static export verified: ${refs.length} Next assets, semantic controls,4 media assets; v12 entry/source unchanged. This is not browser acceptance.`);

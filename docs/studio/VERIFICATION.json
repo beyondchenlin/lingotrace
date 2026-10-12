@@ -1,0 +1,12 @@
+{
+  "scope":"M1: 06 Training Studio, desktop landscape only",
+  "baseline":"PRD v2, user requests from 2026-10-07 15:35/15:37/16:04",
+  "status":"candidate, not 1:1 browser-accepted",
+  "stack":{"next":"16.4.0","react":"19.3.0","typescript":"7.0.2","motion":"14.0.0","export":"static"},
+  "passed":["TypeScript strict check","Next webpack static export","16 deterministic data/persistence checks","12 synthetic composite-recorder/storage checks","containment and zero-baked-UI-photo-mask checks","export shell/9 Next asset references/4 media assets","archived v12 root,/demo,/hud unchanged"],
+  "visual_program_frames":["1672x941 fresh","1672x941 reference fixture","1920x1080 fresh","1920x1080 reference fixture"],
+  "not_verified":["actual browser 1:1 screenshots and native font output","DOM input/IME and pointer hit geometry in a browser","real browser IndexedDB reload and download","actual Canvas encoded video frame/playback and audio mixing","physical camera/microphone","mobile/Pad/TV layouts (M3)"],
+  "browser_blocker":"Bundled browser missing; official download invalid archive; installed Chromium launch socket() failed: Operation not permitted. No bypass attempted.",
+  "privacy":"No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
+  "timing":"activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it."
+}
