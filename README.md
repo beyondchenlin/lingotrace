@@ -4,7 +4,7 @@ LingoTrace 是围绕真实英语素材、本机听写与打字练习、明确检
 
 ## 当前状态
 
-最新源码归档核对：2026-10-12 23:45 UTC。冻结候选的 670 文件源码投影现已完整、可恢复地保存：666 个路径直接保存，另 4 个大资源路径由同分支中的 9 个原始分片和恢复脚本无损还原。独立 Word/PDF PRD 原件、全历史和证据归档仍有待完成项目。[17:15 UTC 原索引](https://github.com/beyondchenlin/lingotrace/blob/218fbb510e7ee4700110d209db6a5718fd37c216/README.md) 保留当时记录。
+最新源码与独立 PRD 原件归档核对：2026-10-12 23:57 UTC。冻结候选的 670 文件源码投影现已完整、可恢复地保存：666 个路径直接保存，另 4 个大资源路径由同分支中的 9 个原始分片和恢复脚本无损还原。本次找回的 48 份独立 Word/PDF PRD 原件也已按原字节归档；全部 Git 历史和证据仍有缺口，不与本次源码/PRD 归档完成混同。[17:15 UTC 原索引](https://github.com/beyondchenlin/lingotrace/blob/218fbb510e7ee4700110d209db6a5718fd37c216/README.md) 保留当时记录。
 
 - 当前已记录的正式网站基线仍为 **Site v93**：[打开 Studio](https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/)。实现源码为 `1797507bcc03890f4f1e23f3e40b8f76e533f962`，发布生成提交为 `47a1df1df2918fb87a56b16d37b63bcda44d22be`。这里引用已保存的发布记录，没有执行新部署或重新宣称设备验收通过。
 - 最新冻结源码候选为 **`b8285030fe8889a1de894f7cfe4ecb91b4d3746a`**，包含以固定速度为主的练习方向。完整验证仍被日历测试进程中断阻塞；该候选未完成新构建、未发布。
@@ -32,11 +32,15 @@ LingoTrace 是围绕真实英语素材、本机听写与打字练习、明确检
    分支：`backup/history-progress-20261012`  
    检查点 `eccd81af44a2b5648e5ade62119465128cdc4806` 已可追溯 19 个投影导入提交，另有仓库初始化提交。投影提交保存原提交与源码树身份，剔除了生成的 `dist` 和历史依赖，不能与原始完整 Git 历史等同。后续历史、原提交与导入提交的映射、各版本文件与资源仍需补齐或核对，全历史迁移尚未完成。
 
+5. **[独立 PRD 原件归档](https://github.com/beyondchenlin/lingotrace/tree/d25f2cd9e8d786c4ea2e52a3e9d9923b832f2b78/docs/prd-originals/2026-10-12)**  
+   分支：`archive/prd-originals-20261012`  
+   已核提交 `d25f2cd9e8d786c4ea2e52a3e9d9923b832f2b78`，保存本次找回的 **48 份独立原件：31 份 Word（DOCX）与 17 份 PDF，共 18,330,358 字节**。包含 v1.4.8 总纲/详细原件、2026-10-12 执行校准版成对原件和其他历史版本；全部原文件名、原字节与各自历史状态保留，没有转换或以新版覆盖旧版。48 个原件及两份归档说明/清单的远端路径、大小和 Git blob SHA 均核对一致。原件中的项目需求引述、消息来源及部署标识按明确许可原样保留。较高版本号不自动代表当前采用版，归档不代表全部功能已实现。
+
 分支可能继续更新。上面的链接指向相应分支；冻结候选身份、GitHub 导入提交和网站发布提交需要分别核对。
 
 ## 接手顺序与剩余工作
 
-1. 先阅读项目交接和决策记录，再查看源码分支中的 PRD 增补。独立 Word/PDF 原件另行归档，不能把这 42 份增补视作全部原始 PRD。源码归档已可恢复，先按分支导入状态说明展开 4 个大资源路径并校验。最新固定速度需求在 [fixedpace-calibration](https://github.com/beyondchenlin/lingotrace/tree/backup/source-text-checkpoint-b828503-20261012/docs/studio/fixedpace-calibration)；原有需求与历史文档继续保留，本首页不重写完整 PRD。
+1. 先阅读项目交接和决策记录，再查看源码分支中的 PRD 增补。独立 Word/PDF 的 48 份已找回原件在上述独立归档中，42 份源码内 PRD 增补仍原样保留；两类资料共同阅读。源码归档已可恢复，先按分支导入状态说明展开 4 个大资源路径并校验。最新固定速度需求在 [fixedpace-calibration](https://github.com/beyondchenlin/lingotrace/tree/backup/source-text-checkpoint-b828503-20261012/docs/studio/fixedpace-calibration)；原有需求与历史文档继续保留，本首页不重写完整 PRD。
 2. 继续补齐历史和证据；对已归档资源完成远端全文回读与大文件重组校验，并补齐缺失的历史路径映射。按清单逐项核对远端文件、字节身份、路径与提交映射，确认不存在缺失或占位替代。
 3. 产品继续开发时，单独解决日历测试进程阻塞，完成精确候选的完整验证。已有局部测试通过不能代替完整验收，未应用实验也不能当作正式源码。
 4. 网站发布需要独立构建、发布记录与公开资源核验，并继续完成实际浏览器、手机和音频交互验收。GitHub 同步本身不触发本项目的新发布。
