@@ -1,0 +1,49 @@
+{
+  "candidate": "v21",
+  "source_commit": "830654b5b8d269ab7da41fd302d93d6e91a389f9",
+  "saved_version": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_5e5679ddd7c08191a0e757ea17e43f03",
+  "deployment": "appgdep_6ac6bb3225b8819196b293c80fa6275e",
+  "entry": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+  "recorded_at_utc": "2026-10-07T22:12:20Z",
+  "evidence_source": "Parent's final bounded Windows browser/audio-decoding QA report; this record does not claim the author ran those browser checks.",
+  "current_product_state": "Frozen and unchanged; no new product edits, commit, build or publication for this ledger.",
+  "latest_passed": [
+    "Inset REC status-footer avoidance passed browser verification",
+    "Three synthetic audio samples,8.52–8.60seconds, contained all expected pulses",
+    "Measured pulse offset range was-22to+36milliseconds in these samples"
+  ],
+  "ffmpeg_eof_assessment": {
+    "observation": "EOF warning reproduced with a minimal native control recording",
+    "evidence": "Disabling the parser produced byte-identical PCM; original and control each had143packets fully decoded through libopus",
+    "conclusion": "Evidence points to the current FFmpeg parser EOF path rather than recording-file corruption",
+    "limit": "Exact FFmpeg source cause not located. No broader FFmpeg investigation or claim of a proven upstream bug."
+  },
+  "prior_applicable_evidence": [
+    "v20 media-request lifecycle and zero-reference grading browser cases passed;886742committed bytes matched the downloaded hash",
+    "Nine synthetic silent ratio/layout recordings fully encoded, previewed, downloaded and played, decoded as1920x1080VP9/WebM,3.08–3.13seconds",
+    "v18–v19 actual browser IDB/recording checks with injected quota and clock: warning behavior, committed-byte recovery, expired-unretained cleanup and retained-record preservation",
+    "Real-input normal scoring, correction de-duplication, current-draft feedback, pause gaps, JSON/CSV parity and layout controls passed the previously recorded limited desktop checks"
+  ],
+  "limits": [
+    "Synthetic streams/audio and short samples do not establish physical camera/microphone or OS permission chooser behavior",
+    "Native OS IME and clipboard remain unverified; earlier IME/paste cases were simulated",
+    "The observed audio offsets do not establish universal synchronization, long-recording drift or other-browser behavior",
+    "Initial WebM duration was previously Infinity before finite post-playback values; no general initial-duration or seeking guarantee is claimed",
+    "Quota/expiry checks used injected conditions, not a full real disk or seven days of elapsed retention",
+    "Original-reference visual differences remain; no1:1/full-M1 acceptance claim"
+  ],
+  "m1_signoff_gaps": [
+    "Explicit acceptance of the remaining same-size reference visual differences is still required before claiming the user's1:1 requirement is met",
+    "Real desktop camera/microphone and native OS input verification are needed before claiming the full actual-device M1 flow; these are evidence gaps, not reproduced product failures"
+  ],
+  "later_work": [
+    "Longer recording endurance, drift and cross-browser compatibility before broader production claims",
+    "M2: remaining nine formal styles on the shared engine",
+    "M3: dedicated phone/Pad/TV and orientation layouts"
+  ],
+  "smallest_next_cycle": [
+    "Keep v21 frozen. Compare the06reference and live reference fixture at1672x941and1920x1080; obtain an explicit visual pass/fail list rather than repeat unspecified polishing",
+    "When actual-device QA is explicitly authorized, run one clean desktop flow with native IME/paste/edit/re-submit plus a short user-started camera/microphone recording, replay and download; record environment and permissions without automatic capture",
+    "Only fix concrete failures from that cycle in a separate backed-up candidate. Do not expand styles or investigate FFmpeg as part of this handover"
+  ]
+}

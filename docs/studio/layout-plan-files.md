@@ -1,0 +1,15 @@
+# Portable manual layout plan
+
+Base v58 `7932dff65e68099c86d4598355bc95a6aaaea589`. PRD P174–176/P191/P198 call for versioned configuration, one validated route, explicit preview/application and undo. This batch adds the complete user file journey for the existing manual stage geometry: download applied plan → choose JSON → validate → show changed components and preview → apply/cancel/undo using the v58 transaction. It is not a full HUD/style/lock/AI document or a training backup.
+
+## File contract
+
+`lingotrace-stage-layout-v1` contains exactly schemaVersion, orientation, canvas {width,height}, and configuration {layout,arrangement}. Layout is lesson/camera/split; arrangement only has the existing media/inset/subtitle/metrics rectangles with finite x/y/w/h. It contains no attempt, answer, reference, scores, source media, URLs, permissions or recording. Export during preview captures the applied baseline, not the candidate. This format is a new portable envelope, not a change to existing localStorage keys or stored geometry.
+
+Only an explicit file selection is read. Files larger than 64 KiB are rejected before reading; decoded JSON has the same UTF-8 byte bound. Invalid JSON, duplicate/escaped duplicate keys, prototype-pollution keys, unknown/missing fields, unknown versions, wrong orientation/canvas, zero/negative dimensions, nonfinite numeric results and degenerate aspect ratios, unsupported modes, and out-of-range geometry are rejected. The existing geometry normalizer validates bounds; imports do not silently clamp, migrate, scale, execute code or follow URLs. Camera-dependent modes cannot be previewed without the already active camera; import never requests device permission.
+
+The file is read in the browser only. No network, server upload, external service, paid dependency, automatic file download or automatic application exists. Native File.text is generation-fenced; close, unmount, changed orientation/height, a newer selection and current recorder state prevent late preview/application. Deferred reads consult the current callback and synchronous live camera tracks; an ended camera cannot be accepted through a stale render. The current candidate and saved preference are not overwritten by rejected files. Apply and competing manual edits are blocked while the file read is pending; Cancel remains available. The same v58 recording guard remains the single entry boundary.
+
+## Verification
+
+Tests run the actual React file event handlers and actual extracted Studio handlers. They cover explicit export, valid import preview, no auto-apply/download, size rejection before read, invalid schema, unmount/read failure/newer request races, current-context checks and original preference retention. The frozen batch passed 1068 tests (799 core/scene, 221 media with the real WebM fixture, 48 validation), TypeScript and production build. Prior layout transaction/recording lifecycle tests remain mandatory. Actual cloud-browser QA separately exercises download, choose that file, preview, cancel/apply/undo, and malformed-file refusal. Physical devices/native IME and background-hidden delivery are not implied.

@@ -1,0 +1,55 @@
+{
+  "route": "/portrait-preview/",
+  "sharedSourceReadOnly": [
+    "studio/hud-library/renderer.ts",
+    "studio/hud-library/showcase/fixtures.ts"
+  ],
+  "persistentData": false,
+  "files": [
+    {
+      "path": "portrait-preview/app.js",
+      "sha256": "f1cb92bbbff49431348b7335586127a417d897d6e656e78db97bb2eba30aebdd",
+      "bytes": 41952
+    },
+    {
+      "path": "portrait-preview/assets/06-cafe-poster.jpg",
+      "sha256": "3e8fd7d93f9baf3f4da4c97f2e1cf469d49da01cd86ffde58dfc234478c87f0e",
+      "bytes": 305225
+    },
+    {
+      "path": "portrait-preview/assets/06-cafe.mp4",
+      "sha256": "22fc25ade368f351cda21951916e559ff359cf1ac8419fbfa5444e050cdbf740",
+      "bytes": 1321615
+    },
+    {
+      "path": "portrait-preview/assets/LIBERATION-LICENSE.txt",
+      "sha256": "cf4bf66f79717b9ad6ff6848134d9c017a758c3587dd242f8ecca75f4e490864",
+      "bytes": 4811
+    },
+    {
+      "path": "portrait-preview/assets/OPEN-SANS-LICENSE.txt",
+      "sha256": "8cdb1b9d4f40f5b20f741e418abb67b67a69687869f8c02f0c560623543aa856",
+      "bytes": 11472
+    },
+    {
+      "path": "portrait-preview/assets/rights.json",
+      "sha256": "1cdaeda123231619bba48bcbeed126b3ad4ec5d28d668efdbef9709a59d8d124",
+      "bytes": 787
+    },
+    {
+      "path": "portrait-preview/assets/studio-sans-regular.woff",
+      "sha256": "ad02868a150aa7d9b3a8d1cacf5947bd854e8c5f1cd47721eeba043cef0cc2b2",
+      "bytes": 49708
+    },
+    {
+      "path": "portrait-preview/index.html",
+      "sha256": "33ab439fda5826ba61d37cecefa2304a93e440306923d7ec986ee49afa5fb66a",
+      "bytes": 3427
+    },
+    {
+      "path": "portrait-preview/style.css",
+      "sha256": "8b616cd5000a79baa92a25328984de8076bc776229303ff5a47839e5a540ca8b",
+      "bytes": 8709
+    }
+  ]
+}

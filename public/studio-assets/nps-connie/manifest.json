@@ -1,0 +1,56 @@
+{
+  "id": "nps-connie-lau-education-ranger-7fe78a9f",
+  "title": "Connie Lau - Education Ranger",
+  "verifiedAt": "2026-10-10",
+  "sourcePage": "https://www.nps.gov/media/video/view.htm?id=7FE78A9F-1C89-4CDE-9BFD-DD0D0E4DE2CB",
+  "sourceVideoUrl": "https://www.nps.gov/nps-audiovideo/audiovideo/505d7a14-5907-49f0-a2e7-aedaaa757c3b720p.mp4",
+  "sourceCaptionUrl": "https://www.nps.gov/nps-audiovideo/closed-caption/7E7A533E-9794-282E-6B1CBB4348556B45.vtt",
+  "policyUrl": "https://www.nps.gov/aboutus/disclaimer.htm",
+  "credit": "National Park Service",
+  "rightsBasis": "The item credits National Park Service without a copyright symbol. Its own Copyright and Usage Info explicitly designates NPS-credited multimedia without a copyright symbol as public domain. NPS general policy cites U.S. government works under 17 U.S.C. sections 101 and 105.",
+  "rightsCaveats": [
+    "Public-domain finding concerns United States copyright status, not every jurisdiction or every other right.",
+    "Do not imply NPS or the ranger endorses LingoTrace. NPS marks and rights of publicity/privacy are distinct.",
+    "The item does not list third-party music/material credits; absence of credits is not an independent legal guarantee.",
+    "NPS general policy requires attribution to original U.S. government works in a commercial copyright notice; preserve source credit and use \"No claim to original U.S. Government works.\""
+  ],
+  "media": {
+    "file": "connie-lau-education-ranger-720p.mp4",
+    "sha256": "b2ea5fa763a5687961606061afbef1b7619fcaff3ccd04b3e0b9f14584ffa642",
+    "byteLength": 19584717,
+    "durationSeconds": 43.366667,
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "videoCodec": "H.264",
+    "audioCodec": "AAC",
+    "audioSampleRate": 48000,
+    "audioChannels": 2,
+    "editing": "None; exact bytes retrieved from official URL."
+  },
+  "selection": {
+    "startSeconds": 0,
+    "endSeconds": 43.366667,
+    "firstOfficialSpeechCueSeconds": 0.77,
+    "lastOfficialCaptionEndSeconds": 43.96
+  },
+  "captions": {
+    "officialFile": "connie-lau-education-ranger.en.vtt",
+    "officialSha256": "0ce3a2e3c8f1acb7a0d78eda6f3d8e4afbc7ef1ee5ffc503e2f150979b6146b5",
+    "referenceVersion": "nps-official-7e7a533e-9794-282e-6b1cbb4348556b45-sha256-0ce3a2e3c8f1acb7",
+    "normalizedFile": "connie-lau-education-ranger.en.normalized.vtt",
+    "normalizedSha256": "a24bd3804ba9ef40bef3d0828de6af0fa4ce678fd8393cecd8fed512d473eb3b",
+    "sentenceFile": "sentences.json",
+    "normalization": "Remove empty first cue and positioning metadata. Clamp last end from 43.960 to 43.366 seconds. Text and other official boundaries unchanged. Sentence JSON only merges official cues at sentence punctuation; timing has not been acoustically realigned."
+  },
+  "checks": {
+    "completeAudioVideoDecode": "Passed ffmpeg decode of entire file with no emitted warning/error",
+    "visualInspection": "Four sampled frames show live-action NPS ranger at Grand Canyon and Yosemite; consistent with official transcript and description.",
+    "audioTrackPresence": "Confirmed by ffprobe and complete decode.",
+    "independentListening": "Not performed: available tool cannot deliver audio input for listening. No claim that background is music-free or that all cue alignment is exact.",
+    "wordCount": 143,
+    "approximateWordsPerMinute": 198
+  },
+  "language": "en-US",
+  "suggestedDifficulty": "Intermediate; approximately 198 words/minute, familiar career/travel/teaching topic, one visible speaker."
+}

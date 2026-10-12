@@ -1,0 +1,206 @@
+{
+  "scope": "M1: 06 Training Studio, desktop landscape only",
+  "baseline": "PRD v2, user requests from 2026-10-07 15:35/15:37/16:04",
+  "status": "candidate, not 1:1 browser-accepted",
+  "stack": {
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "typescript": "7.0.2",
+    "motion": "14.0.0",
+    "export": "static"
+  },
+  "passed": [
+    "TypeScript strict check",
+    "16 deterministic data/persistence checks",
+    "18 shared-reducer pace timeline tests",
+    "1 JSON/CSV pace point/gap parity test",
+    "4 layout bounds/aspect/keyboard/preference/no-jump checks",
+    "2 contain/photo-mask scene checks",
+    "12 synthetic composite-recorder/storage checks",
+    "3 measured-font pace readout tests: reference68, 0/99/100/999/1000/40000/1000000, wider runtime fonts",
+    "Camera reference photo patches exclude baked REC UI",
+    "9 current-draft feedback and Canvas text-output regressions, including immutable reward-attempt binding",
+    "4 capacity estimate threshold/fallback/race tests",
+    "3 recorder integration tests for advisory continue, manual stop, quota failure, retained rows and polling lifecycle",
+    "v18 production static export and all output assets",
+    "Capacity-refresh consumer regression: terminal snapshots do not stop a newly prepared next stream",
+    "v18 final production build and output checks",
+    "4 recording-error presentation tests: object/string/DOMException, private fields, committed-byte recovery and malformed getters",
+    "v19 final production build and static output checks",
+    "15 request-resource and actual-Studio-helper lifecycle regressions with synthetic media/encoder/store",
+    "9 zero-reference and legacy event recovery regressions",
+    "24 valid-reference alignments and3 full timed valid sessions/replays match v19 exactly",
+    "v20 final production build and static output checks",
+    "2 actual Canvas inset aspect/bounds/status-footer collision tests across3source ratios,2layouts,2recording states and3inset sizes",
+    "3 preview duration and actual-UI-event tests: unknown/known/error/ended, stale URL isolation and no automatic seek/play",
+    "1672x941 and1920x1080 reference-mode program PNGs byte-identical to v20",
+    "v21 final production build and static output checks",
+    "7 new default-inset geometry tests including preserved saved positions, reset/reference/split priority and actual Canvas preview/recording-state draw capture",
+    "Both desktop original-reference program PNGs byte-identical to v21; normal default frames reviewed as program images",
+    "v22 final production build and static output checks"
+  ],
+  "visual_program_frames": [
+    "1672x941 fresh",
+    "1672x941 reference fixture",
+    "1920x1080 fresh",
+    "1920x1080 reference fixture",
+    "1672x941 custom layout"
+  ],
+  "not_verified": [
+    "v22 actual-browser default/reset camera and course inset gap, hit/edit coordinates and recorded output",
+    "Physical camera/microphone/OS permission chooser and native IME/clipboard",
+    "Long-recording durability, audio drift and cross-browser matrix",
+    "Real disk exhaustion and seven-day elapsed retention (only controlled injected conditions tested)",
+    "Final visual signoff, with this intentional user-requested default deviation recorded",
+    "M2 nine additional formal styles and M3 non-desktop layouts"
+  ],
+  "browser_blocker": "The local cloud browser limitation previously recorded remains separate from parent-managed Windows browser QA; v20 has no new browser acceptance yet.",
+  "privacy": "No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
+  "timing": "activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it.",
+  "candidate": "v22",
+  "additions": [
+    "Free primary/inset/subtitle/metric layout with proportional resize, docks/reset, keyboard and viewport gesture cancellation",
+    "Shared-reducer pace timeline with explicit frozen/unobserved/clock-change gaps",
+    "Same timeline included in JSON and CSV"
+  ],
+  "review_fixes": [
+    "Default/split movement no longer changes size on pointer-down",
+    "Editor focus follows modal close and suppresses stale focus restoration"
+  ],
+  "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build.",
+  "changes": "User-requested actual default/reset inset shift y46→108; original reference y46 and explicit custom/saved positions retained. Shared Canvas/recording/DOM resolver; no other HUD or data changes.",
+  "prior_browser_evidence": {
+    "candidate": "v14",
+    "source": "Parent-reported Windows browser QA, 2026-10-07; task 01a11506-018f-72a3-be4b-d1d60eb5a0d9",
+    "passed": [
+      "Four-layer drag/resize/dock/keyboard and refresh",
+      "Correction, pause gaps and JSON/CSV agreement",
+      "Synthetic Canvas recording saved, actually played and downloaded"
+    ],
+    "finding": "Three-digit pace overlapped CHARS / MIN at1672 and1920; v15 fixes this, real-browser retest pending",
+    "not_proven": [
+      "1:1 reference comparison before original image available",
+      "physical device capture",
+      "authorized audio mixing",
+      "all browsers/devices"
+    ]
+  },
+  "testTotal": 114,
+  "v16_browser_evidence": {
+    "source": "Parent report from actual Windows browser QA,2026-10-07",
+    "passed": [
+      "Four packaged fonts loaded; all five regions improved",
+      "251-character input selection/replacement/refresh",
+      "Correction gains5 then1,total6",
+      "Ten numeric boundary cases"
+    ],
+    "known_visual_residuals": [
+      "About1px input/numeral edges",
+      "Input glass still darker",
+      "Subtitle stroke transparency differs",
+      "Player background flatter/more opaque",
+      "Small light patch/duplicate edge around reconstructed REC area"
+    ],
+    "status_bug": "Editing a judged correct draft left stale success text; v17 addresses this."
+  },
+  "referenceFrameUnchanged": "1672 program reference frame is byte-identical to v16",
+  "v18_browser_evidence": {
+    "source": "Parent report from actual Windows browser QA, 2026-10-07 20:40",
+    "passed": [
+      "Capacity thresholds, manual refresh, missing API/rejected estimate fallback, approximately ten-second polling",
+      "Low space did not automatically stop; two consecutive recordings saved and downloaded",
+      "Injected write failure preserved 401189 committed bytes with unchanged hash and allowed download",
+      "Injected clock expiry deleted unretained test records/chunks but kept retained records"
+    ],
+    "boundary": "Actual browser encoding and IndexedDB; injected quota/clock, no physical disk fill, real seven-day wait or real camera",
+    "finding": "Quota error notice rendered JSON; v19 fixes presentation only"
+  },
+  "v17_browser_evidence": {
+    "source": "Parent report from actual Windows browser QA",
+    "passed": [
+      "Edited correct draft invalidates success/Next/highlight/reward in both desktop sizes",
+      "Returning original text and refresh still require resubmit; cumulative six words and1/12 do not decrement or duplicate"
+    ],
+    "boundary": "Paste/IME simulated, not OS clipboard/IME"
+  },
+  "v19_browser_evidence": {
+    "candidate": "v19",
+    "source_commit": "5b23a8801a3a3094818320ba08abfd9453560f7d",
+    "saved_version": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_29618803e00481918049229cfff42c75",
+    "deployment": "appgdep_6ac6af2ac3448191b9679fda25d4b01c",
+    "source": "Parent report of completed Windows browser review, 2026-10-07 20:50 UTC",
+    "outcome": "P3 JSON error notice closed",
+    "passed": [
+      "All six injected recording-failure presentation scenarios passed",
+      "Three actual downloads matched SHA and committed-byte counts"
+    ],
+    "boundary": "Actual browser encoding, IndexedDB and downloads with injected failures. Does not verify physical disk exhaustion, real camera/microphone capture, full device support or 1:1 visual acceptance.",
+    "publication": "No republish for this acceptance record; v19 remains unchanged."
+  },
+  "v20_browser_evidence": {
+    "candidate": "v20",
+    "source_commit": "84f054d769a0397fe38151da6814ae49bbc7ab0e",
+    "source": "Parent report of actual Windows browser review, 2026-10-07 21:26 UTC",
+    "passed": [
+      "Targeted media lifecycle and zero-reference grading cases",
+      "886742 committed bytes preserved with matching download hash",
+      "Nine source-ratio/layout combinations actually encoded, previewed, downloaded and fully played",
+      "All nine decoded as1920x1080 VP9/WebM, durations3.08–3.13seconds"
+    ],
+    "media_boundary": "Synthetic media with no audio track; not real camera/microphone capture or audio mixing/synchronization verification.",
+    "findings": [
+      "Portrait and square lesson content in the inset is covered by its bottom REC status strip, minimally reproduced with camera-primary layout",
+      "WebM duration was Infinity at initial load, finite after complete playback; initial duration and seeking usability are not fully accepted"
+    ],
+    "design_boundary": "HUD over the primary background is intentional. Correct only the inset status-strip content collision, not the overall HUD layout."
+  },
+  "v21_browser_evidence": {
+    "candidate": "v21",
+    "source_commit": "830654b5b8d269ab7da41fd302d93d6e91a389f9",
+    "saved_version": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_5e5679ddd7c08191a0e757ea17e43f03",
+    "deployment": "appgdep_6ac6bb3225b8819196b293c80fa6275e",
+    "entry": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+    "recorded_at_utc": "2026-10-07T22:12:20Z",
+    "evidence_source": "Parent's final bounded Windows browser/audio-decoding QA report; this record does not claim the author ran those browser checks.",
+    "current_product_state": "Frozen and unchanged; no new product edits, commit, build or publication for this ledger.",
+    "latest_passed": [
+      "Inset REC status-footer avoidance passed browser verification",
+      "Three synthetic audio samples,8.52–8.60seconds, contained all expected pulses",
+      "Measured pulse offset range was-22to+36milliseconds in these samples"
+    ],
+    "ffmpeg_eof_assessment": {
+      "observation": "EOF warning reproduced with a minimal native control recording",
+      "evidence": "Disabling the parser produced byte-identical PCM; original and control each had143packets fully decoded through libopus",
+      "conclusion": "Evidence points to the current FFmpeg parser EOF path rather than recording-file corruption",
+      "limit": "Exact FFmpeg source cause not located. No broader FFmpeg investigation or claim of a proven upstream bug."
+    },
+    "prior_applicable_evidence": [
+      "v20 media-request lifecycle and zero-reference grading browser cases passed;886742committed bytes matched the downloaded hash",
+      "Nine synthetic silent ratio/layout recordings fully encoded, previewed, downloaded and played, decoded as1920x1080VP9/WebM,3.08–3.13seconds",
+      "v18–v19 actual browser IDB/recording checks with injected quota and clock: warning behavior, committed-byte recovery, expired-unretained cleanup and retained-record preservation",
+      "Real-input normal scoring, correction de-duplication, current-draft feedback, pause gaps, JSON/CSV parity and layout controls passed the previously recorded limited desktop checks"
+    ],
+    "limits": [
+      "Synthetic streams/audio and short samples do not establish physical camera/microphone or OS permission chooser behavior",
+      "Native OS IME and clipboard remain unverified; earlier IME/paste cases were simulated",
+      "The observed audio offsets do not establish universal synchronization, long-recording drift or other-browser behavior",
+      "Initial WebM duration was previously Infinity before finite post-playback values; no general initial-duration or seeking guarantee is claimed",
+      "Quota/expiry checks used injected conditions, not a full real disk or seven days of elapsed retention",
+      "Original-reference visual differences remain; no1:1/full-M1 acceptance claim"
+    ],
+    "m1_signoff_gaps": [
+      "Explicit acceptance of the remaining same-size reference visual differences is still required before claiming the user's1:1 requirement is met",
+      "Real desktop camera/microphone and native OS input verification are needed before claiming the full actual-device M1 flow; these are evidence gaps, not reproduced product failures"
+    ],
+    "later_work": [
+      "Longer recording endurance, drift and cross-browser compatibility before broader production claims",
+      "M2: remaining nine formal styles on the shared engine",
+      "M3: dedicated phone/Pad/TV and orientation layouts"
+    ],
+    "smallest_next_cycle": [
+      "Keep v21 frozen. Compare the06reference and live reference fixture at1672x941and1920x1080; obtain an explicit visual pass/fail list rather than repeat unspecified polishing",
+      "When actual-device QA is explicitly authorized, run one clean desktop flow with native IME/paste/edit/re-submit plus a short user-started camera/microphone recording, replay and download; record environment and permissions without automatic capture",
+      "Only fix concrete failures from that cycle in a separate backed-up candidate. Do not expand styles or investigate FFmpeg as part of this handover"
+    ]
+  }
+}

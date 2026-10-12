@@ -1,0 +1,115 @@
+{
+  "status": "CANDIDATE_FROZEN_NOT_PUBLISHED",
+  "entry": "index.html",
+  "intendedPath": "/story/cafe/",
+  "source": "Authored static source copied byte-for-byte from prototype; source JSON and media mapping included.",
+  "externalDependencies": [],
+  "databaseWrites": false,
+  "persistedLearningData": false,
+  "verification": {
+    "nodeStateTests": "40 passed / 0 failed",
+    "cameraNumeric": "passed",
+    "pixelAnchors": "passed on retained v2 source observations",
+    "realBrowser": "not verified: permission-related standard Chromium launch failure"
+  },
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 6785,
+      "sha256": "46b9508027098d1d790c21de2165ac8020b9199a095aa6123dfc82f6c2744622"
+    },
+    {
+      "path": "app.js",
+      "bytes": 11599,
+      "sha256": "3787f553cfa9f0e860f7cfb8abcc5dddfc01df9f95dd8aa1f690ec20a92b1356"
+    },
+    {
+      "path": "camera.js",
+      "bytes": 6718,
+      "sha256": "b12520ea8d5d03210b34885bfcc4037bf8a39e3f3dc32cedc025f7f4fb313288"
+    },
+    {
+      "path": "scene-camera.js",
+      "bytes": 1999,
+      "sha256": "54676a9d42d6d3e0fe9b61215e503412b7d163604955a4faab0c62dd9c707a1e"
+    },
+    {
+      "path": "story-data.js",
+      "bytes": 26223,
+      "sha256": "38ba8f98111f1fcb1ab7a3954d80fea7e5897130019ae84a0d806092aadfe84b"
+    },
+    {
+      "path": "story-data.json",
+      "bytes": 31059,
+      "sha256": "5b5308289008f559ba5d325ce800ff4ef67d596cea9609595b32d73f3d46f1e2"
+    },
+    {
+      "path": "story.json",
+      "bytes": 25849,
+      "sha256": "0623d55a996e0f601906c5447b5891932f6ae420c6413b13af00e12576202382"
+    },
+    {
+      "path": "scene-plan.json",
+      "bytes": 3295,
+      "sha256": "120b28d5d76529ea5e23f3af83dd4d24cbc281c1dbaa10bfd6cd360d033580d6"
+    },
+    {
+      "path": "media-manifest.json",
+      "bytes": 3214,
+      "sha256": "768f1f63cfcb620055940fdc8e91774f004c9a40b25d5952d34cce0030a06591"
+    },
+    {
+      "path": "SOURCE.txt",
+      "bytes": 1873,
+      "sha256": "be287bd789d349ed828f2790a0cedeed53cfa42597a9793754c202353951a24d"
+    },
+    {
+      "path": "assets/01-entry.png",
+      "bytes": 2428411,
+      "sha256": "833d58e2fa7dc7714b55a3e52c3f895acc53060dd1299434a206e35e11560983"
+    },
+    {
+      "path": "assets/02-walk-to-counter.png",
+      "bytes": 2373726,
+      "sha256": "dea5edd3ef2a9f9a6c15d76ca9c7bb6ef0b11c85af4ecb30a57a9f0f14ec371e"
+    },
+    {
+      "path": "assets/03-receive-coffee.png",
+      "bytes": 2300467,
+      "sha256": "4418fea2856f23d6e5d4ee5322dbdf22946446455b9f2fc969afd089f045875f"
+    },
+    {
+      "path": "assets/04-window-coffee.png",
+      "bytes": 2390167,
+      "sha256": "7776bf736559c193a902033fae6e02b85d7c9fcf1f68e718ab959b01cc6f4e44"
+    },
+    {
+      "path": "assets/05-reading.png",
+      "bytes": 2356115,
+      "sha256": "60a7a2ee352ba3e54ecbf5ff5d349fbbc3c4c3f7863b058937c823ef4139c138"
+    },
+    {
+      "path": "assets/06-exit.png",
+      "bytes": 2513444,
+      "sha256": "37739123b663892bb0e8fdb79406bca94553a1dca51182c87985bd137a65331e"
+    },
+    {
+      "path": "assets/07-take-window-seat.png",
+      "bytes": 2379561,
+      "sha256": "fc9615999f1f4e3488b4e5cb9c3f9fa14af1fa7909825910533a4d0ca7978418"
+    },
+    {
+      "path": "assets/wide.jpg",
+      "bytes": 305225,
+      "sha256": "3e8fd7d93f9baf3f4da4c97f2e1cf469d49da01cd86ffde58dfc234478c87f0e"
+    },
+    {
+      "path": "assets/woman.jpg",
+      "bytes": 404930,
+      "sha256": "a6c714610c1fb907537a10395ff99fdc4e390b3f1b04594a7441b44db79bb305"
+    }
+  ],
+  "revision": "v3.4.2-image-state-reduced-copy",
+  "timingChange": "First committed input: 1000ms. If camera active, feedback starts after it settles; then show response for 2400ms. Demo remains independently paced.",
+  "scopeChange": "Image pending/loaded/failed display and failed-image-only retry preserving practice state; reduced-motion static labels. Story, assets, counters and timings unchanged."
+}

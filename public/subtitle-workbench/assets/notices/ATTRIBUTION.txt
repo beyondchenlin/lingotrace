@@ -1,0 +1,13 @@
+LOCAL SUBTITLE WORKBENCH: PUBLIC RESOURCE ATTRIBUTION
+
+Model: onnx-community/whisper-tiny.en_timestamped
+Fixed converted revision: aeaa13760958b03fac5062f457d317d3319c3168
+Model source: https://huggingface.co/onnx-community/whisper-tiny.en_timestamped/tree/aeaa13760958b03fac5062f457d317d3319c3168
+Conversion card identifies openai/whisper-tiny.en as its base, with no separate license field. The archived Hugging Face base card states Apache-2.0; upstream OpenAI Whisper code and weights are MIT. Both source notices are retained; this is provenance documentation, not a claim of a new exclusive conversion license. Apache-2.0 text: transformers-LICENSE.txt. MIT text: whisper-LICENSE.txt. Weight bytes are unchanged; only the decoder distribution is split into four parts, reassembled and SHA-256 verified locally.
+
+Transformers.js 3.7.1: Apache-2.0 (transformers-LICENSE.txt).
+ONNXRuntime-web 1.22.0-dev.20250409-89f8206ba4: MIT (onnxruntime-LICENSE.txt); complete bundled ThirdPartyNotices retained.
+Bundled @huggingface/jinja 0.5.1: MIT (jinja-LICENSE.txt).
+The fixed runtime files are unmodified. Original author and copyright notices are retained in these files and accompanying license texts.
+
+No user media, PCM, file identity, subtitles, or drafts are part of this public resource package.

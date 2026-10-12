@@ -1,0 +1,36 @@
+{
+  "status": "audited lossless playback representation; Android outcome unverified",
+  "original": {
+    "path": "public/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4",
+    "sha256": "b2ea5fa763a5687961606061afbef1b7619fcaff3ccd04b3e0b9f14584ffa642",
+    "bytes": 19584717
+  },
+  "derivative": {
+    "path": "public/studio-assets/nps-connie/connie-lau-compatible-mp4-v1.mp4",
+    "sha256": "1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526",
+    "bytes": 19581425,
+    "reencoded": false,
+    "method": "FFmpeg 7.1.5 stream-copy MP4 remux; faststart; movie_timescale 48000; normalize only two avcC reserved-bit bytes from 03/01 to FF/E1",
+    "command": "ffmpeg -i ORIGINAL -map 0:v:0 -map 0:a:0 -c copy -movflags +faststart -movie_timescale 48000 OUTPUT.mp4; then normalize the two avcC reserved-bit bytes"
+  },
+  "verification": {
+    "videoPackets": 1301,
+    "audioPackets": 2033,
+    "perStreamPacketsExactlyEqualFor": [
+      "SHA256 payload",
+      "PTS",
+      "DTS",
+      "duration",
+      "size",
+      "flags",
+      "skip-samples side data"
+    ],
+    "decodedFramehashExactlyEqual": true,
+    "decodedVideoFrames": 1301,
+    "decodedAudioFrames": 2032,
+    "decodedFramehashFileSHA256": "802fad2706aa9f731420c0d3d1996aa7ca8bdc297245c920150ed764a8caa5f9",
+    "videoDuration": "43.366667",
+    "audioDuration": "43.337333",
+    "timingCaveat": "Equality is the FFmpeg interpretation of original and derivative. It is not proof of the failing Android runtime interpretation."
+  }
+}

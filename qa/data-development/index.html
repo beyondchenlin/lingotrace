@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Isolated practice data QA</title>
+<style>body{font:16px/1.55 system-ui,sans-serif;max-width:1000px;margin:36px auto;padding:0 24px;background:#f6f7f8;color:#1d2328}button{font:inherit;padding:10px 16px;margin:4px;border:1px solid #54636d;border-radius:6px;background:white;color:#142b35}button:focus-visible{outline:3px solid #0687a3}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;padding:18px;border:1px solid #b9c4cb;border-radius:8px}.warning{border-left:4px solid #916409;padding-left:14px}</style></head>
+<body><h1>Isolated practice data QA</h1>
+<p class="warning">Development-only fixture tests. Each run creates random <code>lingotrace-dev-data-*</code> and <code>lingotrace-dev-fenced-*</code> databases. This page never opens existing product databases, requests capture, or uploads learning data. Faults are deliberately injected only during these tests.</p>
+<p>Run all three batches, reload this page, then verify persistence. A passing fixture test does not mean the product UI or real device input has been tested.</p>
+<button id="run">Run isolated batches 1 + 2A + 2B</button><button id="reload">Reload page</button><button id="verify">Verify after reload</button>
+<p id="status" role="status">Ready. No database operations have run.</p><pre id="result" aria-label="QA results">{}</pre>
+<script src="data-browser.js"></script><script>
+const key='lingotrace-isolated-data-qa-metadata-v2b';
+const status=document.getElementById('status'),result=document.getElementById('result'),buttons=[...document.querySelectorAll('button')];
+function show(value){result.textContent=JSON.stringify(value,null,2)}
+async function run(job){buttons.forEach(button=>button.disabled=true);status.textContent='Running deterministic fixture tests…';try{const value=await job();show(value);status.textContent='Passed. Check executionEnvironment and coverage boundaries below.'}catch(error){show({passed:false,error:String(error?.message||error)});status.textContent='Failed. The result is not a successful browser acceptance.'}finally{buttons.forEach(button=>button.disabled=false)}}
+document.getElementById('run').onclick=()=>run(async()=>{const batch1=await PracticeDataQA.runPracticeDataBatchOneQA();const batch2A=await PracticeDataQA.runPracticeDataBatchTwoAQA();const batch2B=await PracticeDataQA.runPracticeDataBatchTwoBQA();const metadata={batch1,batch2A,batch2B,createdAt:new Date().toISOString()};sessionStorage.setItem(key,JSON.stringify(metadata));return{passed:true,phase:'before-page-reload',...metadata}});
+document.getElementById('reload').onclick=()=>location.reload();
+document.getElementById('verify').onclick=()=>run(async()=>{const saved=sessionStorage.getItem(key);if(!saved)throw new Error('Run the batches first in this same tab and origin.');const expected=JSON.parse(saved);return{passed:true,phase:'after-page-reload',batch1:await PracticeDataQA.verifyPracticeDataReload(expected.batch1),batch2A:await PracticeDataQA.verifyPracticeFencesReload(expected.batch2A),batch2B:await PracticeDataQA.verifyPracticeRedactionReload(expected.batch2B),browser:navigator.userAgent}});
+if(sessionStorage.getItem(key))status.textContent='Saved QA metadata found. Use Verify after reload to read only those isolated fixture databases.';
+</script></body></html>

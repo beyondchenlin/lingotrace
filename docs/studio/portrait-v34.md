@@ -1,0 +1,9 @@
+# v34 bounded one-screen portrait fit
+
+Rollback: v33 source6381eb28d40ee88cef8641d8f9fe8910792fa7ba. Only the independent portrait export is replaced, with new content-hashed dependencies. Existing110 other public files and six pending Practice files remain hash-identical. No data/engine/storage/story migration or changes.
+
+Fit uses available CSS width and height after measured preview toolbar and safe-area padding. The phone preview toolbar is a compact48px row. Portrait geometry closes vertical gaps to820 logical pixels while retaining full-width16:9 media and .58 HUD shapes. Camera is an intentional transparent PiP overlapping the video's top-right42 logical pixels. Taller frames interpolate toward accepted940+ spacing. The whole scene then fits uniformly inside both available bounds. No component is cropped or hidden.
+
+The four bottom player icons keep the same visual centers and receive symmetric invisible hit padding, bounded by neighboring spacing. Below overall scale.85 a concise small-space note explains the text/button tradeoff. Its actual row height is deducted for fit but excluded from orientation choice, avoiding a self-triggered layout loop. Keyboard occlusion retains the stable unoccluded geometry; focused input scrolling remains separate. Window, container, toolbar, visual viewport, orientation and fullscreen changes are observed without remounting training.
+
+Prepublication:289 primary tests and52 media tests passed; typecheck and static build passed. Geometry/renderer tests cover camera buffer, REC text, title hits, defaults and short/tall heights. Four representative desktop frames are byte-identical to v33. Independent review and live browser readback are recorded in the delivery evidence, not inferred from these tests. Physical phone keyboard/IME, very short touch ergonomics and recording during rotation are not certified.

@@ -1,0 +1,14 @@
+{
+  "candidate": "v19",
+  "source_commit": "5b23a8801a3a3094818320ba08abfd9453560f7d",
+  "saved_version": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_29618803e00481918049229cfff42c75",
+  "deployment": "appgdep_6ac6af2ac3448191b9679fda25d4b01c",
+  "source": "Parent report of completed Windows browser review, 2026-10-07 20:50 UTC",
+  "outcome": "P3 JSON error notice closed",
+  "passed": [
+    "All six injected recording-failure presentation scenarios passed",
+    "Three actual downloads matched SHA and committed-byte counts"
+  ],
+  "boundary": "Actual browser encoding, IndexedDB and downloads with injected failures. Does not verify physical disk exhaustion, real camera/microphone capture, full device support or 1:1 visual acceptance.",
+  "publication": "No republish for this acceptance record; v19 remains unchanged."
+}

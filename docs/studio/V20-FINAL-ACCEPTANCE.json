@@ -1,0 +1,17 @@
+{
+  "candidate": "v20",
+  "source_commit": "84f054d769a0397fe38151da6814ae49bbc7ab0e",
+  "source": "Parent report of actual Windows browser review, 2026-10-07 21:26 UTC",
+  "passed": [
+    "Targeted media lifecycle and zero-reference grading cases",
+    "886742 committed bytes preserved with matching download hash",
+    "Nine source-ratio/layout combinations actually encoded, previewed, downloaded and fully played",
+    "All nine decoded as1920x1080 VP9/WebM, durations3.08–3.13seconds"
+  ],
+  "media_boundary": "Synthetic media with no audio track; not real camera/microphone capture or audio mixing/synchronization verification.",
+  "findings": [
+    "Portrait and square lesson content in the inset is covered by its bottom REC status strip, minimally reproduced with camera-primary layout",
+    "WebM duration was Infinity at initial load, finite after complete playback; initial duration and seeking usability are not fully accepted"
+  ],
+  "design_boundary": "HUD over the primary background is intentional. Correct only the inset status-strip content collision, not the overall HUD layout."
+}

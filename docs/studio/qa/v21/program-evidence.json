@@ -1,0 +1,16 @@
+{
+  "method": "Actual Canvas renderer with synthetic no-audio source canvases, not browser or recorded-output verification",
+  "reference_mode": [
+    {
+      "size": "1672x941",
+      "byte_identical": true,
+      "sha256": "978f9616fe969478a53131628a0faf895cee1c518fea053c7f50d54d85a039ad"
+    },
+    {
+      "size": "1920x1080",
+      "byte_identical": true,
+      "sha256": "416d866514663e80992a081dbf7b2bb56372463d9bd4dfbc9b2f4975120497be"
+    }
+  ],
+  "geometry": "Normal inset fullframe273x218 keeps its outer geometry and reserves37px footer; contained media receives273x181 viewport"
+}

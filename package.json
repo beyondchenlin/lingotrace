@@ -1,0 +1,27 @@
+{
+  "name": "lingotrace-studio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack --hostname 0.0.0.0 --port 4173",
+    "build": "next build --webpack && node scripts/assemble-site.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test studio/core/*.test.ts studio/scene/*.test.ts && node --experimental-strip-types --test studio/media/*.test.mjs"
+  },
+  "dependencies": {
+    "motion": "14.0.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.100",
+    "@types/node": "24.10.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "fake-indexeddb": "6.2.5",
+    "tsx": "4.20.6",
+    "typescript": "7.0.2"
+  },
+  "type": "module"
+}

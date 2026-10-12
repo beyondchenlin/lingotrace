@@ -1,0 +1,9 @@
+Portrait adaptive layout preview; no deployment has been performed.
+
+Only publish the directory publish/portrait-preview/ as /portrait-preview/ under the existing site. All relative assets are included. Do not replace the site root. Do not alter /studio/, /story/cafe/, existing app bundles, shared HUD source, practice data, package dependencies, or other routes.
+
+Source: src/index.html, src/style.css, src/app.ts, src/scene.ts. Portable repository location: previews/portrait/. Build from that location with node build.mjs (repository root defaults to ../..). When the source directory is outside the repository, run node build.mjs /absolute/repository/root. All repository imports use @lingotrace/studio resolved by the build alias. Output is always the preview source directory’s publish/portrait-preview/. The existing repository is read-only. Uses installed esbuild and imports the existing read-only HUD renderer and fixture scene, with the real cafe video and poster copied unchanged. No ledger, storage, microphone, camera or external API connection. Input is ephemeral page-only and cannot score or save. Fixtures are visibly labelled.
+
+QA: verify.ts renders the two real shared HUD components with canvas and checks 217 protected source/build/assets files against their starting hashes. These pass. Programmatic component PNGs are in qa; these are NOT browser screenshots. Browser run via qa.mjs was blocked by Chromium socket permission and is not claimed complete. A supported browser must still verify mobile/desktop/keyboard screenshots and media interaction before publication acceptance.
+
+The keyboard toggle is an explicitly labelled 260px occupancy demonstration. Actual browser keyboard handling uses visualViewport and requires device validation. Desktop manual portrait mode is 430px wide. Manual landscape on a phone is intentionally a horizontally scrollable desktop comparison. Auto uses portrait at <=980px and landscape above it.

@@ -1,0 +1,61 @@
+{
+  "version": "nps-connie-official-vtt-derived-sentences-v1",
+  "timingBasis": "Official NPS cue boundaries merged by sentence punctuation; not independently acoustically aligned. End at 43.960 seconds clamped to 43.366 seconds, without media modification.",
+  "sentences": [
+    {
+      "startMs": 770,
+      "endMs": 1530,
+      "text": "Hi, everybody."
+    },
+    {
+      "startMs": 1530,
+      "endMs": 6020,
+      "text": "My name is Ranger Connie and I am reporting live from Grand Canyon National Park."
+    },
+    {
+      "startMs": 6020,
+      "endMs": 8210,
+      "text": "And I am an education ranger here."
+    },
+    {
+      "startMs": 8210,
+      "endMs": 13090,
+      "text": "I pretty much give programs and lessons to students like yourself from K through 12."
+    },
+    {
+      "startMs": 13090,
+      "endMs": 18560,
+      "text": "And that's one of my favorite things to do is actually to teach the public about these really beautiful places."
+    },
+    {
+      "startMs": 18560,
+      "endMs": 25940,
+      "text": "And the second part is I get to travel to different parks, like here I'm in the Grand Canyon National Park and now I'm here in Yosemite."
+    },
+    {
+      "startMs": 25940,
+      "endMs": 28040,
+      "text": "So here I'm also an education ranger."
+    },
+    {
+      "startMs": 28040,
+      "endMs": 29840,
+      "text": "And I was actually a teacher before this."
+    },
+    {
+      "startMs": 29840,
+      "endMs": 31558,
+      "text": "I taught in Los Angeles for seven years."
+    },
+    {
+      "startMs": 31558,
+      "endMs": 35720,
+      "text": "So it's been really awesome just teaching here, leading field trips, doing virtual programs."
+    },
+    {
+      "startMs": 35720,
+      "endMs": 43366,
+      "text": "And yeah, just changing my classroom from an actual classroom, really small and enclosed to somewhere as beautiful as this."
+    }
+  ]
+}
