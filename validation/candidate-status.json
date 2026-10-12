@@ -1,0 +1,16 @@
+{
+  "release": "five-hud-candidate",
+  "built_at": "2026-10-07T09:59:00Z",
+  "baseline": "Five-style PRD 1.0 F01-F08",
+  "automated": "34 pure-model and simulated capture tests passed",
+  "browser": "Pending independent desktop browser QA",
+  "real_devices": "Not captured or tested",
+  "static_visuals": "Five cleaned original reference scenes; DOM HUD",
+  "deviations": [
+    "Live metrics start at 0; concept numbers are not copied into score",
+    "Phone HUD safely docks; free drag available on desktop/tablet",
+    "Permission and recording controls added to top bar",
+    "Camera preview on phone gets its own vertical space",
+    "Input area may grow for long text; reference images have short lines"
+  ]
+}

@@ -1,43 +1,52 @@
-# 练见 LingoTrace — interactive front-end prototype
+# LingoTrace · five sports HUD demo pages
 
-A standalone, dependency-free, static demonstration. Working name only.
+Static, device-local English training prototype based on the selected five visual concepts and the 2026-10-07 PRD (F01–F08). No accounts, cloud upload, AI grading, or payment. This release replaces the v7 media-sidebar presentation.
 
 ## Run
-Serve `dist/` with any static web server, or open `dist/index.html`. Navigation uses hash routes.
 
-## Implemented
-- Dashboard, training room, session recap, growth/medals, data workspace
-- Four original English sentences with optional browser speech synthesis, sentence loop, speed, hints and answer reveal
-- Deterministic word-edit-distance feedback, input drafts and per-attempt context
-- Simulated shadowing recording states (no microphone capture or assessment)
-- Preset 30-minute recap plus separate real local interactive-attempt recap
-- Transparent evidence/metric dialogs, growth/medal rules and local practice plan
-- Real JSON/CSV exports, canvas PNG share-card download, copyable demo URL
-- Clearly prewritten AI analysis UI with no model/network calls
-- LocalStorage persistence, deliberate reset, paused timing on navigation/reload/background
+Serve `dist` with any static HTTP server. Example: `python -m http.server 4173 --directory dist`. Camera and screen capture require a secure browser context (HTTPS or browser-recognized localhost), and explicit visitor clicks. Five routes contain real index files, so refresh works on ordinary static hosting:
 
-## Boundaries
-All preset achievements, curves and medals are synthetic examples, never user achievements. Local input is tagged separately. No backend, account, authentication, payment, cloud synchronization, real audio capture, professional pronunciation assessment, external AI call or automatic social sharing. Browser speech synthesis depends on installed/browser voices and only speaks the original sample text. Time is visible session time, not measured attention. CSV contains all session-summary rows, all 13 synthetic sentence attempts, and every local interactive attempt with dataset, record type, source, hint, exposure, reference, answer and metric fields. JSON contains the complete implemented prototype facts and limitations, including structures unsuitable for CSV, not a production event-sourcing schema.
+- `/demo/01-fitness-flow/`
+- `/demo/02-precision-arena/`
+- `/demo/03-pace-runner/`
+- `/demo/04-aero-hud/`
+- `/demo/05-rhythm-quest/`
 
-## Data and privacy
-No external dependencies, analytics, fonts, imagery, trackers or APIs. Local data is scoped to this browser. User-input rendering is HTML-escaped; spreadsheet-sensitive leading characters are escaped in CSV. Original sample sentences were authored for the prototype. Download files include explicit synthetic/local dataset tags and metric definition.
+`/` opens style 01. In-app style changes retain the same video element, capture controller, draft, and learning session. Each direct page starts with its corresponding original clean café scene. To compare the exact same media frame, switch styles within the app or choose the same local file.
 
-## Routes
-`#home`, `#train`, `#review`, `#growth`, `#data`
+## Structure
 
-## Visual-style demonstration (v5 candidate)
+- `dist/hud/learning.js`: versioned normalization, word alignment, true incremental rewards, temporary input pace, event and JSON/CSV export model.
+- `dist/hud/ui.js`: five style routing, permanent media element, HUD/console, free layout and keyboard alternatives, camera and recording UI.
+- `dist/hud/hud.css`: five distinct visual component systems and responsive safe docking.
+- `dist/hud/capture-store.js`: explicit camera/screen APIs, MediaRecorder lifecycle, IndexedDB chunks and metadata, seven-day local cleanup and retention.
+- `dist/media/hud`: original generated still imagery encoded as narrated image videos. Not real filmed footage. `rights.json` records source.
+- Old app/workbench source remains unreferenced for historical traceability. New logic never loads it or regrades its original answers against the new course.
 
-Two independent layouts share the same training state and fixtures: Command (modular graphite dashboard, target rings and baseline telemetry) and Orbit (spatial milestone map, soft atmosphere, centered training). The display preference is saved separately from learning data; switching does not reset the active route, drafts, hints, scores or plan. The share-card dialog produces two corresponding 1080×1350 PNG designs with identical evidence. Theme gallery and premium labels are only a visual-entitlement concept, with no real purchase, subscription or account. The children's direction is explicitly unavailable. Base sharing and JSON/CSV exports are never gated.
+## Data and feedback
 
-## Readability and export verification (v6 candidate)
-Chart axes and values are HTML labels at actual 12px, independent of SVG scaling; SVG is used only for geometry. Star-map helper labels are 12px minimum. Switching themes updates the URL style parameter with replaceState while preserving other parameters and the current hash route. CSV is UTF-8 with BOM, CRLF row delimiters, quoted fields, embedded quote/newline escaping, and a formula-injection guard; raw answers remain unchanged in JSON.
+The café course has 12 original cues (6 seconds each). Fresh HUD values start at zero. A word position can add to confirmed words once per round; cue completion requires no edit errors. Submission uses word edit distance with deterministic maximum-match tie handling. Submitted text is compared locally, never called AI scoring. Hint, subtitle exposure, paste, first/repeat, exact alignment and source versions accompany results.
 
-## Media-first workspace (v7 candidate)
+Input pace is an activity indicator: +20 per committed typed grapheme, exponential decay with a 3-second time constant. Paste and deletion do not create pace. Listening, pause, composition, checking, closed/hidden page, and review freeze it. Durable achievements never decay. A new round resets only after an explicit confirmation; export first if needed.
 
-The primary surface is now a full-viewport media workbench, with a persistent video/image DOM element, resizable data rail and lower training dock, compact/balanced/large presets, media focus, and user-triggered native browser fullscreen. The Graphite/Warm White preference changes presentation only. Review, growth and exports are secondary drawers; earlier dashboard themes are no longer the entry surface.
+Legacy synthetic data stays separately labeled (4 summaries, 13 attempts; 100 words/22 errors/78%; same 25 words 8→3 errors,68→88%). Existing v1 device-local state is included in export without migration or destructive mutation. None enters live HUD counts.
 
-Bundled assets are original generated imagery with a subtle image animation or portrait crop and locally synthesized English narration (FFmpeg libflite). They are actual H.264/AAC MP4 files, not filmed footage. Each is about 18 seconds. Image metadata and creation description are in `dist/media/rights.json`.
+## Media and layout
 
-User files are read only with URL.createObjectURL and are never uploaded. Previous object URLs are revoked on replacement and page exit; resource generation guards discard stale load/error events. Refresh restores the demo and requires reselecting local files. Unbound local media is preview-only: no subtitle inference, transcription or scoring is claimed. Existing learning data stays intact.
+Local video/image files use object URLs only, revoked on replacement/unload. `object-fit:contain` preserves any aspect ratio. They have no bound reference transcript, so grading is disabled. Default cue video has play, seek, speed, volume, repeat and subtitle controls. Video/HUD can move/scale with handles or keyboard and drawer controls; widths are constrained to safe boundaries. Layout saved by style and viewport; phones use safe docking to keep input/submit visible. Resetting layout does not reset learning or recordings.
 
-Drag separators or focus them and use arrow keys; Home resets the relevant dimension. Fullscreen requires a user gesture and may be unsupported in some browsers; focus mode remains available. At narrow widths, the workspace stacks and scrolls internally, the rail becomes an explicit toggle panel, and media presets resize its visible stage.
+## Capture and local storage
+
+No media permission prompt occurs on load. Camera opens only after its explicit button; video only, no microphone. Screen recording is always a visible entry but starts only after a fresh click and browser source choice. Both audio options default off. Actual capture source/audio appears while recording. The capture preview itself is never embedded into the captured surface.
+
+Recordings are written as ordered chunks to IndexedDB, not retained as a whole in memory during recording. Stop waits for final chunks and metadata commit; write/quota/backlog failure stops capture and marks incomplete. Normal recordings must be previewed in a real browser; interrupted chunks are best-effort bytes and may not decode individually or together.
+
+Unretained recordings expire seven days after normal stop, or last commit for interrupted data. Cleanup runs at startup, visibility return and periodic executable checks. Closed pages cannot promise punctual deletion. Browser clearing/eviction/private mode may remove files earlier. Download is a separate explicit action and means “download initiated”; browser retention is a separate pin. Neither guarantees permanent persistence. No automatic deletion of unexpired data for space.
+
+Limits: 30 minutes,512MiB export,16MiB pending write cap; capacity warning below10% or projected2minutes remaining. Configurable in CaptureController. Web Locks protects concurrent recovery on supported browsers; other environments visibly require single-page use.
+
+## Validation and limits
+
+Automated pure learning tests and26 simulated capture/storage tests cover data integrity, normalization, correction/deduplication, tempo freezing, no prompt on initialization, permissions canceled/denied, stream cleanup, chunk ordering, quota failure, interrupted recovery and retention. These do not prove real camera hardware or system screen capture.
+
+Candidate requires actual browser visual/interaction checks against all5 reference images. Real camera/microphone capture and a real screen chooser are not invoked by automated QA without specific device authorization. Mobile getDisplayMedia is generally unavailable; the app reports actual missing capability and suggests system recording. Frame-rate,200% zoom,soft keyboard,hardware audio mixing,real crash recovery and cross-browser results belong in the release test report, with untested items identified.
