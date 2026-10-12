@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-10-11T11:01:41.242427+00:00",
+  "authenticated": false,
+  "implementation_sha": "90b7c3fa3a1ab5dfd39e29becb5af3434462f93d",
+  "release_sha": "db5085c9f67d61ef577e9f0a043aee8667241873",
+  "checks": [
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+      "status": 200,
+      "mime": "text/html",
+      "bytes": 14205,
+      "sha256": "d821fa256c043ff566679fb1b2b87a4f093b49cb291810ec0a803667469ca7d6",
+      "matches_frozen_bytes": true,
+      "expected_runtime_markers": {
+        "294-80156c004b2ceae0.js": true,
+        "page-3c63db618bf6e1e0.js": true,
+        "a3539c1b0c37f54c.css": true
+      }
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/294-80156c004b2ceae0.js",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/294-80156c004b2ceae0.js",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 902005,
+      "sha256": "25820af05d793682ffdd2e5a0ad359711d1244e5e3ad0e446782d502aec75e15",
+      "matches_frozen_bytes": true
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-3c63db618bf6e1e0.js",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-3c63db618bf6e1e0.js",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 134,
+      "sha256": "444888046849cdaa0effd5379497591f2e2e608d60fcaf1dad94f673a76efa52",
+      "matches_frozen_bytes": true
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/a3539c1b0c37f54c.css",
+      "final_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/a3539c1b0c37f54c.css",
+      "status": 200,
+      "mime": "text/css",
+      "bytes": 31476,
+      "sha256": "bd13f9daa80bc29da5da1d65e806b48136348bf386fc1e4cf9f729e35fc68611",
+      "matches_frozen_bytes": true
+    }
+  ],
+  "browser_acceptance_claim": false,
+  "media_requests_performed": false
+}

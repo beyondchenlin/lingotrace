@@ -1,0 +1,152 @@
+{
+  "status": "V82_CLOSED_SCOPED_PUBLIC_UI_SMOKE_PASS_MEDIA_UNRESOLVED",
+  "updated_at": "2026-10-11T11:36:36.142638+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+  "implementation_source": "90b7c3fa3a1ab5dfd39e29becb5af3434462f93d",
+  "implementation_tree": "4a42e52b606cb96a3c83807cfaa19880048eb900",
+  "release_source": "db5085c9f67d61ef577e9f0a043aee8667241873",
+  "official_opening": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/shared/lingotrace-feedback-release-55bf7b7",
+    "commit_sha": "18ac500220750949349a29d441ed5c428ee006c7"
+  },
+  "official_package": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/shared/lingotrace-feedback-release-55bf7b7",
+    "commit_sha": "db5085c9f67d61ef577e9f0a043aee8667241873",
+    "archive": "/tmp/lingotrace-main82-release-90b7c3f.tar.gz"
+  },
+  "saved_version": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_e3bce9bceb8081918d0954ea78b05845",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "version_number": 82,
+    "source": {
+      "commit_sha": "db5085c9f67d61ef577e9f0a043aee8667241873"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a77c8230bf8905f5c9461a43",
+      "content_hash": "sha256:cebab1f49d33c7e937d1f139a6e95292988fe3985d889852e38528ee4329c92a",
+      "size_bytes": 187351040,
+      "file_count": 396
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6acb6c5ddeb081918868f3f1b6b8732d",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "title": "练见 LingoTrace · 英语训练原型",
+    "version_id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_e3bce9bceb8081918d0954ea78b05845",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac5ccefb20481918a883afab8a483b4",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-11T11:00:57.308714+00:00"
+  },
+  "audience_readback": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "status": "active",
+    "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site",
+    "version_number": 82,
+    "access_mode": "public",
+    "revision": 2
+  },
+  "qa_v2_unchanged": {
+    "id": "appgprj_6acb4da7ce14819199050e64775c5aba",
+    "status": "active",
+    "url": "https://lingotrace-candidate-qa-oct11.beyond-chenlin.chatgpt.site",
+    "version_number": 2,
+    "access_mode": "public",
+    "revision": 2
+  },
+  "verification": {
+    "runtime_files": 395,
+    "runtime_manifest_sha256": "96344ade34cff4cf6cb0fdbcde460c21bbe10a106a3b29468856098c5745c9d3",
+    "source_files": 627,
+    "docs_only_delta_files": 11,
+    "old_release_docs_exact": 135,
+    "archive_files": 396,
+    "gzip_sha256": "8ec09243f545238a674cc0da8deab404f04131b4870b1c4eb26bb1c52b71b2d4",
+    "source_runtime_unchanged": true,
+    "documentation_semantic_review": "Independent integrator PASS; prior PRD text retained with appended scoped status only.",
+    "browser_prepublication_report": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/acceptance-report.md",
+    "browser_prepublication_report_sha256": "648348646153256401fdcc2afe06ee4ede8afeef4484314f8774a578c36e5d6f",
+    "anonymous_http_evidence": "V82-PUBLIC-HTTP-IDENTITY.json",
+    "production_browser_smoke": {
+      "status": "SCOPED_UI_PASS_MEDIA_UNPASSED",
+      "report_path": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/public-v82/smoke-report.md",
+      "report_sha256": "04f8cee76a577f4052bda0e7a874e43ca0fd809430ea37f7111124ccd5e948c2",
+      "observations": [
+        "Natural same-public-origin Cafe, language and existing draft restored without clearing records.",
+        "Live green/red native editing, hidden neutral draft, Below keyboard-only, thin footer and HUD edges passed.",
+        "No new error9 in the bounded production smoke."
+      ],
+      "identity_basis": "Actual native UI observations combined with separate publisher HTTP byte verification. Browser dynamic DOM did not independently preserve all runtime script tags.",
+      "media": "Natural Cafe entrance still exposed cannot-play-media. No Play, reload, retry or forced NPS request. NPS was not exercised because saved Cafe restored.",
+      "not_verified": [
+        "Audible speech/effects, lip sync/end truncation",
+        "Physical OS IME, vibration, camera hardware, recorded output",
+        "Separate typing Follow feature",
+        "Cause of Cafe playback failure or historical error9"
+      ]
+    }
+  },
+  "scope": "UI-only v82: native draft geometry, restore, Below keyboard-only, thin player strip, HUD background edges, previously reviewed prominent typing/error settings. No new typing Follow runtime.",
+  "limits": [
+    "Natural production Cafe still showed a native cannot-play-media message; media is not passed or declared fixed.",
+    "Production NPS was not requested during the single natural saved-Cafe entrance; the HTTP preview HTTPS qualification limit remains separately recorded.",
+    "Historical Chromium error9 incidents remain unattributed; none appeared in the bounded final R2/public UI sessions.",
+    "No physical phone/OS IME/vibration, audible effect/speech synchrony, camera hardware or actual recording acceptance."
+  ],
+  "rollback": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_2dbe9b5fa1288191ba2fe744f930150a",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "version_number": 81,
+    "source": {
+      "commit_sha": "18ac500220750949349a29d441ed5c428ee006c7"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000058fc8230ab5f0f1dbfdf0338",
+      "content_hash": "sha256:e7b073949316757af0c7f6108cd33684a409272b56f772e0d56cf12be26b1cba",
+      "size_bytes": 186398720,
+      "file_count": 389
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6acb4a22056c819186b69afb5eb1de1f"
+  },
+  "secrets_persisted": false,
+  "credentials_cleared": true,
+  "closed_at": "2026-10-11T11:05:08.278251+00:00",
+  "evidence_corrections": [
+    {
+      "recorded_at": "2026-10-11T11:36:36.142618+00:00",
+      "supersedes_media_classification_only": true,
+      "authoritative_current_media_conclusion": "The earlier attribution of generic cannot-play-media AX text to the Cafe course is retracted: the page also contains an inactive no-src camera video. The unlabeled AX text cannot identify its emitting element. Local diagnostic 9d4 showed no course failure details before or after one Play; 0 to 0.05 to 0 after about nine seconds is compatible with the existing normal 0–6 second sentence boundary. Neither an actual Cafe course failure nor continuous in-product playback/audible success is established. Media remains insufficiently observed, and the scoped UI pass is unchanged.",
+      "original_receipt_path": "/workspace/shared/lingotrace-final-main-r2-evidence/build-90b7c3f/V82-PUBLICATION-RECEIPT.original-before-media-classification-correction.json",
+      "original_receipt_sha256": "850d5a155d59994eb821e87fc40231e7d848b84553cee1cd4722f6873ca7dd6b",
+      "reports": [
+        {
+          "path": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/acceptance-report.md",
+          "corrected_sha256": "59631f26b7ce25661aca44aefd8cb065146312635eca11038b3f311fa7ac6ad0",
+          "original_path": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/acceptance-report.original-before-media-classification-correction.md",
+          "original_sha256": "648348646153256401fdcc2afe06ee4ede8afeef4484314f8774a578c36e5d6f"
+        },
+        {
+          "path": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/public-v82/smoke-report.md",
+          "corrected_sha256": "cc76a622c68f88a4a6f88d95df58ef3bfc937f9ca98d24ced3903dc49ab1610c",
+          "original_path": "/workspace/scratch/dd3f275409c3/main-r2-browser-qa/public-v82/smoke-report.original-before-media-classification-correction.md",
+          "original_sha256": "04f8cee76a577f4052bda0e7a874e43ca0fd809430ea37f7111124ccd5e948c2"
+        }
+      ],
+      "site_or_source_changes": false
+    }
+  ],
+  "current_status_after_evidence_correction": "V82_CLOSED_SCOPED_PUBLIC_UI_SMOKE_PASS_MEDIA_INSUFFICIENTLY_OBSERVED"
+}

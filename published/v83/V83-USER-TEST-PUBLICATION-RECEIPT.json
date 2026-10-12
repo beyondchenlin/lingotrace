@@ -1,0 +1,77 @@
+{
+  "status": "V83_PUBLISHED_FOR_USER_TEST_ACCEPTANCE_PENDING",
+  "authorization_message_id": "Sentinel_50a7f99e20b4819182a3a6b24fdd41c3",
+  "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+  "deployment": {
+    "id": "appgdep_6acb88c714908191b213c04f5a974fe2",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "title": "\u7ec3\u89c1 LingoTrace \u00b7 \u82f1\u8bed\u8bad\u7ec3\u539f\u578b",
+    "version_id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_8fdb325d8e308191963b0b53fe7e2749",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac5ccefb20481918a883afab8a483b4",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-11T13:02:09.765520+00:00"
+  },
+  "version": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_8fdb325d8e308191963b0b53fe7e2749",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "version_number": 83,
+    "source": {
+      "commit_sha": "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000abfc81fda5241b62466132c3",
+      "content_hash": "sha256:d30d07ba63019db2946869453189292f487cd8a9a19fb4f719b8b84e64fe0089",
+      "size_bytes": 189286400,
+      "file_count": 419
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6acb88c714908191b213c04f5a974fe2"
+  },
+  "rollback_v82": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_e3bce9bceb8081918d0954ea78b05845",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "version_number": 82,
+    "source": {
+      "commit_sha": "db5085c9f67d61ef577e9f0a043aee8667241873"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a77c8230bf8905f5c9461a43",
+      "content_hash": "sha256:cebab1f49d33c7e937d1f139a6e95292988fe3985d889852e38528ee4329c92a",
+      "size_bytes": 187351040,
+      "file_count": 396
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6acb6c5ddeb081918868f3f1b6b8732d"
+  },
+  "site": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "access_mode": "public",
+    "access_revision": 2,
+    "current_live_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site",
+    "latest_version": 83
+  },
+  "qa_v2": {
+    "project_id": "appgprj_6acb4da7ce14819199050e64775c5aba",
+    "current_live_url": "https://lingotrace-candidate-qa-oct11.beyond-chenlin.chatgpt.site",
+    "latest_version": 2,
+    "access_mode": "public"
+  },
+  "source": "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b",
+  "implementation": "d36190a5ccd1e3d271c6330df4470ef55db7fd39",
+  "build_id": "Nikf7KuvbsRyrhSQ6yEh9",
+  "runtime_manifest_sha256": "89cdf3c0cd1afd04c8407e3e361cf84a62c668777e2ccc134a3ce0f2a228e34d",
+  "anonymous_http_identity_file": "V83-USER-TEST-PUBLIC-HTTP-IDENTITY.json",
+  "browser_acceptance": "BLOCKED: first fresh candidate tab crashed with error9 before interactions; no new browser attempt during publication.",
+  "phone_acceptance": "PENDING_USER_TEST",
+  "user_request_lifted_publication_hold": true,
+  "qa_v2_modified": false,
+  "recorded_at": "2026-10-11T13:03:58.933764+00:00"
+}

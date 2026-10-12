@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "implementation_source": "90b7c3fa3a1ab5dfd39e29becb5af3434462f93d",
+  "runtime_files": 395,
+  "runtime_manifest_sha256": "96344ade34cff4cf6cb0fdbcde460c21bbe10a106a3b29468856098c5745c9d3",
+  "release_source_files": 627,
+  "docs_only_delta_files": 11,
+  "old_release_docs_exact": 135,
+  "runtime_unchanged": true,
+  "untracked_or_private_files_included": false,
+  "archive": "/tmp/lingotrace-main82-release-90b7c3f.tar.gz",
+  "archive_files": 396,
+  "gzip_sha256": "8ec09243f545238a674cc0da8deab404f04131b4870b1c4eb26bb1c52b71b2d4"
+}

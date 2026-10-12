@@ -1,0 +1,35 @@
+{
+  "status": "SUPPORTED_SOURCE_PACKAGE_VERIFIED_PUBLICATION_HELD",
+  "timestamp": "2026-10-11T12:50:21.549015+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "implementation_source": "d36190a5ccd1e3d271c6330df4470ef55db7fd39",
+  "release_source": "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b",
+  "source_helper_opening": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/scratch/dd3f275409c3/lingotrace-portrait-blackout-release-d36190a",
+    "commit_sha": "d36190a5ccd1e3d271c6330df4470ef55db7fd39"
+  },
+  "source_helper_package": {
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "checkout_path": "/workspace/scratch/dd3f275409c3/lingotrace-portrait-blackout-release-d36190a",
+    "commit_sha": "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b",
+    "archive": "/tmp/lingotrace-portrait-blackout-d36190a-release.tar.gz"
+  },
+  "source_push_verified_by_supported_helper": true,
+  "source_only_dist_delta_files": 38,
+  "source_files_unchanged_after_package": 634,
+  "runtime_files": 418,
+  "runtime_manifest_sha256": "89cdf3c0cd1afd04c8407e3e361cf84a62c668777e2ccc134a3ce0f2a228e34d",
+  "archive_files": 419,
+  "archive_bytes": 128642628,
+  "archive_sha256": "68a7605c7159ea915e62f201776b08ede788d5ee4fbb159feb060683557c2771",
+  "archive_runtime_exact": true,
+  "old_v82_freeze_and_archive_unchanged": true,
+  "original_checkout_clean": true,
+  "new_release_checkout_clean": true,
+  "credentials_cleared": true,
+  "publication": false,
+  "browser_acceptance": "Pending root browser gate",
+  "free_tmp": 311881728,
+  "free_overlay": 73609216
+}
