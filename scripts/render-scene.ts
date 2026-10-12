@@ -4,6 +4,7 @@ import {writeFile,mkdir} from 'node:fs/promises';
 import {paintScene,type SceneMedia,type SceneVisual} from '../studio/scene/renderer';
 import {TrainingEngine} from '../studio/core/training';
 for(const suffix of ['Regular','Bold','Italic','BoldItalic']){GlobalFonts.registerFromPath(`/usr/share/fonts/truetype/liberation/LiberationSans-${suffix}.ttf`,'Arial');GlobalFonts.registerFromPath(`/usr/share/fonts/truetype/liberation/LiberationMono-${suffix}.ttf`,'Courier New');}GlobalFonts.registerFromPath('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc','Microsoft YaHei');
+for(const name of['studio-sans-regular','studio-sans-bold','studio-mono-regular','studio-semibold'])GlobalFonts.registerFromPath(`public/studio-assets/fonts/${name}.woff`);
 const out=process.argv[2]||'/workspace/scratch/dd3f275409c3/studio-qa';await mkdir(out,{recursive:true});
 const poster=await loadImage('public/studio-assets/06-cafe-poster.jpg'),ref=await loadImage('public/studio-assets/06-reference.png');
 for(const image of [poster,ref]){if(!image.naturalWidth)Object.defineProperty(image,'naturalWidth',{value:image.width});if(!image.naturalHeight)Object.defineProperty(image,'naturalHeight',{value:image.height});}

@@ -2,7 +2,7 @@ export type Movable='media'|'inset'|'subtitle'|'metrics';
 export type Rect={x:number;y:number;w:number;h:number};
 export type Arrangement=Partial<Record<Movable,Rect>>;
 export const LAYOUT_NAMES:Record<Movable,string>={media:'主画面',inset:'摄像头 / 课程小窗',subtitle:'字幕',metrics:'训练数据带'};
-export const DEFAULT_RECTS:Record<Movable,Rect>={media:{x:0,y:0,w:1672,h:941},inset:{x:1378,y:46,w:273,h:218},subtitle:{x:453,y:523,w:766,h:73},metrics:{x:0,y:754,w:1672,h:118}};
+export const DEFAULT_RECTS:Record<Movable,Rect>={media:{x:0,y:0,w:1672,h:941},inset:{x:1378,y:46,w:273,h:218},subtitle:{x:453,y:521,w:766,h:73},metrics:{x:0,y:754,w:1672,h:118}};
 const limits:Record<Movable,{min:number;bounds:Rect}>={media:{min:300,bounds:{x:0,y:0,w:1672,h:941}},inset:{min:240,bounds:{x:0,y:0,w:1672,h:610}},subtitle:{min:600,bounds:{x:0,y:89,w:1672,h:521}},metrics:{min:1137,bounds:{x:0,y:89,w:1672,h:783}}};
 const clamp=(v:number,a:number,b:number)=>Math.max(a,Math.min(b,v));
 export const rectFor=(key:Movable,arrangement:Arrangement):Rect=>({...DEFAULT_RECTS[key],...arrangement[key]});

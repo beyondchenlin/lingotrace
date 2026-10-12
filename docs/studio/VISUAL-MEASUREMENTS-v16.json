@@ -1,0 +1,344 @@
+{
+  "evidence": "Programmatic Canvas frames, not browser screenshots. Same region and threshold applied.",
+  "files": {
+    "reference": "/workspace/scratch/dd3f275409c3/design_concepts_round2/06-training-studio.png",
+    "v15_program": "/workspace/scratch/dd3f275409c3/studio-qa/v15/06-1672x941-reference-fixture-program-render.png",
+    "v16_program": "/workspace/scratch/dd3f275409c3/studio-qa/v16/06-1672x941-reference-fixture-program-render.png"
+  },
+  "ink": {
+    "68": {
+      "reference": {
+        "bbox": [
+          48,
+          779,
+          143,
+          843
+        ],
+        "inkPixels": 3289
+      },
+      "v15_program": {
+        "bbox": [
+          47,
+          781,
+          138,
+          842
+        ],
+        "inkPixels": 3278
+      },
+      "v16_program": {
+        "bbox": [
+          48,
+          778,
+          144,
+          843
+        ],
+        "inkPixels": 3181
+      }
+    },
+    "24": {
+      "reference": {
+        "bbox": [
+          785,
+          782,
+          867,
+          836
+        ],
+        "inkPixels": 2014
+      },
+      "v15_program": {
+        "bbox": [
+          785,
+          782,
+          872,
+          839
+        ],
+        "inkPixels": 2389
+      },
+      "v16_program": {
+        "bbox": [
+          786,
+          781,
+          868,
+          836
+        ],
+        "inkPixels": 1911
+      }
+    },
+    "input": {
+      "reference": {
+        "bbox": [
+          69,
+          673,
+          648,
+          707
+        ],
+        "inkPixels": 3844
+      },
+      "v15_program": {
+        "bbox": [
+          69,
+          672,
+          658,
+          707
+        ],
+        "inkPixels": 4433
+      },
+      "v16_program": {
+        "bbox": [
+          69,
+          673,
+          648,
+          707
+        ],
+        "inkPixels": 3972
+      }
+    },
+    "label": {
+      "reference": {
+        "bbox": [
+          61,
+          629,
+          297,
+          638
+        ],
+        "inkPixels": 393
+      },
+      "v15_program": {
+        "bbox": [
+          59,
+          629,
+          253,
+          638
+        ],
+        "inkPixels": 505
+      },
+      "v16_program": {
+        "bbox": [
+          61,
+          629,
+          298,
+          638
+        ],
+        "inkPixels": 544
+      }
+    },
+    "subtitle": {
+      "reference": {
+        "bbox": [
+          534,
+          542,
+          1144,
+          583
+        ],
+        "inkPixels": 6024
+      },
+      "v15_program": {
+        "bbox": [
+          531,
+          540,
+          1140,
+          583
+        ],
+        "inkPixels": 5743
+      },
+      "v16_program": {
+        "bbox": [
+          535,
+          542,
+          1144,
+          582
+        ],
+        "inkPixels": 5950
+      }
+    }
+  },
+  "samples": {
+    "(475, 540)": {
+      "reference": [
+        82,
+        66,
+        54
+      ],
+      "v15_program": [
+        89,
+        73,
+        60
+      ],
+      "v16_program": [
+        78,
+        65,
+        55
+      ]
+    },
+    "(1185, 560)": {
+      "reference": [
+        22,
+        22,
+        27
+      ],
+      "v15_program": [
+        38,
+        38,
+        38
+      ],
+      "v16_program": [
+        23,
+        24,
+        27
+      ]
+    },
+    "(38, 624)": {
+      "reference": [
+        38,
+        42,
+        47
+      ],
+      "v15_program": [
+        41,
+        34,
+        30
+      ],
+      "v16_program": [
+        41,
+        41,
+        44
+      ]
+    },
+    "(330, 626)": {
+      "reference": [
+        79,
+        76,
+        78
+      ],
+      "v15_program": [
+        96,
+        88,
+        86
+      ],
+      "v16_program": [
+        79,
+        76,
+        78
+      ]
+    },
+    "(1200, 700)": {
+      "reference": [
+        27,
+        31,
+        37
+      ],
+      "v15_program": [
+        62,
+        64,
+        69
+      ],
+      "v16_program": [
+        26,
+        31,
+        39
+      ]
+    },
+    "(700, 780)": {
+      "reference": [
+        44,
+        44,
+        41
+      ],
+      "v15_program": [
+        40,
+        44,
+        46
+      ],
+      "v16_program": [
+        45,
+        48,
+        52
+      ]
+    },
+    "(1100, 770)": {
+      "reference": [
+        46,
+        45,
+        45
+      ],
+      "v15_program": [
+        43,
+        44,
+        44
+      ],
+      "v16_program": [
+        46,
+        47,
+        48
+      ]
+    },
+    "(830, 890)": {
+      "reference": [
+        30,
+        31,
+        34
+      ],
+      "v15_program": [
+        19,
+        27,
+        28
+      ],
+      "v16_program": [
+        31,
+        31,
+        35
+      ]
+    },
+    "(1100, 925)": {
+      "reference": [
+        29,
+        34,
+        38
+      ],
+      "v15_program": [
+        18,
+        27,
+        28
+      ],
+      "v16_program": [
+        28,
+        31,
+        38
+      ]
+    },
+    "(1600, 240)": {
+      "reference": [
+        25,
+        28,
+        37
+      ],
+      "v15_program": [
+        51,
+        55,
+        61
+      ],
+      "v16_program": [
+        25,
+        28,
+        37
+      ]
+    },
+    "(1550, 244)": {
+      "reference": [
+        12,
+        12,
+        17
+      ],
+      "v15_program": [
+        49,
+        52,
+        57
+      ],
+      "v16_program": [
+        12,
+        12,
+        17
+      ]
+    }
+  }
+}

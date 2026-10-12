@@ -1,1 +1,21 @@
-{"background":"Original generated café artwork derived from the user-selected 06 training studio concept, with interface and camera inset removed using imagegen.","sourceDimensions":[1671,941],"referenceDimensions":[1672,941],"video":"Original still-image video with twelve original cafe sentences and locally synthesized narration. Not filmed footage.","camera":"No camera image or device capture on startup.","ai":"No external model, voice assessment or third-party upload."}
+{
+  "background": "Original generated café artwork derived from the user-selected 06 training studio concept, with interface and camera inset removed using imagegen.",
+  "sourceDimensions": [
+    1671,
+    941
+  ],
+  "referenceDimensions": [
+    1672,
+    941
+  ],
+  "video": "Original still-image video with twelve original cafe sentences and locally synthesized narration. Not filmed footage.",
+  "camera": "No camera image or device capture on startup.",
+  "ai": "No external model, voice assessment or third-party upload.",
+  "fonts": {
+    "sans": "Renamed Latin subset of Liberation Sans Regular/Bold, SIL OFL1.1",
+    "mono": "Renamed Latin subset of Liberation Mono Regular, SIL OFL1.1",
+    "semibold": "Latin subset of Open Sans Semibold, Apache2.0",
+    "notices": "fonts/LIBERATION-LICENSE.txt and fonts/OPEN-SANS-LICENSE.txt",
+    "reference": "Approximate font matches from measured glyph bounds; no assertion these were the original image fonts."
+  }
+}

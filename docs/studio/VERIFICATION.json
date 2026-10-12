@@ -18,7 +18,8 @@
     "2 contain/photo-mask scene checks",
     "12 synthetic composite-recorder/storage checks",
     "3 measured-font pace readout tests: reference68, 0/99/100/999/1000/40000/1000000, wider runtime fonts",
-    "v15 Next static export and output checks"
+    "Camera reference photo patches exclude baked REC UI",
+    "v16 Next static export and media/font asset checks"
   ],
   "visual_program_frames": [
     "1672x941 fresh",
@@ -28,15 +29,16 @@
     "1672x941 custom layout"
   ],
   "not_verified": [
-    "v15 browser retest of 0/99/100/999/1000 pace and 68 reference",
-    "final 1:1 original-reference comparison in browser",
-    "actual camera/microphone devices and authorized audio mixing",
+    "v16 same-size browser comparison of the five corrected regions",
+    "v16 native input/IME/caret after matching DOM and Canvas to packaged mono font",
+    "v16 numeric reflow under loaded packaged fonts",
+    "physical camera/microphone and authorized audio mixing",
     "M3 non-desktop layouts"
   ],
   "browser_blocker": "Bundled browser missing; official download invalid archive; installed Chromium launch socket() failed: Operation not permitted. No bypass attempted.",
   "privacy": "No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
   "timing": "activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it.",
-  "candidate": "v15",
+  "candidate": "v16",
   "additions": [
     "Free primary/inset/subtitle/metric layout with proportional resize, docks/reset, keyboard and viewport gesture cancellation",
     "Shared-reducer pace timeline with explicit frozen/unobserved/clock-change gaps",
@@ -47,7 +49,7 @@
     "Editor focus follows modal close and suppresses stale focus restoration"
   ],
   "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build.",
-  "changes": "Only dynamic pace readout geometry plus focused boundary tests and evidence updates.",
+  "changes": "Five-region reference-fidelity correction only: type/spacing, glass/blur, subtitle box, vector controls and reference-camera photo restoration. Real reducer and pace reflow retained.",
   "prior_browser_evidence": {
     "candidate": "v14",
     "source": "Parent-reported Windows browser QA, 2026-10-07; task 01a11506-018f-72a3-be4b-d1d60eb5a0d9",
@@ -64,5 +66,5 @@
       "all browsers/devices"
     ]
   },
-  "testTotal": 56
+  "testTotal": 57
 }
