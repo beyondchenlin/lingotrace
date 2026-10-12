@@ -1,0 +1,11 @@
+import React from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {TrainingEngine,replay,type TrainingEvent} from '../../studio/core/training';
+import PaceTimeline from '../../studio/components/PaceTimeline';
+import assert from 'node:assert/strict';
+Object.assign(globalThis,{React});
+const e=new TrainingEngine({sessionId:'chart-long',inputObservation:{runId:'chart-run'},clock:{now:()=>0,wallTime:()=>new Date(1700000000000).toISOString(),id:(()=>{let n=0;return()=>`chart-${++n}`})()}});e.beginComposition();
+const seed=e.getSnapshot(),last=seed.events.at(-1)!,events:TrainingEvent[]=[...seed.events];
+for(let i=1;i<=16000;i++)events.push({...last,type:'inputObservationSampled',eventId:`chart-${i+2}`,sequence:last.sequence+i,wallTime:new Date(1700000000000+i*1000).toISOString(),inputObservation:{...last.inputObservation!,atMs:i*1000,restartReason:null}});
+const snapshot=replay(events),html=renderToStaticMarkup(React.createElement(PaceTimeline,{snapshot}));
+assert.equal((html.match(/<circle /g)??[]).length,15996);assert.match(html,/max="16000"/);console.log('CHART_COMPLETE',html.length,'bytes; all 15996 measured circles retained');

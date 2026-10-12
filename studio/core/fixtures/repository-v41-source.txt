@@ -1,0 +1,293 @@
+import { replay, validateSnapshot, type TrainingSnapshot } from './training.ts';
+import {
+  LEGACY_HISTORY_SOURCE, LEGACY_HISTORY_LIMIT, LegacyHistoryError, readLegacyHistoryRecord,
+  legacyHistoryEntry, freezeLegacyHistory, legacyHistoryIdentity,
+  type LegacyHistoryList, type LegacyHistoryEntry, type LegacyHistorySession, type LegacyHistoryCursor,
+} from './legacy-history.ts';
+
+export interface PersistenceStatus {
+  readonly state: 'in-memory' | 'pending' | 'persisted' | 'error';
+  readonly pendingWrites: number;
+  readonly lastPersistedSessionId: string | null;
+  readonly lastPersistedSequence: number | null;
+  readonly error: string | null;
+}
+interface StoredSession { sessionId: string; sequence: number; snapshot: TrainingSnapshot; updatedAt: string }
+interface RepositoryOptions { dbName?: string; indexedDB?: IDBFactory }
+/** IndexedDB only. Failure leaves the engine usable and exportable, never falsely "saved". */
+export class IndexedDBTrainingRepository {
+  private factory: IDBFactory | undefined;
+  private dbName: string;
+  private database: Promise<IDBDatabase> | null = null;
+  private queue: Promise<void> = Promise.resolve();
+  private listeners = new Set<() => void>();
+  private status: PersistenceStatus = Object.freeze({ state: 'in-memory', pendingWrites: 0, lastPersistedSessionId: null, lastPersistedSequence: null, error: null });
+  constructor(options: RepositoryOptions = {}) {
+    this.dbName = options.dbName ?? 'lingotrace-studio-v1';
+    try { this.factory = options.indexedDB ?? globalThis.indexedDB; } catch { this.factory = undefined; }
+  }
+  getStatus = (): PersistenceStatus => this.status;
+  subscribe = (listener: () => void): (() => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
+  private update(patch: Partial<PersistenceStatus>): void {
+    this.status = Object.freeze({ ...this.status, ...patch });
+    for (const listener of this.listeners) listener();
+  }
+  private open(): Promise<IDBDatabase> {
+    if (this.database) return this.database;
+    this.database = new Promise<IDBDatabase>((resolve, reject) => {
+      if (!this.factory) { reject(new Error('IndexedDB is unavailable. This session remains in memory; export JSON/CSV to keep it.')); return; }
+      const request = this.factory.open(this.dbName, 1);
+      let rejected = false;
+      request.onupgradeneeded = () => {
+        const db = request.result;
+        if (!db.objectStoreNames.contains('sessions')) db.createObjectStore('sessions', { keyPath: 'sessionId' });
+        if (!db.objectStoreNames.contains('events')) db.createObjectStore('events', { keyPath: ['sessionId', 'eventId'] });
+        if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta', { keyPath: 'key' });
+      };
+      request.onerror = () => { rejected = true; reject(request.error ?? new Error('Could not open IndexedDB.')); };
+      request.onblocked = () => { rejected = true; reject(new Error('Database upgrade is blocked by another tab. Close older tabs and retry saving, or export this session.')); };
+      request.onsuccess = () => {
+        if (rejected) { request.result.close(); return; }
+        const db = request.result;
+        db.onversionchange = () => { db.close(); this.database = null; };
+        resolve(db);
+      };
+    }).catch(error => { this.database = null; throw error; });
+    return this.database;
+  }
+  async loadLatest(): Promise<TrainingSnapshot | null> {
+    // A refresh restore must not race an earlier queued save in this repository.
+    await this.queue;
+    try {
+      const db = await this.open();
+      const record = await new Promise<StoredSession | null>((resolve, reject) => {
+        const transaction = db.transaction(['sessions', 'meta'], 'readonly');
+        let value: StoredSession | null = null;
+        const latest = transaction.objectStore('meta').get('latest');
+        latest.onsuccess = () => {
+          if (!latest.result?.sessionId) return;
+          const session = transaction.objectStore('sessions').get(latest.result.sessionId);
+          session.onsuccess = () => { value = session.result ?? null; };
+        };
+        transaction.oncomplete = () => resolve(value);
+        transaction.onerror = transaction.onabort = () => reject(transaction.error ?? new Error('Could not restore the saved session.'));
+      });
+      if (!record) return null;
+      const snapshot = replay(record.snapshot.events, record.snapshot.material);
+      if (snapshot.sessionId !== record.sessionId || snapshot.sequence !== record.sequence) throw new Error('Saved session metadata does not match its event log.');
+      this.update({ state: this.status.pendingWrites ? 'pending' : 'persisted', lastPersistedSessionId: snapshot.sessionId, lastPersistedSequence: snapshot.sequence, error: null });
+      return snapshot;
+    } catch (error) {
+      this.update({ state: 'error', error: errorText(error) });
+      throw error;
+    }
+  }
+  /** A separate, short-lived connection prevents a history read from creating or
+   * upgrading storage. In particular, do not reuse open()'s schema initializer. */
+  private openHistory(): Promise<IDBDatabase | null> {
+    return new Promise((resolve, reject) => {
+      if (!this.factory) { reject(new LegacyHistoryError('read-failed', 'IndexedDB is unavailable; saved history cannot be read.')); return; }
+      let absent = false, rejected = false;
+      const request = this.factory.open(this.dbName);
+      request.onupgradeneeded = () => { absent = true; request.transaction!.abort(); };
+      request.onerror = () => {
+        if (absent) resolve(null);
+        else reject(new LegacyHistoryError('read-failed', 'The saved history database could not be opened.'));
+      };
+      request.onblocked = () => { rejected = true; reject(new LegacyHistoryError('read-failed', 'Saved history is blocked by another database connection.')); };
+      request.onsuccess = () => {
+        const db = request.result;
+        if (rejected) { db.close(); return; }
+        if (db.version !== 1 || !db.objectStoreNames.contains('sessions')) {
+          db.close(); reject(new LegacyHistoryError('unsupported-schema', 'The saved history database schema is not supported.')); return;
+        }
+        db.onversionchange = () => db.close(); resolve(db);
+      };
+    });
+  }
+  /** Pages ordered by stored updatedAt descending, then actual primary key ascending.
+   * v1 has no date index: scan readonly, retaining at most limit summaries.
+   * A boundary survives deletion of its record. Pages are not a shared snapshot:
+   * newly saved/updated records moving before the boundary require a refresh.
+   * Missing/invalid dates sort last; malformed records remain separate entries. */
+  async listHistory(options: { limit?: number; after?: LegacyHistoryCursor | null } = {}): Promise<LegacyHistoryList> {
+    const limit = options.limit ?? LEGACY_HISTORY_LIMIT;
+    if (!Number.isSafeInteger(limit) || limit < 1 || limit > LEGACY_HISTORY_LIMIT) throw new LegacyHistoryError('invalid-query', 'History limit must be an integer from 1 to 100.');
+    // Capture and validate even mutable Date/binary/array keys before any await.
+    const after = captureHistoryCursor(options.after, this.factory);
+    await this.queue;
+    let db: IDBDatabase | null = null;
+    try {
+      db = await this.openHistory();
+      if (!db) return freezeLegacyHistory({ source: LEGACY_HISTORY_SOURCE, entries: [], limit, hasMore: false, nextCursor: null });
+      return await new Promise<LegacyHistoryList>((resolve, reject) => {
+        const transaction = db!.transaction('sessions', 'readonly');
+        const retained: { position: LegacyHistoryCursor; entry: LegacyHistoryEntry }[] = [];
+        const compare = (a: LegacyHistoryCursor, b: LegacyHistoryCursor) => compareHistoryPositions(a, b, this.factory!);
+        let count = 0, failure: unknown;
+        const request = transaction.objectStore('sessions').openCursor();
+        request.onsuccess = () => {
+          try {
+            const cursor = request.result; if (!cursor) return;
+            const value: unknown = cursor.value, position = historyPosition(value, cursor.primaryKey);
+            if (!after || compare(position, after) > 0) {
+              count++;
+              const insertion = retained.findIndex(item => compare(position, item.position) < 0);
+              if (retained.length < limit || insertion !== -1) {
+                if (retained.length === limit) retained.pop();
+                retained.splice(insertion === -1 ? retained.length : insertion, 0, { position, entry: legacyHistoryEntry(value, position.key) });
+              }
+            }
+            cursor.continue();
+          } catch (error) { failure = error; transaction.abort(); }
+        };
+        transaction.oncomplete = () => {
+          const hasMore = count > limit;
+          // Freeze the envelope separately: valid IDB keys include mutable Dates
+          // and binary buffers, which cannot all be deeply frozen. Each use clones.
+          const nextCursor = hasMore ? Object.freeze(structuredClone(retained[retained.length - 1].position)) : null;
+          resolve(freezeLegacyHistory({ source: LEGACY_HISTORY_SOURCE, entries: retained.map(item => item.entry), limit, hasMore, nextCursor }));
+        };
+        transaction.onerror = transaction.onabort = () => reject(failure ?? new LegacyHistoryError('read-failed', 'Saved history could not be listed.'));
+      });
+    } catch (error) { throw historyReadError(error); }
+    finally { db?.close(); }
+  }
+  /** Read the stored snapshot verbatim, never restore it into the live engine. */
+  async loadHistorySession(sessionId: string): Promise<LegacyHistorySession | null> {
+    if (typeof sessionId !== 'string' || !sessionId.trim()) throw new LegacyHistoryError('invalid-query', 'A saved session ID is required.');
+    await this.queue;
+    let db: IDBDatabase | null = null;
+    try {
+      db = await this.openHistory(); if (!db) return null;
+      return await new Promise<LegacyHistorySession | null>((resolve, reject) => {
+        const transaction = db!.transaction('sessions', 'readonly');
+        let result: LegacyHistorySession | null = null, failure: unknown;
+        const request = transaction.objectStore('sessions').get(sessionId);
+        request.onsuccess = () => {
+          try { if (request.result !== undefined) result = readLegacyHistoryRecord(request.result, sessionId); }
+          catch (error) { failure = error; transaction.abort(); }
+        };
+        transaction.oncomplete = () => resolve(result);
+        transaction.onerror = transaction.onabort = () => reject(failure ?? new LegacyHistoryError('read-failed', 'The selected saved session could not be read.'));
+      });
+    } catch (error) { throw historyReadError(error); }
+    finally { db?.close(); }
+  }
+  /** Final export handoff under a readonly sessions transaction. A concurrent
+   * writer cannot commit deletion/change between the recheck and synchronous sink.
+   * The caller formats before this call and keeps its own selection/close gate.
+   * This is only a stale-record guard, not integrated Practice privacy controls. */
+  async deliverHistorySession(sessionId: string, expectedSnapshot: TrainingSnapshot, synchronousSink: () => void): Promise<void> {
+    if (typeof sessionId !== 'string' || !sessionId.trim() || expectedSnapshot?.sessionId !== sessionId) throw new LegacyHistoryError('invalid-query', 'The selected saved session ID must match the export snapshot.');
+    if (typeof synchronousSink !== 'function' || Object.prototype.toString.call(synchronousSink) === '[object AsyncFunction]') throw new LegacyHistoryError('invalid-sink', 'History export requires a synchronous sink.');
+    // Capture before awaiting, so caller mutation cannot change the expected boundary.
+    const expected = readLegacyHistoryRecord({ sessionId, sequence: expectedSnapshot.sequence, snapshot: expectedSnapshot, updatedAt: expectedSnapshot.createdAt }, sessionId);
+    const identity = legacyHistoryIdentity(expected.snapshot);
+    await this.queue;
+    let db: IDBDatabase | null = null;
+    try {
+      db = await this.openHistory();
+      if (!db) throw new LegacyHistoryError('stale-record', 'The selected saved session no longer exists. Reload history before exporting.');
+      await new Promise<void>((resolve, reject) => {
+        const transaction = db!.transaction('sessions', 'readonly'); let failure: unknown;
+        const request = transaction.objectStore('sessions').get(sessionId);
+        request.onsuccess = () => {
+          try {
+            if (request.result === undefined) throw new LegacyHistoryError('stale-record', 'The selected saved session no longer exists. Reload history before exporting.');
+            const current = readLegacyHistoryRecord(request.result, sessionId);
+            if (legacyHistoryIdentity(current.snapshot) !== identity) throw new LegacyHistoryError('stale-record', 'The selected saved session changed. Reload history before exporting.');
+            const returned = synchronousSink() as unknown;
+            if (returned !== null && (typeof returned === 'object' || typeof returned === 'function') && typeof (returned as { then?: unknown }).then === 'function') {
+              void Promise.resolve(returned).catch(() => {});
+              throw new LegacyHistoryError('invalid-sink', 'History export sink returned a Promise; it must finish synchronously.');
+            }
+          } catch (error) { failure = error; transaction.abort(); }
+        };
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = transaction.onabort = () => reject(failure ?? new LegacyHistoryError('read-failed', 'The selected saved session could not be checked before export.'));
+      });
+    } catch (error) { throw historyReadError(error); }
+    finally { db?.close(); }
+  }
+  /** Serial writes; a single transaction stores the event log, snapshot, and latest pointer. */
+  saveSession(snapshot: TrainingSnapshot): Promise<void> {
+    let captured: TrainingSnapshot;
+    try { captured = validateSnapshot(snapshot); }
+    catch (error) { this.update({ state: 'error', error: errorText(error) }); return Promise.reject(error); }
+    this.update({ state: 'pending', pendingWrites: this.status.pendingWrites + 1, error: null });
+    const write = this.queue.then(async () => {
+      const db = await this.open();
+      const stored = await new Promise<StoredSession>((resolve, reject) => {
+        const transaction = db.transaction(['sessions', 'events', 'meta'], 'readwrite');
+        const sessions = transaction.objectStore('sessions');
+        let result: StoredSession;
+        let failure: Error | null = null;
+        const existing = sessions.get(captured.sessionId);
+        existing.onsuccess = () => {
+          try {
+            const previous: StoredSession | undefined = existing.result;
+            if (previous) {
+              const shared = Math.min(previous.snapshot.events.length, captured.events.length);
+              for (let i = 0; i < shared; i++) {
+                if (JSON.stringify(previous.snapshot.events[i]) !== JSON.stringify(captured.events[i])) throw new Error('This session was changed in another tab. Export this in-memory session before starting a new round.');
+              }
+              if (previous.sequence >= captured.sequence) { result = previous; return; }
+            }
+            result = { sessionId: captured.sessionId, sequence: captured.sequence, snapshot: captured, updatedAt: new Date().toISOString() };
+            const events = transaction.objectStore('events');
+            // The reducer deduplicates IDs; the composite key also enforces one record per session/event.
+            for (const event of captured.events.slice(previous?.snapshot.events.length ?? 0)) events.add(event);
+            sessions.put(result);
+            transaction.objectStore('meta').put({ key: 'latest', sessionId: captured.sessionId });
+          } catch (error) { failure = error instanceof Error ? error : new Error(String(error)); transaction.abort(); }
+        };
+        transaction.oncomplete = () => resolve(result);
+        transaction.onerror = transaction.onabort = () => reject(failure ?? transaction.error ?? new Error('Session save failed; the in-memory session can still be exported.'));
+      });
+      this.update({ pendingWrites: this.status.pendingWrites - 1, state: this.status.pendingWrites > 1 ? 'pending' : 'persisted',
+        lastPersistedSessionId: stored.sessionId, lastPersistedSequence: stored.sequence, error: null });
+    }).catch(error => {
+      this.update({ pendingWrites: Math.max(0, this.status.pendingWrites - 1), state: 'error', error: errorText(error) });
+      throw error;
+    });
+    // A failed write does not poison later retries. The caller's promise still rejects.
+    this.queue = write.catch(() => {});
+    return write;
+  }
+  async close(): Promise<void> { await this.queue; if (this.database) (await this.database).close(); this.database = null; }
+}
+function errorText(error: unknown): string { return error instanceof Error ? error.message : String(error); }
+function historyReadError(error: unknown): LegacyHistoryError {
+  return error instanceof LegacyHistoryError ? error : new LegacyHistoryError('read-failed', 'Saved history could not be read or delivered. The stored records were not changed.');
+}
+function historyPosition(value: unknown, key: IDBValidKey): LegacyHistoryCursor {
+  const updatedAt = value && typeof value === 'object' ? (value as { updatedAt?: unknown }).updatedAt : undefined;
+  const parsed = typeof updatedAt === 'string' ? Date.parse(updatedAt) : NaN;
+  return { version: 1, updatedAtMs: Number.isFinite(parsed) ? parsed : null, key };
+}
+function compareHistoryPositions(a: LegacyHistoryCursor, b: LegacyHistoryCursor, factory: IDBFactory): number {
+  if (a.updatedAtMs !== b.updatedAtMs) {
+    if (a.updatedAtMs === null) return 1;
+    if (b.updatedAtMs === null) return -1;
+    return b.updatedAtMs - a.updatedAtMs;
+  }
+  return factory.cmp(a.key, b.key);
+}
+function captureHistoryCursor(value: unknown, factory: IDBFactory | undefined): LegacyHistoryCursor | null {
+  if (value === undefined || value === null) return null;
+  try {
+    if (typeof value !== 'object' || Array.isArray(value)) throw new Error();
+    const cursor = value as Partial<LegacyHistoryCursor>;
+    const version = cursor.version, updatedAtMs = cursor.updatedAtMs;
+    if (version !== 1 || (updatedAtMs !== null && (!Number.isSafeInteger(updatedAtMs) || Math.abs(updatedAtMs!) > 8.64e15))) throw new Error();
+    if (Reflect.ownKeys(value).length !== 3 || !['version', 'updatedAtMs', 'key'].every(key => Object.hasOwn(value, key))) throw new Error();
+    const key = structuredClone(cursor.key);
+    if (!factory) throw new LegacyHistoryError('read-failed', 'IndexedDB is unavailable; saved history cannot be read.');
+    factory.cmp(key!, key!); // Delegate all key types, including nested arrays, to IndexedDB.
+    return Object.freeze({ version, updatedAtMs: updatedAtMs!, key: key! });
+  } catch (error) {
+    if (error instanceof LegacyHistoryError) throw error;
+    throw new LegacyHistoryError('invalid-query', 'History cursor must contain a supported version, saved time and valid IndexedDB key.');
+  }
+}
