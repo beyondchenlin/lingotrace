@@ -50,3 +50,9 @@ Limits: 30 minutes,512MiB export,16MiB pending write cap; capacity warning below
 Automated pure learning tests and26 simulated capture/storage tests cover data integrity, normalization, correction/deduplication, tempo freezing, no prompt on initialization, permissions canceled/denied, stream cleanup, chunk ordering, quota failure, interrupted recovery and retention. These do not prove real camera hardware or system screen capture.
 
 Candidate requires actual browser visual/interaction checks against all5 reference images. Real camera/microphone capture and a real screen chooser are not invoked by automated QA without specific device authorization. Mobile getDisplayMedia is generally unavailable; the app reports actual missing capability and suggests system recording. Frame-rate,200% zoom,soft keyboard,hardware audio mixing,real crash recovery and cross-browser results belong in the release test report, with untested items identified.
+
+## v9 targeted browser follow-up
+
+The v8 independent browser pass saw all five distinct HUD scenes and exercised real text submission/state preservation plus synthetic-stream MediaRecorder/IndexedDB/download/retention/expiry/quota flows. Real camera devices and real OS source selection remain untested.
+
+This candidate fixes the four reported layout defects: subtitles follow actual console height; resize/move handles use a stage-level interaction layer; phone media occupies a full separate visible block before subtitle/console; style05 top controls have a solid high-contrast surface and unavailable phone drag handles are hidden. In compact style05, left widgets move upward when a result expands the protected console. Targeted browser recheck is still required.
