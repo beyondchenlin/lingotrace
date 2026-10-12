@@ -9,3 +9,9 @@ Normal operation starts at0 and uses real data. Reference fixture has68/24/4 and
 Programmatic frames at1672×941 and1920×1080 are produced by scripts/render-scene.ts using the same Canvas renderer. They verify paint geometry and allow direct pixel inspection; they do not verify browser font rendering, DOM hit alignment, native input/IME, IndexedDB refresh, media decoding or final encoded video playback. Those need a real browser. Current cloud Chromium launch is blocked by socket EPERM and a newly requested official browser download failed; no bypass was attempted.
 
 Required next acceptance: real browser same-size reference fixture and fresh-state screenshots; real typing/correction/IME/paste; long input scrolling; playback/seek; layout switching; blur/read-only timing; keyboard dialog focus; a short Canvas composite recording using authorized synthetic sources; storage/reload/export parity. Actual camera/microphone devices remain a separate explicit test.
+
+## v14 progress and remaining differences
+
+The large numbers now use upright bold type, glass tones/transparency are closer to the warm reference, and player tracks/icons were adjusted. Reference camera REC backing uses a clean photo-strip extension with newly drawn metadata. These remain program-render comparisons: exact font glyphs, small label tracking, blur/material texture and vector icon geometry still differ from the generated source. The conspicuous reference-fixture annotation is an intentional truthful addition.
+
+Free desktop layout and the actual pace/gap chart are now implemented and have focused pure tests. Two static-review findings were fixed: moving a valid media rectangle no longer resizes it before drag, and editor focus is scheduled after the native modal closes. Actual pointer hit geometry, native focus/keyboard behavior and browser encoded-media output still need browser evidence. A custom-layout program frame is included, not presented as a browser screenshot.

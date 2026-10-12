@@ -1,0 +1,26 @@
+'use client';
+import{useEffect,useRef,useState,type PointerEvent}from'react';
+import{DEFAULT_RECTS,LAYOUT_NAMES,constrainRect,scaleRect,dockRect,keyboardRect,rectFor,rectStyle,type Arrangement,type Movable,type Rect}from'../scene/layout';
+type Props={initial:Arrangement;base?:Arrangement;onChange:(a:Arrangement)=>void;onClose:()=>void;onResetAll:()=>void};
+export default function LayoutEditor({initial,base={},onChange,onClose,onResetAll}:Props){
+ const[a,setA]=useState<Arrangement>(initial),[selected,setSelected]=useState<Movable>('inset'),[announcement,setAnnouncement]=useState('');
+ const editorRef=useRef<HTMLDivElement>(null);useEffect(()=>{const frame=requestAnimationFrame(()=>editorRef.current?.querySelector<HTMLSelectElement>('select')?.focus({preventScroll:true}));return()=>cancelAnimationFrame(frame)},[]);
+ const current=useRef(a),gesture=useRef<{key:Movable;kind:'move'|'resize';x:number;y:number;rect:Rect;width:number;height:number;before:Arrangement}|null>(null);
+ useEffect(()=>{const cancel=()=>{if(gesture.current){const before=gesture.current.before;gesture.current=null;current.current=before;setA(before);onChange(before);setAnnouncement('视口已变化，取消未完成的拖动')}};window.addEventListener('resize',cancel);return()=>window.removeEventListener('resize',cancel)},[onChange]);
+ function update(next:Arrangement){current.current=next;setA(next);onChange(next)}
+ function visibleRect(key:Movable,values:Arrangement){return rectFor(key,{...base,...values})}
+ function setRect(key:Movable,r:Rect){update({...current.current,[key]:r})}
+ function start(e:PointerEvent<HTMLButtonElement>,key:Movable,kind:'move'|'resize'){
+  const stage=e.currentTarget.closest('.studio-stage')?.getBoundingClientRect();if(!stage)return;e.preventDefault();e.stopPropagation();setSelected(key);const r=constrainRect(key,visibleRect(key,current.current));gesture.current={key,kind,x:e.clientX,y:e.clientY,rect:r,width:stage.width,height:stage.height,before:{...current.current}};setRect(key,r);e.currentTarget.setPointerCapture(e.pointerId);
+ }
+ function move(e:PointerEvent<HTMLButtonElement>){const g=gesture.current;if(!g)return;const dx=(e.clientX-g.x)*1672/g.width,dy=(e.clientY-g.y)*941/g.height;const delta=Math.abs(dx)>=Math.abs(dy*g.rect.w/g.rect.h)?dx:dy*g.rect.w/g.rect.h;setRect(g.key,g.kind==='move'?constrainRect(g.key,{...g.rect,x:g.rect.x+dx,y:g.rect.y+dy}):scaleRect(g.key,g.rect,delta))}
+ function finish(e:PointerEvent<HTMLButtonElement>){if(!gesture.current)return;gesture.current=null;if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);const r=visibleRect(selected,current.current);setAnnouncement(`${LAYOUT_NAMES[selected]}，位置${Math.round(r.x)}、${Math.round(r.y)}，大小${Math.round(r.w)}乘${Math.round(r.h)}`)}
+ function reset(key:Movable){const next={...current.current};delete next[key];update(next)}
+ return <div ref={editorRef} className="layout-editor" aria-label="舞台布局编辑" onKeyDown={e=>{if(e.key==='Escape'){e.preventDefault();if(gesture.current){update(gesture.current.before);gesture.current=null;setAnnouncement('已取消本次拖动')}else onClose()}}}>
+  <div className="layout-edit-toolbar"><label>调整<select value={selected} onChange={e=>setSelected(e.target.value as Movable)}>{Object.entries(LAYOUT_NAMES).map(([key,name])=><option key={key} value={key}>{name}</option>)}</select></label><div className="dock-buttons" aria-label="停靠位置">{(['top-left','top-right','bottom-left','bottom-right']as const).map((d,i)=><button key={d} onClick={()=>setRect(selected,dockRect(selected,visibleRect(selected,a),d))}>{['左上','右上','左下','右下'][i]}</button>)}</div><button onClick={()=>reset(selected)}>复位本项</button><button onClick={()=>{update({});onResetAll()}}>恢复原图布局</button><button className="done" onClick={onClose}>完成布局</button><p>拖动手柄 · 角落等比缩放 · 方向键移动 · ＋/－缩放 · Shift加速 · Home复位 · Esc完成 · 铺满主画面需先缩小后移动</p></div>
+  {(Object.keys(DEFAULT_RECTS)as Movable[]).map(key=>{const r=visibleRect(key,a);return <div key={key} className={`layout-frame ${selected===key?'selected':''}`} style={rectStyle(r)} data-layout-item={key}>
+   <button className="layout-drag" aria-label={`移动${LAYOUT_NAMES[key]}，方向键调整，加减号缩放，Home复位`} onFocus={()=>setSelected(key)} onPointerDown={e=>start(e,key,'move')} onPointerMove={move} onPointerUp={finish} onPointerCancel={e=>{if(gesture.current)update(gesture.current.before);finish(e)}} onLostPointerCapture={()=>{gesture.current=null}} onKeyDown={e=>{if(e.key==='Home'){e.preventDefault();reset(key);return}const next=keyboardRect(key,visibleRect(key,current.current),e.key,e.shiftKey);if(next){e.preventDefault();setRect(key,next)}}}>⠿ {LAYOUT_NAMES[key]}</button>
+   <button className="layout-resize" aria-label={`等比缩放${LAYOUT_NAMES[key]}`} onFocus={()=>setSelected(key)} onPointerDown={e=>start(e,key,'resize')} onPointerMove={move} onPointerUp={finish} onPointerCancel={e=>{if(gesture.current)update(gesture.current.before);finish(e)}} onLostPointerCapture={()=>{gesture.current=null}} onKeyDown={e=>{let code=e.key;if(code==='ArrowRight'||code==='ArrowDown')code='+';if(code==='ArrowLeft'||code==='ArrowUp')code='-';const next=keyboardRect(key,visibleRect(key,current.current),code,e.shiftKey);if(next){e.preventDefault();setRect(key,next)}}}>↘</button>
+  </div>})}<span className="sr-only" role="status">{announcement}</span>
+ </div>
+}

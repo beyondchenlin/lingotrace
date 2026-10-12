@@ -17,3 +17,9 @@ Explicit scene recording uses Canvas.captureStream so the rendered video,camera,
 ## Acceptance
 
 Verify deterministic repeated/corrected submissions,IME/paste,pause/background timing,replay and export parity; reload storage; keyboard controls and local errors. Inspect real screenshots at both desktop baselines. Test a short actual Canvas stream encode,chunk write,preview and download using original/synthetic sources without activating a user's real camera or microphone. Device capture needs explicit authorized testing. Browser failures and untested cases remain labeled; deployment is not acceptance.
+
+## v14 candidate additions
+
+Desktop layout editing moves the main media, inset, subtitle and metric strip through the same Canvas scene. Pointer drag, proportional resize, four-corner docking, per-item/reset-all and keyboard equivalents share constrained logical geometry. A full-stage background must be reduced before it has room to move. HUD controls do not cover the fixed input/player zones; media remains behind the HUD. Editing freezes practice timing and preserves the same video, draft and capture nodes. Preference rectangles are device-local; reference fixture always returns to the original arrangement.
+
+Review now derives actual pace points by replaying the original reducer. Each frozen/background/modal/IME interval is a separate gap; unobserved time and clock reversal are flagged, never interpolated as a performance fall. JSON and CSV include the identical points, gaps, segments and clock limitations. The wall timestamp domain is observable history, not a persisted all-state monotonic clock. Below one unit the HUD shows zero.
