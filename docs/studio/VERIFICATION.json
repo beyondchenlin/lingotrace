@@ -19,7 +19,8 @@
     "12 synthetic composite-recorder/storage checks",
     "3 measured-font pace readout tests: reference68, 0/99/100/999/1000/40000/1000000, wider runtime fonts",
     "Camera reference photo patches exclude baked REC UI",
-    "v16 Next static export and media/font asset checks"
+    "9 current-draft feedback and Canvas text-output regressions, including immutable reward-attempt binding",
+    "v17 production static export and all output assets"
   ],
   "visual_program_frames": [
     "1672x941 fresh",
@@ -29,16 +30,15 @@
     "1672x941 custom layout"
   ],
   "not_verified": [
-    "v16 same-size browser comparison of the five corrected regions",
-    "v16 native input/IME/caret after matching DOM and Canvas to packaged mono font",
-    "v16 numeric reflow under loaded packaged fonts",
-    "physical camera/microphone and authorized audio mixing",
+    "v17 actual-browser typing/deletion/paste/IME and refresh feedback invalidation",
+    "final1:1 acceptance: residual visual differences remain",
+    "physical device capture and authorized audio mixing",
     "M3 non-desktop layouts"
   ],
   "browser_blocker": "Bundled browser missing; official download invalid archive; installed Chromium launch socket() failed: Operation not permitted. No bypass attempted.",
   "privacy": "No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
   "timing": "activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it.",
-  "candidate": "v16",
+  "candidate": "v17",
   "additions": [
     "Free primary/inset/subtitle/metric layout with proportional resize, docks/reset, keyboard and viewport gesture cancellation",
     "Shared-reducer pace timeline with explicit frozen/unobserved/clock-change gaps",
@@ -49,7 +49,7 @@
     "Editor focus follows modal close and suppresses stale focus restoration"
   ],
   "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build.",
-  "changes": "Five-region reference-fidelity correction only: type/spacing, glass/blur, subtitle box, vector controls and reference-camera photo restoration. Real reducer and pace reflow retained.",
+  "changes": "One state correction: current draft version/text/cue drives judgment display; stale success/Next/reward are suppressed after edits or during IME. No further visual redesign.",
   "prior_browser_evidence": {
     "candidate": "v14",
     "source": "Parent-reported Windows browser QA, 2026-10-07; task 01a11506-018f-72a3-be4b-d1d60eb5a0d9",
@@ -66,5 +66,23 @@
       "all browsers/devices"
     ]
   },
-  "testTotal": 57
+  "testTotal": 66,
+  "v16_browser_evidence": {
+    "source": "Parent report from actual Windows browser QA,2026-10-07",
+    "passed": [
+      "Four packaged fonts loaded; all five regions improved",
+      "251-character input selection/replacement/refresh",
+      "Correction gains5 then1,total6",
+      "Ten numeric boundary cases"
+    ],
+    "known_visual_residuals": [
+      "About1px input/numeral edges",
+      "Input glass still darker",
+      "Subtitle stroke transparency differs",
+      "Player background flatter/more opaque",
+      "Small light patch/duplicate edge around reconstructed REC area"
+    ],
+    "status_bug": "Editing a judged correct draft left stale success text; v17 addresses this."
+  },
+  "referenceFrameUnchanged": "1672 program reference frame is byte-identical to v16"
 }
