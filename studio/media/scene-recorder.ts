@@ -1,4 +1,5 @@
 import { IndexedDBRecordingStore, recordingExtension, selectRecordingMime } from './recording-storage.js';
+import{CapacityMonitor,INITIAL_CAPACITY,type CapacityAssessment,type EstimateReader}from'./storage-capacity.ts';
 
 const MiB = 1024 * 1024;
 const RETENTION_MS = 7 * 24 * 60 * 60 * 1000;
@@ -51,6 +52,7 @@ export interface SceneRecorderSnapshot {
   readonly error: SceneRecorderFailure | null;
   readonly warning: string | null;
   readonly audioLabel: string;
+  readonly capacity: CapacityAssessment;
 }
 
 export interface SceneRecorderConfig {
@@ -65,6 +67,11 @@ export interface SceneRecorderConfig {
   finalizeTimeoutMs?: number;
   videoBitsPerSecond?: number;
   audioBitsPerSecond?: number;
+  capacityEstimate?: EstimateReader | null;
+  capacityLowRatio?: number;
+  capacityLowSeconds?: number;
+  capacityCheckIntervalMs?: number;
+  capacityEstimateTimeoutMs?: number;
   now?: () => number;
   uuid?: () => string;
 }
@@ -118,6 +125,7 @@ interface Session {
   finishing: boolean;
   finished: boolean;
   durationTimer?: ReturnType<typeof setTimeout>;
+  estimateTimer?: ReturnType<typeof setInterval>;
   finalizeTimer?: ReturnType<typeof setTimeout>;
   unlisten: Array<() => void>;
 }
@@ -140,6 +148,8 @@ export class SceneRecorder {
   private readonly finalizeTimeoutMs: number;
   private readonly videoBitsPerSecond: number;
   private readonly audioBitsPerSecond: number;
+  private readonly capacityMonitor: CapacityMonitor;
+  private readonly capacityCheckIntervalMs: number;
   private snapshot: SceneRecorderSnapshot;
   private readonly listeners = new Set<() => void>();
   private active: Session | null = null;
@@ -166,8 +176,10 @@ export class SceneRecorder {
     this.finalizeTimeoutMs = positive(config.finalizeTimeoutMs, 10000, 'finalizeTimeoutMs');
     this.videoBitsPerSecond = positive(config.videoBitsPerSecond, 2500000, 'videoBitsPerSecond');
     this.audioBitsPerSecond = positive(config.audioBitsPerSecond, 128000, 'audioBitsPerSecond');
+    this.capacityCheckIntervalMs=positive(config.capacityCheckIntervalMs,10000,'capacityCheckIntervalMs');
+    this.capacityMonitor=new CapacityMonitor({reader:config.capacityEstimate,lowRatio:config.capacityLowRatio,lowSeconds:config.capacityLowSeconds,timeoutMs:config.capacityEstimateTimeoutMs,now:this.now,onChange:capacity=>this.patch({capacity})});
     this.snapshot = Object.freeze({ state: 'idle', recordingId: null, startedAt: null,
-      bytes: 0, error: null, warning: this.locks ? null : SINGLE_TAB_WARNING, audioLabel: '无音频' });
+      bytes: 0, error: null, warning: this.locks ? null : SINGLE_TAB_WARNING, audioLabel: '无音频',capacity:INITIAL_CAPACITY });
   }
 
   /** Stable immutable snapshot suitable for React useSyncExternalStore. */
@@ -187,6 +199,9 @@ export class SceneRecorder {
       try { listener(); } catch { /* Subscribers cannot interrupt storage or stream cleanup. */ }
     }
   }
+
+  /** Advisory only: no permission, deletion, start/stop or retention mutation. */
+  refreshStorageEstimate():Promise<CapacityAssessment>{const session=this.active;const fallback=(this.videoBitsPerSecond+(!session||session.stream.getAudioTracks().length?this.audioBitsPerSecond:0))/8;const elapsed=session?.metadata?Math.max(0,(this.now()-session.metadata.startedAt)/1000):0;const measured=elapsed>0?(session?.metadata?.bytes??0)/elapsed:0;return this.capacityMonitor.refresh(Math.max(fallback,measured))}
 
   private assertLive(): void {
     if (this.disposed) throw new SceneRecorderError('DISPOSED', '录像服务已关闭。');
@@ -238,6 +253,7 @@ export class SceneRecorder {
         this.assertLive();
         this.prepared = true;
         this.patch({ state: 'idle', error: null, warning: null });
+        void this.refreshStorageEstimate();
       } catch (error) {
         this.prepared = false;
         this.patch({ state: 'error', error: asFailure(error) });
@@ -266,6 +282,8 @@ export class SceneRecorder {
       writeFailed: false, failure: null, requestedStop: false, stoppedAt: null, stopReason: '用户停止',
       finishing: false, finished: false, unlisten: [] };
     this.active = session;
+    this.capacityMonitor.invalidate();
+    void this.refreshStorageEstimate();
     this.lastSaved = null;
     this.patch({ state: 'idle', recordingId: null, startedAt: null, bytes: 0, error: null, warning: null });
     try {
@@ -318,6 +336,7 @@ export class SceneRecorder {
       recorder.start(1000);
       session.recorderStarted = true;
       this.patch({ state: 'recording' });
+      session.estimateTimer=setInterval(()=>{if(this.active===session&&!session.requestedStop)void this.refreshStorageEstimate()},this.capacityCheckIntervalMs);
       session.durationTimer = setTimeout(() => {
         this.patch({ warning: '已达到本次录像的时长上限，正在停止并保存。' });
         this.requestStop(session, '达到时长上限');
@@ -371,6 +390,8 @@ export class SceneRecorder {
     session.stoppedAt = this.now();
     session.stopReason = reason;
     clearTimeout(session.durationTimer);
+    clearInterval(session.estimateTimer);
+    if(this.active===session)this.capacityMonitor.invalidate();
     this.patch({ state: 'stopping' });
     // If create() is pending, start() will observe requestedStop and own finalization.
     if (!session.recorderStarted) return;
@@ -399,6 +420,8 @@ export class SceneRecorder {
     if (session.finishing || session.finished) return;
     session.finishing = true;
     clearTimeout(session.durationTimer);
+    clearInterval(session.estimateTimer);
+    if(this.active===session)this.capacityMonitor.invalidate();
     clearTimeout(session.finalizeTimer);
     if (this.active === session) this.patch({ state: 'stopping' });
     await session.writeTail;
@@ -498,6 +521,7 @@ export class SceneRecorder {
   dispose(): Promise<void> {
     if (this.disposing) return this.disposing;
     this.disposed = true;
+    this.capacityMonitor.dispose();
     this.disposing = (async () => {
       const session = this.active;
       if (session) {

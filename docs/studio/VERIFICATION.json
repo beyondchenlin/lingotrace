@@ -20,7 +20,9 @@
     "3 measured-font pace readout tests: reference68, 0/99/100/999/1000/40000/1000000, wider runtime fonts",
     "Camera reference photo patches exclude baked REC UI",
     "9 current-draft feedback and Canvas text-output regressions, including immutable reward-attempt binding",
-    "v17 production static export and all output assets"
+    "4 capacity estimate threshold/fallback/race tests",
+    "3 recorder integration tests for advisory continue, manual stop, quota failure, retained rows and polling lifecycle",
+    "v18 production static export and all output assets"
   ],
   "visual_program_frames": [
     "1672x941 fresh",
@@ -30,15 +32,16 @@
     "1672x941 custom layout"
   ],
   "not_verified": [
-    "v17 actual-browser typing/deletion/paste/IME and refresh feedback invalidation",
-    "final1:1 acceptance: residual visual differences remain",
-    "physical device capture and authorized audio mixing",
-    "M3 non-desktop layouts"
+    "v18 real-browser high/low/unsupported/rejected/timeout estimate paths",
+    "v18 real-browser actual quota-failure integration",
+    "M1 camera/audio/multi-ratio and expiry browser matrix from v17 final ledger",
+    "final1:1 visual residuals remain",
+    "physical device capture and M3 non-desktop layouts"
   ],
   "browser_blocker": "Bundled browser missing; official download invalid archive; installed Chromium launch socket() failed: Operation not permitted. No bypass attempted.",
   "privacy": "No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
   "timing": "activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it.",
-  "candidate": "v17",
+  "candidate": "v18",
   "additions": [
     "Free primary/inset/subtitle/metric layout with proportional resize, docks/reset, keyboard and viewport gesture cancellation",
     "Shared-reducer pace timeline with explicit frozen/unobserved/clock-change gaps",
@@ -49,7 +52,7 @@
     "Editor focus follows modal close and suppresses stale focus restoration"
   ],
   "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build.",
-  "changes": "One state correction: current draft version/text/cue drives judgment display; stale success/Next/reward are suppressed after edits or during IME. No further visual redesign.",
+  "changes": "Only advisory storage-capacity estimates and visible warning/fallback integration. No additional styles, mic lifecycle or zero-reference changes.",
   "prior_browser_evidence": {
     "candidate": "v14",
     "source": "Parent-reported Windows browser QA, 2026-10-07; task 01a11506-018f-72a3-be4b-d1d60eb5a0d9",
@@ -66,7 +69,7 @@
       "all browsers/devices"
     ]
   },
-  "testTotal": 66,
+  "testTotal": 73,
   "v16_browser_evidence": {
     "source": "Parent report from actual Windows browser QA,2026-10-07",
     "passed": [

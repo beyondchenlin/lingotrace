@@ -94,6 +94,27 @@ const start = async (recorder, stream = new FakeStream(), audioLabel = '无音�
   return { stream, media: FakeRecorder.instances.at(-1) };
 };
 
+test('low capacity is advisory, manual stop drains data, and retained records remain untouched', async () => {
+  let estimate = {quota:100000000,usage:99999999};
+  const {recorder,store}=setup({capacityEstimate:async()=>estimate});
+  store.records.set('pinned',{id:'pinned',status:'complete',complete:true,retained:true,startedAt:0,endedAt:0,expiresAt:1,bytes:1,chunkCount:1});store.chunks.set('pinned',[new Uint8Array([1]).buffer]);
+  await recorder.prepare();await recorder.refreshStorageEstimate();assert.equal(recorder.getSnapshot().capacity.status,'low');
+  const {media,stream}=await start(recorder);await recorder.refreshStorageEstimate();assert.equal(recorder.getSnapshot().state,'recording');assert.ok(stream.getTracks().every(t=>t.readyState==='live'));
+  media.data('saved');await tick();estimate={quota:1000000000,usage:0};await recorder.refreshStorageEstimate();assert.equal(recorder.getSnapshot().capacity.status,'ok');
+  media.finalText='-final';const record=await recorder.stop();assert.equal(record.complete,true);assert.equal(await(await recorder.blob(record.id)).text(),'saved-final');assert.equal((await store.get('pinned')).retained,true);assert.deepEqual(store.removes,[]);await recorder.dispose();
+});
+
+test('missing estimate does not prevent recording; an actual quota failure still stops safely', async () => {
+  const {recorder,store}=setup({capacityEstimate:null});await recorder.prepare();assert.equal(recorder.getSnapshot().capacity.reason,'unsupported');
+  const {media,stream}=await start(recorder);assert.equal(recorder.getSnapshot().state,'recording');media.data('safe');await tick();store.quotaAt=1;media.data('lost');const record=await recorder.stop();
+  assert.equal(record.complete,false);assert.equal(recorder.getSnapshot().error.code,'QuotaExceededError');assert.equal(await(await recorder.blob(record.id)).text(),'safe');assert.ok(stream.getTracks().every(t=>t.stopCount===1));await recorder.dispose();
+});
+
+test('capacity polling stops with recording and late results cannot rewrite stopped state', async () => {
+  let calls=0;const delayed=gate();const {recorder}=setup({capacityEstimate:()=>{calls++;return calls<3?Promise.resolve({quota:1000000000,usage:0}):delayed.promise},capacityCheckIntervalMs:5});
+  await recorder.prepare();await recorder.refreshStorageEstimate();const {media}=await start(recorder);await recorder.refreshStorageEstimate();await new Promise(r=>setTimeout(r,12));assert.ok(calls>=3);media.finalText='saved';await recorder.stop();const stopped=recorder.getSnapshot();const afterCalls=calls;delayed.release({quota:1000000,usage:999999});await tick();await new Promise(r=>setTimeout(r,12));assert.equal(calls,afterCalls);assert.equal(recorder.getSnapshot(),stopped);await recorder.dispose();
+});
+
 test('final data is drained serially before tracks are released; exporting never pins', async () => {
   const { recorder, store } = setup();
   const independentCamera = new FakeTrack('video');
