@@ -64,3 +64,11 @@ This candidate fixes the four reported layout defects: subtitles follow actual c
 - Original authored samples (about1MiB each) load fully as local Blob playback sources. This provides local seeking using a browser-local source. The v9 observed response lacked Range headers and reported seekable zero, but the original request headers were not retained; server Range rejection is not established. Seek controls enable only when the browser reports a real seekable range; queued positioning is applied only when ready.
 - Recording preflight and new chunks use byte-verified ArrayBuffer records for WebKit IndexedDB compatibility, while reading legacy Blob records. Conversion is serialized before each transaction; the bounded pending queue remains. No camera/screen permission or upload is introduced by preparation.
 - Current automated checks:48 passing (8 learning,34 capture/storage,6 viewport and keyboard/remote geometry checks). Browser engine, phone/tablet virtual keyboard, physical rotation, real TV/remote, actual camera and OS screen chooser are separate verification categories; this candidate does not claim those devices are all supported or tested.
+
+## v11 targeted compatibility corrections
+
+A reported media error while loading an authored Blob sample now triggers one attempt using that same original same-origin URL. The UI announces compatibility playback; no user-agent switch disables features, and seeking remains governed by real seekable ranges. If both paths fail, it shows the error. Local-file/recording preview failures stay explicit; successful storage/download bytes are distinct from successful decoding, especially in the Windows WebKit test environment.
+
+Short-landscape media height is budgeted from the actual console, subtitle and active recording notice. It retains contain and uses condensed HUD widgets when height is scarce. Quest widgets stack with measured gaps on phone and compact when the tablet console grows; its progress ring remains circular. TV Back first closes the open dialog; the adjustable safety margin now also governs the top toolbar.
+
+These are candidate fixes awaiting targeted browser checks. They do not convert desktop-engine or synthetic capture evidence into physical Safari/phone/TV/device-capture verification.
