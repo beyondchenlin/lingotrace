@@ -24,3 +24,7 @@ No external dependencies, analytics, fonts, imagery, trackers or APIs. Local dat
 
 ## Routes
 `#home`, `#train`, `#review`, `#growth`, `#data`
+
+## Visual-style demonstration (v5 candidate)
+
+Two independent layouts share the same training state and fixtures: Command (modular graphite dashboard, target rings and baseline telemetry) and Orbit (spatial milestone map, soft atmosphere, centered training). The display preference is saved separately from learning data; switching does not reset the active route, drafts, hints, scores or plan. The share-card dialog produces two corresponding 1080×1350 PNG designs with identical evidence. Theme gallery and premium labels are only a visual-entitlement concept, with no real purchase, subscription or account. The children's direction is explicitly unavailable. Base sharing and JSON/CSV exports are never gated.
