@@ -1,0 +1,8 @@
+/** Fixed-date program specimens, not browser/recording acceptance or real learning data. */
+import {createCanvas,GlobalFonts} from '@napi-rs/canvas';import {mkdir,writeFile} from 'node:fs/promises';import {join} from 'node:path';
+import {renderHudScene} from '../renderer.ts';import {batch2FixtureScene,BATCH2_TYPES,BATCH2_CLOCK} from './batch2-fixtures.ts';
+for(const suffix of ['Regular','Bold']){GlobalFonts.registerFromPath(`/usr/share/fonts/truetype/liberation/LiberationSans-${suffix}.ttf`,'Arial');GlobalFonts.registerFromPath(`/usr/share/fonts/truetype/liberation/LiberationMono-${suffix}.ttf`,'Courier New');}
+const dir=process.argv[2]??'/tmp/lingotrace-hud-v02';await mkdir(dir,{recursive:true});
+const sheet=createCanvas(1580,472),ctx=sheet.getContext('2d');ctx.fillStyle='#101b1d';ctx.fillRect(0,0,1580,472);ctx.fillStyle='#edf4f1';ctx.font='24px Arial';ctx.fillText('LingoTrace / Quantities, targets, calendar',36,45);ctx.fillStyle='#93a6a6';ctx.font='12px Arial';ctx.fillText('v0.2 · Independent components · FIXTURE DATA / FIXED DATES · PROGRAM RENDER, not browser QA',36,72);
+for(const [i,type]of BATCH2_TYPES.entries()){const c=createCanvas(480,300);renderHudScene(c.getContext('2d') as unknown as CanvasRenderingContext2D,batch2FixtureScene(type),BATCH2_CLOCK);await writeFile(join(dir,`${type}-transparent.png`),c.toBuffer('image/png'));ctx.drawImage(c,30+i*520,108);ctx.fillStyle='#819794';ctx.font='10px Courier New';ctx.fillText(`${String(i+5).padStart(2,'0')} / ${type}`,48+i*520,442);}
+await writeFile(join(dir,'hud-components-v02-program-render.png'),sheet.toBuffer('image/png'));console.log(dir);

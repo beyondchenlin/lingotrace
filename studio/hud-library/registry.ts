@@ -1,0 +1,14 @@
+import type { HudMetric, HudNode } from './schema.ts';
+export const HUD_REGISTRY = Object.freeze({
+  numeric: Object.freeze({ status: 'implemented', metricKind: 'number', minSize: Object.freeze({ width: 190, height: 136 }), defaultSize: Object.freeze({ width: 420, height: 240 }), description: 'An exact supplied number, without inferred grading.' }),
+  'trend-line': Object.freeze({ status: 'implemented', metricKind: 'trend', minSize: Object.freeze({ width: 270, height: 180 }), defaultSize: Object.freeze({ width: 480, height: 250 }), description: 'A time series with explicit missing and paused segments.' }),
+  'trend-bars': Object.freeze({ status: 'implemented', metricKind: 'trend', minSize: Object.freeze({ width: 270, height: 180 }), defaultSize: Object.freeze({ width: 480, height: 250 }), description: 'The same supplied timestamped observations as vertical bars; zero must belong to the declared scale.' }),
+  'input-pulse': Object.freeze({ status: 'implemented', metricKind: 'input-pulse', minSize: Object.freeze({ width: 270, height: 180 }), defaultSize: Object.freeze({ width: 480, height: 250 }), description: 'Committed input rhythm. Never a physiological heart-rate signal.' }),
+  'progress-ring': Object.freeze({ status: 'implemented', metricKind: 'progress', minSize: Object.freeze({ width: 220, height: 220 }), defaultSize: Object.freeze({ width: 320, height: 260 }), description: 'An explicit numerator and denominator, with unknown totals kept unknown.' }),
+  'progress-track': Object.freeze({ status: 'implemented', metricKind: 'progress', minSize: Object.freeze({ width: 270, height: 160 }), defaultSize: Object.freeze({ width: 480, height: 230 }), description: 'The same explicit numerator and denominator as a horizontal track, with unknown totals unavailable.' }),
+  'bar-chart': Object.freeze({ status: 'implemented', metricKind: 'bar', minSize: Object.freeze({ width: 320, height: 230 }), defaultSize: Object.freeze({ width: 480, height: 270 }), description: 'Supplied grouped quantities with explicit units, intervals and coverage.' }),
+  'target-band': Object.freeze({ status: 'implemented', metricKind: 'target-band', minSize: Object.freeze({ width: 320, height: 180 }), defaultSize: Object.freeze({ width: 480, height: 250 }), description: 'An explicit target interval and actual value; out-of-range values stay visible.' }),
+  'calendar-heatmap': Object.freeze({ status: 'implemented', metricKind: 'calendar', minSize: Object.freeze({ width: 340, height: 260 }), defaultSize: Object.freeze({ width: 480, height: 300 }), description: 'Caller-supplied calendar dates, timezone and complete/partial/unknown coverage.' }),
+} as const);
+export function descriptorFor(type: HudNode['type']) { return HUD_REGISTRY[type]; }
+export function expectedKind(type: HudNode['type']): HudMetric['kind'] { return descriptorFor(type).metricKind; }
