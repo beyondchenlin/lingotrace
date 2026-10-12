@@ -1,0 +1,346 @@
+{
+  "archive_date": "2026-10-12",
+  "scope": "LingoTrace 独立 PRD 原始文档归档；保留各历史版本的原始内容与当时状态，不代表当前接受版本、产品实现完成或源码与历史恢复完成。",
+  "file_count": 48,
+  "docx_count": 31,
+  "pdf_count": 17,
+  "total_original_bytes": 18330358,
+  "files": [
+    {
+      "filename": "LingoTrace_PRD_v1.4.10_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.10_独立总纲.docx",
+      "bytes": 42456,
+      "sha256": "7aeede29797a0f821c4cfeb175fcbd1a032bb2fe9e3f296f7ef03bd20d4108ea",
+      "git_blob_sha1": "117c01541cf005d65e4ea343e7dbfad229badcfa"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.11_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.11_独立总纲.docx",
+      "bytes": 42456,
+      "sha256": "7c21bb4b6a0a62536b5668ecd9bc1aa16255e1e6830f9bf0216018118545713d",
+      "git_blob_sha1": "3c2ab2e07e955c746fdd59dfca35a8c3d20c2f72"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.12_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.12_独立总纲.docx",
+      "bytes": 42871,
+      "sha256": "03e91459abd1c88b4de16a4205a3c5251f64e8e3c8b43f5b7032c0496785b65d",
+      "git_blob_sha1": "f424599f19669049f1a3eee654158076253e85f2"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.13_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.13_独立总纲.docx",
+      "bytes": 44215,
+      "sha256": "52cc117259bf71a103f5af3fa1c80645de4745b5bee96f28e264ede8eaddc135",
+      "git_blob_sha1": "a7d6205101309340cee7a212fc431d0699438fb3"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.14_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.14_独立总纲.docx",
+      "bytes": 45223,
+      "sha256": "bcab8bb14188eafaf04519cc39ffde0aa3b684547600c6f4fbff87229c169fdb",
+      "git_blob_sha1": "daed7256ecc38b225bbac96faaca8304989d8c8b"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.2_展示规则与未来情景课程补充.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.2_展示规则与未来情景课程补充.docx",
+      "bytes": 43341,
+      "sha256": "a710927b790e05af3c7d0340795f00c67d9b1856bd3276bf047165ca9ec7905e",
+      "git_blob_sha1": "e733cedea8103ca463ec3ad461e88efec4a08fe3"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.2_展示规则与未来情景课程补充.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.2_展示规则与未来情景课程补充.pdf",
+      "bytes": 366407,
+      "sha256": "0bc269ccbacddcc914d061e37663c7081f2278739dabc97f99e15979cf15c50f",
+      "git_blob_sha1": "20bdc817ff563a505ed53c04d2da74ad64894561"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.3_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.3_独立总纲.docx",
+      "bytes": 41383,
+      "sha256": "facf005d1bc12d606b02f859e2789a53e6a52d28c24978d0b5b930cd390fbbf6",
+      "git_blob_sha1": "315c9f7eaeb089303720e5c9cbbba6bdf61e405e"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.3_独立总纲.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.3_独立总纲.pdf",
+      "bytes": 204412,
+      "sha256": "a4f72689fad579f14015bb9f894c219c95f71ad52fb496dc7e7b30b0671fc091",
+      "git_blob_sha1": "48d8c1756f447575141cdfd9a23ce692235fa474"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.4_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.4_独立总纲.docx",
+      "bytes": 41499,
+      "sha256": "1324f27405a702966637d1ee9a3be566ce91ce9d7c3cb4c236bd0719a976f2bb",
+      "git_blob_sha1": "87d197462430ef80fd3e4430a7cad3504477b2a8"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.4_独立总纲.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.4_独立总纲.pdf",
+      "bytes": 208388,
+      "sha256": "1f6df3361de4ad897d3d14aaed705c820055f2f9800a57c683acdf241ad272fe",
+      "git_blob_sha1": "b992e4e3c30e9f0db844254e0a52c32cdd7905d2"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.5_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.5_独立总纲.docx",
+      "bytes": 41472,
+      "sha256": "c5dfec089d2e3194b74b8fd44faa896d3579c6e4d2e57ba96512bbf25298ea2d",
+      "git_blob_sha1": "85458075f4f0ed7f15445768188cb28a137b3366"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.5_独立总纲.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.5_独立总纲.pdf",
+      "bytes": 207972,
+      "sha256": "7cddd0ea94429a0a6bdc22c83e4b6144f11f40e134ec2032a6db66fab3564242",
+      "git_blob_sha1": "c843bf8a3419b3e40488cd94e5e999b498f806b7"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.6_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.6_独立总纲.docx",
+      "bytes": 41555,
+      "sha256": "ccf0779a73aea82d9f540419119e8285ee1f31ea6bce4a5d560bc7210d166486",
+      "git_blob_sha1": "6174f9621b3ad2f79695d16a2c85e270d5c29ab4"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.6_独立总纲.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.6_独立总纲.pdf",
+      "bytes": 210844,
+      "sha256": "9b505ec246525d4bf7ccce02a629a5c8ae57e078280ae68e78cd5e3a58f041b8",
+      "git_blob_sha1": "43ce648af8e7f01908e3991a1de9a67862bd1749"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.7_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.7_独立总纲.docx",
+      "bytes": 41657,
+      "sha256": "17113174e6cd9f63abe69d743a667874cf4545cdf9792799a0bf6c76713259d1",
+      "git_blob_sha1": "66e3762e3240dedbd2cd16fdd5b805dc577a3044"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.7_独立总纲.pdf",
+      "path": "originals/LingoTrace_PRD_v1.4.7_独立总纲.pdf",
+      "bytes": 212991,
+      "sha256": "747c731e1c9630bfb042bff806b42a85389becd57a512a9682c329474fa37107",
+      "git_blob_sha1": "6adf43d002d68cc5c6e9571585862ec4f39276ca"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.8_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.8_独立总纲.docx",
+      "bytes": 43068,
+      "sha256": "e1d7ff84bad582b30d58ec1fd4a6a7110387dbab4a28e5e153e6aba0f4389dd8",
+      "git_blob_sha1": "a541b9f8e4c4f71791aa3029181ca4c8e135d74d"
+    },
+    {
+      "filename": "LingoTrace_PRD_v1.4.9_独立总纲.docx",
+      "path": "originals/LingoTrace_PRD_v1.4.9_独立总纲.docx",
+      "bytes": 44737,
+      "sha256": "5d6d906a5a668501568e996dc3e809d35fe004edea265fa38b20593f1e23d788",
+      "git_blob_sha1": "1543a8c7bc2bbe9015eb96c8c0ee8fd3c01d42b1"
+    },
+    {
+      "filename": "LingoTrace_动态HUD与学习档案PRD_v1.2.docx",
+      "path": "originals/LingoTrace_动态HUD与学习档案PRD_v1.2.docx",
+      "bytes": 61768,
+      "sha256": "af0e2effa32979f3b79a1e096725f18be01ff7d6a991942a0eb693cccbcdc107",
+      "git_blob_sha1": "5de653ef2a0c338c42bd3e1db59aaaeaede03b09"
+    },
+    {
+      "filename": "LingoTrace_动态HUD与学习档案PRD_v1.2.pdf",
+      "path": "originals/LingoTrace_动态HUD与学习档案PRD_v1.2.pdf",
+      "bytes": 1012835,
+      "sha256": "2248a3fa94bfcd118b3de5817f1e0cf820184bd1662e37190a3f42a1160f3378",
+      "git_blob_sha1": "cc664a033b6bb82f1f43261fc9ab7912e1632170"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.3(1).pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.3(1).pdf",
+      "bytes": 1111870,
+      "sha256": "b5b9af6ab9719cf1890c3c02a7854a43a73003b3aafe18767366593f01bf322d",
+      "git_blob_sha1": "81d17ea7aef5efbc8b58bb6d812d4a6ef2f29bfe"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.3.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.3.docx",
+      "bytes": 66177,
+      "sha256": "7a9055502f3fc78f42b3f7195bb13fea6e010ea1640b88478adee3be5df19ca4",
+      "git_blob_sha1": "3ff52e203ee6802b78021afc83eb05e3eb05abf7"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.3.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.3.pdf",
+      "bytes": 1111870,
+      "sha256": "b5b9af6ab9719cf1890c3c02a7854a43a73003b3aafe18767366593f01bf322d",
+      "git_blob_sha1": "81d17ea7aef5efbc8b58bb6d812d4a6ef2f29bfe"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4(1).pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4(1).pdf",
+      "bytes": 1187433,
+      "sha256": "9f4aa7705a7ebd294b7ec57075edd4e0d89bce1c586d24fda590e4ecfc65a975",
+      "git_blob_sha1": "c5d5803721ab19b8afa5eb51642e618d9747c6e8"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.1.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.1.docx",
+      "bytes": 71808,
+      "sha256": "924afe645ab45f376db8191e36d081c52acce177ad4f9b4d6f6b5f1ac2bd1840",
+      "git_blob_sha1": "83a47b6af2ae857f01b8ef23dfeac2565cdea0bb"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.1.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.1.pdf",
+      "bytes": 1320841,
+      "sha256": "0394810f04ece8d8ed5b2fef54321b8239de09369e5ad1e76069002468555eef",
+      "git_blob_sha1": "affdfaead96d451860b1c1af5c1039fac2825453"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.10.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.10.docx",
+      "bytes": 106345,
+      "sha256": "0598409711388312145dd006a79b912357f4bd962a0180a6001e02bcb8a3e185",
+      "git_blob_sha1": "2b94c3d554f5a28d386ab58fa333961f12e3a707"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.11.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.11.docx",
+      "bytes": 107767,
+      "sha256": "38fa6e2ff1301f2a9b5b84d43bad1f836518c1777177c186c326914cf280a61d",
+      "git_blob_sha1": "efa6daaee99cb250366a2c21997883035015513b"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.12.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.12.docx",
+      "bytes": 110303,
+      "sha256": "bb73e6b64c84df8857df07a4a276748a4b9f7c22a8ced91e6cc5f47bfb66be75",
+      "git_blob_sha1": "4c13e7550eed84b6ceb29610ad4c10e12fb05fbf"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.13.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.13.docx",
+      "bytes": 123292,
+      "sha256": "e8c7d9b35ad70bc09772e0880a8ac4b7bc508c162e14462ce8f585f34277f75a",
+      "git_blob_sha1": "6507f9e91b7afd1273a564caf530bcbbbb6e9bb0"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.14.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.14.docx",
+      "bytes": 131865,
+      "sha256": "7f0f985b6b7d89ca9741640e22ad540186246cb4046ad849722d60ee9aee2dc9",
+      "git_blob_sha1": "9efe90abaa06852ccbbcfb691d0ae4044f2a096e"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.3.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.3.docx",
+      "bytes": 79943,
+      "sha256": "c6ddfb0f258cfef1c87063d63a6788ac973cfadf88779bb6430e4ebdf1350772",
+      "git_blob_sha1": "31280a52140c9ccc288334fe72ade3aa03e74eff"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.3.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.3.pdf",
+      "bytes": 1471751,
+      "sha256": "b54d293839df544244ba8a296c42000ae40a16bab72d72b03d092158b9f188ed",
+      "git_blob_sha1": "d6d11b05a12a4a99e845c3873c03cc01a8643711"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.4.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.4.docx",
+      "bytes": 83038,
+      "sha256": "ca8a5ed0915e73ebbd059d4e631da939683e076d0bffb67a1853b3ac945d5b3b",
+      "git_blob_sha1": "cad78c54116a8779f0a5df20d3ec33b8704e905c"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.4.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.4.pdf",
+      "bytes": 1522028,
+      "sha256": "98e10610899b4d01611b0e7e43b303cd6bd5f2fa5b7b43eed71cf96dc079808e",
+      "git_blob_sha1": "25116b7841ec91e56405addddb69008df5aa57ec"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.5.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.5.docx",
+      "bytes": 85752,
+      "sha256": "56bca8df17d6986f8f03cba90f07a729853ec9715e678e4a91d5539f8f3be735",
+      "git_blob_sha1": "e2b488794471f48caabf2b30359743a153184d81"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.5.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.5.pdf",
+      "bytes": 1568574,
+      "sha256": "ac79dc52c1824f6b86b0a8db96127cd84817c7d28df9906ef5713de29bc9bf4e",
+      "git_blob_sha1": "1a9a49a1b3e224e80c0b67c992cadf0a534ffc92"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.6.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.6.docx",
+      "bytes": 88374,
+      "sha256": "98bb0e9925be53e81ba5e94a796804d1f86963d83e1e4218658cf034525140a4",
+      "git_blob_sha1": "eb44f97e5974ce10984b968a3d25bcde05974145"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.6.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.6.pdf",
+      "bytes": 1610940,
+      "sha256": "8db8b1a467179e5a3d1bc1120f43df6ceb88bac7024131e7b5f2242b2510e24d",
+      "git_blob_sha1": "038d57d7fe0a1c6c965e8fe1112c27f6784c49f6"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.7.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.7.docx",
+      "bytes": 91840,
+      "sha256": "ca00021903b336121ef56d4176d6edb8ac1db2f233314a4edbbdc59a2a8cb217",
+      "git_blob_sha1": "60ce28706b04c529e876f344f1f4a33ae53efd3c"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.7.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.7.pdf",
+      "bytes": 1663763,
+      "sha256": "a5bcc26e7dcaf524867ded947f7d3c9d879ed14518ab6485f277ab1b31b29e53",
+      "git_blob_sha1": "51d6cf969c97ca9b757e92312fc2e42f198858ab"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.8.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.8.docx",
+      "bytes": 94787,
+      "sha256": "23e6d6afed43f6534d412a112e2e957d934c07555541df292bd8f63e9f81e50b",
+      "git_blob_sha1": "5539b4f1c4e99e405b1a05e973f2a7be33b1416c"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.9.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.9.docx",
+      "bytes": 99581,
+      "sha256": "4203379983a63672a37304c4893085d61fa849b2c7a3a0af85025d47c6c962c0",
+      "git_blob_sha1": "823def5761664c38f8a3110975a390eebc78c84d"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.docx",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.docx",
+      "bytes": 70009,
+      "sha256": "6eafc7362f82aeb4ac6bfc450eba71f85a0f667a1a7aca670ad42045a232cf2c",
+      "git_blob_sha1": "867fa3f21e1bf6e3dbbbdee260ad0ac158f39681"
+    },
+    {
+      "filename": "LingoTrace_学习闭环与动态HUD_PRD_v1.4.pdf",
+      "path": "originals/LingoTrace_学习闭环与动态HUD_PRD_v1.4.pdf",
+      "bytes": 1187433,
+      "sha256": "9f4aa7705a7ebd294b7ec57075edd4e0d89bce1c586d24fda590e4ecfc65a975",
+      "git_blob_sha1": "c5d5803721ab19b8afa5eb51642e618d9747c6e8"
+    },
+    {
+      "filename": "LingoTrace_总纲_v1.4.8执行校准版2026-10-12.docx",
+      "path": "originals/LingoTrace_总纲_v1.4.8执行校准版2026-10-12.docx",
+      "bytes": 42740,
+      "sha256": "eb6d39a3be1b8039f9e1a17265407d1941a81dae3f7bcd3ef3755224a4546e6d",
+      "git_blob_sha1": "0f6b81cd24f5c09cee34862b0bf164416a71cd6d"
+    },
+    {
+      "filename": "LingoTrace_详细PRD_v1.4.8执行校准版2026-10-12.docx",
+      "path": "originals/LingoTrace_详细PRD_v1.4.8执行校准版2026-10-12.docx",
+      "bytes": 78684,
+      "sha256": "640cf04f8a926b76d98c26fc1f6b5ec832eeb0b13ef56848a79f3ba272a19827",
+      "git_blob_sha1": "629f7fb3b3fb66205fcfc39e70e8829c00055141"
+    }
+  ]
+}
