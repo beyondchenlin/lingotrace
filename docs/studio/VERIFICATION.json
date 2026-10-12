@@ -17,8 +17,8 @@
     "4 layout bounds/aspect/keyboard/preference/no-jump checks",
     "2 contain/photo-mask scene checks",
     "12 synthetic composite-recorder/storage checks",
-    "Next webpack static export (one build worker)",
-    "Static export asset/shell and old v12 preservation checks"
+    "3 measured-font pace readout tests: reference68, 0/99/100/999/1000/40000/1000000, wider runtime fonts",
+    "v15 Next static export and output checks"
   ],
   "visual_program_frames": [
     "1672x941 fresh",
@@ -28,17 +28,15 @@
     "1672x941 custom layout"
   ],
   "not_verified": [
-    "actual browser 1:1 screenshots and native font output",
-    "DOM input/IME and pointer hit geometry in a browser",
-    "real browser IndexedDB reload and download",
-    "actual Canvas encoded video frame/playback and audio mixing",
-    "physical camera/microphone",
-    "mobile/Pad/TV layouts (M3)"
+    "v15 browser retest of 0/99/100/999/1000 pace and 68 reference",
+    "final 1:1 original-reference comparison in browser",
+    "actual camera/microphone devices and authorized audio mixing",
+    "M3 non-desktop layouts"
   ],
   "browser_blocker": "Bundled browser missing; official download invalid archive; installed Chromium launch socket() failed: Operation not permitted. No bypass attempted.",
   "privacy": "No real device capture or external upload in testing. Reference fixture remains visibly simulated, read-only and not recordable.",
   "timing": "activeMs is foreground input-capable practice time including focused pauses, not pure keystroke time or attention. Blur, preview-only media, listening, composition, pause, modal, review and background freeze it.",
-  "candidate": "v14",
+  "candidate": "v15",
   "additions": [
     "Free primary/inset/subtitle/metric layout with proportional resize, docks/reset, keyboard and viewport gesture cancellation",
     "Shared-reducer pace timeline with explicit frozen/unobserved/clock-change gaps",
@@ -48,5 +46,23 @@
     "Default/split movement no longer changes size on pointer-down",
     "Editor focus follows modal close and suppresses stale focus restoration"
   ],
-  "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build."
+  "buildRecovery": "Initial build was killed with exit137 after page generation. Sequential retry with one worker and memory optimization completed; no concurrent build.",
+  "changes": "Only dynamic pace readout geometry plus focused boundary tests and evidence updates.",
+  "prior_browser_evidence": {
+    "candidate": "v14",
+    "source": "Parent-reported Windows browser QA, 2026-10-07; task 01a11506-018f-72a3-be4b-d1d60eb5a0d9",
+    "passed": [
+      "Four-layer drag/resize/dock/keyboard and refresh",
+      "Correction, pause gaps and JSON/CSV agreement",
+      "Synthetic Canvas recording saved, actually played and downloaded"
+    ],
+    "finding": "Three-digit pace overlapped CHARS / MIN at1672 and1920; v15 fixes this, real-browser retest pending",
+    "not_proven": [
+      "1:1 reference comparison before original image available",
+      "physical device capture",
+      "authorized audio mixing",
+      "all browsers/devices"
+    ]
+  },
+  "testTotal": 56
 }
