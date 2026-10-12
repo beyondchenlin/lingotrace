@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-12T00:10:04.631780+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "source_sha": "28a926fed2e3f60c2b1a222d0e48986c3e044629",
+  "release_commit": "765d90a06887636a47808d23e9ec3312b4113b30",
+  "release_checkout": "/workspace/scratch/dd3f275409c3/lingotrace-f03-v85-release-28a926f",
+  "archive": "/workspace/scratch/dd3f275409c3/lingotrace-f03-v85-28a926f-release.tar.gz",
+  "archive_sha256": "406123af8045c3d346115d2f054d26880ba590a5b3a0127b28a1a329f1ea2ecc",
+  "archive_bytes": 129502083,
+  "runtime_file_count": 437,
+  "normalized_hosting_extra_file": 1,
+  "runtime_all_hashes_match_freeze": true,
+  "all_647_source_git_blobs_identical": true,
+  "all_159_docs_retained": true,
+  "public_54_unchanged": true,
+  "old_v82_v83_v84_v85_freezes_archives_unchanged": true,
+  "clean_release_worktree": true,
+  "package_exit_code": 0,
+  "free_tmp": 367652864,
+  "free_overlay": 4588019712
+}

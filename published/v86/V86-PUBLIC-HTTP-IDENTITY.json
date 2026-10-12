@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-10-12T02:07:50.873577+00:00",
+  "source_sha": "28a926fed2e3f60c2b1a222d0e48986c3e044629",
+  "release_commit": "765d90a06887636a47808d23e9ec3312b4113b30",
+  "build_id": "WCoLPOr9cJb_lRqTDLhZu",
+  "html_contains_exact_build_id": true,
+  "anonymous_http_identity_only": true,
+  "public_v86_exact": true,
+  "requests": [
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+      "status": 200,
+      "sha256": "739a3dd8a40635a70ba89a5ae533dde476bd59389a25bb1bd8f57bf9ba21d50c",
+      "expected_sha256": "739a3dd8a40635a70ba89a5ae533dde476bd59389a25bb1bd8f57bf9ba21d50c",
+      "matches_exact_v86_freeze": true,
+      "bytes": 14964,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/ca808b45-2942f71d5de90847.js",
+      "status": 200,
+      "sha256": "2e938bc040e804111362eab104ca354e20fa85467a76b09170a67a26a31e4720",
+      "expected_sha256": "2e938bc040e804111362eab104ca354e20fa85467a76b09170a67a26a31e4720",
+      "matches_exact_v86_freeze": true,
+      "bytes": 203721,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/774-8587ebc2f9ddf688.js",
+      "status": 200,
+      "sha256": "81db190dbdad670e24d488c752c5cf4f117a3628060115708dacdcdce6f6dbf4",
+      "expected_sha256": "81db190dbdad670e24d488c752c5cf4f117a3628060115708dacdcdce6f6dbf4",
+      "matches_exact_v86_freeze": true,
+      "bytes": 242888,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/main-app-a0110743c427b069.js",
+      "status": 200,
+      "sha256": "f55bd55e423bcf02a62306485f6093d4b7498ed9ddb59a420c4d0483007a5e1c",
+      "expected_sha256": "f55bd55e423bcf02a62306485f6093d4b7498ed9ddb59a420c4d0483007a5e1c",
+      "matches_exact_v86_freeze": true,
+      "bytes": 511,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/63-f7a96b77764c15e0.js",
+      "status": 200,
+      "sha256": "82588ff8532c00fcdf8173c25ce7e031c5c8bc81371a9dabd4535ee50b15d8af",
+      "expected_sha256": "82588ff8532c00fcdf8173c25ce7e031c5c8bc81371a9dabd4535ee50b15d8af",
+      "matches_exact_v86_freeze": true,
+      "bytes": 125540,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/113-d3c22a625851f6b2.js",
+      "status": 200,
+      "sha256": "11fdbb0b0374b45cbe7e753e62217f345615b9debfd7e01939660b4c5a7561dd",
+      "expected_sha256": "11fdbb0b0374b45cbe7e753e62217f345615b9debfd7e01939660b4c5a7561dd",
+      "matches_exact_v86_freeze": true,
+      "bytes": 31617,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/701-fedb6d39ac75c7db.js",
+      "status": 200,
+      "sha256": "3d6e15daf52c98dfd123230e194b665fb1977bb3be9acea2c652da32940d47ff",
+      "expected_sha256": "3d6e15daf52c98dfd123230e194b665fb1977bb3be9acea2c652da32940d47ff",
+      "matches_exact_v86_freeze": true,
+      "bytes": 942585,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-38ee1e731ed82395.js",
+      "status": 200,
+      "sha256": "ba8bea070500faa22af74afe3e22643df51091b35e3caa8171fe6b5cd9cab07b",
+      "expected_sha256": "ba8bea070500faa22af74afe3e22643df51091b35e3caa8171fe6b5cd9cab07b",
+      "matches_exact_v86_freeze": true,
+      "bytes": 135,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "status": 200,
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "expected_sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "matches_exact_v86_freeze": true,
+      "bytes": 112594,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/webpack-49f32b06bc6ce1d9.js",
+      "status": 200,
+      "sha256": "04332586e5536deb6c17ef0c647b1c9a77408b81122c360753eede7a73f0e027",
+      "expected_sha256": "04332586e5536deb6c17ef0c647b1c9a77408b81122c360753eede7a73f0e027",
+      "matches_exact_v86_freeze": true,
+      "bytes": 3252,
+      "authentication_or_cookies_sent": false
+    },
+    {
+      "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/c044335b61b8874b.css",
+      "status": 200,
+      "sha256": "98ae30957d71c57d74cb2bdfc32f06d42bbd3f00db87cc8397976b48ca6da3be",
+      "expected_sha256": "98ae30957d71c57d74cb2bdfc32f06d42bbd3f00db87cc8397976b48ca6da3be",
+      "matches_exact_v86_freeze": true,
+      "bytes": 33398,
+      "authentication_or_cookies_sent": false
+    }
+  ],
+  "browser_phone_audio_recording_acceptance_claimed": false
+}
