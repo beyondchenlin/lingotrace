@@ -31,3 +31,13 @@ Two independent layouts share the same training state and fixtures: Command (mod
 
 ## Readability and export verification (v6 candidate)
 Chart axes and values are HTML labels at actual 12px, independent of SVG scaling; SVG is used only for geometry. Star-map helper labels are 12px minimum. Switching themes updates the URL style parameter with replaceState while preserving other parameters and the current hash route. CSV is UTF-8 with BOM, CRLF row delimiters, quoted fields, embedded quote/newline escaping, and a formula-injection guard; raw answers remain unchanged in JSON.
+
+## Media-first workspace (v7 candidate)
+
+The primary surface is now a full-viewport media workbench, with a persistent video/image DOM element, resizable data rail and lower training dock, compact/balanced/large presets, media focus, and user-triggered native browser fullscreen. The Graphite/Warm White preference changes presentation only. Review, growth and exports are secondary drawers; earlier dashboard themes are no longer the entry surface.
+
+Bundled assets are original generated imagery with a subtle image animation or portrait crop and locally synthesized English narration (FFmpeg libflite). They are actual H.264/AAC MP4 files, not filmed footage. Each is about 18 seconds. Image metadata and creation description are in `dist/media/rights.json`.
+
+User files are read only with URL.createObjectURL and are never uploaded. Previous object URLs are revoked on replacement and page exit; resource generation guards discard stale load/error events. Refresh restores the demo and requires reselecting local files. Unbound local media is preview-only: no subtitle inference, transcription or scoring is claimed. Existing learning data stays intact.
+
+Drag separators or focus them and use arrow keys; Home resets the relevant dimension. Fullscreen requires a user gesture and may be unsupported in some browsers; focus mode remains available. At narrow widths, the workspace stacks and scrolls internally, the rail becomes an explicit toggle panel, and media presets resize its visible stage.
