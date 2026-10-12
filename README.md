@@ -72,3 +72,7 @@ A reported media error while loading an authored Blob sample now triggers one at
 Short-landscape media height is budgeted from the actual console, subtitle and active recording notice. It retains contain and uses condensed HUD widgets when height is scarce. Quest widgets stack with measured gaps on phone and compact when the tablet console grows; its progress ring remains circular. TV Back first closes the open dialog; the adjustable safety margin now also governs the top toolbar.
 
 These are candidate fixes awaiting targeted browser checks. They do not convert desktop-engine or synthetic capture evidence into physical Safari/phone/TV/device-capture verification.
+
+## v12 final targeted candidate
+
+Quest far-view stacks the two left HUD cards using their rendered height and a20px gap. Its console starts after the configured screen margin, measured left-column width and24px spacing, so changing2/3/5/7% safety margins does not push the cards behind the input panel. This isolated change requires the adjacent-margin browser recheck; all device/recording limitations above remain.
