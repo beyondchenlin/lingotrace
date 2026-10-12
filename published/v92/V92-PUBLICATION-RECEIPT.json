@@ -1,0 +1,974 @@
+{
+  "timestamp": "2026-10-12T10:05:54.843609+00:00",
+  "status": "PUBLISHED_AND_ANONYMOUS_HTTP_VERIFIED",
+  "source_sha": "a463151cea2055ba53f3a938edc71c5247153e48",
+  "source_tree": "16534b79c9abf06d20d468e7a55c970442c8d9df",
+  "release_commit": "6e2173662e41747ffbe594a420ae614ad65720f6",
+  "build_id": "DugpSRDg5u26dP824NLeP",
+  "site_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+  "saved_version": {
+    "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_f74ed045ba488191ad020fd1f22dd947",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "version_number": 92,
+    "source": {
+      "commit_sha": "6e2173662e41747ffbe594a420ae614ad65720f6"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000ceb0820eafd8ab533ce8e13a",
+      "content_hash": "sha256:fa24f9de58176bffc14df438ca662d598672e663ab36ea6acd1830a46eef3e26",
+      "size_bytes": 198154240,
+      "file_count": 475
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6accb006d018819183fd247d005c6a97",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "title": "\u7ec3\u89c1 LingoTrace \u00b7 \u82f1\u8bed\u8bad\u7ec3\u539f\u578b",
+    "version_id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_f74ed045ba488191ad020fd1f22dd947",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ac5ccefb20481918a883afab8a483b4",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-12T10:03:36.687688+00:00"
+  },
+  "readback": {
+    "main": {
+      "id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+      "latest_version_number": 92,
+      "access_mode": "public",
+      "role": "owner",
+      "access_revision": 2,
+      "current_live_url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site"
+    },
+    "qa2": {
+      "id": "appgprj_6acb4da7ce14819199050e64775c5aba",
+      "latest_version_number": 2,
+      "access_mode": "public",
+      "role": "owner",
+      "access_revision": 2,
+      "current_live_url": "https://lingotrace-candidate-qa-oct11.beyond-chenlin.chatgpt.site"
+    },
+    "versions": [
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_f74ed045ba488191ad020fd1f22dd947",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 92,
+        "source": {
+          "commit_sha": "6e2173662e41747ffbe594a420ae614ad65720f6"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000ceb0820eafd8ab533ce8e13a",
+          "content_hash": "sha256:fa24f9de58176bffc14df438ca662d598672e663ab36ea6acd1830a46eef3e26",
+          "size_bytes": 198154240,
+          "file_count": 475
+        },
+        "deployment_id": "appgdep_6accb006d018819183fd247d005c6a97"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_c98819226eec8191a2943b124c89f69b",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 91,
+        "source": {
+          "commit_sha": "6c251d74cc1245c9b6ddd454106fd696d96e4daf"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000219881f5ac02ac8587b7566d",
+          "content_hash": "sha256:9bfc7c7c90ab7a95d5eb28ba60c658b00705ad5bef4bd54eb676eb438c9e9a86",
+          "size_bytes": 197150720,
+          "file_count": 469
+        },
+        "deployment_id": "appgdep_6acca6f0183481919a69669f3deeec5a"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_bcf2d4d077748191a749161c4049e9c0",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 90,
+        "source": {
+          "commit_sha": "45ee1ed3029472e978446bd4485e2dbf22148f53"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000013081f5b19bfbbc73b0b04b",
+          "content_hash": "sha256:6fcc33f327976ea14a43bca668b0dd2087b7431792411337152b6e6990f645dd",
+          "size_bytes": 196157440,
+          "file_count": 463
+        },
+        "deployment_id": "appgdep_6acca01c91e881918b94a09d2703133b"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_d868b70b2a1c8191b2130e0053f08beb",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 89,
+        "source": {
+          "commit_sha": "ca7e2fb25a1ecbb1a583d97cd52230d1b86d5716"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_000000000e54820da54ec65512919878",
+          "content_hash": "sha256:f4a27fc42ffa30b93840c8bfd6fdfc27da6324b95c05c470c5c86bb3878e7f18",
+          "size_bytes": 195153920,
+          "file_count": 457
+        },
+        "deployment_id": "appgdep_6acc7560a74c819191289da258c5bc7a"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_b60671bd8ff08191b661f5d40f6bdd7d",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 88,
+        "source": {
+          "commit_sha": "571b89b20ece4a37def7580efc3833ea9b866d0b"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000d6cc81f58b6a1b1ed0eef52f",
+          "content_hash": "sha256:3f3ce96b3344795c2fcc216afe27049566218c4f5091424a501f52423dc92cb9",
+          "size_bytes": 194129920,
+          "file_count": 450
+        },
+        "deployment_id": "appgdep_6acc6ed60c2c8191b72a816f84d46c13"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_85ef494b28448191b78912e3620e7175",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 87,
+        "source": {
+          "commit_sha": "c3df8fecb7c9539418de92da98580acfcc4e3917"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000ed54823085e6505bfcede81a",
+          "content_hash": "sha256:0421d83047e1663a55a6b3b68e8db3f6138c35f2d81084e670af6e163b7e52b3",
+          "size_bytes": 193146880,
+          "file_count": 444
+        },
+        "deployment_id": "appgdep_6acc6531c2c08191b1601c1b0c07233b"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_bb83d383cb808191b00c3234293047a1",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 86,
+        "source": {
+          "commit_sha": "765d90a06887636a47808d23e9ec3312b4113b30"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000c01481fda97b02eb985936f0",
+          "content_hash": "sha256:86b0bbb8e05ec89cc8530752ece1a403609c5c5f381eb6235e242abb3fdf6241",
+          "size_bytes": 192163840,
+          "file_count": 438
+        },
+        "deployment_id": "appgdep_6acc40cde47c8191aee9db702d89237b"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_063dcaa3e0b88191afa252bec0d68b95",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 85,
+        "source": {
+          "commit_sha": "6de83f62687d42edd2250934c94e6627142183e6"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000bd9481f4aee98f02e29f76b7",
+          "content_hash": "sha256:c1348156ca48fa28d79e0d24b7543c046f449f6e37ba5cf675efe798cf3486d1",
+          "size_bytes": 191201280,
+          "file_count": 432
+        },
+        "deployment_id": "appgdep_6acc1a9b632c8191989660015f252491"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_49e607ccec848191ac9550cf3e7cc092",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 84,
+        "source": {
+          "commit_sha": "8c5a465ad70734c440c9dea70e05b8e3f75956c5"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000608881f5af02c4686555b52f",
+          "content_hash": "sha256:a284e82bfd5f3ea6f6e53d9bf82b80a209c1ef71d2955c7c4890ce66f8b02578",
+          "size_bytes": 190208000,
+          "file_count": 425
+        },
+        "deployment_id": "appgdep_6acb91840de88191a5750def242031e2"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_8fdb325d8e308191963b0b53fe7e2749",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 83,
+        "source": {
+          "commit_sha": "2d137bf40b1f25e4e6702da07f7b03b90ca22f9b"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000abfc81fda5241b62466132c3",
+          "content_hash": "sha256:d30d07ba63019db2946869453189292f487cd8a9a19fb4f719b8b84e64fe0089",
+          "size_bytes": 189286400,
+          "file_count": 419
+        },
+        "deployment_id": "appgdep_6acb88c714908191b213c04f5a974fe2"
+      },
+      {
+        "id": "appgprj_6ac5ccefb20481918a883afab8a483b4~appgver_e3bce9bceb8081918d0954ea78b05845",
+        "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+        "version_number": 82,
+        "source": {
+          "commit_sha": "db5085c9f67d61ef577e9f0a043aee8667241873"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_00000000a77c8230bf8905f5c9461a43",
+          "content_hash": "sha256:cebab1f49d33c7e937d1f139a6e95292988fe3985d889852e38528ee4329c92a",
+          "size_bytes": 187351040,
+          "file_count": 396
+        },
+        "deployment_id": "appgdep_6acb6c5ddeb081918868f3f1b6b8732d"
+      }
+    ]
+  },
+  "http_identity": {
+    "timestamp": "2026-10-12T10:05:08.573011+00:00",
+    "source_sha": "a463151cea2055ba53f3a938edc71c5247153e48",
+    "release_commit": "6e2173662e41747ffbe594a420ae614ad65720f6",
+    "build_id": "DugpSRDg5u26dP824NLeP",
+    "html_contains_exact_build_id": true,
+    "anonymous_http_identity_only": true,
+    "public_v92_exact": true,
+    "verified_previous_unique_immutable_assets": {
+      "86": 6,
+      "87": 6,
+      "88": 6,
+      "89": 7,
+      "90": 6,
+      "91": 6
+    },
+    "requests": [
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/studio/",
+        "status": 200,
+        "sha256": "a9121abe5d9265bf59d4699c951160d83f3b7378f251267d29ec34eb79b0c470",
+        "expected_sha256": "a9121abe5d9265bf59d4699c951160d83f3b7378f251267d29ec34eb79b0c470",
+        "matches_exact_v92_freeze": true,
+        "bytes": 15058,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/",
+        "status": 200,
+        "sha256": "dfa09d0e8e600cb97af3885e2d3ac8a6081f9dcd1e50e51cae57c8d5d87bfe54",
+        "expected_sha256": "dfa09d0e8e600cb97af3885e2d3ac8a6081f9dcd1e50e51cae57c8d5d87bfe54",
+        "matches_exact_v92_freeze": true,
+        "bytes": 530,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/portrait-preview/",
+        "status": 200,
+        "sha256": "3cae284c01812b01fe99f7fa9c6bc6f64fc0888258448f2eff8029733384d085",
+        "expected_sha256": "3cae284c01812b01fe99f7fa9c6bc6f64fc0888258448f2eff8029733384d085",
+        "matches_exact_v92_freeze": true,
+        "bytes": 15098,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/media-transport-check/",
+        "status": 200,
+        "sha256": "5dd30a4412a3315b1075352fcc34983ec175c5395a0d9673fafca8c824ab4e7f",
+        "expected_sha256": "5dd30a4412a3315b1075352fcc34983ec175c5395a0d9673fafca8c824ab4e7f",
+        "matches_exact_v92_freeze": true,
+        "bytes": 9122,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/ca808b45-2942f71d5de90847.js",
+        "status": 200,
+        "sha256": "2e938bc040e804111362eab104ca354e20fa85467a76b09170a67a26a31e4720",
+        "expected_sha256": "2e938bc040e804111362eab104ca354e20fa85467a76b09170a67a26a31e4720",
+        "matches_exact_v92_freeze": true,
+        "bytes": 203721,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/774-8587ebc2f9ddf688.js",
+        "status": 200,
+        "sha256": "81db190dbdad670e24d488c752c5cf4f117a3628060115708dacdcdce6f6dbf4",
+        "expected_sha256": "81db190dbdad670e24d488c752c5cf4f117a3628060115708dacdcdce6f6dbf4",
+        "matches_exact_v92_freeze": true,
+        "bytes": 242888,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/main-app-a0110743c427b069.js",
+        "status": 200,
+        "sha256": "f55bd55e423bcf02a62306485f6093d4b7498ed9ddb59a420c4d0483007a5e1c",
+        "expected_sha256": "f55bd55e423bcf02a62306485f6093d4b7498ed9ddb59a420c4d0483007a5e1c",
+        "matches_exact_v92_freeze": true,
+        "bytes": 511,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/63-f7a96b77764c15e0.js",
+        "status": 200,
+        "sha256": "82588ff8532c00fcdf8173c25ce7e031c5c8bc81371a9dabd4535ee50b15d8af",
+        "expected_sha256": "82588ff8532c00fcdf8173c25ce7e031c5c8bc81371a9dabd4535ee50b15d8af",
+        "matches_exact_v92_freeze": true,
+        "bytes": 125540,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/113-f234b822708b920e.js",
+        "status": 200,
+        "sha256": "0a62b99f6dd36d550da820c955ffe3b08a55ff66bff7f0350187900a70b07db3",
+        "expected_sha256": "0a62b99f6dd36d550da820c955ffe3b08a55ff66bff7f0350187900a70b07db3",
+        "matches_exact_v92_freeze": true,
+        "bytes": 35339,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/538-c0af9c6c79b16117.js",
+        "status": 200,
+        "sha256": "717240b1bcbdd505a40625057a51d849c1e62f8174edf8be8fd99372c305a5c6",
+        "expected_sha256": "717240b1bcbdd505a40625057a51d849c1e62f8174edf8be8fd99372c305a5c6",
+        "matches_exact_v92_freeze": true,
+        "bytes": 983674,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-01ffb2a1794d6bfd.js",
+        "status": 200,
+        "sha256": "8f8e262346fad26016f564579af6aa36200aa22b8d017b9e8f16862f868ecc7f",
+        "expected_sha256": "8f8e262346fad26016f564579af6aa36200aa22b8d017b9e8f16862f868ecc7f",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/polyfills-42372ed130431b0a.js",
+        "status": 200,
+        "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+        "expected_sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+        "matches_exact_v92_freeze": true,
+        "bytes": 112594,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/webpack-49f32b06bc6ce1d9.js",
+        "status": 200,
+        "sha256": "04332586e5536deb6c17ef0c647b1c9a77408b81122c360753eede7a73f0e027",
+        "expected_sha256": "04332586e5536deb6c17ef0c647b1c9a77408b81122c360753eede7a73f0e027",
+        "matches_exact_v92_freeze": true,
+        "bytes": 3252,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/css/c044335b61b8874b.css",
+        "status": 200,
+        "sha256": "98ae30957d71c57d74cb2bdfc32f06d42bbd3f00db87cc8397976b48ca6da3be",
+        "expected_sha256": "98ae30957d71c57d74cb2bdfc32f06d42bbd3f00db87cc8397976b48ca6da3be",
+        "matches_exact_v92_freeze": true,
+        "bytes": 33398,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": null
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/WCoLPOr9cJb_lRqTDLhZu/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/WCoLPOr9cJb_lRqTDLhZu/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/701-fedb6d39ac75c7db.js",
+        "status": 200,
+        "sha256": "3d6e15daf52c98dfd123230e194b665fb1977bb3be9acea2c652da32940d47ff",
+        "expected_sha256": "3d6e15daf52c98dfd123230e194b665fb1977bb3be9acea2c652da32940d47ff",
+        "matches_exact_v92_freeze": true,
+        "bytes": 942585,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-bc843869cc8624aa.js",
+        "status": 200,
+        "sha256": "c409e44ac3862fab88734dce93867e065166649859cd89fc37b10dec9fd2fc6d",
+        "expected_sha256": "c409e44ac3862fab88734dce93867e065166649859cd89fc37b10dec9fd2fc6d",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-61a0c09ea5c6ac7a.js",
+        "status": 200,
+        "sha256": "d860c1b9d10b90e9ba9c789a6e6d0088d374230923cc115262eda090e6a87e36",
+        "expected_sha256": "d860c1b9d10b90e9ba9c789a6e6d0088d374230923cc115262eda090e6a87e36",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-38ee1e731ed82395.js",
+        "status": 200,
+        "sha256": "ba8bea070500faa22af74afe3e22643df51091b35e3caa8171fe6b5cd9cab07b",
+        "expected_sha256": "ba8bea070500faa22af74afe3e22643df51091b35e3caa8171fe6b5cd9cab07b",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 86
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/8AsL1WyhUM2bPjwrUybSk/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/8AsL1WyhUM2bPjwrUybSk/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/355-7c7c7bceb402502a.js",
+        "status": 200,
+        "sha256": "27a5d588257f0f6c76933d708ad9bafeb75c87f2ee58240420da67d9333f5f07",
+        "expected_sha256": "27a5d588257f0f6c76933d708ad9bafeb75c87f2ee58240420da67d9333f5f07",
+        "matches_exact_v92_freeze": true,
+        "bytes": 963221,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-2ba60d62216598c2.js",
+        "status": 200,
+        "sha256": "58271057af08984b08b77278e531c60014d82c9ca5b35f3b75c008306392b086",
+        "expected_sha256": "58271057af08984b08b77278e531c60014d82c9ca5b35f3b75c008306392b086",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-ac850d896ade958b.js",
+        "status": 200,
+        "sha256": "e410af248b666e9835e80af1c98feb04b42b0d07e602d6b1f8f1b8eb9f6f2442",
+        "expected_sha256": "e410af248b666e9835e80af1c98feb04b42b0d07e602d6b1f8f1b8eb9f6f2442",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-516b6af586e95330.js",
+        "status": 200,
+        "sha256": "b540e356df9558e564f346dc7f684362ac2f792cffaa3a5a119e47c42ea40273",
+        "expected_sha256": "b540e356df9558e564f346dc7f684362ac2f792cffaa3a5a119e47c42ea40273",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 87
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/6M3QU0rG_GwQ2sc-jP3fc/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/6M3QU0rG_GwQ2sc-jP3fc/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/807-fa70b78f4d8f5e63.js",
+        "status": 200,
+        "sha256": "a7f7120b75efa5b9ea0098d8bd405563378ac8454bb6162328baee31891ddf77",
+        "expected_sha256": "a7f7120b75efa5b9ea0098d8bd405563378ac8454bb6162328baee31891ddf77",
+        "matches_exact_v92_freeze": true,
+        "bytes": 965408,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-f1d2cf86096870f7.js",
+        "status": 200,
+        "sha256": "2bde9faa918136f7f4207d6b3759e22c985ac03279c0de020e8db69fd3a3faec",
+        "expected_sha256": "2bde9faa918136f7f4207d6b3759e22c985ac03279c0de020e8db69fd3a3faec",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-1d62d2925155c940.js",
+        "status": 200,
+        "sha256": "2f8d4d982de945649f65ee6b22e620c342398f2d23d8c48f72a43b67bdee66e6",
+        "expected_sha256": "2f8d4d982de945649f65ee6b22e620c342398f2d23d8c48f72a43b67bdee66e6",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-eee4ab85b8380a93.js",
+        "status": 200,
+        "sha256": "2edeef15a6b4b9e623b9a4a7b1327655c60feb438d5f149b7414bf6743a22b48",
+        "expected_sha256": "2edeef15a6b4b9e623b9a4a7b1327655c60feb438d5f149b7414bf6743a22b48",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 88
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/342-54a6ebd04ab67758.js",
+        "status": 200,
+        "sha256": "81622a411ac0bf483fe09ad55e6e47a4358ac59ca1dd4d2bb8c7137f2c20464a",
+        "expected_sha256": "81622a411ac0bf483fe09ad55e6e47a4358ac59ca1dd4d2bb8c7137f2c20464a",
+        "matches_exact_v92_freeze": true,
+        "bytes": 977195,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-41295c8ea9259a43.js",
+        "status": 200,
+        "sha256": "18d807d2508a4cdec4c64f589604e6573f042a47bde7ecf964d196cf93db94d6",
+        "expected_sha256": "18d807d2508a4cdec4c64f589604e6573f042a47bde7ecf964d196cf93db94d6",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-2854c934671bd82a.js",
+        "status": 200,
+        "sha256": "c12a5cee3aa0279b54a1a3df7061f2d2b63b4a94c667d9510ad29faed0daa1f5",
+        "expected_sha256": "c12a5cee3aa0279b54a1a3df7061f2d2b63b4a94c667d9510ad29faed0daa1f5",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-9b7ae3bcc78d7323.js",
+        "status": 200,
+        "sha256": "c134589707e08a7bfe5638fdb6d00c3c14cf7905261aeecaa768bae452dda864",
+        "expected_sha256": "c134589707e08a7bfe5638fdb6d00c3c14cf7905261aeecaa768bae452dda864",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/oyZQgi4jGuSaYaxWmNxXB/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/oyZQgi4jGuSaYaxWmNxXB/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 89
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/949-7276dba36e17dc8e.js",
+        "status": 200,
+        "sha256": "3851aa117060ce4f0c68ae421c98cd35b1005467d814fd1bed4875f6eb4655a6",
+        "expected_sha256": "3851aa117060ce4f0c68ae421c98cd35b1005467d814fd1bed4875f6eb4655a6",
+        "matches_exact_v92_freeze": true,
+        "bytes": 979002,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-04ff4b7f7f392d73.js",
+        "status": 200,
+        "sha256": "8aeaedcd151b0460f6b6338f3412c5a15a13e526a5eba282341bcb21168a55ff",
+        "expected_sha256": "8aeaedcd151b0460f6b6338f3412c5a15a13e526a5eba282341bcb21168a55ff",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-b3245900c971191f.js",
+        "status": 200,
+        "sha256": "c4945840dd8f4e474834dcc95bf41709d5e6df91f00cdff2b67a25f60130dfa7",
+        "expected_sha256": "c4945840dd8f4e474834dcc95bf41709d5e6df91f00cdff2b67a25f60130dfa7",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-15479353cae50e89.js",
+        "status": 200,
+        "sha256": "463ce2ac5822057ec5404a4c6713caf7ae571925143def7a1dff311aeb6ce9f1",
+        "expected_sha256": "463ce2ac5822057ec5404a4c6713caf7ae571925143def7a1dff311aeb6ce9f1",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/ohUbTGaN7epgWiNpr8973/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/ohUbTGaN7epgWiNpr8973/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 90
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/DXXUtm-BSKgej0LbomcZP/_buildManifest.js",
+        "status": 200,
+        "sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "expected_sha256": "9e1c031897ba94be9e9aa3d089652df82d71b3d45359ca4855587bffacdcf375",
+        "matches_exact_v92_freeze": true,
+        "bytes": 516,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/DXXUtm-BSKgej0LbomcZP/_ssgManifest.js",
+        "status": 200,
+        "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "expected_sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+        "matches_exact_v92_freeze": true,
+        "bytes": 80,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/273-33164f1c8c710541.js",
+        "status": 200,
+        "sha256": "2be7c5dfe677830d7e244b480d14a2a2c61e110d640f7c38449f03351c572fdd",
+        "expected_sha256": "2be7c5dfe677830d7e244b480d14a2a2c61e110d640f7c38449f03351c572fdd",
+        "matches_exact_v92_freeze": true,
+        "bytes": 983056,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/media-transport-check/page-3aecfb440ec785b2.js",
+        "status": 200,
+        "sha256": "9f368977fe8b081dcc0e1d5120abf4c7c0881c1f0db75fc403fee5477dd7e5e5",
+        "expected_sha256": "9f368977fe8b081dcc0e1d5120abf4c7c0881c1f0db75fc403fee5477dd7e5e5",
+        "matches_exact_v92_freeze": true,
+        "bytes": 11242,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/portrait-preview/page-c19764cd8bd72c42.js",
+        "status": 200,
+        "sha256": "132015d3746350340ef2dad34bf2660d84e43a68a44ade259e00a065f5171fd9",
+        "expected_sha256": "132015d3746350340ef2dad34bf2660d84e43a68a44ade259e00a065f5171fd9",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      },
+      {
+        "url": "https://lingotrace-training-demo.beyond-chenlin.chatgpt.site/_next/static/chunks/app/studio/page-6f79091726ea7892.js",
+        "status": 200,
+        "sha256": "3ac30bf38a76481e832eea33382700f59fe9df8e7fdc88e3c7e2250ecb290dde",
+        "expected_sha256": "3ac30bf38a76481e832eea33382700f59fe9df8e7fdc88e3c7e2250ecb290dde",
+        "matches_exact_v92_freeze": true,
+        "bytes": 135,
+        "authentication_or_cookies_sent": false,
+        "prior_unique_immutable_version": 91
+      }
+    ],
+    "browser_phone_audio_recording_acceptance_claimed": false
+  },
+  "build": {
+    "timestamp": "2026-10-12T09:59:45.802549+00:00",
+    "status": "BUILD_FROZEN",
+    "source_sha": "a463151cea2055ba53f3a938edc71c5247153e48",
+    "source_tree": "16534b79c9abf06d20d468e7a55c970442c8d9df",
+    "release_base": "6c251d74cc1245c9b6ddd454106fd696d96e4daf",
+    "build_id": "DugpSRDg5u26dP824NLeP",
+    "freeze_path": "/workspace/scratch/dd3f275409c3/lingotrace-v92-a463151-freeze",
+    "release_checkout": "/workspace/scratch/dd3f275409c3/lingotrace-v92-release-a463151",
+    "runtime_file_count": 474,
+    "runtime_bytes": 197751774,
+    "manifest_sha256": "d8754de56675ea210842c10aa8c4e23286903a5116652797546b8d6279ef092d",
+    "source_files": 664,
+    "docs_files": 163,
+    "original_docs_163_unchanged": true,
+    "source_unchanged": true,
+    "immutable_collisions_verified": 18,
+    "new_runtime_bytes": 1066526,
+    "v91_all_paths_retained": true,
+    "v91_immutable_next_identical": true,
+    "v82_v91_rollback_unchanged": true,
+    "qa2_modified": false,
+    "browser_phone_audio_recording_acceptance": false,
+    "free_overlay": 1424789504,
+    "free_tmp": 291926016
+  },
+  "package": {
+    "timestamp": "2026-10-12T10:00:22.491069+00:00",
+    "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+    "source_sha": "a463151cea2055ba53f3a938edc71c5247153e48",
+    "release_commit": "6e2173662e41747ffbe594a420ae614ad65720f6",
+    "archive": "/workspace/scratch/dd3f275409c3/lingotrace-v92-a463151-release.tar.gz",
+    "archive_bytes": 131285943,
+    "archive_sha256": "aefa4572f97c356bd3ca1a99193606ece0147be925ea0e675639077313d3439d",
+    "runtime_file_count": 474,
+    "all_frozen_source_git_blobs_identical": true,
+    "docs_files": 163,
+    "original_docs_163_unchanged": true,
+    "public_54_unchanged": true,
+    "runtime_all_hashes_match_freeze": true,
+    "v91_immutable_assets_retained": true,
+    "retained_versions_verified": [
+      {
+        "version": 82,
+        "files": 395,
+        "all_hashes_match": true
+      },
+      {
+        "version": 83,
+        "files": 418,
+        "all_hashes_match": true
+      },
+      {
+        "version": 84,
+        "files": 424,
+        "all_hashes_match": true
+      },
+      {
+        "version": 85,
+        "files": 431,
+        "all_hashes_match": true
+      },
+      {
+        "version": 86,
+        "files": 437,
+        "all_hashes_match": true
+      },
+      {
+        "version": 87,
+        "files": 443,
+        "all_hashes_match": true
+      },
+      {
+        "version": 88,
+        "files": 449,
+        "all_hashes_match": true
+      },
+      {
+        "version": 89,
+        "files": 456,
+        "all_hashes_match": true
+      },
+      {
+        "version": 90,
+        "files": 462,
+        "all_hashes_match": true
+      },
+      {
+        "version": 91,
+        "files": 468,
+        "all_hashes_match": true
+      }
+    ],
+    "clean_release_worktree": true,
+    "free_overlay": 1292820480,
+    "free_tmp": 291926016
+  },
+  "full_suite": {
+    "tests": 3665,
+    "pass": 3664,
+    "fail": 0,
+    "skipped": 1,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "tracked_test_files": 207,
+  "producer_manifest": {
+    "path": "/workspace/shared/lingotrace-calendar-scale-fix-20261012/MANIFEST.json",
+    "sha256": "e4e740c941854b37b189e86259d1a122bf1b2a0a7fdb4b41f57fc2185e9b439a",
+    "source_tree": "16534b79c9abf06d20d468e7a55c970442c8d9df"
+  },
+  "producer_evidence_unchanged_after_publication": true,
+  "retained_red_and_incomplete_aggregate_evidence_unchanged": true,
+  "same_fixture_comparison": {
+    "baseline_commit": "80a35e11c9835e4570ff2abfe3cdddbb5436b10a",
+    "candidate_commit": "a463151cea2055ba53f3a938edc71c5247153e48",
+    "fixture": {
+      "count": 100,
+      "events": 6300,
+      "eventsPerWrapper": 63,
+      "serializedWrapperBytes": 4076000,
+      "databaseJSONBytes": 7277542
+    },
+    "same_probe_fixture_and_assertions": true,
+    "probe_changes": "probe-adaptation.patch (commit gate, new snapshot call/cancel trigger, expected scan counts only)",
+    "timing_samples_per_configuration": 1,
+    "same_retention_control": true,
+    "refresh_ms": {
+      "before": 23844.236987000004,
+      "after": 6843.492453999999
+    },
+    "first_published_ms": {
+      "before": 19939.78151,
+      "after": 3415.1054950000002
+    },
+    "list_calls": {
+      "before": 101,
+      "after": 2
+    },
+    "returned_wrappers": {
+      "before": 10100,
+      "after": 200
+    },
+    "max_5ms_timer_gap_ms": {
+      "before": 536.1291710000005,
+      "after": 519.4850509999997
+    },
+    "cancel_candidate": {
+      "timerScheduledMs": 3023.93145,
+      "timerDelayMs": 0.28984700000000885,
+      "refreshSettleAfterCancelMs": 0.6125629999996818,
+      "noLatePublication": true
+    },
+    "cancel_tail_ms": 184.80864199999996,
+    "correctness_and_readonly": true,
+    "browser_performance_claimed": false,
+    "product_oom_claimed": false,
+    "source_files": [
+      {
+        "path": "/workspace/shared/lingotrace-v91-followup-20261012/scale/100-full-retention-control.json",
+        "sha256": "f8f5157d6e45560676bb4ef0b92c8e49b22e9fba6f1b18f264223af8a24080f8"
+      },
+      {
+        "path": "/workspace/shared/lingotrace-calendar-scale-fix-20261012/comparison/100-full-retention-control.json",
+        "sha256": "3f21eb1af322e5242860a444140edce00969e59cc8c3dca2868c4007a1c608a3"
+      },
+      {
+        "path": "/workspace/shared/lingotrace-calendar-scale-fix-20261012/comparison/100-cancel-original.json",
+        "sha256": "825e1fd4ac96d3410a63d15c3be219b55b74c693960f76dcd50be839b2300f1a"
+      }
+    ]
+  },
+  "build_count": 1,
+  "save_count": 1,
+  "deploy_count": 1,
+  "public_access_revision": 2,
+  "qa2_unchanged": true,
+  "v82_v91_all_version_metadata_unchanged": true,
+  "browser_phone_audio_recording_acceptance": false,
+  "browser_performance_claimed": false,
+  "source_token_printed_or_persisted": false,
+  "free_overlay": 1287970816,
+  "free_tmp": 291926016,
+  "evidence": [
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/FULL-SUITE-GO.json",
+      "sha256": "1e15bf51780144d5a70fefeba90bf2bf941abdd87035a8a877939f5ff376ac13"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/RESOURCE-PREFLIGHT.json",
+      "sha256": "a254b8797e235c347bdda4d6f07a27c081f8b546a3cb5d8474848c8333af3a4e"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/BUILD-RECEIPT.json",
+      "sha256": "79a56e6953d595d463969371bebf77af57b8c19805d8e193b45037b624adc169"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/PACKAGE-VERIFICATION.json",
+      "sha256": "db3c5175fb38f89291f892cf43118b18c545348a9879bef2bef02f7e4e9592cc"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/SAVED-V92.json",
+      "sha256": "881f3a4709160e14f4aca8a4804942b98041b734607ca15cbfba3769c17c7deb"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/DEPLOYED-V92.json",
+      "sha256": "a7f7ac07f99a9f7f55dce8a6ef09aa9fd200e9f4b4096cf2c0deca4bfdb2da59"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/V92-READBACK.json",
+      "sha256": "15359f6e0753d718ce1fce950dc13b4af359ef9e75c98f1a52b918ea16a9acd4"
+    },
+    {
+      "path": "/workspace/shared/lingotrace-v92-delivery-a463151-20261012/V92-PUBLIC-HTTP-IDENTITY.json",
+      "sha256": "05393591d2735cc90b6718d2b566046441f4b9a5907d975afbcf22232c28f5f1"
+    }
+  ]
+}

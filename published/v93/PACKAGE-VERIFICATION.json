@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-10-12T10:54:52.734512+00:00",
+  "project_id": "appgprj_6ac5ccefb20481918a883afab8a483b4",
+  "source_sha": "1797507bcc03890f4f1e23f3e40b8f76e533f962",
+  "release_commit": "47a1df1df2918fb87a56b16d37b63bcda44d22be",
+  "archive": "/workspace/scratch/dd3f275409c3/lingotrace-v93-1797507-release.tar.gz",
+  "archive_bytes": 131590158,
+  "archive_sha256": "33bc3fe1bf58661e2927c4facabb7563fbc872df4d7b0ddb7c7aa55033dc465a",
+  "runtime_file_count": 480,
+  "all_frozen_source_git_blobs_identical": true,
+  "docs_files": 165,
+  "original_docs_163_unchanged": true,
+  "public_54_unchanged": true,
+  "runtime_all_hashes_match_freeze": true,
+  "v92_immutable_assets_retained": true,
+  "retained_versions_verified": [
+    {
+      "version": 82,
+      "files": 395,
+      "all_hashes_match": true
+    },
+    {
+      "version": 83,
+      "files": 418,
+      "all_hashes_match": true
+    },
+    {
+      "version": 84,
+      "files": 424,
+      "all_hashes_match": true
+    },
+    {
+      "version": 85,
+      "files": 431,
+      "all_hashes_match": true
+    },
+    {
+      "version": 86,
+      "files": 437,
+      "all_hashes_match": true
+    },
+    {
+      "version": 87,
+      "files": 443,
+      "all_hashes_match": true
+    },
+    {
+      "version": 88,
+      "files": 449,
+      "all_hashes_match": true
+    },
+    {
+      "version": 89,
+      "files": 456,
+      "all_hashes_match": true
+    },
+    {
+      "version": 90,
+      "files": 462,
+      "all_hashes_match": true
+    },
+    {
+      "version": 91,
+      "files": 468,
+      "all_hashes_match": true
+    },
+    {
+      "version": 92,
+      "files": 474,
+      "all_hashes_match": true
+    }
+  ],
+  "clean_release_worktree": true,
+  "free_overlay": 801181696,
+  "free_tmp": 282529792
+}

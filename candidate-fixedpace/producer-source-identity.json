@@ -1,0 +1,11 @@
+{
+  "base": "1797507bcc03890f4f1e23f3e40b8f76e533f962",
+  "implementation_commit": "b178171d250ad02efcefecf563a16cf9b7a6d149",
+  "head": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
+  "tree": "42261ce4c7289a5c43463b9349fe5096603955f7",
+  "source_files": 12,
+  "frozen_worktree": "/workspace/shared/lingotrace-f03-v85-integration-20261012",
+  "existing_untracked": "node_modules symlink",
+  "new_build": false,
+  "published": false
+}
