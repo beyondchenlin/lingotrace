@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "6e879e157a86fe8ce1901729b140a834928adbad",
-  "source_file_count": 675,
-  "direct_source_file_count": 671,
+  "source_projection_tree_sha1": "ab282a0982f2a4752c9c1e5ca25bcb0aa41ac20d",
+  "source_file_count": 678,
+  "direct_source_file_count": 674,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -1932,6 +1932,20 @@
       "bytes": 2897,
       "git_blob_sha1": "aa3fd0a9509da8129c77e7b9dc48839b308c7b47",
       "sha256": "2ffeb365ac7d8b5dca1000409600cb3ea2b228f5b78d50104e1196685947e3be"
+    },
+    {
+      "path": "studio/carousel/carousel.css",
+      "mode": "100644",
+      "bytes": 996,
+      "git_blob_sha1": "ff429c16cd004a733f251e4867fd40b6d40ed279",
+      "sha256": "0a45125c31451815f7a603a850d5efcf15ea2f7f34432ba6fe512b02cddb1dc2"
+    },
+    {
+      "path": "studio/carousel/motions.ts",
+      "mode": "100644",
+      "bytes": 1455,
+      "git_blob_sha1": "89113b3b88c85c45b80bd1da29e224cb528432d1",
+      "sha256": "23233101b7d791431377ba435352898f5e02d25d48e8c3d9a87392c1786a09ad"
     },
     {
       "path": "studio/components/CheckedAnswerReview.tsx",
@@ -4690,6 +4704,13 @@
       "bytes": 8731,
       "git_blob_sha1": "132b2e74902c838dd439a5a85f1d27a0ef185430",
       "sha256": "2288c5cd4e36917d419d3395d2700d3c7699d802d7d7f7e36e467e756253be26"
+    },
+    {
+      "path": "studio/theme/kids-cartoon.ts",
+      "mode": "100644",
+      "bytes": 939,
+      "git_blob_sha1": "6a2295fa0ed0475c0ac96ed38bdee19787d88926",
+      "sha256": "5c86ef41e2563906b4376ab787f870b74f4c3ae38ffb8d43c34ad5e3069a7b0e"
     },
     {
       "path": "tsconfig.json",
