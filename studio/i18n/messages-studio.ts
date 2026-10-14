@@ -66,6 +66,16 @@ export const studioEnglish = {
   "follow.description": "Assisted mode: video speed follows typing, so this does not prove original-speed performance. On a fresh practice or an eligible sentence you select for the first time this round, your first real tail input starts video and original audio together at 0.80×. Committed typing smoothly adjusts them from 0.50–1.50×. After 1.5 seconds without typing, playback slows toward 0.50× and stops at the saved sentence boundary. This is a sentence-average estimate, not word synchronization. Short sentences may end before adaptation; slow typing may still fall behind. Check and Next stay manual.",
   "follow.boundaries": "Use the stop control before typing to turn automatic entry off. Only real tail typing or a final IME commit counts; paste, deletion and other edits stop Follow. Pause, leaving the input, hiding the reference, backgrounding or recording disarms this sentence; further typing does not restart it. Use the start control to restart explicitly. Restore never autoplays. This control stays outside the recorded canvas; Follow is unavailable during recording.",
 
+  "follow.deepLinkTip": "Follow β · Adaptive assist. Type at the sentence end or tap Start — restore never autoplays. Phone audio still needs your device check.",
+  "follow.deepLinkDismiss": "Got it",
+  "follow.deepLinkStart": "Start Follow",
+  "follow.recoverPlay": "Follow could not start playback (browser blocked or timed out). Tap Retry after a user gesture.",
+  "follow.recoverMedia": "Follow media error. Reload the NPS course, then Retry.",
+  "follow.recoverRate": "Follow could not apply playback rate. Retry Start Follow.",
+  "follow.recoverDismiss": "Dismiss",
+  "follow.recoverRetry": "Retry Start",
+
+
 
   "studio.displayRecovering": "Restoring the display… Your draft is unchanged.",
   "studio.displayInterrupted": "The display was interrupted. Your draft is unchanged. Retry the display.",
@@ -636,6 +646,16 @@ export const studioChinese: Record<keyof typeof studioEnglish,string> = {
   "follow.help": "跟随如何工作",
   "follow.description": "辅助模式：视频速度迁就输入，不能证明已跟上原速。新练习或本轮首次主动选择的合格新句，首次真实末尾输入会让视频和原声以 0.80× 一起开始。随后根据真实已提交输入，在 0.50–1.50× 之间平滑调速。1.5 秒无输入会逐渐放慢至 0.50×，播至已存句界停止。这是整句平均节奏估算，并非逐词同步。短句可能在调速前结束，慢速输入仍可能落后。检查和下一句均需手动操作。",
   "follow.boundaries": "输入前可点当前模式的停止按钮关闭自动启动。只计入真实末尾输入或输入法最终提交；粘贴、删除等编辑会停止跟随。暂停、离开输入框、隐藏参考、进入后台或录制会解除本句跟随，继续打字不会重启；可主动点当前模式的开始按钮重新开始。恢复记录不会自动播放。此控件位于录制画布之外；录制期间无法使用跟随。",
+
+  "follow.deepLinkTip": "跟音 β · 自适应辅助。在句末开始输入或点「开始」——恢复记录不会自动播放。手机出声仍需你本机确认。",
+  "follow.deepLinkDismiss": "知道了",
+  "follow.deepLinkStart": "开始跟音",
+  "follow.recoverPlay": "跟音未能开始播放（浏览器拦截或超时）。请在手势后再点重试。",
+  "follow.recoverMedia": "跟音媒体出错。请重新加载 NPS 课程后再重试。",
+  "follow.recoverRate": "跟音未能写入播放速率。请重新开始跟音。",
+  "follow.recoverDismiss": "关闭",
+  "follow.recoverRetry": "重试开始",
+
 
 
   "studio.displayRecovering": "正在恢复画面…你的草稿未改变。",

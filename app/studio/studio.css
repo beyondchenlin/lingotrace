@@ -499,3 +499,29 @@
 .portrait-layout .studio-drawer-grabber{
   width:42px;height:4px;background:#d7e7d855;
 }
+
+
+/* Follow deep-link tip + honest recover (no phone-audio claim). */
+.follow-intent-banner{
+  position:absolute;z-index:8;left:50%;top:11.2%;transform:translateX(-50%);
+  display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:10px;
+  max-width:min(92%,720px);padding:10px 14px;border:1px solid #7ad7ff66;border-radius:28px;
+  background:#0f2430ea;backdrop-filter:blur(16px);font-size:13px;line-height:1.45;color:#e6f7ff;
+  box-shadow:0 8px 36px #0006;
+}
+.follow-intent-banner span{flex:1 1 220px;text-align:left}
+.follow-intent-banner button{border:0;border-radius:20px;padding:8px 13px;font-size:13px;min-height:36px}
+.follow-intent-banner .follow-intent-dismiss{background:#1a3038;color:#d7ebe3;border:1px solid #7ad7ff44}
+.follow-intent-banner .follow-intent-start{background:#7ad7ff;color:#0c1a22;font-weight:600}
+.follow-recover-banner{border-color:#ffb07a99;background:#3a2218ea;color:#ffe8d8}
+.follow-recover-banner .follow-intent-start{background:#ffc48a;color:#3a1f12}
+.record-banner~.follow-intent-banner,.replay-banner~.follow-intent-banner,.course-intent-banner~.follow-intent-banner{top:17.7%}
+.course-intent-banner~.follow-intent-banner+.follow-intent-banner,.record-banner~.follow-intent-banner+.follow-intent-banner{top:24%}
+.typing-follow-status-pill{
+  max-width:min(52vw,220px);padding:5px 9px;border-radius:999px;border:1px solid #7ad7ff55;
+  background:#102028d9;color:#e6f7ff;font:600 10px/1.25 "Lingo Studio Sans",Arial,sans-serif;
+  letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  box-shadow:0 2px 8px #0005;
+}
+.typing-follow-status-pill[data-recover=true]{border-color:#ffb07a99;background:#3a2218d9;color:#ffe8d8}
+.portrait-layout[data-practice-compact=true] .typing-follow-status-pill{max-width:42vw;font-size:9px;padding:4px 7px}
