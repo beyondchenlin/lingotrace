@@ -1194,3 +1194,15 @@
   background:linear-gradient(168deg,#2a2418f2 0%,#1a1810f8 52%,#14120cfb 100%);
   box-shadow:0 18px 44px #00000078,inset 0 1px 0 #ffe6b430;
 }
+
+/* continue20 — title-band status-chip / trend peers (no video caption capsule) */
+.typing-pace-chip,.sheet-status-chip{
+  /* peer vocabulary to canvas title-band status-chip glass */
+  box-shadow:0 4px 18px #00000066,inset 0 1px 0 #ffffff1a,0 0 0 1px #c9e2d814;
+}
+.studio-dialog .session-chart .chart-labels{
+  letter-spacing:.04em;color:#b8c6c4;
+}
+.studio-dialog .session-chart .chart-column>span{
+  font-variant-numeric:tabular-nums;color:#e0eee9;
+}

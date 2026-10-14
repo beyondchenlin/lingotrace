@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "1404cd803e77db98ab29aec6e6f7205148232cef",
-  "source_file_count": 712,
+  "source_projection_tree_sha1": "6572558cfe07994eb19c178114e9a7026aa3f7fe",
+  "source_file_count": 714,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 78733,
-      "git_blob_sha1": "bbbd504aae1d95dbefa5e2b1d89ed1148ffa0a1a",
-      "sha256": "6b47b7655f2f5ffeb0c5862eaac9b474540f989b89d3bf353a6d2cc1604bfbe4"
+      "bytes": 79189,
+      "git_blob_sha1": "4fd78b34dacceacfb876c9d0e43cd8a66679bb76",
+      "sha256": "4b95e3cfded471da9e5d155ec440a605b0559dc22ea2521b4abb5701ce72300e"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -4855,9 +4855,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 39805,
-      "git_blob_sha1": "4be87a98283c6dd71f98a1ed4d6a13457e4c69ca",
-      "sha256": "44abf9e4dd467d8cc5f3f7c575f991782c60482972bd4d4f0fc3650e0f4ac10f"
+      "bytes": 42161,
+      "git_blob_sha1": "cfc2a5d9684cd72c05d4e4b931b8d806311008dc",
+      "sha256": "40adb77843c7c762fb997a5e770886fac7f85bb8756f0882e47369c52b2be672"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -4991,6 +4991,20 @@
       "bytes": 4450,
       "git_blob_sha1": "c17837b4c4df4f188d6374fda0abd6634c0626e6",
       "sha256": "b1165b9fca4b1dcda3b0be3e11c13a2f85ec3173fad790568c43c5babac3da7b"
+    },
+    {
+      "path": "qa/prd-continue20-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4167,
+      "git_blob_sha1": "5f4c70755d0979138771a588c885f8cb3d43c0be",
+      "sha256": "3059f6ffbaf1e132be5b60ff32a44ed062014a58d6ba80ea30a29db206a4aefb"
+    },
+    {
+      "path": "scripts/prd-continue20-qa.mts",
+      "mode": "100644",
+      "bytes": 4443,
+      "git_blob_sha1": "cf13814a5e2b093c1167320684d9f050f979c5dc",
+      "sha256": "515bdf6a802724b85270cba72946591f48ed051b996bdb1e796925a1f1394cf0"
     }
   ],
   "large_resources": [
