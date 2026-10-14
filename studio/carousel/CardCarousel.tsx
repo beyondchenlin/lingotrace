@@ -153,7 +153,7 @@ function kindLabel(kind:LessonCardSpec['kind'],locale:'en'|'zh-CN'){
   kids:['Kids','儿童版'],
   'cafe':['Cafe fixed','咖啡馆定速'],
   assisted:['Assisted','辅助'],
-  follow:['Follow β','跟音 β'],
+  follow:['Follow · sentence β','跟音 · 句级 β'],
  } as const;
  return locale==='zh-CN'?map[kind][1]:map[kind][0];
 }

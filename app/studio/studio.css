@@ -525,3 +525,29 @@
 }
 .typing-follow-status-pill[data-recover=true]{border-color:#ffb07a99;background:#3a2218d9;color:#ffe8d8}
 .portrait-layout[data-practice-compact=true] .typing-follow-status-pill{max-width:42vw;font-size:9px;padding:4px 7px}
+
+
+/* PRD continue3 — Follow sentence-β labeling surfaces + touch craft */
+.follow-start-hint{
+  margin-top:8px!important;padding:10px 12px;border-radius:12px;
+  border:1px solid #7ad7ff44;background:#0f243088;color:#d7eef8!important;
+  font-size:12px!important;line-height:1.55!important;
+}
+.pace-mode-row button,.pace-rate-row button{min-height:44px}
+.typing-follow-rate{
+  min-height:28px;padding:4px 9px;border-radius:999px;border:1px solid #7ad7ff66;
+  background:#102830e0;color:#e6f7ff;font:600 11px/1 "Lingo Studio Sans",Arial,sans-serif;
+  letter-spacing:.04em;box-shadow:0 2px 8px #0005;
+}
+.typing-follow-toolbar[data-pace-mode=adaptive] .typing-pace-chip{
+  box-shadow:0 2px 14px #0a203055,inset 0 1px 0 #7ad7ff22;
+}
+.typing-follow-toolbar[data-pace-mode=adaptive] .typing-pace-chip[aria-expanded=true]{
+  border-color:#7ad7ffcc;background:linear-gradient(165deg,#7ad7ff28,#102028e0);color:#eaf8ff;
+}
+.portrait-layout[data-practice-compact=true] .typing-pace-chip{min-height:36px}
+.status-strip{
+  backdrop-filter:blur(10px);
+  background:linear-gradient(90deg,#0e1a2088,#0e1a2044);
+  border-radius:10px;padding:4px 8px;
+}
