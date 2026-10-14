@@ -97,18 +97,13 @@ test('portrait text labels stay legible and timeline remains fully on the record
  for(const label of result.labels){assert.ok(label.centerY>=0&&label.centerY<g.height,label.text);assert.ok(label.size>=9.999,label.text)}
  for(const text of ['Hidden · Show','Check ↵'])assert.ok(result.labels.find(label=>label.text===text)!.size>=11.999,text);
  assert.ok(!result.labels.some(label=>label.text==='OFF'),'collapsed camera has no large OFF label');
- if(g.practiceCompact){
-  assert.ok(!result.labels.some(label=>label.text==='PRACTICE TARGET'));
-  assert.ok(!result.labels.some(label=>/^\d+%$/.test(label.text)),'no fake standby percent on one-screen');
- }else{
-  for(const text of ['PRACTICE TARGET','INPUT TREND','INPUT FLOW'])assert.ok(result.labels.find(label=>label.text===text)!.size>=11.999,text);
-  const goalTitle=result.labels.find(label=>label.text===('PRACTICE TARGET'))!;
-  assert.ok(goalTitle.left>=g.goal.x&&goalTitle.right<=g.goal.x+g.goal.w);assert.ok(goalTitle.top>=g.goal.y);
-  const trendTitle=result.labels.find(label=>label.text==='INPUT TREND')!,trendUnit=result.labels.find(label=>label.text==='GRAPHEMES / SECOND')!;
-  assert.ok(trendTitle.bottom<trendUnit.top);assert.ok(trendUnit.bottom<g.trend.y+(104-40)*(g.trend.w/352));
-  assert.ok(trendTitle.left>=g.trend.x&&trendTitle.right<=g.trend.x+g.trend.w);
-  assert.ok(trendUnit.left>=g.trend.x&&trendUnit.right<=g.trend.x+g.trend.w);
- }
+ for(const text of ['PRACTICE TARGET','INPUT TREND','INPUT FLOW'])assert.ok(result.labels.find(label=>label.text===text)!.size>=11.999,text);
+ const goalTitle=result.labels.find(label=>label.text===('PRACTICE TARGET'))!;
+ assert.ok(goalTitle.left>=g.goal.x&&goalTitle.right<=g.goal.x+g.goal.w);assert.ok(goalTitle.top>=g.goal.y);
+ const trendTitle=result.labels.find(label=>label.text==='INPUT TREND')!,trendUnit=result.labels.find(label=>label.text==='GRAPHEMES / SECOND')!;
+ assert.ok(trendTitle.bottom<trendUnit.top);assert.ok(trendUnit.bottom<g.trend.y+(104-40)*(g.trend.w/352));
+ assert.ok(trendTitle.left>=g.trend.x&&trendTitle.right<=g.trend.x+g.trend.w);
+ assert.ok(trendUnit.left>=g.trend.x&&trendUnit.right<=g.trend.x+g.trend.w);
  for(let i=1;i<=12;i++){
   const label=result.labels.find(item=>item.text===String(i).padStart(2,'0')&&item.centerY>g.zones.seek.y);assert.ok(label);
   const target=g.cueMarker((i-1)/12);assert.ok(label.x>=target.x&&label.x<=target.x+target.w);
@@ -134,11 +129,6 @@ test('live event labels and trend units fit their compact panels without sharing
  const g=responsiveLayout(true,{},'lesson',height);
  for(const commits10s of [0,9,99,999,1000,123456]){
   const result=render(visual,{...frame,pageInputStarted:true,input:{...frame.input,commits10s}},true,1,height);
-  if(g.practiceCompact){
-   assert.ok(!result.labels.some(label=>label.text==='INPUT TREND'));
-   assert.ok(!result.labels.some(label=>['COMMITTED EVENTS','/ 10s','EVENTS / 10s'].includes(label.text)));
-   continue;
-  }
   const unit=result.labels.find(label=>label.text==='GRAPHEMES / SECOND')!,title=result.labels.find(label=>label.text==='INPUT TREND')!;
   assert.ok(title.bottom<unit.top);assert.ok(unit.left>=g.trend.x&&unit.right<=g.trend.x+g.trend.w);
   const flowLabels=result.labels.filter(label=>['COMMITTED EVENTS','/ 10s','EVENTS / 10s'].includes(label.text));

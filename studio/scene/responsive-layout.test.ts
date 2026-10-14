@@ -30,7 +30,14 @@ test('portrait resolves a bounded surface and independent controls at short, def
  assert.equal(g.inputScale,402/722);
  assert.equal(g.console.y-portraitContentBottom(height),g.practiceCompact?8:16);
  assert.deepEqual(portraitRects(height),{media:g.media,inset:g.inset,metrics:g.metrics,subtitle:g.subtitle});
- for(const rect of Object.values(portraitRects(height)))assert.ok(rect.y+rect.h<=portraitContentBottom(height));
+ const movable=portraitRects(height);
+ if(g.practiceCompact){
+  // Media is the full-stage backdrop; movable HUD/inset/subtitle stay above the console.
+  assert.ok(movable.media.y+movable.media.h<=g.height+1e-8);
+  for(const key of ['inset','metrics','subtitle'] as const)assert.ok(movable[key].y+movable[key].h<=portraitContentBottom(height)+1e-8,key);
+ }else{
+  for(const rect of Object.values(movable))assert.ok(rect.y+rect.h<=portraitContentBottom(height));
+ }
  }
  assert.equal(PORTRAIT_MIN_HEIGHT,820);assert.equal(resolvePortraitHeight(700),820);assert.equal(resolvePortraitHeight(1800),1400);
  assert.equal(resolvePortraitHeight(NaN),1080);assert.equal(responsiveLayout(true,{},'lesson',700).height,820);
@@ -124,22 +131,29 @@ test('tall portrait preserves full-width media and HUD proportions with one inte
  }
 });
 
-test('phone practice-compact portrait packs video, console and thin transport in one screen',()=>{
+test('phone practice-compact portrait keeps full-scale HUD layered over media-forward stage',()=>{
  for(const height of [700,800,PORTRAIT_MIN_HEIGHT,840,880,930]){
-  const g=responsiveLayout(true,{},'lesson',height);
+  const g=responsiveLayout(true,{},'lesson',height),scale=g.goal.w/264;
   assert.equal(g.practiceCompact,true);
   assert.equal(g.height,Math.max(PORTRAIT_MIN_HEIGHT,height));
-  assert.equal(g.media.w,430);assert.equal(g.media.w/g.media.h,16/9);
-  assert.ok(g.media.y<80,'video sits near the top strip');
-  assert.ok(g.console.y>=g.media.y+g.media.h,'input follows video');
-  assert.ok(g.player.y>g.console.y,'transport under input');
-  assert.ok(g.zones.play.y+g.zones.play.h<=g.height);
-  assert.ok(g.goal.w<=44&&g.trend.w<=44&&g.metrics.w<=44,'charts collapsed to chips');
+  assert.equal(g.media.w,430);
+  assert.ok(g.media.h>g.media.w*9/16,'media backdrop taller than 16:9 plate for overlay chrome');
+  assert.equal(g.media.y,0);
+  assert.ok(Math.abs(scale-.58)<1e-12,'goal keeps established HUD scale');
+  for(const [key,width,tall] of [['goal',264,264],['trend',352,192],['metrics',309,168]] as const){
+   assert.ok(Math.abs(g[key].w/width-scale)<1e-12,key);
+   assert.ok(Math.abs(g[key].h/tall-scale)<1e-12,key);
+   assert.ok(g[key].w>100,`${key} must not collapse to a chip`);
+  }
+  // HUD sits on the media plate (game overlay), console/transport under it.
+  assert.ok(g.goal.y+g.goal.h<=g.media.y+g.media.h+1e-6);
+  assert.ok(g.trend.y+g.trend.h<=g.media.y+g.media.h+1e-6);
+  assert.ok(g.metrics.y>=g.goal.y);
+  assert.ok(g.console.y+g.console.h<=g.player.y+1e-6);
+  assert.ok(g.player.y+g.player.h<=g.height+1e-6);
   for(const key of ['input','submit','play','previous','next','mute'] as const){
    assert.ok(g.zones[key].w>=44);assert.ok(g.zones[key].h>=44);
   }
   assert.equal(overlap(g.zones.input,g.zones.submit),0);
-  // Logical stack fits the portrait height so CSS width-fit does not force page scroll.
-  assert.ok(g.player.y+g.player.h<=g.height+1e-6);
  }
 });

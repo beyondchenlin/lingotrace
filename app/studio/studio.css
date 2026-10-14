@@ -101,7 +101,7 @@
 .editing-layout>.typing-follow-toolbar{pointer-events:none;visibility:hidden}
 
 
-/* P0 mobile one-screen + HUD declutter */
+/* Short-phone tools sheet + keyboard avoid (HUD panels stay on Canvas) */
 .responsive-enabled.studio-page{justify-content:flex-start;min-height:100dvh;overflow:hidden}
 .responsive-enabled>.portrait-layout{overflow:hidden}
 .portrait-layout[data-practice-compact=true]{--practice-sheet-radius:18px}
@@ -120,11 +120,6 @@
   opacity:0;pointer-events:none;translate:0 8px;transition:opacity .2s ease,translate .2s ease;
 }
 .portrait-layout.tools-open .status-strip{opacity:1;pointer-events:auto;translate:0 0;display:flex}
-.portrait-layout .pace-mode-chip{
-  position:absolute;z-index:6;left:12px;top:8px;min-height:28px;padding:4px 10px;border-radius:999px;
-  border:1px solid #d7e7d838;background:#14211acc;color:#e7f2df;font:11px/1.2 "Lingo Studio Sans",Arial,sans-serif;
-  letter-spacing:.04em;pointer-events:none;backdrop-filter:blur(10px);
-}
 .portrait-layout .submit-hit{transition:transform .16s ease,background .16s ease}
 .portrait-layout .submit-hit:active{transform:scale(.96);background:#dbe9e520}
 .portrait-layout[data-software-keyboard=true] .studio-tools,
