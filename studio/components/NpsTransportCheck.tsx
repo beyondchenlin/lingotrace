@@ -244,9 +244,40 @@ export function createNpsTransportCheckController(options: {
   };
 }
 
-const button: CSSProperties = { padding: '10px 14px', minHeight: 44, borderRadius: 8, border: '1px solid #8fa3bd', font: 'inherit', cursor: 'pointer' };
+/* PRD continue36 — media-transport-check glass peer (optical only; Studio/cards c15–35 frost/hairline) */
+const page: CSSProperties = {
+  maxWidth: 960, margin: '24px auto', padding: 22,
+  fontFamily: "Lingo Studio Sans, system-ui, sans-serif",
+  color: '#e8f0ea', lineHeight: 1.6,
+  background: 'linear-gradient(165deg,#152229f8 0%,#0f1a20f6 55%,#0b141af9 100%)',
+  border: '1px solid #d7e7d838', borderRadius: 18,
+  boxShadow: '0 28px 70px #000a, inset 0 1px 0 #ffffff12',
+  backdropFilter: 'blur(22px) saturate(1.15)', WebkitBackdropFilter: 'blur(22px) saturate(1.15)',
+};
+const button: CSSProperties = {
+  padding: '10px 14px', minHeight: 44, borderRadius: 10, font: 'inherit', cursor: 'pointer',
+  color: '#e8f0ea', background: '#edf5e90a',
+  border: '1px solid #d7e7d828',
+  boxShadow: 'inset 0 1px 0 #ffffff10',
+};
 const row: CSSProperties = { display: 'flex', gap: 10, flexWrap: 'wrap', margin: '16px 0' };
-const value: CSSProperties = { margin: 0, overflowWrap: 'anywhere' };
+const value: CSSProperties = { margin: 0, overflowWrap: 'anywhere', color: '#c5d4c8' };
+const meta: CSSProperties = { fontSize: 13, color: '#95a69f' };
+const alert: CSSProperties = { color: '#ffd0b7' };
+const videoFrame: CSSProperties = {
+  display: 'block', width: '100%', aspectRatio: '16 / 9', objectFit: 'contain', borderRadius: 12,
+  background: 'radial-gradient(90% 70% at 50% 35%,#243a3688,#0b1217 72%), linear-gradient(180deg,#1a282e,#0b1217)',
+  boxShadow: '0 16px 40px #0008, inset 0 0 0 1px #d7e7d814',
+};
+const canvasFrame: CSSProperties = {
+  width: '100%', height: 'auto', borderRadius: 12, background: '#0b1523',
+  boxShadow: 'inset 0 0 0 1px #d7e7d814',
+};
+const dl: CSSProperties = {
+  display: 'grid', gridTemplateColumns: 'minmax(96px, 140px) minmax(0, 1fr)', gap: '8px 16px', fontSize: 14,
+  padding: '14px 16px', borderRadius: 14, border: '1px solid #d7e7d822',
+  background: '#0b141ad9', boxShadow: 'inset 0 1px 0 #ffffff0a',
+};
 
 const PHASE_KEYS = {
   idle: 'npsTransport.phaseIdle', verifying: 'npsTransport.phaseVerifying', loading: 'npsTransport.phaseLoading',
@@ -272,19 +303,19 @@ function NpsTransportCheckInner() {
   const metadataText = state.duration === null
     ? t('npsTransport.metaPending')
     : t('npsTransport.metaReady', {duration: state.duration.toFixed(6), width: state.width, height: state.height});
-  return <main style={{ maxWidth: 960, margin: '24px auto', padding: 20, fontFamily: 'system-ui, sans-serif', color: '#182b42', lineHeight: 1.6 }}>
-    <h1 style={{ fontSize: 26, margin: '0 0 8px' }}>{t('npsTransport.title')}</h1>
-    <p>{t('npsTransport.lede')}</p>
-    <p>{t('npsTransport.shaNote')}</p>
-    <p>{t('npsTransport.androidNote')}</p>
+  return <main style={page}>
+    <h1 style={{ fontSize: 26, margin: '0 0 8px', fontWeight: 600, letterSpacing: '.2px' }}>{t('npsTransport.title')}</h1>
+    <p style={meta}>{t('npsTransport.lede')}</p>
+    <p style={meta}>{t('npsTransport.shaNote')}</p>
+    <p style={meta}>{t('npsTransport.androidNote')}</p>
     <div style={row}>
       <button style={button} onClick={() => void controller.current?.load()} disabled={busy}>{t('npsTransport.load')}</button>
       <button style={button} onClick={() => controller.current?.stop()} disabled={state.phase === 'idle' || state.phase === 'stopped'}>{t('npsTransport.stop')}</button>
     </div>
     <p role="status" aria-live="polite">{t('npsTransport.phaseLabel', {phase: phaseText})}</p>
-    {state.error && <p role="alert" style={{ color: '#a62620' }}>{ui(state.error)}</p>}
+    {state.error && <p role="alert" style={alert}>{ui(state.error)}</p>}
     <video ref={video} crossOrigin="anonymous" playsInline preload="metadata" muted
-      aria-label={t('npsTransport.videoAria')} style={{ display: 'block', width: '100%', aspectRatio: '16 / 9', background: '#0b1523', objectFit: 'contain', borderRadius: 12 }} />
+      aria-label={t('npsTransport.videoAria')} style={videoFrame} />
     <div style={row}>
       <button style={button} disabled={!ready} onClick={() => void controller.current?.play()}>{t('npsTransport.play')}</button>
       <button style={button} disabled={!ready} onClick={() => controller.current?.pause()}>{t('npsTransport.pause')}</button>
@@ -293,7 +324,7 @@ function NpsTransportCheckInner() {
       <button style={button} disabled={!ready} onClick={() => controller.current?.seek(-1)}>{t('npsTransport.seekLast')}</button>
       <button style={button} disabled={!ready} onClick={() => controller.current?.checkCanvas()}>{t('npsTransport.checkCanvas')}</button>
     </div>
-    <dl style={{ display: 'grid', gridTemplateColumns: 'minmax(96px, 120px) minmax(0, 1fr)', gap: '8px 16px', fontSize: 14 }}>
+    <dl style={dl}>
       <dt>{t('npsTransport.dtTransport')}</dt><dd style={value}>{t('npsTransport.ddTransport')}</dd>
       <dt>{t('npsTransport.dtFixed')}</dt><dd style={value}>{NPS_PLAYBACK_MEDIA.playbackVariant.url}</dd>
       <dt>{t('npsTransport.dtRequest')}</dt><dd style={value}>{state.source || t('npsTransport.notLoaded')}</dd>
@@ -307,12 +338,16 @@ function NpsTransportCheckInner() {
     </dl>
     <p role="status">{state.canvasResult ? ui(state.canvasResult) : t('npsTransport.canvasHint')}</p>
     <canvas ref={canvas} width={1} height={1} aria-label={t('npsTransport.canvasAria')}
-      style={{ display: state.frameDataUrl ? 'block' : 'none', width: '100%', height: 'auto', borderRadius: 12, background: '#0b1523' }} />
-    {state.frameDataUrl && <p><a href={state.frameDataUrl} download="nps-same-origin-frame.png">{t('npsTransport.downloadFrame')}</a></p>}
-    <p style={{ fontSize: 13, color: '#50647d' }}>{t('npsTransport.leaveNote')}</p>
+      style={{ ...canvasFrame, display: state.frameDataUrl ? 'block' : 'none' }} />
+    {state.frameDataUrl && <p><a href={state.frameDataUrl} download="nps-same-origin-frame.png" style={{ color: '#c4fc57' }}>{t('npsTransport.downloadFrame')}</a></p>}
+    <p style={meta}>{t('npsTransport.leaveNote')}</p>
   </main>;
 }
 
 export default function NpsTransportCheck() {
-  return <StudioLocaleProvider><NpsTransportCheckInner /></StudioLocaleProvider>;
+  return <StudioLocaleProvider>
+    <div style={{ minHeight: '100svh', margin: 0, padding: '12px 16px 28px', background: '#0d1419', color: '#e8f0ea' }}>
+      <NpsTransportCheckInner />
+    </div>
+  </StudioLocaleProvider>;
 }

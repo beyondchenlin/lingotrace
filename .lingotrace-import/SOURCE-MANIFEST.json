@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "3d9218d559ef99b59a60058c1a9e7e1c2bfcfb01",
-  "source_file_count": 744,
+  "source_projection_tree_sha1": "3cfc9adff21fd49193f88aaadaf4782d44ef4ca3",
+  "source_file_count": 746,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -2244,9 +2244,9 @@
     {
       "path": "studio/components/NpsTransportCheck.tsx",
       "mode": "100644",
-      "bytes": 19634,
-      "git_blob_sha1": "91cfcd921655e01d97f49bc05e618d138a6a0dc4",
-      "sha256": "1d7459406c2a90ee41fb0e5561dd161ae21ab7cc9bfe0c65785d352979cb1988"
+      "bytes": 21001,
+      "git_blob_sha1": "c7d0ac15c6257ae2c391b7c2fd7d7651c63be121",
+      "sha256": "bad1d7f859e53895a67a97f27f3f435968ffbb13066177b900e6ccddb9d94104"
     },
     {
       "path": "studio/components/PaceTimeline.tsx",
@@ -2300,9 +2300,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 263286,
-      "git_blob_sha1": "7a5df50096dedbd30b404865981ff0da7a7b4bd8",
-      "sha256": "084d5e4febf3a296bd2e5fea9f9a4ee57fc8609750edf95671794d1f3e3a1bdc"
+      "bytes": 260167,
+      "git_blob_sha1": "3453b311f475bd5d94a85c39b4854310ab44b566",
+      "sha256": "d575c036c68e9ce3c0789a327b97861dc59881744ed0b069ea3bba1a3a3b0b02"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -5215,6 +5215,20 @@
       "bytes": 1450,
       "sha256": "1892548cd7ab5d6f61c39ea97a837a349e73b6f163d5d9ce10432d516668fbf8",
       "git_blob_sha1": "09f9adcf809bdccf8b7960e1f8b3be39a668de64"
+    },
+    {
+      "path": "qa/prd-continue36-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5276,
+      "sha256": "1d662045191aeb88c0cc4031ca75fe3b211150808ad2570ea3eb3f39131f1723",
+      "git_blob_sha1": "195fe06e480c67c61e0746be9118d166440cbdfe"
+    },
+    {
+      "path": "scripts/prd-continue36-qa.mts",
+      "mode": "100644",
+      "bytes": 1619,
+      "sha256": "c5a398f58fef9a39effb67d95f586f13bfea34843452e6a3a30a75fea4cd050e",
+      "git_blob_sha1": "f042b75f89cb1325e19ab1507c20578a7b41babe"
     }
   ],
   "large_resources": [
