@@ -72,6 +72,21 @@ test('known diagnostics translate without altering raw failures, unknown details
  assert.equal(translateKnownUi('en','复测媒体在最终交接前已失效。 [media] [range]'),'Retest media expired before the final handoff. [media] [range]');
  assert.equal(translateKnownUi('en','真人课程解码已中断，播放和作答暂停。请重新加载当前课程；未切换其他素材。 code=4'),'Live-footage decoding interrupted; playback and answering paused. Reload the current course; no other material was switched. code=4');
  assert.equal(translateKnownUi('zh-CN','The corrected original could not be verified.'),'校正原片未能核验。');
+ assert.equal(translateKnownUi('en','复测播放器的原片来源已变化。'),"The retest player's original source changed.");
+ assert.equal(translateKnownUi('en','复测原片准备超时，未开始跟踪。 [range]'),'Retest original preparation timed out; tracking did not start. [range]');
+ assert.equal(translateKnownUi('en','复测准备已结束；当前为普通练习，不推进任务。'),'Retest preparation ended; this is now ordinary practice and will not advance the task.');
+ assert.equal(translateKnownUi('en','本次查看参考会随完整练习记录。'),'This reference view will be recorded with the complete practice.');
+ assert.equal(translateKnownUi('en','本片段只记录已展示参考；校正来源未记录，仍是部分历史。'),'This segment only records the shown reference; the correction source is unrecorded, so history remains partial.');
+ assert.equal(translateKnownUi('en','当前只保留本页临时查看事实，不会补录先前或关闭期间内容。'),"Only this page's temporary view facts are kept; earlier or closed-period content is not backfilled.");
+ assert.equal(translateKnownUi('en','正在复测第 2 句；首次有效提交后按你预选的时间安排。'),'Retesting sentence 2; after the first valid submission, the next is scheduled at your chosen time.');
+ assert.equal(translateKnownUi('en','本次真实作答已关联，已按你预选的时间安排下一次。'),'This real submission is linked; the next is scheduled at your chosen time.');
+ assert.equal(translateKnownUi('en','用户停止'),'User stop');
+ assert.equal(translateKnownUi('en','练习暂停'),'Practice paused');
+ assert.equal(translateKnownUi('en','录制混音中断'),'Recording mix interrupted');
+ assert.equal(translateKnownUi('en','画面渲染中断'),'Display render interrupted');
+ assert.equal(translateKnownUi('en','页面后台化'),'Page backgrounded');
+ assert.equal(translateKnownUi('en','画面渲染已中断，录像已停止；画面可能不完整。'),'Display rendering was interrupted. Recording stopped; the picture may be incomplete.');
+ assert.equal(translateKnownUi('zh-CN','User stop'),'用户停止');
 
  const engine=new TrainingEngine();engine.input('My English draft stays exactly the same.');const before=JSON.stringify(engine.getSnapshot());
  for(const locale of ['en','zh-CN'] as const){translate(locale,'hud.check');translateKnownUi(locale,raw)}
@@ -221,4 +236,13 @@ test('continue13 media-transport-check metadata uses panelsEnglish catalog',asyn
  assert.ok(!page.includes("'同源视频传输检查 · LingoTrace'"));
  assert.equal(translate('en','npsTransport.title'),'Same-origin video transport check');
  assert.equal(translate('zh-CN','npsTransport.title'),'同源视频传输检查');
+});
+
+test('continue14 reason-token / confirmation / short-timeout bridges',()=>{
+ assert.equal(translate('en','notice.retestTrackingCue',{index:3}),'Retesting sentence 3; after the first valid submission, the next is scheduled at your chosen time.');
+ assert.equal(translate('zh-CN','notice.retestTrackingCue',{index:3}),'正在复测第 3 句；首次有效提交后按你预选的时间安排。');
+ assert.equal(translateKnownUi('en','复测原片准备超时，未开始跟踪。 transport=blob'),'Retest original preparation timed out; tracking did not start. transport=blob');
+ assert.equal(translateKnownUi('zh-CN','Recording mix interrupted'),'录制混音中断');
+ assert.equal(translateKnownUi('en','画面渲染中断，录像可能不完整。'),'Display rendering interrupted; the recording may be incomplete.');
+ assert.equal(translateKnownUi('en','录制混音已中断，声音可能不完整。'),'The recording mix was interrupted; audio may be incomplete.');
 });

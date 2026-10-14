@@ -860,3 +860,22 @@
 .studio-dialog .record-card h2{font-weight:500;letter-spacing:.2px;color:#e8f2ea}
 .studio-dialog .record-card label{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:14px;line-height:1.55;color:#d5e2d8}
 .studio-dialog .record-card label input{margin-top:3px;flex:none}
+
+
+/* continue14 — HUD premium micro-craft (no video caption capsule) */
+.studio-dialog .record-card{
+  border-radius:16px;border:1px solid #c9e2d832;
+  background:linear-gradient(165deg,#16242cac 0%,#101a20e8 100%);
+  box-shadow:inset 0 1px 0 #ffffff0e,0 10px 28px #00000028;
+  backdrop-filter:blur(10px);
+}
+.studio-toast{
+  box-shadow:0 18px 56px #0000005a,inset 0 1px 0 #ffffffa8;
+}
+.hud-glyph{
+  filter:drop-shadow(0 1px 2px #061016aa) drop-shadow(0 0 10px #c4fc5710);
+}
+.sheet-status-chip{
+  letter-spacing:.04em;
+  box-shadow:inset 0 1px 0 #ffffff0c;
+}
