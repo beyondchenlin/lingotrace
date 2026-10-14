@@ -207,6 +207,18 @@ export const diagnosticEnglish = {
   "listening.segmentSaveError": "Listening segment could not be saved",
   "listening.referenceSaveError": "Reference-condition boundary was not saved; listening can continue without text",
   "listening.initError": "Listening could not be initialized",
+  "reviewTask.refOriginal": "Fixed original; new references are not adopted automatically.",
+  "reviewTask.refNps": "Fixed NPS official media and subtitle-derived version; original footage is verified before start.",
+  "reviewTask.refNpsUnverified": "Live-footage source declaration could not be verified; retest cannot start.",
+  "reviewTask.refLocalMissing": "Local version or ancestor chain is missing/mismatched; retest cannot start. The original task remains.",
+  "reviewTask.refLocalFixed": "Fixed local corrected version; actual original footage is still verified before start.",
+  "reviewTask.resultNone": "No linked actual retest result yet. Due items and deadlines do not mean mastery.",
+  "reviewTask.resultEvidenceGone": "The latest linked original-answer evidence is unavailable; zero score or mastery is not inferred.",
+  "reviewTask.resultEvidenceUnread": "Linked evidence could not be read; no empty or zero-score inference. Refresh and retry.",
+  "error.openReferencesRealPractice": "Return to available real practice before opening local reference versions.",
+  "notice.newPracticeHistoryOff": "A new practice was created, but history could not be enabled; this view stays on the current page only.",
+  "error.mediaSeekUnavailable": "Media cannot be seeked yet; waiting for the browser to load.",
+  "media.verifyingCourse": "Verifying course video…",
   "listening.retryError": "Listening-record retry failed"
 } as const;
 
@@ -418,5 +430,17 @@ export const diagnosticChinese: Record<keyof typeof diagnosticEnglish,string> = 
   "listening.segmentSaveError": "听力片段保存失败",
   "listening.referenceSaveError": "原文条件边界未保存；可继续纯听",
   "listening.initError": "听力初始化失败",
+  "reviewTask.refOriginal": "固定原版；不会自动采用新参考。",
+  "reviewTask.refNps": "固定 NPS 官方素材与字幕派生版本；开始前核验原片。",
+  "reviewTask.refNpsUnverified": "真人素材来源声明无法核验，不能开始复测。",
+  "reviewTask.refLocalMissing": "本机版本或祖先链缺失／不符，不能开始复测；原任务仍保留。",
+  "reviewTask.refLocalFixed": "固定本机校正版；开始前仍核验实际原片。",
+  "reviewTask.resultNone": "暂无已关联的实际复测结果；待办和到期不代表学习完成。",
+  "reviewTask.resultEvidenceGone": "最近关联的原作答证据不可用；未显示零分或推断已掌握。",
+  "reviewTask.resultEvidenceUnread": "关联证据暂时无法读取，未推断无记录或零分。请刷新重试。",
+  "error.openReferencesRealPractice": "请先返回可用的真实练习，再打开本机参考版本。",
+  "notice.newPracticeHistoryOff": "新练习已创建，历史记录未能开启；本次查看仅保留在当前页面。",
+  "error.mediaSeekUnavailable": "素材暂时不可定位，等待浏览器加载。",
+  "media.verifyingCourse": "正在核验课程视频…",
   "listening.retryError": "听力记录重试失败"
 };

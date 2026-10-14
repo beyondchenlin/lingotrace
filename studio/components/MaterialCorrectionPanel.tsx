@@ -129,13 +129,13 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
   const trackedPool:OriginalCourseMediaPool={async acquire(options){
    const generation=++leaseEpoch.current;
    const acquired=await pool.acquire(options);
-   if(!alive.current||generation!==leaseEpoch.current||options?.signal?.aborted){acquired.release();throw new Error('校正预览已取消，请主动重新核验。')}
+   if(!alive.current||generation!==leaseEpoch.current||options?.signal?.aborted){acquired.release();throw new Error(t('correction.previewCanceled'))}
    let released=false;
    const tracked:OriginalCourseMediaLease={...acquired,release(){if(released)return;released=true;if(activeLease.current===tracked)activeLease.current=null;acquired.release()}};
    activeLease.current=tracked;return tracked;
   }};
   const controller=createContextBookmarkPreviewController({video:video.current,pool:trackedPool,monitor,
-   validateReference:value=>sameReference(value,referenceRef.current)&&latest.current.current?.mediaId===ORIGINAL_COURSE_MEDIA.mediaId&&latest.current.current?.mediaSha256===ORIGINAL_COURSE_MEDIA.mediaSha256?null:'编辑内容、素材或片段范围已改变，请重新核验。',
+   validateReference:value=>sameReference(value,referenceRef.current)&&latest.current.current?.mediaId===ORIGINAL_COURSE_MEDIA.mediaId&&latest.current.current?.mediaSha256===ORIGINAL_COURSE_MEDIA.mediaSha256?null:t('correction.referenceChanged'),
    isRecordingBlocked:()=>!!latest.current.recordingBlocked||latest.current.isRecordingBlocked(),
   });
   controllerRef.current=controller;setPreview(controller.getState());
@@ -147,7 +147,7 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
  useEffect(()=>{controllerRef.current?.setRecordingBlocked(recordingBlocked);if(recordingBlocked)invalidatePreview()},[recordingBlocked]);
  useEffect(()=>{if(transitionBusy)invalidatePreview()},[transitionBusy]);
  useEffect(()=>{if(disabledReason)invalidatePreview()},[disabledReason]);
- useEffect(()=>{if(selected&&!entries.some(row=>sameEntry(row,selected))){selection.current=null;setSelected(null);setMessage('所选版本已不可核验，请刷新后重新选择；没有自动改用其他版本。')}},[entries,selected]);
+ useEffect(()=>{if(selected&&!entries.some(row=>sameEntry(row,selected))){selection.current=null;setSelected(null);setMessage(t('correction.selectionGone'))}},[entries,selected]);
  async function prepare(){
   const controller=controllerRef.current,expected=referenceRef.current;
   if(!expected||!controller||operation.current||blocked()||latest.current.disabledReason||!hasScorableReference(expected.text)||!Number.isFinite(expected.startSeconds)||!Number.isFinite(expected.endSeconds)||expected.startSeconds<0||expected.endSeconds<=expected.startSeconds)return;
@@ -159,9 +159,9 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
    await controller.load({retry});
    if(!alive.current||generation!==previewEpoch.current||targetIdentity!==identityRef.current||blocked())return;
    const verified=proof();
-   if(verified)setMessage(`已核验原片实际时长 ${verified.duration} 秒；准备不会自动播放。`);
-   else if(controller.getState().phase==='ready'){controller.close();setError('实际媒体来源或时长与所选版本不符，不能保存或预听。')}
-  }catch(e){if(alive.current&&generation===previewEpoch.current)setError(errorMessage(e,'校正片段未能准备，请重新核验。'))}
+   if(verified)setMessage(t('correction.verifiedDuration',{duration:verified.duration}));
+   else if(controller.getState().phase==='ready'){controller.close();setError(t('correction.sourceMismatch'))}
+  }catch(e){if(alive.current&&generation===previewEpoch.current)setError(errorMessage(e,t('correction.prepareFailed')))}
   finally{if(alive.current&&generation===previewEpoch.current)setPreparing(false)}
  }
  function play(){
@@ -175,14 +175,14 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
   if(draft.mode==='edit'&&draft.text===original.text&&verified.reference.startSeconds===original.start&&verified.reference.endSeconds===original.end)return;
   const requestIdentity=JSON.stringify([identityRef.current,draft,verified.duration]);
   try{if(saveRequest.current?.identity!==requestIdentity)saveRequest.current={identity:requestIdentity,id:crypto.randomUUID()}}
-  catch{setError('当前浏览器未能创建独立保存标识；没有保存新版本，请重试。');return}
+  catch{setError(t('correction.saveIdFailed'));return}
   const structure=draft.mode==='edit'?{}:{structure:{operation:draft.mode,firstText:draft.text,...(draft.mode==='split'?{secondText:draft.secondText,splitAt:seconds(draft.splitAt)}:{}),confirmed:true as const}};
   const input={...structure,text:verified.reference.text,start:verified.reference.startSeconds,end:verified.reference.endSeconds,verifiedDurationSeconds:verified.duration,saveRequestId:saveRequest.current.id};
   operation.current='save';setPending('save');setError('');setMessage('');const targetIdentity=identityRef.current;
   try{
    const result=await latest.current.onSave(input);
-   if(alive.current&&targetIdentity===identityRef.current)setMessage(result.disposition==='already-present'?'这次校正已保存，未重复创建版本。请显式选择版本后新开练习。':'已保存新的本机版本。当前轮未切换；请显式选择版本后新开练习。');
-  }catch(e){if(alive.current&&targetIdentity===identityRef.current)setError(errorMessage(e,'新版本未能确认保存；原轮与编辑内容仍保留，可重试。'))}
+   if(alive.current&&targetIdentity===identityRef.current)setMessage(result.disposition==='already-present'?t('correction.alreadyPresent'):t('correction.saved'));
+  }catch(e){if(alive.current&&targetIdentity===identityRef.current)setError(errorMessage(e,t('correction.saveFailed')))}
   finally{operation.current=null;if(alive.current)setPending(null)}
  }
  function choose(row:Entry){
@@ -195,78 +195,79 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
   if(!chosen||operation.current||blocked()||!latest.current.entries.some(row=>sameEntry(row,chosen)))return;
   invalidatePreview();operation.current='start';setPending('start');setError('');
   try{await latest.current.onStart(chosen)}
-  catch(e){if(alive.current)setError(errorMessage(e,'未能新开练习。已保存的版本仍保留，请查看当前轮的保存状态后重试。'))}
+  catch(e){if(alive.current)setError(errorMessage(e,t('correction.startFailed')))}
   finally{operation.current=null;if(alive.current)setPending(null)}
  }
  async function reload(){
   if(operation.current||latest.current.transitionBusy)return;
   invalidatePreview();operation.current='reload';setPending('reload');setError('');
   try{await latest.current.onReload()}
-  catch(e){if(alive.current)setError(errorMessage(e,'本机版本列表未能刷新，请重试。'))}
+  catch(e){if(alive.current)setError(errorMessage(e,t('correction.reloadFailed')))}
   finally{operation.current=null;if(alive.current)setPending(null)}
  }
  const availableProof=proof();
- return <section aria-label="当前句校正与本机版本">
-  <p className="note">校正生成独立的本机参考版本，不改旧答案、旧分数或已提交记录。保存版本不会结束当前轮，也不会增加练习量。</p>
-  {current&&cue&&<section aria-label="当前句参考校正">
-   <h3>校正当前句 · {cue.id}</h3>
-   <p className="notice">校正时已查看参考。取消只撤销编辑，已发生的本轮参考展示不会清除。</p>
-   <div className="button-row" aria-label="字幕编辑方式">
-    <button disabled={busy||recordingBlocked||!!disabledReason} aria-pressed={edit.mode==='edit'} onClick={()=>chooseMode('edit')}>仅校正文字与时间</button>
-    <button disabled={busy||recordingBlocked||!!disabledReason||!next} aria-pressed={edit.mode==='merge'} onClick={()=>chooseMode('merge')}>合并当前与后一句</button>
-    <button disabled={busy||recordingBlocked||!!disabledReason} aria-pressed={edit.mode==='split'} onClick={()=>chooseMode('split')}>拆分当前句</button>
+ const splitLabel=Number.isFinite(splitAt)?String(splitAt):t('correction.pending');
+ return <section aria-label={t('correction.sectionLabel')}>
+  <p className="note">{t('correction.lede')}</p>
+  {current&&cue&&<section aria-label={t('correction.currentSection')}>
+   <h3>{t('correction.currentHeading',{id:cue.id})}</h3>
+   <p className="notice">{t('correction.viewedNotice')}</p>
+   <div className="button-row" aria-label={t('correction.editModesAria')}>
+    <button disabled={busy||recordingBlocked||!!disabledReason} aria-pressed={edit.mode==='edit'} onClick={()=>chooseMode('edit')}>{t('correction.modeEdit')}</button>
+    <button disabled={busy||recordingBlocked||!!disabledReason||!next} aria-pressed={edit.mode==='merge'} onClick={()=>chooseMode('merge')}>{t('correction.modeMerge')}</button>
+    <button disabled={busy||recordingBlocked||!!disabledReason} aria-pressed={edit.mode==='split'} onClick={()=>chooseMode('split')}>{t('correction.modeSplit')}</button>
    </div>
-   {structural&&<p className="note">原当前句：{cue.text}。合并／拆分将生成新句标识并保留父子关系；原句标识不复用。请明确填写新句文字并预听核对，多人对白或错位请勿直接合并。</p>}
-   {edit.mode==='merge'&&next&&<p className="notice">合并 {cue.id} 与 {next.id}（{next.start}–{next.end} 秒）。后一句参考不会自动展示；请根据原片完整填写合并文字，并确认两句适合合并。</p>}
-   <label>当前句参考文字<textarea aria-label="当前句参考文字" value={edit.text} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('text',event.target.value)} style={{width:'100%',minHeight:90}}/></label>
+   {structural&&<p className="note">{t('correction.originalCue',{text:cue.text})}</p>}
+   {edit.mode==='merge'&&next&&<p className="notice">{t('correction.mergeNotice',{a:cue.id,b:next.id,start:next.start,end:next.end})}</p>}
+   <label>{t('correction.textLabel')}<textarea aria-label={t('correction.textAria')} value={edit.text} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('text',event.target.value)} style={{width:'100%',minHeight:90}}/></label>
    <div className="button-row">
-    <label>开始秒数 <input aria-label="校正开始秒数" readOnly={structural} type="number" step="any" min="0" value={edit.start} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('start',event.target.value)}/></label>
-    <label>结束秒数 <input aria-label="校正结束秒数" readOnly={structural} type="number" step="any" min="0" value={edit.end} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('end',event.target.value)}/></label>
+    <label>{t('correction.startLabel')} <input aria-label={t('correction.startAria')} readOnly={structural} type="number" step="any" min="0" value={edit.start} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('start',event.target.value)}/></label>
+    <label>{t('correction.endLabel')} <input aria-label={t('correction.endAria')} readOnly={structural} type="number" step="any" min="0" value={edit.end} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('end',event.target.value)}/></label>
    </div>
    {edit.mode==='split'&&<>
-    <label>拆分后第二句文字<textarea aria-label="拆分后第二句文字" value={edit.secondText} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('secondText',event.target.value)} style={{width:'100%',minHeight:70}}/></label>
-    <label>拆分时间点秒数<input aria-label="拆分时间点秒数" type="number" step="any" value={edit.splitAt} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('splitAt',event.target.value)}/></label>
-    <p className="note">第一句 {start}–{Number.isFinite(splitAt)?splitAt:'待填'} 秒；第二句 {Number.isFinite(splitAt)?splitAt:'待填'}–{end} 秒。两句文字与分界必须由你确认，不自动断句。</p>
+    <label>{t('correction.secondTextLabel')}<textarea aria-label={t('correction.secondTextAria')} value={edit.secondText} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('secondText',event.target.value)} style={{width:'100%',minHeight:70}}/></label>
+    <label>{t('correction.splitAtLabel')}<input aria-label={t('correction.splitAtAria')} type="number" step="any" value={edit.splitAt} disabled={busy||recordingBlocked||!!disabledReason} onChange={event=>change('splitAt',event.target.value)}/></label>
+    <p className="note">{t('correction.splitNote',{start,split:splitLabel,end})}</p>
    </>}
-   {invalidStructure&&<p className="notice warn">请完整填写新句文字与内部拆分点。合并需修改为完整文字；原边界必须保留，且不能与相邻句重叠。</p>}
-   {structural&&<button disabled={busy||recordingBlocked||!!disabledReason||invalidText||invalidRange||invalidStructure} aria-pressed={edit.confirmed} onClick={confirmStructure}>{edit.confirmed?'已确认新句结构':'确认新句结构'}</button>}
-   {invalidText&&<p className="notice warn">参考文字须含可评分的英文单词或数字。</p>}
-   {invalidRange&&<p className="notice warn">请输入有限秒数，并满足 0 ≤ 开始 &lt; 结束；不会自动裁剪或修正。</p>}
-   {!invalidRange&&previous&&start!==previous.end&&<p className="note">{start<previous.end?'与前一句时间有重叠':'与前一句时间有间隔'}，请预听确认。前一句结束于 {previous.end} 秒。</p>}
-   {!invalidRange&&following&&end!==following.start&&<p className="note">{end>following.start?'与后一句时间有重叠':'与后一句时间有间隔'}，请预听确认。后一句开始于 {following.start} 秒。</p>}
+   {invalidStructure&&<p className="notice warn">{t('correction.structureIncomplete')}</p>}
+   {structural&&<button disabled={busy||recordingBlocked||!!disabledReason||invalidText||invalidRange||invalidStructure} aria-pressed={edit.confirmed} onClick={confirmStructure}>{edit.confirmed?t('correction.structureConfirmed'):t('correction.confirmStructure')}</button>}
+   {invalidText&&<p className="notice warn">{t('correction.needScorable')}</p>}
+   {invalidRange&&<p className="notice warn">{t('correction.needRange')}</p>}
+   {!invalidRange&&previous&&start!==previous.end&&<p className="note">{(start<previous.end?t('correction.overlapPrev'):t('correction.gapPrev'))}{t('correction.boundaryHint',{end:previous.end})}</p>}
+   {!invalidRange&&following&&end!==following.start&&<p className="note">{(end>following.start?t('correction.overlapNext'):t('correction.gapNext'))}{t('correction.boundaryHintNext',{start:following.start})}</p>}
    {disabledReason&&<p className="notice warn">{ui(disabledReason)}</p>}
-   <p className="note">{availableProof?`实际已核验时长：${availableProof.duration} 秒。`:'实际时长与原片来源尚未完成当前编辑范围的核验；不能保存。'}</p>
+   <p className="note">{availableProof?t('correction.proofReady',{duration:availableProof.duration}):t('correction.proofNeeded')}</p>
   </section>}
-  <video ref={video} playsInline preload="metadata" hidden={!current} aria-label="校正原片段预览" style={{width:'100%',maxHeight:280,background:'#111'}}/>
+  <video ref={video} playsInline preload="metadata" hidden={!current} aria-label={t('correction.previewAria')} style={{width:'100%',maxHeight:280,background:'#111'}}/>
   {current&&cue&&<>
    <div className="button-row">
-    <button disabled={busy||recordingBlocked||!!disabledReason||preparing||invalidText||invalidRange} onClick={()=>void prepare()}>{preparing?'正在核验校正片段…':'核验校正片段'}</button>
-    <button disabled={busy||recordingBlocked||!availableProof} onClick={play}>预听校正片段</button>
-    <button disabled={preview?.phase!=='playing'} onClick={()=>controllerRef.current?.pause()}>暂停校正片段</button>
-    <button disabled={busy||recordingBlocked||!changed||invalidText||invalidRange||invalidStructure||(structural&&!edit.confirmed)||!availableProof} onClick={()=>void save()}>{pending==='save'?'正在保存新版本…':'保存为新的本机版本'}</button>
+    <button disabled={busy||recordingBlocked||!!disabledReason||preparing||invalidText||invalidRange} onClick={()=>void prepare()}>{preparing?t('correction.verifying'):t('correction.verify')}</button>
+    <button disabled={busy||recordingBlocked||!availableProof} onClick={play}>{t('correction.preview')}</button>
+    <button disabled={preview?.phase!=='playing'} onClick={()=>controllerRef.current?.pause()}>{t('correction.pausePreview')}</button>
+    <button disabled={busy||recordingBlocked||!changed||invalidText||invalidRange||invalidStructure||(structural&&!edit.confirmed)||!availableProof} onClick={()=>void save()}>{pending==='save'?t('correction.saving'):t('correction.save')}</button>
    </div>
-   {preview?.error&&<p className="notice warn" role="alert">{preview.error}</p>}
-   {recordingBlocked&&<p className="notice">录制准备、进行或收尾期间不能核验或预听；结束后须主动重新核验。</p>}
-   <p className="note">预听遵守课程音量、课程静音与全部监听静音，不加入舞台录像音轨。关闭、切后台或开始录制会停止并释放预览；返回不会自动续播。</p>
+   {preview?.error&&<p className="notice warn" role="alert">{ui(preview.error)}</p>}
+   {recordingBlocked&&<p className="notice">{t('correction.recordingBlocked')}</p>}
+   <p className="note">{t('correction.previewMonitorNote')}</p>
   </>}
-  <div className="button-row"><button disabled={busy} onClick={cancel}>{current?'取消编辑并关闭':'关闭版本列表'}</button><button disabled={busy} onClick={()=>void reload()}>{pending==='reload'?'正在刷新版本…':'刷新本机版本'}</button></div>
-  {error&&<p className="notice warn" role="alert">{error}</p>}
-  {message&&<p className="notice" role="status">{message}</p>}
-  <h3>已保存的本机版本</h3>
-  <p className="note">列表只展示版本信息；选择不会展示其他句参考或自动采用最新版本。新开练习后会再次明确展示所选版本的目标句参考。</p>
-  {unreadableCount>0&&<p className="notice warn">有 {unreadableCount} 条版本无法安全读取，原数据未改写。</p>}
-  {!entries.length&&<p className="empty">还没有已保存的校正版本。</p>}
+  <div className="button-row"><button disabled={busy} onClick={cancel}>{current?t('correction.cancelEdit'):t('correction.closeList')}</button><button disabled={busy} onClick={()=>void reload()}>{pending==='reload'?t('correction.refreshing'):t('correction.refresh')}</button></div>
+  {error&&<p className="notice warn" role="alert">{ui(error)}</p>}
+  {message&&<p className="notice" role="status">{ui(message)}</p>}
+  <h3>{t('correction.savedHeading')}</h3>
+  <p className="note">{t('correction.listNote')}</p>
+  {unreadableCount>0&&<p className="notice warn">{t('correction.unreadable',{count:unreadableCount})}</p>}
+  {!entries.length&&<p className="empty">{t('correction.empty')}</p>}
   <div className="attempt-list">{entries.map(row=><article className="record-card" key={row.key}>
    <h4 style={{overflowWrap:'anywhere'}}>{row.material.version}</h4>
-   {row.material.localReference?.lineage&&<p className="note" style={{overflowWrap:'anywhere'}}>{row.material.localReference.lineage.operation==='merge'?'合并 2 句为 1 句':'拆分 1 句为 2 句'} · 父句 {row.material.localReference.lineage.parentUnitIds.join('、')} · 新句 {row.material.localReference.lineage.unitIds.join('、')}</p>}
-   <p className="note">目标句 {row.change.cueId} · 父版本 {row.parent.version} · {row.createdAt}</p>
-   <button disabled={busy} aria-pressed={selection.current?.key===row.key} onClick={()=>choose(row)}>选择此版本</button>
+   {row.material.localReference?.lineage&&<p className="note" style={{overflowWrap:'anywhere'}}>{row.material.localReference.lineage.operation==='merge'?t('correction.lineageMerge'):t('correction.lineageSplit')}{t('correction.lineageParents',{ids:row.material.localReference.lineage.parentUnitIds.join('、')})}{t('correction.lineageUnits',{ids:row.material.localReference.lineage.unitIds.join('、')})}</p>}
+   <p className="note">{t('correction.rowMeta',{cue:row.change.cueId,parent:row.parent.version,createdAt:row.createdAt})}</p>
+   <button disabled={busy} aria-pressed={selection.current?.key===row.key} onClick={()=>choose(row)}>{t('correction.selectVersion')}</button>
   </article>)}</div>
-  {selection.current&&<div aria-label="所选校正版本">
-   <p className="note">已选择 {selection.current.material.version} · {selection.current.change.cueId}。将先安全保存允许保留的当前轮，再按所选版本开始新轮。</p>
-   <button disabled={busy||recordingBlocked} onClick={()=>void startSelected()}>{pending==='start'?'正在安全切换练习…':'结束当前轮，使用此版本新开练习'}</button>
+  {selection.current&&<div aria-label={t('correction.selectedAria')}>
+   <p className="note">{t('correction.selectedNote',{version:selection.current.material.version,cue:selection.current.change.cueId})}</p>
+   <button disabled={busy||recordingBlocked} onClick={()=>void startSelected()}>{pending==='start'?t('correction.starting'):t('correction.startNew')}</button>
   </div>}
-  <p className="note">校正版本暂不支持语境书签；不会把它的文字或时间冒充原版书签。</p>
-  <p className="note">本机版本库与自动练习历史独立。只有获准保存的完整 Training 会话可恢复整轮；历史关闭或仅保存片段时，刷新不会恢复被排除的练习，可从已保存版本显式新开。</p>
+  <p className="note">{t('correction.bookmarkLimit')}</p>
+  <p className="note">{t('correction.historyIndependence')}</p>
  </section>;
 }

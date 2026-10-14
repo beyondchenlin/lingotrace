@@ -104,7 +104,7 @@ test('course and retest notices describe the existing Show/Hide choice in both l
  assert.match(translate('zh-CN','notice.courseStarted'),/旧记录不会追改/);
  assert.match(translate('en','notice.retestStarted'),/only after an actual submission/);
  assert.match(translate('zh-CN','notice.retestStarted'),/实际提交后才更新复习安排/);
- for(const key of ['notice.courseStarted','notice.retestStarted'] as const)assert.ok(source.includes(`notify('${translate('zh-CN',key)}')`));
+ for(const key of ['notice.courseStarted','notice.retestStarted'] as const)assert.ok(source.includes(`notify(t('${key}'))`));
  assert.match(source,/\[referenceVisible,setReferenceVisible\]=useState\(true\)/);
 });
 

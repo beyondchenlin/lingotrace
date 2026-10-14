@@ -9,7 +9,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import MaterialCorrectionPanel from '../components/MaterialCorrectionPanel';
 import {CAFE_MATERIAL,hasScorableReference} from './training';
 import {createContextBookmarkPreviewController,ORIGINAL_COURSE_MEDIA} from '../media/context-bookmark-media';
-import {translate} from '../i18n/locale';
+import {translate,translateKnownUi} from '../i18n/locale';
 
 const require=createRequire(import.meta.url),swc=require('next/dist/build/swc');await swc.loadBindings();
 const source=await readFile(new URL('../components/MaterialCorrectionPanel.tsx',import.meta.url),'utf8');
@@ -59,7 +59,7 @@ function setup(options:any={}){
   useState(initial:any){const index=cursor++;if(!cells[index]){const cell:any={kind:'state',value:typeof initial==='function'?initial():initial};cell.set=(next:any)=>{if(!mounted){lateStateUpdates++;return}const value=typeof next==='function'?next(cell.value):next;if(!Object.is(value,cell.value)){cell.value=value;dirty=true}};cells[index]=cell}return[cells[index].value,cells[index].set]},
   useEffect(effect:any,deps:any){const index=cursor++,prior=cells[index];if(!prior||!sameDeps(prior.deps,deps)){const next={kind:'effect',deps,cleanup:prior?.cleanup};cells[index]=next;effects.push(()=>{next.cleanup?.();next.cleanup=effect()})}},
  };
- const exports:any={};vm.runInNewContext(code,{exports,Error,crypto:webcrypto,window:windowTarget,document:documentTarget,require:(name:string)=>name==='react'?hooks:name.includes('/i18n/react')?{useStudioLocale:()=>({t:(key:any)=>translate(options.locale??'zh-CN',key)})}:name.includes('/core/training')?{hasScorableReference}:name.includes('context-bookmark-media')?{ORIGINAL_COURSE_MEDIA,createContextBookmarkPreviewController:(dependencies:any)=>{
+ const exports:any={};vm.runInNewContext(code,{exports,Error,crypto:webcrypto,window:windowTarget,document:documentTarget,require:(name:string)=>name==='react'?hooks:name.includes('/i18n/react')?{useStudioLocale:()=>({t:(key:any,params?:any)=>translate(options.locale??'zh-CN',key,params),ui:(message:any)=>translateKnownUi(options.locale??'zh-CN',message)})}:name.includes('/core/training')?{hasScorableReference}:name.includes('context-bookmark-media')?{ORIGINAL_COURSE_MEDIA,createContextBookmarkPreviewController:(dependencies:any)=>{
   controllerDependencies.push(dependencies);const controller=createContextBookmarkPreviewController({...dependencies,lifecycle:{windowTarget,documentTarget,isHidden:()=>documentTarget.hidden},metadataTimeoutMs:1000});controllers.push(controller);return controller;
  }}:require(name)});
  const controllerRef={current:null as ReturnType<typeof createContextBookmarkPreviewController>|null};
@@ -94,7 +94,7 @@ test('actual initial DOM reveals only the current cue; list-only and metadata ro
  assert.match(editor,/Could I have a coffee, please/);assert.doesNotMatch(editor,/Would you like it hot|SECRET SAVED|HIDDEN BEFORE|HIDDEN AFTER/);
  const list=renderToStaticMarkup(React.createElement(MaterialCorrectionPanel,{...common,current:null}));
  assert.doesNotMatch(list,/Could I have|Would you like|SECRET SAVED|HIDDEN BEFORE|HIDDEN AFTER/);
- assert.match(list,/校正版本暂不支持语境书签/);assert.match(list,/刷新不会恢复被排除的练习/);
+ assert.match(list,/Corrected versions do not support context bookmarks/);assert.match(list,/refresh does not restore excluded practice/);
 });
 
 test('mount and saved-row selection are metadata-only and never load, save, start, or autoplay',async()=>{
@@ -284,8 +284,11 @@ test('accepted mode reset clears only the form and invalidates old proof without
  assert.equal(p.releases,1);assert.equal(p.controllerRef.current!.getState().phase,'empty');assert.equal(p.button('确认新句结构').props['aria-pressed'],false);
  oldSave();oldPlay();await p.settle();assert.equal(count(p,'save'),0);assert.equal(count(p,'start'),0);assert.equal(p.video.plays,0);assert.doesNotMatch(uiText(p),/Would you like it hot/);p.unmount();
 });
-for(const locale of ['en','zh-CN'])test(`mode reset warning is localized in ${locale}`,()=>{
- const p=setup({locale});p.edit('当前句参考文字','Draft');p.click('拆分当前句');const warning=p.calls.find(call=>call[0]==='confirm')?.[1];
+for(const locale of ['en','zh-CN'] as const)test(`mode reset warning is localized in ${locale}`,()=>{
+ const p=setup({locale});
+ const textLabel=locale==='en'?'Current-sentence reference text':'当前句参考文字';
+ const splitLabel=locale==='en'?'Split current sentence':'拆分当前句';
+ p.edit(textLabel,'Draft');p.click(splitLabel);const warning=p.calls.find(call=>call[0]==='confirm')?.[1];
  assert.equal(typeof warning,'string');assert.match(warning,locale==='en'?/Unsaved changes will be lost/:/尚未保存的修改将丢失/);p.unmount();
 });
 for(const lock of ['recording','hidden','transition','disabled','save pending'])test(`${lock} refuses a dirty mode change before requesting confirmation`,async()=>{

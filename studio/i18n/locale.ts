@@ -3,14 +3,15 @@ import {referenceImpactEnglish, referenceImpactChinese} from './messages-referen
 import { reviewEnglish, reviewChinese } from './messages-review';
 import {sceneEnglish, sceneChinese} from './messages-scene';
 import {diagnosticEnglish, diagnosticChinese} from './messages-diagnostics';
+import {correctionEnglish, correctionChinese} from './messages-correction';
 
 /** Presentation only. Never use translations as persisted identifiers or scoring input. */
 export const STUDIO_LOCALES = ['en', 'zh-CN'] as const;
 export type StudioLocale = typeof STUDIO_LOCALES[number];
 export const DEFAULT_STUDIO_LOCALE: StudioLocale = 'en';
 export const STUDIO_LOCALE_STORAGE_KEY = 'lingotrace-studio-interface-locale-v1';
-export const english = { ...studioEnglish, ...reviewEnglish, ...sceneEnglish, ...diagnosticEnglish, ...referenceImpactEnglish } as const;
-export const chinese: Record<keyof typeof english, string> = { ...studioChinese, ...reviewChinese, ...sceneChinese, ...diagnosticChinese, ...referenceImpactChinese };
+export const english = { ...studioEnglish, ...reviewEnglish, ...sceneEnglish, ...diagnosticEnglish, ...referenceImpactEnglish, ...correctionEnglish } as const;
+export const chinese: Record<keyof typeof english, string> = { ...studioChinese, ...reviewChinese, ...sceneChinese, ...diagnosticChinese, ...referenceImpactChinese, ...correctionChinese };
 export type MessageKey = keyof typeof english;
 export type MessageParams = Readonly<Record<string, string | number>>;
 export function normalizeStudioLocale(value: unknown): StudioLocale {
