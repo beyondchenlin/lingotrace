@@ -24,7 +24,7 @@ test('submitted-only RoundReview slot never reveals reference or creates bookmar
 test('actual composer is opt-in reference-only with bounded native word selectors and no render-time save',()=>{
  const e=fixture();e.input('a wrong private answer');e.submit();const reference=getBookmarkReference(e.getSnapshot(),e.cue.id)!;
  let writes=0;const html=renderToStaticMarkup(React.createElement(ContextBookmarkComposer,{reference,disabledReason:null,onSave:async()=>{writes++;throw Error('unexpected')},onOpenLibrary(){}}));
- assert.equal(writes,0);assert.match(html,/保存到本机收藏/);assert.match(html,/收藏起始词/);assert.match(html,/收藏结束词/);assert.match(html,/与自动练习历史开关独立/);assert.doesNotMatch(html,/a wrong private answer/);
+ assert.equal(writes,0);assert.match(html,/Save to local bookmarks/);assert.match(html,/Bookmark start word/);assert.match(html,/Bookmark end word/);assert.match(html,/Independent of automatic practice history/);assert.doesNotMatch(html,/a wrong private answer/);
  assert.equal(contextBookmarkWords(reference)[0].text,'Could');
  const blocked=renderToStaticMarkup(React.createElement(ContextBookmarkComposer,{reference,disabledReason:'原片未核验',onSave:async()=>{throw Error('unexpected')},onOpenLibrary(){}}));
  assert.match(blocked,/disabled=""/);assert.match(blocked,/原片未核验/);

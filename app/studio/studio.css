@@ -839,3 +839,18 @@
   .layout-options>button,.media-panel .cue-grid button,.sheet-status-chip{transition:none}
   .studio-dialog .panel-head button{transition:none}
 }
+
+/* PRD continue7 — review disabledReason i18n surface + notice craft (no video caption capsule). */
+.studio-dialog .round-review-continue:disabled,
+.studio-dialog .button-row button:disabled{
+  opacity:.42;
+}
+.studio-dialog .notice:not(.warn){
+  border-radius:14px;
+  box-shadow:inset 0 1px 0 #ffffff0a;
+}
+.studio-dialog .round-review-continue.primary:disabled{
+  background:#c4fc5740;
+  color:#9bb56a;
+  border-color:transparent;
+}

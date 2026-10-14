@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "bf1e3ae48c31080607b019ec28c83d1fe786aa68",
-  "source_file_count": 689,
+  "source_projection_tree_sha1": "28682450526d9d6927d6b7fe1d343411e7c2d50e",
+  "source_file_count": 692,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 65685,
-      "git_blob_sha1": "dd2f6053980b1ab9578cdfe1abc5780477e34b5e",
-      "sha256": "b27fc78cfef4660b1b8a26b3805c925ccc517f936a2139291b932795ca12c6d6"
+      "bytes": 66121,
+      "git_blob_sha1": "5eec2b83239077be006bdc89f3bad3576deb67da",
+      "sha256": "3df8f621f814b738ea2f6c34956ab4fc179087b18f71a032ef34309c5ae17b9c"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1822,6 +1822,13 @@
       "sha256": "f7ca6f774f4dee6e67232a796df739bcb02dda2b48314dcfe2573d8bb42d6d4a"
     },
     {
+      "path": "qa/prd-continue7-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5333,
+      "git_blob_sha1": "90e746f601d41abe4a7a42ac0f5a0bd015f583b3",
+      "sha256": "fdb7ae0212becfac4bf86a76ad37f0b010b3832d5c4bcf91cdd909c5dc128185"
+    },
+    {
       "path": "scripts/assemble-portrait-preview.mjs",
       "mode": "100644",
       "bytes": 2040,
@@ -1934,6 +1941,13 @@
       "git_blob_sha1": "53ce345b597d1cc61f5407065a3e62f7ae2f1963"
     },
     {
+      "path": "scripts/prd-continue7-qa.mts",
+      "mode": "100644",
+      "bytes": 3644,
+      "git_blob_sha1": "24b70f1d77d476662b589fb4f1700af417085e1e",
+      "sha256": "cf150c0ddaa8023b98efef0cb307c18dff70a12c176a5cb3d651cbf939de5cdc"
+    },
+    {
       "path": "scripts/prepare-subtitle-assets.mjs",
       "mode": "100644",
       "bytes": 8485,
@@ -2034,9 +2048,9 @@
     {
       "path": "studio/components/ContextBookmarkComposer.tsx",
       "mode": "100644",
-      "bytes": 3104,
-      "git_blob_sha1": "f0b5bcb8ba8748e64c6c5a29707e42b42aeb0981",
-      "sha256": "538776afc0faa65f72cfb0a900163febab47684dc32f0457a6c7a4b26089ee44"
+      "bytes": 3052,
+      "git_blob_sha1": "901815bfcb37aa780c1127e87457e948d3bfd618",
+      "sha256": "aaa42c23cab3cdc423a4c88af6ea96b67cd159c54deace93ef62ad7575d94316"
     },
     {
       "path": "studio/components/ContextBookmarkLibrary.tsx",
@@ -2118,9 +2132,9 @@
     {
       "path": "studio/components/MaterialCorrectionPanel.tsx",
       "mode": "100644",
-      "bytes": 25336,
-      "git_blob_sha1": "caa9b41d25af16de641343056b92c19c80692053",
-      "sha256": "147d7d5536214a7e45da1c0841f262fbe0474e4eb6f1bc107b0488a1f9cf6755"
+      "bytes": 25343,
+      "git_blob_sha1": "8cc32c903b447740e66e486c6d3071193a0cec93",
+      "sha256": "67b9cd219a4922abfeef6040ce176cd42daa2219625e97134a59fcec15b52289"
     },
     {
       "path": "studio/components/MutedRecordingCopy.tsx",
@@ -2188,9 +2202,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 267566,
-      "git_blob_sha1": "1bdb6bbbc9812d54211328d5ca9458a2db63e9d5",
-      "sha256": "10f665fbdf5efe6c9fe589b6c4695afcc07227464ece4cd420fdbf311f4d03dd"
+      "bytes": 267198,
+      "git_blob_sha1": "49206220f69ed574ff6996b36450851f433cea47",
+      "sha256": "9c86734e2a60add47e1d94e87aa847e02ec8b7e22f530568a98ef39b68b053cf"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -2314,9 +2328,9 @@
     {
       "path": "studio/core/context-bookmark-ui.test.ts",
       "mode": "100644",
-      "bytes": 6510,
-      "git_blob_sha1": "7d224b9db6c3072a15cffed9342b87d0833dac03",
-      "sha256": "d01a8d4626d0f6fd51d71da581518c559c5f7e5f58f4cde2335329db17e1989e"
+      "bytes": 6526,
+      "git_blob_sha1": "7d240cae7e1b346ac0d61a88a6183da119e27298",
+      "sha256": "261b459c6451b368a3e809c0055db16aa006c189544a58be8dddbb25fdae5259"
     },
     {
       "path": "studio/core/context-bookmark.test.ts",
@@ -3833,9 +3847,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 92472,
-      "git_blob_sha1": "62118e58106b04c4da2d148a6b2041e76219ddc9",
-      "sha256": "e4f7909eb9d22fae998f967196fb5a60cffb78f762f875170ade7a89394ba2c7"
+      "bytes": 94861,
+      "git_blob_sha1": "09650fa614d6a774b3c850a0d5af3dced73bb53d",
+      "sha256": "ae38988175d9f713a93f9a9612542587686f0bf07f4392b00926146f5c77dbc7"
     },
     {
       "path": "studio/i18n/react.tsx",

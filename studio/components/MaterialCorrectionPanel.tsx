@@ -42,7 +42,7 @@ const seconds=(value:string)=>value.trim()===''?NaN:Number(value);
 /** No Training command, automatic adoption, recording track, source upload, or
  * reference-list rendering lives here. Saving and starting are separate actions. */
 export default function MaterialCorrectionPanel<Entry extends MaterialCorrectionEntry>(props:MaterialCorrectionPanelProps<Entry>){
- const {t}=useStudioLocale();
+ const {t,ui}=useStudioLocale();
  const {current,entries,pool,controllerRef,monitor,recordingBlocked,transitionBusy=false,disabledReason=null,unreadableCount=0}=props;
  const identity=current?JSON.stringify(current):'';
  const cue=current?.material.cues.find(value=>value.id===current.cueId)??null;
@@ -234,7 +234,7 @@ export default function MaterialCorrectionPanel<Entry extends MaterialCorrection
    {invalidRange&&<p className="notice warn">请输入有限秒数，并满足 0 ≤ 开始 &lt; 结束；不会自动裁剪或修正。</p>}
    {!invalidRange&&previous&&start!==previous.end&&<p className="note">{start<previous.end?'与前一句时间有重叠':'与前一句时间有间隔'}，请预听确认。前一句结束于 {previous.end} 秒。</p>}
    {!invalidRange&&following&&end!==following.start&&<p className="note">{end>following.start?'与后一句时间有重叠':'与后一句时间有间隔'}，请预听确认。后一句开始于 {following.start} 秒。</p>}
-   {disabledReason&&<p className="notice warn">{disabledReason}</p>}
+   {disabledReason&&<p className="notice warn">{ui(disabledReason)}</p>}
    <p className="note">{availableProof?`实际已核验时长：${availableProof.duration} 秒。`:'实际时长与原片来源尚未完成当前编辑范围的核验；不能保存。'}</p>
   </section>}
   <video ref={video} playsInline preload="metadata" hidden={!current} aria-label="校正原片段预览" style={{width:'100%',maxHeight:280,background:'#111'}}/>
