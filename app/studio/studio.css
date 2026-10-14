@@ -358,8 +358,15 @@
 .typing-pace-chip[aria-expanded=true]{background:#d3ebba22;border-color:#c4fc57aa;color:#dfffbf}
 .typing-follow-toolbar[data-pace-mode=adaptive] .typing-pace-chip{border-color:#7ad7ff66;color:#d7f3ff}
 .hud-popover.pace-sheet-popover{
-  position:absolute;z-index:12;right:0;top:calc(100% + 6px);width:min(320px,78vw);
+  position:absolute;z-index:20;right:0;left:auto;top:calc(100% + 6px);bottom:auto;width:min(320px,78vw);
   max-height:min(62vh,420px);overflow:auto;
+}
+@media(max-width:600px){
+  .hud-popover.pace-sheet-popover{
+    position:fixed;left:10px;right:10px;bottom:max(12px,env(safe-area-inset-bottom,0px));top:auto;
+    width:auto;max-height:min(52vh,360px);z-index:30;border-radius:16px;
+  }
+  .hud-popover.pace-sheet-popover>header{position:static;top:auto;margin:0 0 8px;padding:0 0 8px}
 }
 .pace-mode-row,.pace-rate-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .pace-mode-row button,.pace-rate-row button{

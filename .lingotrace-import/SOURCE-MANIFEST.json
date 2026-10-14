@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "2fe5af004486e57701d0884279a0eeb95ab1df19",
+  "source_projection_tree_sha1": "19b7c3662e08ce621df3cd23e50e720e226310ab",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 44060,
-      "git_blob_sha1": "fd62e66c45c6426c03db8b1ca4d0a190e0068b58",
-      "sha256": "a1031b704d5aab1879132a996906fd1f81d4547c5844f799d8633326c277ead0"
+      "bytes": 44418,
+      "git_blob_sha1": "dd787f0227d443d3b7c0ba544eb39856a701e7fd",
+      "sha256": "970743ba2dd18fde56517da1c2da0a8670006fa1a1fd41008fec86ce57579b6c"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
