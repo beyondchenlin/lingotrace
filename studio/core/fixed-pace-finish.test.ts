@@ -16,7 +16,8 @@ const edit = (before = '', data = 'hello', beforeRevision = 0): TypingFollowAppe
 });
 function fixture(beginPatch: Partial<FixedPaceFinishBegin> = {}) {
   const observer = new FixedPaceFinishObserver(), id = beginPatch.identity ?? identity();
-  const frame = { identity: id, eligible: true, referenceShown: true };
+  const referenceShown = beginPatch.referenceShown !== undefined ? beginPatch.referenceShown : true;
+  const frame = { identity: id, eligible: true, referenceShown };
   const begin: FixedPaceFinishBegin = { ...frame, nowMs: 0, rate: 1, draft: '', draftRevision: 0, inputVersion: 0, ...beginPatch };
   observer.begin(begin);
   const sample = (nowMs: number, positionSeconds = 10 + (nowMs - 100) / 1000, patch: Partial<FixedPaceFinishMedia> = {}) =>
@@ -25,7 +26,7 @@ function fixture(beginPatch: Partial<FixedPaceFinishBegin> = {}) {
   const attempt = (patch: Partial<Attempt> = {}): Attempt => ({ attemptId: 'attempt', sessionId: id.sessionId,
     roundId: id.roundId, cueId: id.cueId, materialId: id.courseId, materialVersion: id.courseVersion,
     ruleVersion: 'existing-rule', reference: 'hello', answer: 'hello', inputVersion: 1,
-    conditions: { exposure: 'first', hinted: false, revealed: true, pasted: false, inputSource: 'typed' },
+    conditions: { exposure: 'first', hinted: false, revealed: referenceShown, pasted: false, inputSource: 'typed' },
     words: 1, errors: 0, accuracy: 100, alignment: [], gain: 1, firstCompletion: true, activeMs: 0,
     wallTime: '2026-10-12T00:00:00Z', dataset: 'local_interactive', ...patch });
   const check = (patch: Partial<FixedPaceFinishCheck> = {}) => observer.check({ ...frame, nowMs: 1200,
@@ -45,6 +46,16 @@ test('empty observer exposes no result; begin and media alone cannot judge or co
 test('Check returns signed early finish from final trusted commit to actual observed boundary', () => {
   const f = fixture(); f.finish(); assert.equal(f.observer.snapshot.result, null);
   assert.deepEqual(f.check(), { deltaMs: -400, reason: null, rate: 1, referenceAssisted: true, attemptId: 'attempt', accuracy: 100, errors: 0 });
+});
+test('hidden-reference dictation finish keeps referenceAssisted false', () => {
+  const f = fixture({ referenceShown: false }); f.finish();
+  assert.deepEqual(f.check(), { deltaMs: -400, reason: null, rate: 1, referenceAssisted: false, attemptId: 'attempt', accuracy: 100, errors: 0 });
+});
+test('revealing the reference mid dictation observation invalidates the run', () => {
+  const f = fixture({ referenceShown: false }); f.sample(100); f.sample(350);
+  f.sample(600, 10.5, { referenceShown: true });
+  assert.equal(f.observer.snapshot.phase, 'unknown');
+  assert.equal(f.observer.snapshot.reason, 'reference-revealed');
 });
 test('trusted append after playback ends remains observable without restarting media', () => {
   const f = fixture(); f.sample(100); f.sample(600); f.sample(1100); f.append(1600);

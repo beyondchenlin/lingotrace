@@ -7,6 +7,8 @@ test('kids edition keeps distinct glanceable accents without dropping HUD roles'
  assert.equal(editionSurface('kids').id,'kids');
  assert.notEqual(KIDS_EDITION.tone,PRO_EDITION.tone);
  assert.ok(KIDS_EDITION.plateRadius>PRO_EDITION.plateRadius);
+ assert.ok(KIDS_EDITION.breathScale>PRO_EDITION.breathScale);
+ assert.ok(KIDS_EDITION.warmLift>PRO_EDITION.warmLift);
  assert.equal(normalizeVisualEdition('kids'),'kids');
  assert.equal(normalizeVisualEdition('nope'),'pro');
 });

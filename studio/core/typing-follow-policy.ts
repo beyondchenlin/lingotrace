@@ -81,7 +81,7 @@ export interface TypingFollowAppend {
 }
 export type TypingFollowInterrupt =
   | 'manual-pause' | 'manual-play' | 'manual-seek' | 'manual-replay' | 'manual-rate'
-  | 'hide-reference' | 'background' | 'blur' | 'course-change' | 'cue-change' | 'version-change'
+  | 'hide-reference' | 'show-reference' | 'background' | 'blur' | 'course-change' | 'cue-change' | 'version-change'
   | 'recording' | 'check' | 'next' | 'review' | 'replay' | 'unmount' | 'media-error'
   | 'unattributed-native-event';
 export type TypingFollowEvent =
@@ -178,10 +178,23 @@ function registeredCue(identity: TypingFollowIdentity) {
     identity.sentenceMapVersion !== source.sentenceMapVersion || identity.sentenceMapSha256 !== source.sentenceMapSha256) return null;
   return NPS_MATERIAL.cues.find(cue => cue.id === identity.cueId && cue.start === identity.cueStartSeconds && cue.end === identity.cueEndSeconds) ?? null;
 }
-/** Check privacy before looking up a cue or deriving a target-dependent value. */
-function unavailable(env: TypingFollowEnvironment, allowComposition = false, allowBuffering = false, allowInitialSeek = false): string | null {
+/** Fixed primary may run assisted (reference shown) or intentional dictation (reference hidden).
+ * Adaptive assist still requires a shown reference and ordinary typing. */
+export function typingFollowAdmission(env: Pick<TypingFollowEnvironment, 'mode' | 'referenceShown' | 'pacingStrategy'>): string | null {
+  const strategy = env.pacingStrategy === undefined ? 'adaptive' : env.pacingStrategy;
+  if (strategy === 'fixed') {
+    if (env.mode === 'dictation') return env.referenceShown ? 'dictation-reference-leaked' : null;
+    if (env.mode === 'legacy-typing') return env.referenceShown ? null : 'reference-hidden';
+    return 'not-ordinary-typing';
+  }
   if (!env.referenceShown) return 'reference-hidden';
   if (env.mode !== 'legacy-typing') return 'not-ordinary-typing';
+  return null;
+}
+/** Check privacy before looking up a cue or deriving a target-dependent value. */
+function unavailable(env: TypingFollowEnvironment, allowComposition = false, allowBuffering = false, allowInitialSeek = false): string | null {
+  const admission = typingFollowAdmission(env);
+  if (admission) return admission;
   if (env.listeningPlayerActive) return 'listening-owner';
   if (env.recording !== 'idle') return 'recording';
   if (env.composing && !allowComposition) return 'composing';

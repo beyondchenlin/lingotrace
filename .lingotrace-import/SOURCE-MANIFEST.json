@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "19b7c3662e08ce621df3cd23e50e720e226310ab",
+  "source_projection_tree_sha1": "40aa3969363911eac57621618a833169fc762339",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 44418,
-      "git_blob_sha1": "dd787f0227d443d3b7c0ba544eb39856a701e7fd",
-      "sha256": "970743ba2dd18fde56517da1c2da0a8670006fa1a1fd41008fec86ce57579b6c"
+      "bytes": 45670,
+      "git_blob_sha1": "bc47e02ed10c3a10cb9cff26176171088b864aa0",
+      "sha256": "d756753bff91c466db76635dfab423c7ec4e063fd6a8753cd7079793ca5fc6b9"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -347,9 +347,9 @@
     {
       "path": "docs/studio/card-carousel/PRD-total.md",
       "mode": "100644",
-      "bytes": 1161,
-      "git_blob_sha1": "2af9fcc87e4913866ea4697fd7704d604686a5f9",
-      "sha256": "34bf18c51dd8482744c358ac3fa02523d817488fef37d9b1bb9c519fa80daff5"
+      "bytes": 1592,
+      "git_blob_sha1": "d3f5ac8a03500022ceeba066662a2b2b3d6d9675",
+      "sha256": "5bbe66e41b8cf1d1cbffbec3c608dadd9c76a5d58ef49349a257c1c5385e5431"
     },
     {
       "path": "docs/studio/centered-english-hud/PRD-detailed-v80.md",
@@ -585,9 +585,9 @@
     {
       "path": "docs/studio/kids-edition/PRD-total.md",
       "mode": "100644",
-      "bytes": 1350,
-      "git_blob_sha1": "1f0995b0bf3dfa45a680ffc74e839704fc99c9fd",
-      "sha256": "3ec6abefbbad567141bed4e447eeddc4539d73db48f198f0d8327a5fdbdd7caa"
+      "bytes": 1373,
+      "git_blob_sha1": "5f7fc03b7cefed2d70a3eb6fea8cf52e13b274d5",
+      "sha256": "bf9b35c1631f39d387318f392637f08976d23a240aa708096781f4d49f7630d3"
     },
     {
       "path": "docs/studio/layout-plan-files.md",
@@ -1985,30 +1985,30 @@
     {
       "path": "studio/carousel/CardCarousel.tsx",
       "mode": "100644",
-      "bytes": 7406,
-      "git_blob_sha1": "8823c1c26cf8407878d00d9fec9cce61115ee668",
-      "sha256": "36f369e2abd396e19bc691b145c9e35d15ef1784ddd40db9a8733bd52db33a3d"
+      "bytes": 7907,
+      "git_blob_sha1": "1c6c34e2f59dee6c7b10babd84d22d81e85d6599",
+      "sha256": "d1d50522b0fbc21c7ed2e9aae0eb126324a340de25660e6c588fe502ec7faa01"
     },
     {
       "path": "studio/carousel/carousel.css",
       "mode": "100644",
-      "bytes": 4694,
-      "git_blob_sha1": "93a178e1c985083341a5a6a0dadd566cec3f456f",
-      "sha256": "1670e1ffc987e86719176694d8c0950c8f5833d1ffacc79e3d71afd28d1436f0"
+      "bytes": 5428,
+      "git_blob_sha1": "9a7a726fbbcc6e0509be916c36629810e933ff1f",
+      "sha256": "3f391cb966867c0fe6ec2f2b13ba412dc47efb6f5be5f5fe8b02fe60a2f1e5b8"
     },
     {
       "path": "studio/carousel/motions.test.ts",
       "mode": "100644",
-      "bytes": 964,
-      "git_blob_sha1": "3ecea8fc27cff4a68094ef2d9214197ef41caea4",
-      "sha256": "b14818ef3e622b3ea05ed733a31854ce35863dda6020cd64df4e66e3aed145a9"
+      "bytes": 1345,
+      "git_blob_sha1": "d945c35262b15b85040376acb0e2ec0d2b698a12",
+      "sha256": "ec90985476c87aaba9f7188dad2eda63dfceb2df9c5861b9ddd46703804e563d"
     },
     {
       "path": "studio/carousel/motions.ts",
       "mode": "100644",
-      "bytes": 2711,
-      "git_blob_sha1": "26eb42e1576ef3181b9f9965651486843b22cb92",
-      "sha256": "182442f202dfabd916a5226f178f21a85643772b141f42ae444a2751cbb53874"
+      "bytes": 4407,
+      "git_blob_sha1": "b96ef32277aa45bb19f2a123f60536d4f7ad2a64",
+      "sha256": "8eae90e90c730ac53b45240b041eadd88512ead238711b61c7a912d185f546ad"
     },
     {
       "path": "studio/components/CheckedAnswerReview.tsx",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 255421,
-      "git_blob_sha1": "78904f6e35c0f744b4084598f912b4a47fcb4154",
-      "sha256": "cdb9a46c43cdb4171f962c25345e7b4938b9ceed83d79cbfc9c5b93ca8f94b56"
+      "bytes": 256971,
+      "git_blob_sha1": "8cbd2b37a2a3ec548348fc84ae112bb4af56d3be",
+      "sha256": "7518fdbd7bd862f65e1cb9af3869fe4bb1990a5b5b535e5fedb1fac81a9c5e52"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -2363,16 +2363,16 @@
     {
       "path": "studio/core/fixed-pace-finish.test.ts",
       "mode": "100644",
-      "bytes": 17784,
-      "git_blob_sha1": "35d90013da386044e2476702f50661f17508ddd1",
-      "sha256": "af30b7f6e9b7a30c2cbeade9533ad10494ec1843ca5d26e8791a75a5ed9663e7"
+      "bytes": 18517,
+      "git_blob_sha1": "f0dbb631a01be94f9050cca1e5cf4e60d506a4ad",
+      "sha256": "f1dce8b151b8715cdb40e691fd6c4e1dea55f574596eed541331837b7a55fb2b"
     },
     {
       "path": "studio/core/fixed-pace-finish.ts",
       "mode": "100644",
-      "bytes": 12796,
-      "git_blob_sha1": "2230a71c616c86898b0e974fa91f451c6e5e6fd2",
-      "sha256": "5b5a054fefdecceccc702efc21437446cda3cb526f58706c03c9b3dcfe158504"
+      "bytes": 13082,
+      "git_blob_sha1": "ca1250e345430a6f0c2118b5ebfd763c14e680ec",
+      "sha256": "8300c729031012a1462b9e2937e2693adcc5d283361a8a01c2c10b82c5265bdc"
     },
     {
       "path": "studio/core/fixtures/repository-v41-source.txt",
@@ -3399,16 +3399,16 @@
     {
       "path": "studio/core/typing-follow-policy.test.ts",
       "mode": "100644",
-      "bytes": 46923,
-      "git_blob_sha1": "8f21f41b5df6a63fcc988aabebb0e2c7e28901ee",
-      "sha256": "aac6942613863e3596dc07c405430d94c053c5e0c76c409a6e0392c160cbbb4c"
+      "bytes": 48807,
+      "git_blob_sha1": "ab82c558876d08ab2bf6cbbe0e9bfba940163006",
+      "sha256": "98e192acb35bb2d74557256e6bb2e3b1215f799bf3a01e5ce2179b5cbbb2301e"
     },
     {
       "path": "studio/core/typing-follow-policy.ts",
       "mode": "100644",
-      "bytes": 26661,
-      "git_blob_sha1": "cd8e3f9fe878e2cc00fbc17272ade70a12a00943",
-      "sha256": "37ce8e4e57266558c55d31bee30ba3b731e8b213d687b47ea4b6f8acc9609aa1"
+      "bytes": 27438,
+      "git_blob_sha1": "06a43d8dda73343f28c538327e9f0a84f984a6cf",
+      "sha256": "4ecc7e9b498b2b63217fcd14dde9f8bd01393c743d8b12e931018e507eb70f3a"
     },
     {
       "path": "studio/core/typing-follow-studio.test.ts",
@@ -3819,9 +3819,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 86394,
-      "git_blob_sha1": "e45bf09fa5ecdb6887228ba3de85ddc533acc332",
-      "sha256": "70ba0c10270ff2ce170154c20e9e387015984ebfb4e9add35e8ebbd005e0c106"
+      "bytes": 87907,
+      "git_blob_sha1": "9d165a6cfef2e4dc1b0bbbc73d2280bc0ae04a1a",
+      "sha256": "ce230492cb6657999fbe8616239e975a41dcf69faed599893f620e33b7c3d8ba"
     },
     {
       "path": "studio/i18n/react.tsx",
@@ -4771,16 +4771,16 @@
     {
       "path": "studio/theme/kids-cartoon.test.ts",
       "mode": "100644",
-      "bytes": 991,
-      "git_blob_sha1": "95c4048ff652d8f5aa735c6d1375b4c24017f15c",
-      "sha256": "3f7e0d42ce0599d273af99c70ac29e376dcee78d45b8354afab1a4412600c4f3"
+      "bytes": 1109,
+      "git_blob_sha1": "ed27af33f420eee48fc69463a153b6ee31d0302a",
+      "sha256": "2b83d62f61b574d0a1cce31d9409fa796568288c18dc4e7d57fea3d360a66f49"
     },
     {
       "path": "studio/theme/kids-cartoon.ts",
       "mode": "100644",
       "bytes": 1744,
-      "git_blob_sha1": "d4111d8b21fb9335fb8bcf6ed89cc556a9ac9484",
-      "sha256": "8cf776395625deb05a311718ae38862bf65cd75deb3684a84c19034826421a33"
+      "git_blob_sha1": "2e0ffa707c1178e927d97983d51d9b7d58683153",
+      "sha256": "d5e8095e652f98b3fe4a6f3b77b9cd7f95c4816e957a512f456d4c83ce0b5a72"
     },
     {
       "path": "tsconfig.json",

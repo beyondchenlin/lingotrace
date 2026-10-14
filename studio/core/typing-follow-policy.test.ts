@@ -268,18 +268,56 @@ for (const [name, patch] of blocked) test(`entry fails closed for ${name}`, () =
   assert.equal(f.state.phase, 'off');
 });
 
-for (const [name, patch] of blocked) test(`fixed entry preserves the existing guard for ${name}`, () => {
+const fixedBlocked = blocked.filter(([name]) => name !== 'hidden' && name !== 'dictation');
+for (const [name, patch] of fixedBlocked) test(`fixed entry preserves the existing guard for ${name}`, () => {
   const f = fixture({ pacingStrategy: 'fixed', ...patch });
   assert.deepEqual(types(f.start()), []);
   assert.equal(f.state.active, null);
   assert.equal(f.state.phase, 'off');
 });
 
+test('fixed entry still blocks assisted path when reference is hidden without dictation mode', () => {
+  const f = fixture({ pacingStrategy: 'fixed', referenceShown: false, mode: 'legacy-typing' });
+  assert.deepEqual(types(f.start()), []);
+  assert.equal(f.state.reason, 'reference-hidden');
+});
+
+test('fixed entry blocks dictation when reference is still shown', () => {
+  const f = fixture({ pacingStrategy: 'fixed', referenceShown: true, mode: 'dictation' });
+  assert.deepEqual(types(f.start()), []);
+  assert.equal(f.state.reason, 'dictation-reference-leaked');
+});
+
+test('fixed dictation entry starts when reference stays hidden', () => {
+  const f = fixture({ pacingStrategy: 'fixed', referenceShown: false, mode: 'dictation' });
+  const d = f.start();
+  assert.ok(types(d).includes('start-cue'));
+  assert.ok(f.state.phase === 'starting' || f.state.phase === 'following');
+  assert.equal(f.state.active?.pacingStrategy, 'fixed');
+});
+
+test('fixed dictation continues while reference stays hidden', () => {
+  const f = fixture({ pacingStrategy: 'fixed', referenceShown: false, mode: 'dictation' });
+  f.start();
+  const d = f.tick(50);
+  assert.ok(f.state.phase === 'following' || f.state.phase === 'starting');
+  assert.equal(f.state.active?.pacingStrategy, 'fixed');
+  assert.deepEqual(types(f.tick(100, { referenceShown: false, mode: 'dictation' })).filter(t => t === 'pause'), []);
+});
+
+test('fixed dictation rejects leaked reference mid-run', () => {
+  const f = fixture({ pacingStrategy: 'fixed', referenceShown: false, mode: 'dictation' });
+  f.start(); f.tick(50);
+  const d = f.tick(100, { referenceShown: true, mode: 'dictation' });
+  assert.deepEqual(types(d), ['pause', 'restore-base-rate']);
+  assert.equal(f.state.reason, 'dictation-reference-leaked');
+});
+
 test('fixed playback keeps source, privacy, observation and sentence endpoint guards', () => {
   const patches: [Partial<TypingFollowEnvironment>, string][] = [
     [{ referenceShown: false }, 'reference-hidden'], [{ visible: false }, 'background'],
     [{ focused: false }, 'blur'], [{ sourceVerified: false }, 'source-unqualified'],
-    [{ recording: 'preparing' }, 'recording'], [{ mode: 'dictation' }, 'not-ordinary-typing'],
+    [{ recording: 'preparing' }, 'recording'], [{ mode: 'dictation' }, 'dictation-reference-leaked'],
     [{ mediaPositionSeconds: identity().cueStartSeconds - 0.001 }, 'outside-cue'],
     [{ mediaPositionSeconds: identity().cueEndSeconds }, 'sentence-ended'],
     [{ nowMs: T.maxObservationGapMs + 1 }, 'observation-gap'],

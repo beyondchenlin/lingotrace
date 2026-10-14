@@ -63,3 +63,14 @@
  .lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active:not(.is-revealed) .lt-card-meta{
   opacity:1;transform:none}
 }
+
+.lt-card-kind{
+ display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;padding:4px 10px;border-radius:999px;
+ font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;
+ border:1px solid #9ad7ff55;background:#16303acc;color:#cfefff;
+}
+.lt-card-kind[data-kind=dictation]{border-color:#ffb34766;background:#3a2818cc;color:#ffe0b0}
+.lt-card-kind[data-kind=kids]{border-color:#ff9ad066;background:#3a1a28cc;color:#ffd0e4}
+.lt-card-kind[data-kind='cafe-preview']{border-color:#c8b08a66;background:#2a2418cc;color:#f0e0c0}
+.lt-card-kind[data-kind=assisted]{border-color:#9dffb366;background:#1a2e1acc;color:#d8ffd8}
+.lt-card-kind[data-kind='fixed-pace']{border-color:#9ad7ff66;background:#16303acc;color:#cfefff}

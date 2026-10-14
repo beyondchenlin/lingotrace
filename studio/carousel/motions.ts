@@ -24,6 +24,8 @@ export function carouselMotion(id:CarouselMotionId):CarouselMotionProfile{
  return id==='magnetic-reveal'?MAGNETIC_REVEAL:DEPTH_DECK;
 }
 
+export type LessonCardKind = 'fixed-pace' | 'dictation' | 'kids' | 'cafe-preview' | 'assisted';
+
 export interface LessonCardSpec {
  id:string;
  title:string;
@@ -35,54 +37,99 @@ export interface LessonCardSpec {
  videoSrc?:string;
  href:string;
  credit?:string;
+ kind:LessonCardKind;
+ cta?:string;
+ ctaZh?:string;
 }
 
-/** Dual-aspect demo deck: cafe landscape + Connie portrait-framed landscape media. */
+/** Richer dual-aspect lesson catalog: NPS Studio paths + cafe media preview (not Studio cafe training). */
 export const DEMO_LESSON_CARDS:LessonCardSpec[]=[
  {
-  id:'cafe-landscape',
-  title:'Cafe Conversation',
-  titleZh:'咖啡馆对话',
-  subtitle:'Landscape practice · 16:9',
-  subtitleZh:'横版练习 · 16:9',
-  aspect:'landscape',
-  posterSrc:'/studio-assets/06-cafe-poster.jpg',
-  videoSrc:'/studio-assets/06-cafe.mp4',
-  href:'/studio/',
- },
- {
-  id:'connie-landscape',
-  title:'Education Ranger',
-  titleZh:'教育护林员',
-  subtitle:'NPS Connie Lau · landscape',
-  subtitleZh:'NPS Connie Lau · 横版',
+  id:'connie-fixed',
+  title:'Connie · Fixed pace',
+  titleZh:'Connie · 定速跟音',
+  subtitle:'NPS · 1× primary · assisted reference',
+  subtitleZh:'NPS · 定速主训练 · 显示参考',
   aspect:'landscape',
   posterSrc:'/studio-assets/nps-connie/poster.jpg',
   videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
   href:'/studio/',
   credit:'National Park Service · No claim to original U.S. Government works.',
+  kind:'fixed-pace',
+  cta:'Open Studio',
+  ctaZh:'打开 Studio',
  },
  {
-  id:'cafe-portrait-frame',
-  title:'Cafe · Portrait frame',
-  titleZh:'咖啡馆 · 竖版框',
-  subtitle:'Same media, portrait card',
-  subtitleZh:'同一素材 · 竖版卡片',
+  id:'connie-dictation',
+  title:'Connie · Hidden dictation',
+  titleZh:'Connie · 隐藏听写',
+  subtitle:'Fixed pace with reference hidden',
+  subtitleZh:'定速听写 · 参考已隐藏',
+  aspect:'landscape',
+  posterSrc:'/studio-assets/nps-connie/poster.jpg',
+  videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
+  href:'/studio/?dictation=1',
+  credit:'National Park Service · No claim to original U.S. Government works.',
+  kind:'dictation',
+  cta:'Start dictation',
+  ctaZh:'开始听写',
+ },
+ {
+  id:'connie-kids',
+  title:'Connie · Kids edition',
+  titleZh:'Connie · 儿童版',
+  subtitle:'Same training · softer HUD chrome',
+  subtitleZh:'同一训练 · 更柔和的界面',
+  aspect:'portrait',
+  posterSrc:'/studio-assets/nps-connie/poster.jpg',
+  videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
+  href:'/studio/?edition=kids',
+  credit:'National Park Service · No claim to original U.S. Government works.',
+  kind:'kids',
+  cta:'Open Kids Studio',
+  ctaZh:'打开儿童版',
+ },
+ {
+  id:'cafe-preview-landscape',
+  title:'Cafe · Media preview',
+  titleZh:'咖啡馆 · 素材预览',
+  subtitle:'Preview art only · Studio trains on verified NPS',
+  subtitleZh:'仅预览画面 · Studio 仍用已核验 NPS',
+  aspect:'landscape',
+  posterSrc:'/studio-assets/06-cafe-poster.jpg',
+  videoSrc:'/studio-assets/06-cafe.mp4',
+  href:'/studio/',
+  kind:'cafe-preview',
+  cta:'Open Studio (NPS)',
+  ctaZh:'打开 Studio（NPS）',
+ },
+ {
+  id:'cafe-preview-portrait',
+  title:'Cafe · Portrait preview',
+  titleZh:'咖啡馆 · 竖版预览',
+  subtitle:'Dual-aspect preview · not cafe Studio training',
+  subtitleZh:'双画幅预览 · 非咖啡馆定速训练',
   aspect:'portrait',
   posterSrc:'/studio-assets/06-cafe-poster.jpg',
   videoSrc:'/studio-assets/06-cafe.mp4',
   href:'/studio/',
+  kind:'cafe-preview',
+  cta:'Open Studio (NPS)',
+  ctaZh:'打开 Studio（NPS）',
  },
  {
-  id:'connie-portrait-frame',
-  title:'Ranger · Portrait frame',
-  titleZh:'护林员 · 竖版框',
-  subtitle:'Portrait card · dual aspect',
-  subtitleZh:'竖版卡片 · 双画幅',
+  id:'connie-assisted',
+  title:'Connie · Assisted typing',
+  titleZh:'Connie · 辅助跟打',
+  subtitle:'Reference visible · word underlines',
+  subtitleZh:'显示参考 · 词下划线',
   aspect:'portrait',
   posterSrc:'/studio-assets/nps-connie/poster.jpg',
   videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
   href:'/studio/',
   credit:'National Park Service · No claim to original U.S. Government works.',
+  kind:'assisted',
+  cta:'Practice with reference',
+  ctaZh:'带参考练习',
  },
 ];

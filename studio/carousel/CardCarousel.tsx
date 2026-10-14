@@ -79,7 +79,7 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
     <div>
      <p className="lt-cards-kicker">{locale==='zh-CN'?'课程卡片':'Lesson cards'}</p>
      <h1>{locale==='zh-CN'?'双动效卡组':'Dual-motion deck'}</h1>
-     <p className="lt-cards-lede">{locale==='zh-CN'?'Depth Deck 与 Magnetic Reveal · 横版 / 竖版卡片 · 不改变训练事实':'Depth Deck & Magnetic Reveal · landscape / portrait cards · training facts unchanged'}</p>
+     <p className="lt-cards-lede">{locale==='zh-CN'?'Depth Deck / Magnetic Reveal · 定速 / 听写 / 儿童版 / 咖啡馆预览 · 不改变训练事实':'Depth Deck / Magnetic Reveal · fixed / dictation / kids / cafe preview · training facts unchanged'}</p>
     </div>
     <nav className="lt-cards-nav" aria-label={locale==='zh-CN'?'动效模式':'Motion mode'}>
      {([['depth-deck','Depth Deck'],['magnetic-reveal','Magnetic Reveal']] as const).map(([id,label])=>(
@@ -126,10 +126,11 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
         )}
        </div>
        <div className="lt-card-meta">
+        <span className="lt-card-kind" data-kind={card.kind}>{kindLabel(card.kind,locale)}</span>
         <strong>{title}</strong>
         <span>{subtitle}</span>
         {card.credit&&<small>{card.credit}</small>}
-        {active&&<a className="lt-card-cta" href={card.href}>{locale==='zh-CN'?'进入练习':'Practice'}</a>}
+        {active&&<a className="lt-card-cta" href={card.href}>{locale==='zh-CN'?(card.ctaZh??'进入练习'):(card.cta??'Practice')}</a>}
        </div>
       </article>
      );
@@ -143,6 +144,17 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
    <p className="lt-cards-hint">{locale==='zh-CN'?'左右键或拖拽切换 · 减少动效时改为淡入 · 媒体 contain 不裁切':'Arrow keys or drag · reduced motion uses fade · media uses contain'}</p>
   </section>
  );
+}
+
+function kindLabel(kind:LessonCardSpec['kind'],locale:'en'|'zh-CN'){
+ const map={
+  'fixed-pace':['Fixed pace','定速'],
+  dictation:['Dictation','听写'],
+  kids:['Kids','儿童版'],
+  'cafe-preview':['Cafe preview','咖啡馆预览'],
+  assisted:['Assisted','辅助'],
+ } as const;
+ return locale==='zh-CN'?map[kind][1]:map[kind][0];
 }
 
 function cardStyle(motionId:CarouselMotionId,stack:number,dragX:number,profile:ReturnType<typeof carouselMotion>,reduced:boolean):CSSProperties{

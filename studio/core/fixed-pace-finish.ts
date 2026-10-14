@@ -59,7 +59,7 @@ export interface FixedPaceFinishResult {
   readonly deltaMs: number | null;
   readonly reason: string | null;
   readonly rate: number;
-  readonly referenceAssisted: true;
+  readonly referenceAssisted: boolean;
   readonly attemptId: string;
   readonly accuracy: number;
   readonly errors: number;
@@ -73,6 +73,8 @@ interface MediaSample { readonly nowMs: number; readonly positionSeconds: number
 interface Cycle {
   readonly identity: FixedPaceFinishIdentity;
   readonly rate: number;
+  /** Locked at begin: assisted = reference shown for the whole run; dictation = reference stayed hidden. */
+  readonly referenceAssisted: boolean;
   readonly beganMs: number;
   lastMs: number;
   draftRevision: number;
@@ -127,7 +129,9 @@ export class FixedPaceFinishObserver {
     const c = this.cycle;
     if (!c) return false;
     if (!sameIdentity(c.identity, frame.identity)) { this.invalidate('identity-changed'); return false; }
-    if (!frame.referenceShown) { this.invalidate('reference-hidden'); return false; }
+    if (frame.referenceShown !== c.referenceAssisted) {
+      this.invalidate(frame.referenceShown ? 'reference-revealed' : 'reference-hidden'); return false;
+    }
     if (!frame.eligible) { this.invalidate('ineligible'); return false; }
     if (!clock(frame.nowMs) || frame.nowMs < c.lastMs) { this.invalidate('clock-discontinuity'); return false; }
     c.lastMs = frame.nowMs;
@@ -136,7 +140,7 @@ export class FixedPaceFinishObserver {
   begin(frame: FixedPaceFinishBegin): void {
     this.clear();
     // Store only identity, revisions, length and final timestamps, never draft text.
-    this.cycle = { identity: Object.freeze({ ...frame.identity }), rate: frame.rate, beganMs: frame.nowMs,
+    this.cycle = { identity: Object.freeze({ ...frame.identity }), rate: frame.rate, referenceAssisted: frame.referenceShown, beganMs: frame.nowMs,
       lastMs: frame.nowMs, draftRevision: frame.draftRevision, inputVersion: frame.inputVersion,
       draftLength: frame.draft.length, finalInputMs: null, firstMedia: null, lastMedia: null, cueEndMs: null };
     this.set('observing', null);
@@ -222,7 +226,7 @@ export class FixedPaceFinishObserver {
     const reason = this.state.reason ?? (attempt.accuracy !== 100 || attempt.errors !== 0 ? 'answer-incomplete' :
       c.finalInputMs === null ? 'trusted-input-unobserved' : c.cueEndMs === null ? 'cue-end-unobserved' : null);
     const result: FixedPaceFinishResult = { deltaMs: reason ? null : c.finalInputMs! - c.cueEndMs!, reason,
-      rate: c.rate, referenceAssisted: true, attemptId: attempt.attemptId, accuracy: attempt.accuracy, errors: attempt.errors };
+      rate: c.rate, referenceAssisted: c.referenceAssisted, attemptId: attempt.attemptId, accuracy: attempt.accuracy, errors: attempt.errors };
     this.set('checked', reason, result); return this.state.result;
   }
 }
