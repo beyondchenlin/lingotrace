@@ -143,11 +143,15 @@ test('phone practice-compact portrait keeps full-scale HUD layered over media-fo
   assert.ok(g.media.h>g.media.w*9/16,'media backdrop taller than 16:9 plate for overlay chrome');
   assert.equal(g.media.y,0);
   assert.ok(Math.abs(scale-.58)<1e-12,'goal keeps established HUD scale');
-  for(const [key,width,tall] of [['goal',264,264],['trend',352,192],['metrics',309,168]] as const){
+  for(const [key,width,tall] of [['goal',264,264],['trend',352,192]] as const){
    assert.ok(Math.abs(g[key].w/width-scale)<1e-12,key);
    assert.ok(Math.abs(g[key].h/tall-scale)<1e-12,key);
    assert.ok(g[key].w>100,`${key} must not collapse to a chip`);
   }
+  // Flow docks under goal as a full-width column panel (not a chip, not video overlay).
+  assert.ok(Math.abs(g.metrics.w-g.goal.w)<1e-6,'flow matches goal column width');
+  assert.ok(g.metrics.w>100&&g.metrics.h>=72,'flow stays a readable panel');
+  assert.ok(g.metrics.y+1>=g.goal.y+g.goal.h,'flow docks under goal');
   // HUD sits on the media plate (game overlay), console/transport under it.
   assert.ok(g.goal.y+g.goal.h<=g.media.y+g.media.h+1e-6);
   assert.ok(g.trend.y+g.trend.h<=g.media.y+g.media.h+1e-6);
@@ -179,6 +183,21 @@ test('phone one-screen stage never grows and leaves no empty bottom band',()=>{
   assert.ok(folded.inputCard.card.y<normal.inputCard.card.y,'OS keyboard folds stack upward onto video');
   assert.ok(folded.player.h<=120,'folded transport stays thin (no inflate under OS keyboard)');
   assert.ok(folded.player.y+folded.player.h<=height*0.55+1,'transport sits in the visual viewport above the OS keyboard');
+ }
+});
+
+test('phone practice-compact docks flow under goal and clears camera from trend',async()=>{
+ const {cameraControlGeometry}=await import('./camera-control.ts');
+ for(const height of[820,844,880,930]){
+  const g=responsiveLayout(true,{},'lesson',height);
+  assert.equal(g.practiceCompact,true);
+  assert.ok(g.metrics.y+1>=g.goal.y+g.goal.h,'flow under goal');
+  assert.ok(Math.abs(g.metrics.x-g.goal.x)<1e-6,'flow shares goal column');
+  const cam=cameraControlGeometry(g,'off','lesson',{cssWidth:430});
+  const panelOverlap=(a:Rect,b:Rect)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+  assert.equal(cam.compact,true);
+  assert.ok(!panelOverlap(cam.visual,g.trend),'camera clears trend');
+  assert.ok(!panelOverlap(cam.visual,g.goal),'camera clears goal');
  }
 });
 

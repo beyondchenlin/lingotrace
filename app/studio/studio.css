@@ -114,28 +114,80 @@
   align-items:center;
 }
 .responsive-enabled>.portrait-layout{overflow:hidden}
-.portrait-layout[data-practice-compact=true]{--practice-sheet-radius:18px}
-.portrait-layout .studio-tools{
-  position:absolute;left:10px!important;right:10px!important;top:auto!important;bottom:12px!important;
-  transform:none!important;flex-wrap:wrap;gap:6px;max-height:min(42%,320px);overflow:auto;
-  padding:12px;border-radius:var(--practice-sheet-radius,16px);background:#0f1a20f2!important;
-  border:1px solid #d7e7d838;box-shadow:0 -8px 36px #0006;
-  opacity:0;pointer-events:none;translate:0 12px;transition:opacity .2s ease,translate .2s ease;
+.portrait-layout[data-practice-compact=true]{--practice-sheet-radius:22px}
+/* True pull-up drawer: scrim + grabber + unified sheet (tools + companion actions). */
+.portrait-layout .studio-drawer-scrim{
+  position:absolute;inset:0;z-index:4;border:0;padding:0;margin:0;
+  background:#02080cb8;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  cursor:pointer;
 }
-.portrait-layout.tools-open .studio-tools{opacity:1;pointer-events:auto;translate:0 0;display:flex}
-.portrait-layout.tools-open .status-strip{
-  top:auto!important;bottom:calc(12px + min(42%,320px) + 8px)!important;left:10px!important;right:10px!important;
-  transform:none!important;flex-wrap:wrap;max-height:28%;overflow:auto;
-  border-radius:14px;background:#102028f0;padding:8px 10px;
-  opacity:0;pointer-events:none;translate:0 8px;transition:opacity .2s ease,translate .2s ease;
+.portrait-layout .studio-drawer[data-drawer=sheet]{
+  position:absolute;left:0;right:0;bottom:0;z-index:5;
+  display:flex;flex-direction:column;align-items:stretch;gap:0;
+  max-height:min(48%,380px);
+  padding:0 0 env(safe-area-inset-bottom,0px);
+  border-radius:var(--practice-sheet-radius,22px) var(--practice-sheet-radius,22px) 0 0;
+  background:#0f1a20f5;border:1px solid #d7e7d838;border-bottom:0;
+  box-shadow:0 -16px 48px #0008;
+  opacity:0;pointer-events:none;translate:0 28px;
+  transition:opacity .22s ease,translate .22s ease;
 }
-.portrait-layout.tools-open .status-strip{opacity:1;pointer-events:auto;translate:0 0;display:flex}
+.portrait-layout.tools-open .studio-drawer[data-drawer=sheet]{
+  opacity:1;pointer-events:auto;translate:0 0;
+}
+.portrait-layout .studio-drawer-grabber{
+  display:none;width:44px;height:4px;margin:10px auto 6px;border-radius:999px;background:#d7e7d855;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-drawer-grabber{display:block}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools{
+  position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;translate:none!important;opacity:1!important;pointer-events:auto!important;
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 4px;
+  max-height:none;overflow:auto;padding:4px 12px 14px;
+  background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;
+  white-space:normal!important;flex-wrap:unset!important;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button{
+  flex-direction:column;justify-content:center;gap:4px;min-height:56px;padding:8px 4px;
+  font-size:11px;line-height:1.2;border-radius:12px;background:#edf5e908;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button svg{width:18px;height:18px}
+/* Companion status/actions: glued to the sheet top as one surface (not a mid-video island). */
+.portrait-layout.tools-open .status-strip[data-drawer-companion]{
+  position:absolute!important;left:0!important;right:0!important;top:auto!important;
+  bottom:calc(min(48%,380px) - 2px)!important;
+  transform:none!important;translate:0 0!important;
+  display:flex!important;flex-wrap:wrap;gap:8px;align-items:center;
+  max-height:none;overflow:visible;
+  margin:0;padding:10px 14px 12px;
+  border-radius:var(--practice-sheet-radius,22px) var(--practice-sheet-radius,22px) 0 0;
+  background:#0f1a20f5;border:1px solid #d7e7d838;border-bottom:0;
+  box-shadow:none;opacity:1;pointer-events:auto;z-index:5;
+}
+.portrait-layout.tools-open .status-strip[data-drawer-companion]>span{display:block;flex:1 1 100%;font-size:11px;color:#c5d6cb}
+.portrait-layout.tools-open .status-strip[data-drawer-companion] button{
+  min-height:40px;padding:8px 12px;border-radius:10px;font-size:12px;
+  background:#edf5e912;border:1px solid #d7e7d838;
+}
+/* Closed: hide drawer chrome on portrait (title-hit still toggles). */
+.portrait-layout:not(.tools-open) .studio-drawer[data-drawer=sheet]{visibility:hidden}
 .portrait-layout .submit-hit{transition:transform .16s ease,background .16s ease}
 .portrait-layout .submit-hit:active{transform:scale(.96);background:#dbe9e520}
-.portrait-layout[data-software-keyboard=true] .studio-tools,
+.portrait-layout[data-software-keyboard=true] .studio-drawer,
 .portrait-layout[data-software-keyboard=true].tools-open .status-strip{display:none!important}
+/* Desktop rail drawer is a no-op wrapper — keep classic top tools. */
+.studio-drawer[data-drawer=rail]{display:contents}
+.studio-drawer[data-drawer=rail] .studio-drawer-grabber{display:none}
 @media(prefers-reduced-motion:reduce){
-  .portrait-layout .studio-tools,.portrait-layout.tools-open .status-strip,.portrait-layout .submit-hit{transition:none!important;translate:none!important}
+  .portrait-layout .studio-drawer[data-drawer=sheet],.portrait-layout .submit-hit{transition:none!important;translate:none!important}
+}
+/* Practice-compact: Check is the sole primary CTA; pace lives in typing settings. */
+.portrait-layout[data-practice-compact=true] .typing-follow-toolbar[data-compact-secondary]{
+  opacity:.92;
+}
+.portrait-layout[data-practice-compact=true] .typing-follow-toolbar[data-compact-secondary] button{
+  min-height:36px;padding:4px 8px;font-size:11px;border-radius:8px;
+  background:#102028aa;border:1px solid #d7e7d828;
 }
 
 

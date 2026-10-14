@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "a23753ac16403992af71ad8529bd551ac47ee600",
-  "source_file_count": 687,
-  "direct_source_file_count": 683,
+  "source_projection_tree_sha1": "6254b1d7633710dcd3aacce2d2e0bd0325f8e7df",
+  "source_file_count": 688,
+  "direct_source_file_count": 684,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 33887,
-      "git_blob_sha1": "8f9aeea6055ded1283e4d4cfd07f0b31fcf9f066",
-      "sha256": "4dd5f5e83e337ff7c063a55eb3c1f66a1a552acb898ed290a31b9d3f0863af33"
+      "bytes": 36701,
+      "git_blob_sha1": "771706416577a280e584b6c09234d2246876c1a4",
+      "sha256": "4202f2a24f9a11edc7d6f6e8151e598486d08634ff00d31964e6ceec50fee26d"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1899,6 +1899,13 @@
       "sha256": "c7591a536724b7068aa27a3559749ab1125460d2c1bed5bf1ae337a5d1ed6b01"
     },
     {
+      "path": "scripts/hud-redesign-qa.mts",
+      "mode": "100644",
+      "bytes": 4057,
+      "git_blob_sha1": "646f0c1c46e8d0b155a35046d8471c6f7e051776",
+      "sha256": "54282800cda9b4159ed5c77d3a44befb3c526afa570d3dcd1178a403af03cf0a"
+    },
+    {
       "path": "scripts/native-input-projection-fixture.mjs",
       "mode": "100644",
       "bytes": 7754,
@@ -2167,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 248958,
-      "git_blob_sha1": "4f0dbc2fa02b4ba082eefa50d9474fadd37d46dc",
-      "sha256": "46f201a032c3f84d612c272255992f16daaff8d15ad8a5bc1fcf8bc219dd5d69"
+      "bytes": 249499,
+      "git_blob_sha1": "fccc45dd083b191a56edc8fede1d8aaa8b56058d",
+      "sha256": "37598f3572d96001d9978db4dcebb38c7c46deff2abdd456bc27f90380e67816"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4253,9 +4260,9 @@
     {
       "path": "studio/scene/camera-control.ts",
       "mode": "100644",
-      "bytes": 2086,
-      "git_blob_sha1": "14b4fc5cddd16b9092c477b0f0271459c5fa2870",
-      "sha256": "68593b8bf9d0ee04e38724cc4da69e724c1ec51560065a9f04179d8d6b3aedf6"
+      "bytes": 2489,
+      "git_blob_sha1": "f552e18d03f404f973497e0f2b3a36873e96d4c8",
+      "sha256": "a6bd4bebf45c62d22c335995d959d986515e0b3da318c45ca2f4334104dd55c0"
     },
     {
       "path": "studio/scene/centered-feedback.test.ts",
@@ -4610,23 +4617,23 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 13458,
-      "git_blob_sha1": "cb2a3de0a3cdd749462a02c69e43adf20b417db3",
-      "sha256": "af9d298808b7e4dc75d9965a25aa7c47b0efe561cd780cd73ddbbc40c2ff144b"
+      "bytes": 14530,
+      "git_blob_sha1": "40a6fa7245cb626129f5e46a3d54b39750ffeef3",
+      "sha256": "98be51a6b9bec632bd7f0a00bc1cdd51617db031f21aa65006b5fcf95417e253"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
       "mode": "100644",
-      "bytes": 9160,
-      "git_blob_sha1": "be8d385f0984071cd0766109b0de77936409b426",
-      "sha256": "0f01899a7ef2712ccf2c60306c1b459754838751564e43feb444df964a2e8809"
+      "bytes": 9272,
+      "git_blob_sha1": "f71d946fc496e02c28bc2d129c1b735a49b82e07",
+      "sha256": "d200dca596993e858f186c4be732c1f09bd9dd909fc1a83536537330a3a98aba"
     },
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 21473,
-      "git_blob_sha1": "690c71efada86de6c18cfe60b5cd86aeff1cc4d8",
-      "sha256": "8defcf7d75f77d6ca63378a6d23485b664b75ab7de7d80425987ba8443b8e964"
+      "bytes": 21480,
+      "git_blob_sha1": "e55833e2e40dd49b2caffc28de37d703ea28f98b",
+      "sha256": "b46ff7efe008c88c33f159bb2be508db2aa9e72a751f257695c555035c86c596"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",
@@ -4708,9 +4715,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31201,
-      "git_blob_sha1": "ea256f70a6880bf512753148c5571c4aaad4398a",
-      "sha256": "8570b18e909cbb6e4431732de7a305db5b7fc3f85641034e8c8ecce615b9f2d8"
+      "bytes": 31405,
+      "git_blob_sha1": "a127b36e8612cbdc433375355b6440b1b540475c",
+      "sha256": "9f633ef78e5c206fa79cf0bd38ea77a157d0669194752942209146e8e49efe1c"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

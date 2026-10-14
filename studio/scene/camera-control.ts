@@ -1,6 +1,6 @@
 import type {Rect} from './transparent-layout';
 
-type CameraGeometry={width:number;height:number;inset:Rect;console:Rect;title:Rect;trend?:Rect;inputCard?:{input:Rect;helper:Rect;overlayKeyboard?:boolean;overlayControls?:boolean}};
+type CameraGeometry={width:number;height:number;inset:Rect;console:Rect;title:Rect;trend?:Rect;practiceCompact?:boolean;inputCard?:{input:Rect;helper:Rect;overlayKeyboard?:boolean;overlayControls?:boolean}};
 type CameraState='off'|'requesting'|'on'|'error';
 export interface CameraViewport {width:number;height:number}
 const clamp=(n:number,min:number,max:number)=>Math.max(min,Math.min(max,n));
@@ -13,6 +13,14 @@ export function cameraControlGeometry(g:CameraGeometry,camera:CameraState,layout
  const cssHeight=typeof options.cssHeight==='number'&&Number.isFinite(options.cssHeight)&&options.cssHeight>0?options.cssHeight:g.height;
  const sx=cssWidth/g.width,sy=cssHeight/g.height;
  const hitW=44/sx,hitH=44/sy,visualW=32/sx,visualH=32/sy;
+ // Phone practice-compact: park below the trend plate on the right rail so the
+ // icon never rides on the waveform (notch / trend clash).
+ if(g.practiceCompact&&g.trend){
+  const cx=g.width-hitW/2-8/sx;
+  const cy=g.trend.y+g.trend.h+hitH/2+8/sy;
+  return{compact,visual:{x:cx-visualW/2,y:cy-visualH/2,w:visualW,h:visualH},
+   hit:{x:cx-hitW/2,y:cy-hitH/2,w:hitW,h:hitH}};
+ }
  // Keep the old inset's upper-right anchor when space allows, without leaving
  // an invisible large hit box or expanding across title/input controls.
  const inside=!!g.inputCard?.overlayControls&&!!g.trend;

@@ -133,7 +133,7 @@ test('live event labels and trend units fit their compact panels without sharing
   assert.ok(title.bottom<unit.top);assert.ok(unit.left>=g.trend.x&&unit.right<=g.trend.x+g.trend.w);
   const flowLabels=result.labels.filter(label=>['COMMITTED EVENTS','/ 10s','EVENTS / 10s'].includes(label.text));
   assert.equal(flowLabels.length,String(commits10s).length<=3?2:1);
-  for(const label of flowLabels){assert.ok(label.size>=9.999);assert.ok(label.left>=g.metrics.x&&label.right<=g.metrics.x+g.metrics.w,label.text);assert.ok(label.bottom<g.metrics.y+92*(g.metrics.w/309),label.text)}
+  for(const label of flowLabels){assert.ok(label.size>=9.999);assert.ok(label.left>=g.metrics.x-1e-6&&label.right<=g.metrics.x+g.metrics.w+1e-6,label.text);assert.ok(label.bottom<=g.metrics.y+g.metrics.h+1e-6,label.text)}
   if(flowLabels.length===2)assert.ok(flowLabels[0].bottom<flowLabels[1].top);
  }
  }

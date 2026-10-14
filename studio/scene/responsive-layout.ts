@@ -48,13 +48,15 @@ export function portraitRects(height=PORTRAIT_HEIGHT):Record<Movable,Rect>{
  if(isPortraitPracticeCompact(height)){
   const H=resolvePortraitHeight(height),scale=hudScale(),media=portraitOverlayMedia(H);
   const consoleRect=portraitOverlayConsole(H);
-  const metricsH=168*scale,metricsY=Math.min(consoleRect.y-metricsH-10,media.h*0.55);
+  // Left telemetry column: Goal → Flow (clears the contain video plate).
+  const goalY=expand(H,48,64),goalSize=264*scale,flowH=Math.max(72,Math.min(168*scale,104));
   const subH=Math.max(44,49*scale);
   return{
    media,
-   inset:{x:416-240*scale,y:Math.max(media.y+12,portraitOverlayTitle(H).y+portraitOverlayTitle(H).h+4),w:240*scale,h:152*scale},
-   metrics:{x:14,y:Math.max(media.h*0.42,metricsY),w:309*scale,h:metricsH},
-   // Two readable caption lines must fit above the typing card overlay.
+   // Expanded camera PiP rests clear of the top HUD; compact icon uses camera-control.
+   inset:{x:416-240*scale,y:Math.max(media.y+12,goalY+goalSize+8),w:240*scale,h:152*scale},
+   metrics:{x:14,y:goalY+goalSize+8,w:goalSize,h:flowH},
+   // Captions stay just above the typing overlay on the video plate.
    subtitle:{x:65,y:Math.max(media.y+8,consoleRect.y-subH-10),w:300,h:subH},
   };
  }
