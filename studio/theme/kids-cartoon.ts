@@ -25,7 +25,8 @@ export const PRO_EDITION:EditionSurface={
 
 /** Softer, warmer cartoon pass — still glanceable game HUD, not a toy strip. */
 export const KIDS_EDITION:EditionSurface={
- id:'kids',tone:'#ffb347',traceTone:'#7ad7ff',plateAlpha:1.18,breathScale:1.28,plateRadius:22,warmLift:.12,
+ // continue16 — higher glance contrast on dark plates (warm amber + brighter trace); roles unchanged.
+ id:'kids',tone:'#ff9e2e',traceTone:'#5ecfff',plateAlpha:1.22,breathScale:1.3,plateRadius:22,warmLift:.15,
 };
 
 export function editionSurface(id:StudioVisualEdition|undefined):EditionSurface{

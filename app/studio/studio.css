@@ -996,3 +996,42 @@
 .submit-hit{border-radius:18px}
 .typing-follow-toolbar{gap:10px;filter:drop-shadow(0 1px 3px #06101677)}
 
+/* continue16 — instrument / chart / kids contrast micro-craft (no video caption capsule) */
+.studio-dialog .session-chart{
+  background:linear-gradient(168deg,#16242cb8 0%,#101a20d8 55%,#0c151ad0 100%);
+  border:1px solid #c9e2d850;
+  box-shadow:inset 0 1px 0 #ffffff14,0 10px 28px #00000030;
+}
+.studio-dialog .review-stats strong{
+  text-shadow:0 0 26px #c4fc5748,0 1px 0 #06101688;
+}
+.studio-stage[data-visual-edition=kids]{
+  box-shadow:0 36px 120px #000000b8,0 0 0 1px #ffd59a28,inset 0 1px 0 #ffe6b418;
+}
+.studio-stage[data-visual-edition=kids] .studio-tools{
+  border-color:#ffc56e88;
+  box-shadow:0 18px 44px #0009, inset 0 1px 0 #ffe6b448;
+}
+.studio-stage[data-visual-edition=kids] .hud-glyph{
+  border-color:#ffc56e66;background:#1c2816d0;color:#ffe8c8;
+  filter:drop-shadow(0 1px 2px #061016bb) drop-shadow(0 0 14px #ffb34728);
+}
+.studio-stage[data-visual-edition=kids] .hud-glyph:hover,
+.studio-stage[data-visual-edition=kids] .hud-glyph[data-active=true]{
+  background:#ffb34722;color:#ffe8c8;box-shadow:inset 0 0 0 1px #ffc56e66;
+}
+.studio-page[data-visual-edition=kids] .typing-pace-chip{
+  border-color:#ffc56e77;color:#ffe8c8;
+  background:linear-gradient(165deg,#2e2616f0,#1c1810e8);
+  box-shadow:0 4px 18px #00000070,inset 0 1px 0 #ffe6b428;
+}
+.studio-page[data-visual-edition=kids] .typing-pace-chip[aria-expanded=true]{
+  border-color:#ff9e2ecc;background:linear-gradient(165deg,#ff9e2e32,#1c1810f0);color:#fff0d8;
+}
+.studio-page[data-visual-edition=kids] .studio-tools-sheet,
+.studio-page[data-visual-edition=kids] .tools-drawer-grid,
+.studio-page[data-visual-edition=kids] .hud-popover{
+  border-color:#ffc56e55;
+  background:linear-gradient(168deg,#2a2418f2 0%,#1a1810f8 52%,#14120cfb 100%);
+  box-shadow:0 22px 56px #00000078,inset 0 1px 0 #ffe6b430;
+}
