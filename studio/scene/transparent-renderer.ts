@@ -159,7 +159,15 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  if(!v.listeningDisplay?.active)txt(c,v.referenceGuideUnavailable?t('scene.referenceUnavailable'):v.referenceGuide?t('scene.referenceActionCompact'):t('scene.dictationActionCompact'),header.reference.x,card.helper.y+card.helper.h*.75,Math.max(12,12/card.cssScale),'#c8d8d2');
  if(listening){if(!listening.hidden)paintInputText(c,card,{...v,draft:listening.text,caret:listening.text.length,selectionEnd:listening.text.length,inputFocused:false,composition:false,nativeInputDisplay:undefined,inputGuide:undefined,referenceGuide:undefined,scrollLeft:0,scrollTop:0});paintPassiveKeyboard(c,card,{visible:v.keyboardFeedback?.visible!==false,codes:listening.hidden||!listening.targetKey?[]:[listening.targetKey],committedUntil:0,composing:false},now,v.reducedMotion)}else{paintInputText(c,card,{...v,checkedAttempt:feedback});paintPassiveKeyboard(c,card,v.keyboardFeedback,now,v.reducedMotion)}
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
- const button=card.submit;if(!listening){c.save();c.beginPath();c.roundRect(button.x,button.y,button.w,button.h,8/card.cssScale);c.fillStyle='#dbe9e512';c.fill();c.strokeStyle='#dbe9e555';c.lineWidth=1/card.cssScale;c.stroke();c.restore();(()=>{const checkLabel=feedback?.errors===0?`${t('hud.next')} →`:`${t('hud.check')} ↵`;const checkSize=Math.min(13/card.cssScale,Math.max(11/card.cssScale,button.w/(checkLabel.length*.55)));centeredText(c,checkLabel,button.x+button.w/2,button.y+button.h/2,checkSize,'#e0eed7',400,'center')})()};
+ const button=card.submit;if(!listening){
+  // Same visual language as keyboard/settings hud-glyph (44 hit, ~20px stroke icon).
+  const cx=button.x+button.w/2,cy=button.y+button.h/2,r=Math.min(button.w,button.h)/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
+  c.save();c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.fillStyle='#e4f3de12';c.fill();c.restore();
+  c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.beginPath();
+  if(feedback?.errors===0){c.moveTo(cx-icon*.22,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.22);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.22)}
+  else{c.moveTo(cx-icon*.28,cy+icon*.02);c.lineTo(cx-icon*.05,cy+icon*.28);c.lineTo(cx+icon*.32,cy-icon*.28)}
+  c.stroke();c.restore();
+ };
  const statusSize=Math.max(portrait?12:14,12/card.cssScale),statusLineHeight=Math.max(portrait?16:18,16/card.cssScale);
  const feedbackLines=feedback?inputFeedbackLines(feedback,locale):[];
  if(activeReward&&feedback){const old=s?.attempts.filter(item=>item.cueId===feedback.cueId&&item.attemptId!==feedback.attemptId).at(-1),improved=old&&feedback.errors<old.errors;const message=feedback.gain>0?t('scene.confirmedGain',{count:feedback.gain}):improved?t('scene.fewerErrors',{count:old.errors-feedback.errors}):feedback.errors===0?t('scene.complete'):t('scene.checked');

@@ -77,9 +77,8 @@ export function inputCardGeometry(base:StudioGeometry,options:InputCardOptions={
  const foldKb=practiceCompact&&base.portrait&&Number.isFinite(options.availableHeight)&&options.availableHeight!>0&&options.availableHeight!/scale+1<base.height;
  const header=Math.max(practiceCompact?(foldKb?28:36):44,44/scale),inputLines=base.portrait?(practiceCompact?(foldKb?1:2):3):2,inputHeight=lineHeight*inputLines+paddingY*2;
  const input={x:x+outer,y:y+header,w:width-outer*2,h:inputHeight};
- // Phone: Check stays primary but not a half-row slab (44px min touch).
- const submitWidth=base.portrait?Math.max(touch,practiceCompact?56/scale:68/scale):Math.max(touch,86/scale);
- const submit={x:x+width-outer-submitWidth,y:input.y+input.h+gap,w:submitWidth,h:touch};
+ // Match keyboard/settings hud-glyph: 44 CSS px visual + hit (no wider CTA slab).
+ const submit={x:x+width-outer-touch,y:input.y+input.h+gap,w:touch,h:touch};
  const modeToggle={x:submit.x-touch-gap,y:submit.y,w:touch,h:touch},toggle={x:modeToggle.x-touch-gap,y:submit.y,w:touch,h:touch};
  const stacked=toggle.x<x+outer;if(stacked){toggle.x=x+outer;modeToggle.x=toggle.x+touch+gap;submit.y+=touch+gap;}
  const card={x,y,w:width,h:submit.y+touch+gap-y};

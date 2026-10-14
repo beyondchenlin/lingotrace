@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "06b770b1462f71575ce1470f7e381699b1a666ab",
+  "source_projection_tree_sha1": "599ae73d33352a600c68269bcf6308bcd7fc1fb8",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 36775,
-      "git_blob_sha1": "5827fc7b6cfedbd185f0b0acd8c703d61111f534",
-      "sha256": "c34608558c532544eb22e0d9741a301488bfad350f2ed77f4d3f61e24372b163"
+      "bytes": 39814,
+      "git_blob_sha1": "6f47025020514630513d9e069563ab26267b9914",
+      "sha256": "47c5ea340dbf7d4ea6f262a11b5249763fdf30301dc1e505088de549a9d8bb84"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 249713,
-      "git_blob_sha1": "24aeb88d6d7e2afad26b673b33281aca81278517",
-      "sha256": "c49315d11bedb36b8b13b8a217652881aea90de8abbd07c8b1c1a0ed99dd6d4a"
+      "bytes": 249929,
+      "git_blob_sha1": "18255e764b801eec4dfdcac85591905bc1041f97",
+      "sha256": "c44273aa7c6147697547937a38709dda4211148214a47f19e74e264effa6c2e5"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -3413,9 +3413,9 @@
     {
       "path": "studio/core/typing-follow-studio.test.ts",
       "mode": "100644",
-      "bytes": 59895,
-      "git_blob_sha1": "7510b2cdee70107c4babe03a1c29bc7155ba6ae4",
-      "sha256": "fb5127e81a4c7171ae61334fe5a95024f552bce3a41cb62eaff1aca64b9cc33c"
+      "bytes": 59945,
+      "git_blob_sha1": "bcc86fe23705fbbdc80b2c14a9a63d4b87e9d6d0",
+      "sha256": "db532f64d0997fbbc5250e142f9cab4bae0a09989e4f3765fead08ab882313ec"
     },
     {
       "path": "studio/core/zero-reference.test.ts",
@@ -3819,9 +3819,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 85473,
-      "git_blob_sha1": "fcf1878a6d6983d059e7ef388481c9cf00f3b10e",
-      "sha256": "d6e4b3a1f277732863e86b12a6748889104138e283c9af886f0912d522107ac7"
+      "bytes": 85525,
+      "git_blob_sha1": "e3a2d6dad3f48066f3e7b970fdec33afdedefec1",
+      "sha256": "c57c9441e535f56da1a82b2449929001826165833bb43ad932e8d06ac9ca0908"
     },
     {
       "path": "studio/i18n/react.tsx",
@@ -4393,9 +4393,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 49502,
-      "git_blob_sha1": "650794f9bd1084d8fb5db4a4f3fd3d07932a6f87",
-      "sha256": "aa7bbf7c673046f33a0e4ad0174b0f532a4f8523111b2a0ff1988e6132439e76"
+      "bytes": 49391,
+      "git_blob_sha1": "20e10399a46943d876c84c8aa0cfe96d2ce28c2c",
+      "sha256": "db9ef563c79bf3818b59ed7ff43c8312435b1a5234f3ae1299060aa8cded3ce6"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4715,9 +4715,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31539,
-      "git_blob_sha1": "a567693b100d7eaf03afbf5e876665e47239948d",
-      "sha256": "a547fc31959af0819e2238ef91d903f752e62ad268ca8ba2116f42712dd8178b"
+      "bytes": 31780,
+      "git_blob_sha1": "989b25fdb8e5a407518b9518810eb496a2f18895",
+      "sha256": "e4d9302dc5d00cee775edf19f1cf8f506a12f0fac946d7a3a7818b3c013d6ed9"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
