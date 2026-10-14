@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "6707e4247e3ae3277e9afbb46545098767cfa3cc",
+  "source_projection_tree_sha1": "bf1e3ae48c31080607b019ec28c83d1fe786aa68",
   "source_file_count": 689,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 55668,
-      "git_blob_sha1": "20b9a35f1d3c08947a2165684c4a7a921e83843f",
-      "sha256": "e700de7c3116cb8725674e9aaf7541d1a7d784a9dde96eb2db43f570ddb98f66"
+      "bytes": 65685,
+      "git_blob_sha1": "dd2f6053980b1ab9578cdfe1abc5780477e34b5e",
+      "sha256": "b27fc78cfef4660b1b8a26b3805c925ccc517f936a2139291b932795ca12c6d6"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1999,16 +1999,16 @@
     {
       "path": "studio/carousel/CardCarousel.tsx",
       "mode": "100644",
-      "bytes": 7953,
-      "git_blob_sha1": "a498692e5c5712c30fd78f6f8855ae76608e982e",
-      "sha256": "42127e00e0198714b5128bcbbe5c2d11816152a78add4e5af9a3b25bfa4dbb8b"
+      "bytes": 8172,
+      "git_blob_sha1": "7269a43843d78ae5cdcb130da289e8608b5a46c9",
+      "sha256": "7693be87de4d37c69c0e0b22c1375b582ff22c9f84bcfa4c6303a3ec1ab7f786"
     },
     {
       "path": "studio/carousel/carousel.css",
       "mode": "100644",
-      "bytes": 5428,
-      "git_blob_sha1": "9a7a726fbbcc6e0509be916c36629810e933ff1f",
-      "sha256": "3f391cb966867c0fe6ec2f2b13ba412dc47efb6f5be5f5fe8b02fe60a2f1e5b8"
+      "bytes": 9433,
+      "git_blob_sha1": "5686ada9b6de75c268aadf8b19d7782b32ca7f92",
+      "sha256": "e9979d1821f0462e8804b026dc76e9c6522e8662ea669934c43dd56238c751e7"
     },
     {
       "path": "studio/carousel/motions.test.ts",
@@ -2167,16 +2167,16 @@
     {
       "path": "studio/components/ReviewTaskPanel.tsx",
       "mode": "100644",
-      "bytes": 13436,
-      "git_blob_sha1": "36a30b4412530f3949ea409096bd252d2932fd05",
-      "sha256": "05d79db4715b5e6dc7a16494eb6ee9b4d7917e00d029890898bed68aa749e030"
+      "bytes": 13466,
+      "git_blob_sha1": "ea75138c2be179e23331db8f963b71177a5186cc",
+      "sha256": "1c2d5f644f2d52f864943096039f9b29351e908b558b86f76e7cfb65445b61c3"
     },
     {
       "path": "studio/components/RoundReview.tsx",
       "mode": "100644",
-      "bytes": 4477,
-      "git_blob_sha1": "8cfa598c8791cb0cd32e5fb11e0af7c7569ef285",
-      "sha256": "d8dd1cc94edc94dc00670f89ae52edf0a231524aa58f2ecba39ca1e8de50f1d4"
+      "bytes": 4590,
+      "git_blob_sha1": "5274a146ebdc9649f6b25ca02142b6b7b9869a5e",
+      "sha256": "a4174e8491160c62ec536a1ee5669e7638f8e1f4bf4564eb445c06924bfff46d"
     },
     {
       "path": "studio/components/SegmentHistoryPanel.tsx",
@@ -2188,9 +2188,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 264066,
-      "git_blob_sha1": "2a62791d47d54842eedee50a198b2d2fbf7ae0af",
-      "sha256": "918b59d5371752a74afff7c047ffbcc83730c98685c1ae28e4ab79804066e6fe"
+      "bytes": 267566,
+      "git_blob_sha1": "1bdb6bbbc9812d54211328d5ca9458a2db63e9d5",
+      "sha256": "10f665fbdf5efe6c9fe589b6c4695afcc07227464ece4cd420fdbf311f4d03dd"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -3833,9 +3833,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 90881,
-      "git_blob_sha1": "a3468d1799758bcae3bd48900cbf638e59bb902a",
-      "sha256": "203a1cad4dd861d912d7d984f5e7757bf6792e6621868cb6e3260bd2d6b96c1d"
+      "bytes": 92472,
+      "git_blob_sha1": "62118e58106b04c4da2d148a6b2041e76219ddc9",
+      "sha256": "e4f7909eb9d22fae998f967196fb5a60cffb78f762f875170ade7a89394ba2c7"
     },
     {
       "path": "studio/i18n/react.tsx",
