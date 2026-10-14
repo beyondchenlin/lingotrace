@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "b9e93f138d7345f747f0053b55072dd1f73491df",
-  "source_file_count": 736,
+  "source_projection_tree_sha1": "be0b9621c3270b6c4dde45a66b45d4dd5f309f4f",
+  "source_file_count": 738,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/LayoutEditor.tsx",
       "mode": "100644",
-      "bytes": 7489,
-      "git_blob_sha1": "d98c30ad9cc9b797b9fb8e21e6b07e7b0b4f3fd6",
-      "sha256": "39c2edcaa8ed5b3a1b16ac467eb5dba9c3b971f9e196458a9d63bdd34dae6c68"
+      "bytes": 7921,
+      "git_blob_sha1": "7edd31a5725bae4188def03b3a5ed0cb4d0fb5ee",
+      "sha256": "134d3e27c35d9bf63f9c0b69bab37a0ce3bc9924185fa3325b63d8802d93a39e"
     },
     {
       "path": "studio/components/LayoutPlanFiles.tsx",
@@ -3315,9 +3315,9 @@
     {
       "path": "studio/core/studio-layout-transactions.test.ts",
       "mode": "100644",
-      "bytes": 9465,
-      "git_blob_sha1": "589457d98108edfb012ad07b6b0e04cfd0ba067e",
-      "sha256": "a0f0fc6547804c54710131d4d4a87cc459b4bcc3d099cdbedc3547b4ba0709ec"
+      "bytes": 10199,
+      "git_blob_sha1": "ff018c6ab504e4ee3708f3d4a9c07e1f865aef1d",
+      "sha256": "2e212f1ef74920d0f8c996bbda2f865f8e6a25a265b022912fba0dc6f8d69261"
     },
     {
       "path": "studio/core/studio-material-consistency.test.ts",
@@ -3959,9 +3959,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 94861,
-      "git_blob_sha1": "09650fa614d6a774b3c850a0d5af3dced73bb53d",
-      "sha256": "ae38988175d9f713a93f9a9612542587686f0bf07f4392b00926146f5c77dbc7"
+      "bytes": 97183,
+      "git_blob_sha1": "00dec0c9fbb93953bbd8ec5af7512c1a78978ba2",
+      "sha256": "730eeafe3ebad7cce69dbd82869d9990c6b6e3328d5cd04268fa8954785d9c32"
     },
     {
       "path": "studio/i18n/react.tsx",
@@ -5159,6 +5159,20 @@
       "bytes": 1138,
       "git_blob_sha1": "4b7703f1ad10f24dbda7ac00d6bc20639c714346",
       "sha256": "dc90f873205b1a8990f4cba6678f330ca3f7ae44503a8452616476be05ec2ce1"
+    },
+    {
+      "path": "qa/prd-continue32-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 6087,
+      "git_blob_sha1": "8b49f51958cde80bcdfb1b3069d265bbeddd3982",
+      "sha256": "d9af2962835a95ad329e80546916053284da706bb0e6b75d1c4467f9a82e683e"
+    },
+    {
+      "path": "scripts/prd-continue32-qa.mts",
+      "mode": "100644",
+      "bytes": 1444,
+      "git_blob_sha1": "3e53a07ccb358125c95d7fb55dd161f8118f566a",
+      "sha256": "8982de3eb3a3743c7f909b721a2426c195800c63877471669c85cbafde68dd6e"
     }
   ],
   "large_resources": [
