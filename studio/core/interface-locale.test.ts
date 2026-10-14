@@ -63,6 +63,15 @@ test('known diagnostics translate without altering raw failures, unknown details
  assert.equal(translate('zh-CN','npsTransport.load'),'核验并加载同源兼容视频');
  assert.equal(translateKnownUi('en','画布读取失败：浏览器未提供 2D 画布。'),'Canvas read failed: The browser did not provide a 2D canvas.');
  assert.equal(translateKnownUi('en','原生视频加载或解码失败。 code=4'),'Native video load or decode failed. code=4');
+ assert.equal(translateKnownUi('en','校正原片未能核验。'),'The corrected original could not be verified.');
+ assert.equal(translateKnownUi('en','新轮复测准备未完成。'),'New-round retest preparation did not finish.');
+ assert.equal(translateKnownUi('en','本机参考版本暂时无法读取。'),'Local reference versions could not be read right now.');
+ assert.equal(translateKnownUi('en','作答已留在正常练习中，复习关联与排期尚未提交。'),'The answer stayed in normal practice; the review link and schedule were not submitted yet.');
+ assert.equal(translateKnownUi('en','实际原片尚未核验。'),'The actual original has not been verified yet.');
+ assert.equal(translateKnownUi('en','实际原片时长与固定校正版不一致。 [duration; actual=10; expected=11; tolerance=0]'),'Actual original duration does not match the fixed corrected version. [duration; actual=10; expected=11; tolerance=0]');
+ assert.equal(translateKnownUi('en','复测媒体在最终交接前已失效。 [media] [range]'),'Retest media expired before the final handoff. [media] [range]');
+ assert.equal(translateKnownUi('en','真人课程解码已中断，播放和作答暂停。请重新加载当前课程；未切换其他素材。 code=4'),'Live-footage decoding interrupted; playback and answering paused. Reload the current course; no other material was switched. code=4');
+ assert.equal(translateKnownUi('zh-CN','The corrected original could not be verified.'),'校正原片未能核验。');
 
  const engine=new TrainingEngine();engine.input('My English draft stays exactly the same.');const before=JSON.stringify(engine.getSnapshot());
  for(const locale of ['en','zh-CN'] as const){translate(locale,'hud.check');translateKnownUi(locale,raw)}
@@ -203,4 +212,13 @@ test('continue10 ListeningSessionHistory / LayoutPlanFiles / ContextBookmarkLibr
  assert.ok(!layout.includes('<h3>保存与恢复布局</h3>'));
  assert.ok(library.includes("t('library.title')")&&library.includes('useStudioLocale'));
  assert.ok(!library.includes('aria-label="本机语境收藏"'));
+});
+
+test('continue13 media-transport-check metadata uses panelsEnglish catalog',async()=>{
+ const page=await readFile(new URL('../../app/media-transport-check/page.tsx',import.meta.url),'utf8');
+ assert.ok(page.includes("panelsEnglish['npsTransport.title']"));
+ assert.ok(page.includes("panelsEnglish['npsTransport.lede']"));
+ assert.ok(!page.includes("'同源视频传输检查 · LingoTrace'"));
+ assert.equal(translate('en','npsTransport.title'),'Same-origin video transport check');
+ assert.equal(translate('zh-CN','npsTransport.title'),'同源视频传输检查');
 });

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import NpsTransportCheck from '@/studio/components/NpsTransportCheck';
+import { panelsEnglish } from '@/studio/i18n/messages-panels';
 
 export const metadata: Metadata = {
-  title: '同源视频传输检查 · LingoTrace',
-  description: '独立核验固定 NPS 视频的同源直接播放与画布读取，不产生学习记录。',
+  title: `${panelsEnglish['npsTransport.title']} · LingoTrace`,
+  description: panelsEnglish['npsTransport.lede'],
 };
 
 export default function MediaTransportCheckPage() {

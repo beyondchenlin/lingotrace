@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "552c50a58ba7ac8fc45a23ba063248107a207827",
-  "source_file_count": 704,
-  "direct_source_file_count": 700,
+  "source_projection_tree_sha1": "c57de0803b1a6edb885e478b042204e65a25c756",
+  "source_file_count": 706,
+  "direct_source_file_count": 702,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -53,9 +53,9 @@
     {
       "path": "app/media-transport-check/page.tsx",
       "mode": "100644",
-      "bytes": 398,
-      "git_blob_sha1": "70d28d658f2cf8b001d74a173480712c2782a005",
-      "sha256": "731b5f766a75fd1ab345f2c5be7d70d3a9780ea909157ab6cee28adaf274db84"
+      "bytes": 415,
+      "git_blob_sha1": "e11142d8a5b1cfb60fe2c0c1fcc7fabfd63e2f0a",
+      "sha256": "06b480ba47c8db26232584c09fcc0bb06c51ed71317a8380e4c35d30f38ac002"
     },
     {
       "path": "app/portrait-preview/page.tsx",
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 66633,
-      "git_blob_sha1": "6e7ccfa4e7e0aa324b966d31b409d976f3639f94",
-      "sha256": "5143c0894fd2b3853349fbf868e09683d9474b05edd92bf38d614bc2c2ad1219"
+      "bytes": 66719,
+      "git_blob_sha1": "5c1d682e30755f8166f6b642fce7408f1969032f",
+      "sha256": "312a856d688bc5d53f4a35f9fc92523cc26f6264292675d667fcbab9c4cb96b8"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1843,6 +1843,13 @@
       "sha256": "ee8d0acf7274a6813372377da399b58bf9ba6a9f1d5545609d06c3e2a375a3f4"
     },
     {
+      "path": "qa/prd-continue13-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 6966,
+      "git_blob_sha1": "ae56eb610723ef334791dda0bba53de859988fba",
+      "sha256": "4cf3d75cb29912ad1caa4f3bf9698f5d8c4508142ba72ba8569be74ca64675df"
+    },
+    {
       "path": "qa/prd-continue7-acceptance.mjs",
       "mode": "100644",
       "bytes": 5333,
@@ -1988,6 +1995,13 @@
       "bytes": 3646,
       "git_blob_sha1": "2dc0748fae008a3467e4c28b663fc92bd596fb6a",
       "sha256": "efc27ac26a42f736b7a2aa33c8040e80115e2f58a96593fc33cb0670c2ee2fad"
+    },
+    {
+      "path": "scripts/prd-continue13-qa.mts",
+      "mode": "100644",
+      "bytes": 3646,
+      "git_blob_sha1": "28daca21d7a49ac344386cc1ea981c39744d1d58",
+      "sha256": "ee050f90acfa015f851b12a37d80cc676ff89d5f956e114b0066bf6893e1e705"
     },
     {
       "path": "scripts/prd-continue4-qa.mts",
@@ -2538,9 +2552,9 @@
     {
       "path": "studio/core/interface-locale.test.ts",
       "mode": "100644",
-      "bytes": 18380,
-      "git_blob_sha1": "51289b89f5d74b52a69132c694a1b00bd1593782",
-      "sha256": "a38f0fbc5f08eaa29f4d86e8670ea2c5846b0f68368cabf2551491426490dc6f"
+      "bytes": 20479,
+      "git_blob_sha1": "b78dc162ae4203ab8802bcaac843818f804c5e48",
+      "sha256": "90cdf1c38371a5c2552d9e98308340004c3575855fe5ec02b09c4bf2046171e3"
     },
     {
       "path": "studio/core/layout-plan-files-ui.test.ts",
@@ -3896,9 +3910,9 @@
     {
       "path": "studio/i18n/messages-diagnostics.ts",
       "mode": "100644",
-      "bytes": 56680,
-      "git_blob_sha1": "a94337151ade6809f461aa50aae835060e043b1c",
-      "sha256": "555cef955e1a205fca8c69be509ff5c744f8a3199a5cc52c81b7d4d0c07bb637"
+      "bytes": 61809,
+      "git_blob_sha1": "599ddc6be42c868c37c5494fbf728cc035339cb3",
+      "sha256": "a8d62ebb1f5acfaf50aea89dac4d7ba12aa7861d2c287954faf35dec56d0c33f"
     },
     {
       "path": "studio/i18n/messages-panels.ts",
