@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { StudioLocaleProvider, useStudioLocale } from '../i18n/react';
 import { NPS_COURSE_MEDIA, NPS_MATERIAL } from '../core/builtin-material';
 import {
   createOriginalCourseMediaPool, isVerifiedCourseMediaLease,
@@ -18,10 +19,6 @@ export type NpsTransportCheckState = Readonly<{
 const EMPTY: NpsTransportCheckState = {
   phase: 'idle', source: '', currentSrc: '', actualSha256: '', duration: null,
   width: 0, height: 0, currentTime: 0, error: '', nativeError: '', canvasResult: '', frameDataUrl: '',
-};
-const labels: Record<Phase, string> = {
-  idle: '尚未加载', verifying: '核验固定资源字节', loading: '等待原生视频元数据', ready: '元数据已核验，等待手动播放',
-  playing: '正在播放', paused: '已暂停', ended: '播放结束', stopped: '已停止并释放', error: '检查失败',
 };
 const readableError = (error: unknown) => error instanceof Error ? error.message : '视频检查失败，请手动重试。';
 const cueStart = Math.min(...NPS_MATERIAL.cues.map(cue => cue.start));
@@ -241,7 +238,14 @@ const button: CSSProperties = { padding: '10px 14px', minHeight: 44, borderRadiu
 const row: CSSProperties = { display: 'flex', gap: 10, flexWrap: 'wrap', margin: '16px 0' };
 const value: CSSProperties = { margin: 0, overflowWrap: 'anywhere' };
 
-export default function NpsTransportCheck() {
+const PHASE_KEYS = {
+  idle: 'npsTransport.phaseIdle', verifying: 'npsTransport.phaseVerifying', loading: 'npsTransport.phaseLoading',
+  ready: 'npsTransport.phaseReady', playing: 'npsTransport.phasePlaying', paused: 'npsTransport.phasePaused',
+  ended: 'npsTransport.phaseEnded', stopped: 'npsTransport.phaseStopped', error: 'npsTransport.phaseError',
+} as const;
+
+function NpsTransportCheckInner() {
+  const {t, ui} = useStudioLocale();
   const video = useRef<HTMLVideoElement>(null), canvas = useRef<HTMLCanvasElement>(null);
   const controller = useRef<ReturnType<typeof createNpsTransportCheckController> | null>(null);
   const [pool] = useState(() => createOriginalCourseMediaPool({}, NPS_PLAYBACK_MEDIA));
@@ -254,43 +258,51 @@ export default function NpsTransportCheck() {
   }, [pool]);
   const busy = state.phase === 'verifying' || state.phase === 'loading';
   const ready = ['ready', 'playing', 'paused', 'ended'].includes(state.phase);
+  const phaseText = t(PHASE_KEYS[state.phase]);
+  const metadataText = state.duration === null
+    ? t('npsTransport.metaPending')
+    : t('npsTransport.metaReady', {duration: state.duration.toFixed(6), width: state.width, height: state.height});
   return <main style={{ maxWidth: 960, margin: '24px auto', padding: 20, fontFamily: 'system-ui, sans-serif', color: '#182b42', lineHeight: 1.6 }}>
-    <h1 style={{ fontSize: 26, margin: '0 0 8px' }}>同源视频传输检查</h1>
-    <p>仅验证同源直接播放与画布，不产生学习记录。</p>
-    <p>只加载固定的 NPS 兼容视频。先核验下载字节的 SHA-256，再由原生视频请求同一同源地址。第二次响应不由画布或 SHA-256 重新核验，依赖该内容寻址资源保持不变。</p>
-    <p>本页不复现 AAC 错误，也不代表 Android 已验收。默认静音，不自动播放；需要听声音时，请手动打开视频音量。</p>
+    <h1 style={{ fontSize: 26, margin: '0 0 8px' }}>{t('npsTransport.title')}</h1>
+    <p>{t('npsTransport.lede')}</p>
+    <p>{t('npsTransport.shaNote')}</p>
+    <p>{t('npsTransport.androidNote')}</p>
     <div style={row}>
-      <button style={button} onClick={() => void controller.current?.load()} disabled={busy}>核验并加载同源兼容视频</button>
-      <button style={button} onClick={() => controller.current?.stop()} disabled={state.phase === 'idle' || state.phase === 'stopped'}>停止并释放</button>
+      <button style={button} onClick={() => void controller.current?.load()} disabled={busy}>{t('npsTransport.load')}</button>
+      <button style={button} onClick={() => controller.current?.stop()} disabled={state.phase === 'idle' || state.phase === 'stopped'}>{t('npsTransport.stop')}</button>
     </div>
-    <p role="status" aria-live="polite">阶段：{labels[state.phase]}</p>
-    {state.error && <p role="alert" style={{ color: '#a62620' }}>{state.error}</p>}
+    <p role="status" aria-live="polite">{t('npsTransport.phaseLabel', {phase: phaseText})}</p>
+    {state.error && <p role="alert" style={{ color: '#a62620' }}>{ui(state.error)}</p>}
     <video ref={video} crossOrigin="anonymous" playsInline preload="metadata" muted
-      aria-label="已核验的固定 NPS 同源视频" style={{ display: 'block', width: '100%', aspectRatio: '16 / 9', background: '#0b1523', objectFit: 'contain', borderRadius: 12 }} />
+      aria-label={t('npsTransport.videoAria')} style={{ display: 'block', width: '100%', aspectRatio: '16 / 9', background: '#0b1523', objectFit: 'contain', borderRadius: 12 }} />
     <div style={row}>
-      <button style={button} disabled={!ready} onClick={() => void controller.current?.play()}>播放</button>
-      <button style={button} disabled={!ready} onClick={() => controller.current?.pause()}>暂停</button>
-      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(0)}>定位第一句</button>
-      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(1)}>定位第二句</button>
-      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(-1)}>定位末句</button>
-      <button style={button} disabled={!ready} onClick={() => controller.current?.checkCanvas()}>检查画布</button>
+      <button style={button} disabled={!ready} onClick={() => void controller.current?.play()}>{t('npsTransport.play')}</button>
+      <button style={button} disabled={!ready} onClick={() => controller.current?.pause()}>{t('npsTransport.pause')}</button>
+      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(0)}>{t('npsTransport.seekFirst')}</button>
+      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(1)}>{t('npsTransport.seekSecond')}</button>
+      <button style={button} disabled={!ready} onClick={() => controller.current?.seek(-1)}>{t('npsTransport.seekLast')}</button>
+      <button style={button} disabled={!ready} onClick={() => controller.current?.checkCanvas()}>{t('npsTransport.checkCanvas')}</button>
     </div>
     <dl style={{ display: 'grid', gridTemplateColumns: 'minmax(96px, 120px) minmax(0, 1fr)', gap: '8px 16px', fontSize: 14 }}>
-      <dt>传输</dt><dd style={value}>同源 HTTPS 直接播放；手动核验后启用</dd>
-      <dt>固定资源</dt><dd style={value}>{NPS_PLAYBACK_MEDIA.playbackVariant.url}</dd>
-      <dt>请求地址</dt><dd style={value}>{state.source || '未加载'}</dd>
-      <dt>原生 currentSrc</dt><dd style={value}>{state.currentSrc || '尚未选择资源'}</dd>
-      <dt>预期播放 SHA-256</dt><dd style={value}>{NPS_PLAYBACK_MEDIA.playbackVariant.mediaSha256}</dd>
-      <dt>实测下载 SHA-256</dt><dd style={value}>{state.actualSha256 || '尚未核验'}</dd>
-      <dt>原素材 SHA-256</dt><dd style={value}>{NPS_COURSE_MEDIA.mediaSha256}</dd>
-      <dt>元数据</dt><dd style={value}>{state.duration === null ? '尚未取得' : `${state.duration.toFixed(6)} 秒；${state.width} × ${state.height}`}</dd>
-      <dt>当前时间</dt><dd style={value}>{state.currentTime.toFixed(3)} 秒</dd>
-      <dt>原生错误</dt><dd style={value}>{state.nativeError || '无已报告错误'}</dd>
+      <dt>{t('npsTransport.dtTransport')}</dt><dd style={value}>{t('npsTransport.ddTransport')}</dd>
+      <dt>{t('npsTransport.dtFixed')}</dt><dd style={value}>{NPS_PLAYBACK_MEDIA.playbackVariant.url}</dd>
+      <dt>{t('npsTransport.dtRequest')}</dt><dd style={value}>{state.source || t('npsTransport.notLoaded')}</dd>
+      <dt>{t('npsTransport.dtCurrentSrc')}</dt><dd style={value}>{state.currentSrc || t('npsTransport.noSrcYet')}</dd>
+      <dt>{t('npsTransport.dtExpectedSha')}</dt><dd style={value}>{NPS_PLAYBACK_MEDIA.playbackVariant.mediaSha256}</dd>
+      <dt>{t('npsTransport.dtActualSha')}</dt><dd style={value}>{state.actualSha256 || t('npsTransport.notVerifiedYet')}</dd>
+      <dt>{t('npsTransport.dtSourceSha')}</dt><dd style={value}>{NPS_COURSE_MEDIA.mediaSha256}</dd>
+      <dt>{t('npsTransport.dtMetadata')}</dt><dd style={value}>{metadataText}</dd>
+      <dt>{t('npsTransport.dtTime')}</dt><dd style={value}>{t('npsTransport.timeSeconds', {time: state.currentTime.toFixed(3)})}</dd>
+      <dt>{t('npsTransport.dtNativeError')}</dt><dd style={value}>{ui(state.nativeError) || t('npsTransport.noNativeError')}</dd>
     </dl>
-    <p role="status">{state.canvasResult || '点击“检查画布”读取当前视频帧。'}</p>
-    <canvas ref={canvas} width={1} height={1} aria-label="当前原生视频帧的画布读回结果"
+    <p role="status">{state.canvasResult ? ui(state.canvasResult) : t('npsTransport.canvasHint')}</p>
+    <canvas ref={canvas} width={1} height={1} aria-label={t('npsTransport.canvasAria')}
       style={{ display: state.frameDataUrl ? 'block' : 'none', width: '100%', height: 'auto', borderRadius: 12, background: '#0b1523' }} />
-    {state.frameDataUrl && <p><a href={state.frameDataUrl} download="nps-same-origin-frame.png">下载已读取的 PNG 帧</a></p>}
-    <p style={{ fontSize: 13, color: '#50647d' }}>离开或隐藏本页会停止播放、取消请求并释放凭据。返回后需手动重新核验。本页不请求摄像头、麦克风或录屏权限。</p>
+    {state.frameDataUrl && <p><a href={state.frameDataUrl} download="nps-same-origin-frame.png">{t('npsTransport.downloadFrame')}</a></p>}
+    <p style={{ fontSize: 13, color: '#50647d' }}>{t('npsTransport.leaveNote')}</p>
   </main>;
+}
+
+export default function NpsTransportCheck() {
+  return <StudioLocaleProvider><NpsTransportCheckInner /></StudioLocaleProvider>;
 }

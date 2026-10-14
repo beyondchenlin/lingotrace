@@ -50,6 +50,19 @@ test('known diagnostics translate without altering raw failures, unknown details
  assert.equal(translateKnownUi('zh-CN','The original recording has no readable video data.'),'原录像没有可读取的视频数据。');
  assert.equal(translate('en','mutedCopy.generate'),'Create muted copy');
  assert.equal(translate('zh-CN','mutedCopy.generate'),'生成静音副本');
+ assert.equal(translateKnownUi('en','同源直接播放凭据无效。'),'Same-origin direct playback credentials are invalid.');
+ assert.equal(translateKnownUi('en','浏览器未提供 2D 画布。'),'The browser did not provide a 2D canvas.');
+ assert.equal(translateKnownUi('en','画布读取结果不完整。'),'Canvas readback is incomplete.');
+ assert.equal(translateKnownUi('en','固定资源没有通过同源 URL、类型与 SHA-256 核验。'),'The fixed resource did not pass same-origin URL, type, and SHA-256 verification.');
+ assert.equal(translateKnownUi('en','复习媒体核验已取消。'),'Review media verification was canceled.');
+ assert.equal(translateKnownUi('en','当前状态不能开始复测，请先结束录制、输入法或其他切换。'),'Cannot start a retest in the current state. Finish recording, IME input, or another transition first.');
+ assert.equal(translateKnownUi('en','正在纯听，原文、目标键与估算节奏均已隐藏。'),'Listening only. Source text, target keys, and estimated cadence are all hidden.');
+ assert.equal(translateKnownUi('en','训练中，正在显示真实输入统计。'),'Training — showing real input statistics.');
+ assert.equal(translateKnownUi('zh-CN','Same-origin direct playback credentials are invalid.'),'同源直接播放凭据无效。');
+ assert.equal(translate('en','npsTransport.title'),'Same-origin video transport check');
+ assert.equal(translate('zh-CN','npsTransport.load'),'核验并加载同源兼容视频');
+ assert.equal(translateKnownUi('en','画布读取失败：浏览器未提供 2D 画布。'),'Canvas read failed: The browser did not provide a 2D canvas.');
+ assert.equal(translateKnownUi('en','原生视频加载或解码失败。 code=4'),'Native video load or decode failed. code=4');
 
  const engine=new TrainingEngine();engine.input('My English draft stays exactly the same.');const before=JSON.stringify(engine.getSnapshot());
  for(const locale of ['en','zh-CN'] as const){translate(locale,'hud.check');translateKnownUi(locale,raw)}

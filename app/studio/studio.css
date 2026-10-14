@@ -751,7 +751,9 @@
 .sheet-status-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .sheet-status-chip{
   display:inline-flex;align-items:center;min-height:30px;padding:4px 12px;border-radius:999px;
-  border:1px solid #c9e2d838;background:#142028cc;color:#d7ebe3;font-size:12px;letter-spacing:.02em;
+  border:1px solid #c9e2d848;background:linear-gradient(165deg,#1a3038d8,#102028cc);
+  color:#d7ebe3;font-size:12px;letter-spacing:.02em;
+  box-shadow:inset 0 1px 0 #ffffff14,0 4px 14px #0003;backdrop-filter:blur(10px);
 }
 .sheet-status-chip[data-state=on]{border-color:#c4fc5799;background:#c4fc5718;color:#e8f9d2}
 .sheet-status-chip[data-state=busy]{border-color:#9dd6ff88;background:#1a3040cc;color:#d7eefc}
@@ -796,12 +798,7 @@
 .record-panel button:focus-visible{
   outline:2px solid #c4fc57;outline-offset:2px;
 }
-.empty.empty-state{
-  display:grid;justify-items:center;gap:10px;padding:42px 28px;
-  border-radius:18px;border:1px dashed #9ebea866;
-  background:linear-gradient(165deg,#9debe60c,#0e181ecc);
-  color:#c5d4c8;box-shadow:inset 0 1px 0 #ffffff08;
-}
+.empty.empty-state{display:grid;justify-items:center;gap:12px;padding:42px 28px;border-radius:18px;border:1px dashed #c9e2d838;background:linear-gradient(160deg,#142028aa,#0e181ccc);box-shadow:inset 0 1px 0 #ffffff10}
 .empty-glyph{font-size:28px;line-height:1;color:#c4fc57aa;filter:drop-shadow(0 0 12px #c4fc5733)}
 .empty.empty-state p{margin:0;max-width:36ch;line-height:1.55}
 .studio-dialog .notice.warn{
