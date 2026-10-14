@@ -289,7 +289,18 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
   if(playing){c.beginPath();c.moveTo(playX-5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX-5.2*iconScale,centerY+8.5*iconScale);c.moveTo(playX+5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX+5.2*iconScale,centerY+8.5*iconScale);c.stroke()}
   else{c.beginPath();c.moveTo(playX-4.8*iconScale,centerY-8.2*iconScale);c.lineTo(playX+8.2*iconScale,centerY);c.lineTo(playX-4.8*iconScale,centerY+8.2*iconScale);c.closePath();c.stroke()}
   c.restore()}
- for(const [z,direction,enabled] of[[zones.previous,-1,markers.some(p=>p.cueIndex===transportCueIndex-1)],[zones.next,1,markers.some(p=>p.cueIndex===transportCueIndex+1)]] as const){const x=z.x+z.w/2;c.save();c.translate(x,centerY);c.scale(iconScale,iconScale);c.translate(-x,-centerY);c.globalAlpha*=enabled?1:.32;c.strokeStyle='#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();c.moveTo(x-direction*4,centerY-7);c.lineTo(x+direction*3,centerY);c.lineTo(x-direction*4,centerY+7);c.moveTo(x-direction*8,centerY-7);c.lineTo(x-direction*8,centerY+7);c.stroke();c.restore()}
+ // continue26 — prev/next residual polish peer to transport-rail (stroke/optical only; no new navigation).
+ for(const [z,direction,enabled] of[[zones.previous,-1,markers.some(p=>p.cueIndex===transportCueIndex-1)],[zones.next,1,markers.some(p=>p.cueIndex===transportCueIndex+1)]] as const){
+  const x=z.x+z.w/2,y=centerY;
+  c.save();c.globalAlpha*=enabled?1:.34;
+  c.beginPath();c.roundRect(z.x+2,z.y+3,z.w-4,z.h-6,10);
+  const pg=c.createLinearGradient(0,z.y,0,z.y+z.h);pg.addColorStop(0,'rgba(18,28,34,.50)');pg.addColorStop(1,'rgba(8,14,20,.26)');
+  c.fillStyle=pg;c.fill();c.strokeStyle=enabled?'rgba(201,226,216,.34)':'rgba(201,226,216,.18)';c.lineWidth=1;c.stroke();
+  c.beginPath();c.moveTo(z.x+8,z.y+4.2);c.lineTo(z.x+z.w-8,z.y+4.2);c.strokeStyle='rgba(245,252,248,.12)';c.lineWidth=.8;c.stroke();
+  c.translate(x,y);c.scale(iconScale,iconScale);c.translate(-x,-y);
+  c.strokeStyle='#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
+  c.beginPath();c.moveTo(x-direction*4.2,y-7.2);c.lineTo(x+direction*3.2,y);c.lineTo(x-direction*4.2,y+7.2);
+  c.moveTo(x-direction*8.2,y-7.2);c.lineTo(x-direction*8.2,y+7.2);c.stroke();c.restore()}
  const railLeft=zones.seek.x+geometry.railInset,railWidth=zones.seek.w-geometry.railInset*2,railY=zones.seek.y+(portrait?34:26)*railScale;
  {
   // continue17 timeline — heavier progress head, clearer ticks, denser trough rim.
