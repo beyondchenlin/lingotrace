@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "be0b9621c3270b6c4dde45a66b45d4dd5f309f4f",
-  "source_file_count": 738,
+  "source_projection_tree_sha1": "06d78f0be609b4945643d43791dae19722313931",
+  "source_file_count": 740,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -2300,9 +2300,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 263994,
-      "git_blob_sha1": "5a53e36591893a0f120571acba3fd4f583d00243",
-      "sha256": "cf851ca04c621b75613e7c51081c0c526e2f55917f68f938c49eeead21df9ce2"
+      "bytes": 263498,
+      "git_blob_sha1": "a480485d93c3e33e1ba2e8319406287672e5f56e",
+      "sha256": "27448c4a3e1f72cd7a5a9565cdfbf5dac5afed1b5e7b3dd80223f532db34b20e"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -3301,9 +3301,9 @@
     {
       "path": "studio/core/studio-host-test-fixture.ts",
       "mode": "100644",
-      "bytes": 24655,
-      "git_blob_sha1": "041cf423798ca6eed2cc60be54082a1dfe21d4a5",
-      "sha256": "eeb1631aba9e0b44912adad1bb8aa9093fc4dc6a114b65bb52d583ab184cdb24"
+      "bytes": 24682,
+      "git_blob_sha1": "0a4f9bf92691d22260c34047839fc4bdd8d6fbfe",
+      "sha256": "f4f2218f9883361f91f378500d40bffa20657342b09e4149e18790b49974957f"
     },
     {
       "path": "studio/core/studio-input-card.test.ts",
@@ -5173,6 +5173,20 @@
       "bytes": 1444,
       "git_blob_sha1": "3e53a07ccb358125c95d7fb55dd161f8118f566a",
       "sha256": "8982de3eb3a3743c7f909b721a2426c195800c63877471669c85cbafde68dd6e"
+    },
+    {
+      "path": "qa/prd-continue33-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5652,
+      "git_blob_sha1": "2314e003d3a1b1593b0cae072b23cd49c016c364",
+      "sha256": "482fbe1302cd6bf64a9866c3c45922599781ff26ab9293c73354e794c1590c53"
+    },
+    {
+      "path": "scripts/prd-continue33-qa.mts",
+      "mode": "100644",
+      "bytes": 1356,
+      "git_blob_sha1": "fe65cf917cd802e9bae4b45ff32aa6434e0e52ce",
+      "sha256": "1b3038bb7819ea53a5a6d371136d94693dcb64f513ecc88998e4a401a88a4f1d"
     }
   ],
   "large_resources": [

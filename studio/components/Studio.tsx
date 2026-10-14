@@ -607,23 +607,23 @@ function StudioContent({responsive=false}:{responsive?:boolean}){
    try{library=await referenceRepository().list()}catch{/* Task history remains visible when the reference library is unavailable. */}
    for(const task of list.entries){
     const instance=await repo.loadReviewInstance(task.currentInstanceId);const cueIndex=task.target.material.cues.findIndex(c=>c.id===task.target.cueId);
-    let referenceStatus='固定原版；不会自动采用新参考。',canStart=!!instance&&instance.status==='pending'&&task.status==='active';
-    if(task.target.material.builtinReference){try{isBuiltinMaterial(task.target.material);referenceStatus='固定 NPS 官方素材与字幕派生版本；开始前核验原片。'}catch{canStart=false;referenceStatus='真人素材来源声明无法核验，不能开始复测。'}}
+    let referenceStatus=t('reviewTask.refOriginal'),canStart=!!instance&&instance.status==='pending'&&task.status==='active';
+    if(task.target.material.builtinReference){try{isBuiltinMaterial(task.target.material);referenceStatus=t('reviewTask.refNps')}catch{canStart=false;referenceStatus=t('reviewTask.refNpsUnverified')}}
     if(task.target.material.localReference){
      let known=false;try{known=await isKnownReference(task.target.material)}catch{}
-     if(!known){referenceStatus='本机版本或祖先链缺失／不符，不能开始复测；原任务仍保留。';canStart=false}else referenceStatus='固定本机校正版；开始前仍核验实际原片。';
+     if(!known){referenceStatus=t('reviewTask.refLocalMissing');canStart=false}else referenceStatus=t('reviewTask.refLocalFixed');
     }
-    if(library?.entries.some(entry=>entry.parent.version===task.target.material.version&&entry.parent.digest===task.target.materialDigest))referenceStatus+=' 来源已有新版本，本任务继续固定原版；开始表示明确选择原版。';
-    if(!instance)referenceStatus+=' 当前复测实例缺失，不能开始。';
-    let resultSummary='暂无已关联的实际复测结果；待办和到期不代表学习完成。';
+    if(library?.entries.some(entry=>entry.parent.version===task.target.material.version&&entry.parent.digest===task.target.materialDigest))referenceStatus+=' '+t('reviewTask.refHasNewer');
+    if(!instance)referenceStatus+=' '+t('reviewTask.refInstanceMissing');
+    let resultSummary=t('reviewTask.resultNone');
     try{
      const exported=await repo.exportReviewTask(task.taskId);
-     if(exported.evidence[0]?.availability!=='available'){canStart=false;referenceStatus+=' 原提交证据不可用，不能开始；未将缺失记录视为零分。';}
+     if(exported.evidence[0]?.availability!=='available'){canStart=false;referenceStatus+=' '+t('reviewTask.refEvidenceUnavailable');}
      const latest=[...exported.relations].sort((a,b)=>a.committedAt.localeCompare(b.committedAt)||a.relationId.localeCompare(b.relationId)).at(-1);
      if(latest){const evidence=exported.evidence.find(value=>reviewSame(value.source,latest.source));
-      resultSummary=evidence?.availability==='available'&&evidence.result?`最近关联提交 ${latest.source.attemptId}：参考词数 ${evidence.result.words}，错误 ${evidence.result.errors}；${latest.disposition==='winner'?'该实例首个已保存有效提交':'同一实例的后续真实提交'}。${evidence.coverage==='partial'?'部分记录，辅助与参考来源未知。':'辅助条件见原完整记录。'}可导出核对会话、事件与实例。`:'最近关联的原作答证据不可用；未显示零分或推断已掌握。';
+      resultSummary=evidence?.availability==='available'&&evidence.result?t('reviewTask.resultLinked',{attemptId:latest.source.attemptId,words:evidence.result.words,errors:evidence.result.errors,disposition:t(latest.disposition==='winner'?'reviewTask.dispositionWinner':'reviewTask.dispositionFollowOn'),coverage:t(evidence.coverage==='partial'?'reviewTask.coveragePartial':'reviewTask.coverageComplete')}):t('reviewTask.resultEvidenceGone');
      }
-    }catch{canStart=false;resultSummary='关联证据暂时无法读取，未推断无记录或零分。请刷新重试。';}
+    }catch{canStart=false;resultSummary=t('reviewTask.resultEvidenceUnread');}
     rows.push({taskId:task.taskId,revision:task.revision,status:task.status,materialTitle:task.target.material.title,materialVersion:task.target.material.version,cueNumber:cueIndex+1,due:task.due,nextDue:instance?.nextDue??null,sourceCoverage:task.source.kind==='full'?'complete':'partial',referenceStatus,resultSummary,canStart});
    }
    if(disposed.current||request!==reviewListRequest.current)return;setReviewRows(rows);setReviewUnreadable(list.unreadableCount);
