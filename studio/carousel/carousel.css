@@ -74,3 +74,52 @@
 .lt-card-kind[data-kind='cafe-preview']{border-color:#c8b08a66;background:#2a2418cc;color:#f0e0c0}
 .lt-card-kind[data-kind=assisted]{border-color:#9dffb366;background:#1a2e1acc;color:#d8ffd8}
 .lt-card-kind[data-kind='fixed-pace']{border-color:#9ad7ff66;background:#16303acc;color:#cfefff}
+
+
+/* PRD continue5 cards craft */
+.lt-cards-nav button:focus-visible,
+.lt-cards-studio:focus-visible,
+.lt-card-cta:focus-visible,
+.lt-cards-dots button:focus-visible,
+.lt-card:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:3px;
+}
+.lt-cards-nav button,.lt-cards-studio,.lt-card-cta{
+  transition:background .16s ease,border-color .16s ease,transform .12s ease,box-shadow .16s ease;
+  box-shadow:inset 0 1px 0 #ffffff10;
+}
+.lt-cards-nav button:hover,.lt-cards-studio:hover{border-color:#c4fc5766;background:#1a2c24ee}
+.lt-card{
+  border:1px solid #d7e7d848;
+  background:linear-gradient(165deg,#152229f5 0%,#0f1a20f5 55%,#0b141af8 100%);
+  box-shadow:0 28px 70px #000a,inset 0 1px 0 #ffffff12;
+}
+.lt-card-media{
+  background:
+    radial-gradient(90% 70% at 50% 35%,#243a3688,#0b1217 72%),
+    linear-gradient(180deg,#1a282e,#0b1217);
+}
+.lt-card-meta{
+  background:linear-gradient(180deg,#0b141a00 0%,#0b141af0 22%,#0b141afa 100%);
+  border-top:1px solid #d7e7d822;
+}
+.lt-card-cta{
+  box-shadow:0 8px 22px #c4fc5733,inset 0 1px 0 #ffffff55;
+}
+.lt-card-cta:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.lt-cards-dots button{
+  min-width:12px;min-height:12px;width:12px;height:12px;
+  background:#6f857866;box-shadow:inset 0 0 0 1px #ffffff18;
+  transition:transform .15s ease,background .15s ease;
+}
+.lt-cards-dots button[aria-selected=true]{
+  background:#c4fc57;box-shadow:0 0 0 3px #c4fc5733,inset 0 0 0 1px #ffffff44;
+}
+.lt-card-kind[data-kind=follow]{border-color:#7ad7ff66;background:#102830cc;color:#d6f3ff}
+.lt-card-kind[data-kind=cafe]{border-color:#c8b08a66;background:#2a2418cc;color:#f0e0c0}
+.lt-card-carousel[data-motion=depth-deck] .lt-card.is-active{
+  box-shadow:0 34px 86px #000b,0 0 0 1px #d7e7d838,inset 0 1px 0 #ffffff14;
+}
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active{
+  box-shadow:0 0 0 1px #c4fc5777,0 32px 86px #000b,0 0 56px #c4fc5738,inset 0 1px 0 #ffffff16;
+}

@@ -620,3 +620,113 @@
   background:linear-gradient(90deg,#0e1a20a0,#0e1a2055);
   border:1px solid #c9e2d818;
 }
+
+
+/* PRD continue5 — review / settings / a11y craft (no video caption capsule). */
+.studio-dialog{
+  border-radius:24px;
+  border:1px solid #c9e2d848;
+  background:linear-gradient(165deg,#1a262cf8 0%,#121b21f8 48%,#0e161cf8 100%);
+  box-shadow:0 40px 120px #0009,inset 0 1px 0 #ffffff12;
+}
+.studio-dialog::backdrop{background:#050c10cc;backdrop-filter:blur(10px) saturate(1.05)}
+.panel-head{
+  background:linear-gradient(180deg,#1c2a30f5 0%,#172127ee 70%,#17212700);
+  border-bottom:1px solid #c5d7c338;
+  backdrop-filter:blur(12px);
+}
+.panel-head small{letter-spacing:.18em;color:#a8c0b2}
+.panel-head h1{letter-spacing:.01em;font-weight:600;color:#eef6f0}
+.panel-head button{
+  background:linear-gradient(180deg,#24363ccc,#1a282ecc);
+  border:1px solid #9ebea855;
+  box-shadow:inset 0 1px 0 #ffffff10;
+  transition:border-color .15s ease,background .15s ease,transform .12s ease;
+}
+.panel-head button:hover{border-color:#c4fc5788;background:linear-gradient(180deg,#2a4038cc,#1e3028cc)}
+.panel-head button:focus-visible{outline:2px solid #c4fc57;outline-offset:3px}
+.panel-body button:focus-visible,.panel-body .button:focus-visible,.panel-body summary:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:2px;
+}
+.studio-dialog .review-stats{
+  gap:18px;padding:16px 18px;margin:8px 0 18px;border-radius:16px;
+  background:linear-gradient(155deg,#9debe612,#102028cc 55%,#0c161acc);
+  border:1px solid #c9e2d838;
+  box-shadow:inset 0 1px 0 #ffffff10,0 10px 28px #00000033;
+}
+.studio-dialog .review-stats strong{color:#dff9b8;text-shadow:0 0 18px #c4fc5733}
+.studio-dialog .session-chart{
+  border-radius:16px;padding:16px 16px 12px;
+  background:linear-gradient(165deg,#132027aa,#0e181ecc);
+  border:1px solid #c6ddd63a;
+  box-shadow:inset 0 1px 0 #ffffff0c;
+}
+.studio-dialog .session-chart.is-expanded{box-shadow:0 0 0 1px #c4fc5744,inset 0 1px 0 #ffffff10}
+.pace-expand-toggle{
+  min-height:36px;padding:6px 12px;border-radius:999px;
+  border:1px solid #c9e2d844;background:#142028cc;color:#d7ebe3;font-size:12px;
+}
+.pace-expand-toggle:focus-visible{outline:2px solid #c4fc57;outline-offset:2px}
+.pace-expand-toggle[aria-pressed=true]{border-color:#c4fc5799;background:#c4fc5718;color:#e8f9d2}
+.studio-dialog .attempt-list details{
+  margin:0;padding:10px 12px;border-radius:12px;border:1px solid #d4e2da22;
+  background:linear-gradient(180deg,#edf5e908,#0c141800);
+}
+.studio-dialog .attempt-list details+details{margin-top:8px}
+.studio-dialog .attempt-list summary{
+  min-height:44px;display:flex;align-items:center;gap:8px;
+  border-radius:8px;padding:8px 6px;list-style-position:outside;
+}
+.studio-dialog .attempt-list summary:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:2px;background:#c4fc5710;
+}
+.round-review{display:grid;gap:4px}
+.round-review-filter{
+  display:inline-flex;align-items:center;gap:10px;min-height:44px;
+  margin:8px 0 4px;padding:8px 12px;border-radius:12px;
+  border:1px solid #c9e2d830;background:#13202766;color:#d7ebe3;font-size:14px;
+  cursor:pointer;
+}
+.round-review-filter input{width:18px;height:18px;accent-color:#c4fc57}
+.round-review-filter:focus-within{outline:2px solid #c4fc5788;outline-offset:2px}
+.round-review-continue{margin-top:10px}
+.studio-dialog .round-review .attempt-list details{
+  background:linear-gradient(180deg,#9debe60e,#10202888);
+}
+.studio-tools-sheet button:focus-visible,.tools-drawer-grid button:focus-visible,
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:2px;
+  border-color:#c4fc5799;
+  box-shadow:0 0 0 3px #c4fc5733,inset 0 1px 0 #ffffff14;
+}
+.hud-popover label:has(select):focus-within,
+.hud-popover label:has(button):focus-within{
+  color:#d7ebe3;
+}
+.hud-popover .hud-panel-section{
+  padding:14px 12px 12px;margin-top:14px;
+  border:1px solid #d7e7d828;border-top:1px solid #d7e7d828;
+  box-shadow:inset 0 1px 0 #ffffff08;
+}
+.hud-popover .hud-section-label{letter-spacing:.14em;color:#a8c0b2}
+.course-intent-banner button:focus-visible,
+.follow-intent-banner button:focus-visible,
+.record-banner button:focus-visible,
+.replay-banner button:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:3px;
+}
+.typing-pace-chip:focus-visible{
+  outline:2px solid #c4fc57;outline-offset:3px;
+}
+.review-task-panel{display:grid;gap:6px}
+.review-task-panel .button-row button{min-height:44px}
+.review-task-panel details{
+  margin:8px 0;padding:12px 14px;border-radius:14px;
+  border:1px solid #c9e2d830;
+  background:linear-gradient(180deg,#9debe60c,#10202888);
+}
+.review-task-panel summary{
+  min-height:44px;display:flex;align-items:center;cursor:pointer;
+  border-radius:8px;padding:6px 4px;
+}
+.review-task-panel summary:focus-visible{outline:2px solid #c4fc57;outline-offset:2px}

@@ -82,8 +82,8 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
      <p className="lt-cards-lede">{locale==='zh-CN'?'Depth Deck / Magnetic Reveal · 定速 / 听写 / 儿童版 / 咖啡馆定速 · 不改变训练事实':'Depth Deck / Magnetic Reveal · fixed / dictation / kids / cafe fixed · training facts unchanged'}</p>
     </div>
     <nav className="lt-cards-nav" aria-label={locale==='zh-CN'?'动效模式':'Motion mode'}>
-     {([['depth-deck','Depth Deck'],['magnetic-reveal','Magnetic Reveal']] as const).map(([id,label])=>(
-      <button key={id} type="button" aria-pressed={motionId===id} onClick={()=>setMotionId(id)}>{label}</button>
+     {([['depth-deck','Depth Deck','纵深叠卡'],['magnetic-reveal','Magnetic Reveal','磁力揭示']] as const).map(([id,en,zh])=>(
+      <button key={id} type="button" aria-pressed={motionId===id} onClick={()=>setMotionId(id)}>{locale==='zh-CN'?zh:en}</button>
      ))}
      <a className="lt-cards-studio" href="/studio/">{locale==='zh-CN'?'打开 Studio':'Open Studio'}</a>
     </nav>

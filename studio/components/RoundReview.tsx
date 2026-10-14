@@ -20,10 +20,10 @@ export default function RoundReview({snapshot, disabledReason, onContinue, rende
   const review = useMemo(() => projectRoundReview(snapshot), [snapshot]);
   const [onlyCorrections, setOnlyCorrections] = useState(false);
   const rows = onlyCorrections ? review.rows.filter(row => row.status === 'needs-correction') : review.rows;
-  return <section aria-label={t('review.roundLabel')}>
+  return <section className="round-review" aria-label={t('review.roundLabel')}>
     <h2>{t('review.heading')}</h2>
     <p className="note">{t('review.roundCounts', {corrections: review.needsCorrection, matched: review.matched, unsubmitted: review.unsubmitted})}</p>
-    <label><input type="checkbox" checked={onlyCorrections} onChange={event => setOnlyCorrections(event.target.checked)}/>{t('review.onlyCorrections')}</label>
+    <label className="round-review-filter"><input type="checkbox" checked={onlyCorrections} onChange={event => setOnlyCorrections(event.target.checked)}/>{t('review.onlyCorrections')}</label>
     <p className="note">{t('review.roundScope')}</p>
     {disabledReason && <p className="notice">{ui(disabledReason)}</p>}
     {!rows.length && <p className="empty">{t('review.noCorrections')}</p>}
@@ -40,7 +40,7 @@ export default function RoundReview({snapshot, disabledReason, onContinue, rende
         <p className="note">{row.latest.ruleVersion} · {row.latest.materialVersion}</p>
         {renderContextBookmark?.(row.cueId)}
       </> : <p className="note">{row.status === 'unsubmitted' ? t('review.noSubmissionDetails') : t('review.associationUnavailable')}</p>}
-      <button disabled={!!disabledReason} onClick={() => onContinue(row.cueId)}>{t('review.continueSentence', {number: row.cueIndex + 1})}</button>
+      <button type="button" className="round-review-continue primary" disabled={!!disabledReason} onClick={() => onContinue(row.cueId)}>{t('review.continueSentence', {number: row.cueIndex + 1})}</button>
     </details>)}</div>
     <p className="note">{t('review.continueNotice')}</p>
   </section>;

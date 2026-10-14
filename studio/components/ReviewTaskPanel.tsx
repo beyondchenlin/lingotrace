@@ -109,7 +109,7 @@ export default function ReviewTaskPanel(props:ReviewTaskPanelProps){
  const groups=[{id:'due',label:t('reviewTask.due'),rows:entries.filter(row=>row.status==='active'&&Date.parse(row.due.instant)<=now)},
   {id:'upcoming',label:t('reviewTask.upcoming'),rows:entries.filter(row=>row.status==='active'&&Date.parse(row.due.instant)>now)},
   {id:'cancelled',label:t('reviewTask.cancelledLabel'),rows:entries.filter(row=>row.status==='cancelled')}];
- return <section aria-label={t('reviewTask.panelLabel')}>
+ return <section className="review-task-panel" aria-label={t('reviewTask.panelLabel')}>
   <p className="note">{t('reviewTask.scope')}</p>
   <div className="button-row"><button disabled={loading||!!busy} onClick={()=>void run('reload',null,()=>latest.current.onReload(),'reviewTask.reloaded')}>{busy==='reload'?t('reviewTask.reloading'):t('reviewTask.reload')}</button></div>
   {loading&&<p role="status">{t('reviewTask.loading')}</p>}

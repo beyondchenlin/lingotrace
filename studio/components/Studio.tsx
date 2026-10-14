@@ -237,7 +237,7 @@ function StudioContent({responsive=false}:{responsive?:boolean}){
  function chooseInputStyle(value:string){
   if(!['letters','words','hint-letters','hint-words'].includes(value))return;
   const e=engineRef.current;
-  if(value.startsWith('hint-')){if(!referenceVisibleRef.current||!e||referenceBlocked()||builtinAnswerBlocked()||fixture||replaySnapshot.current||mediaKind!=='demo'||paused||composing.current)return;e.exposeHint('hint');if(!getDraft(e.getSnapshot()).hinted)return;inputGuideOwnerRef.current=inputGuideOwner();setInputGuideDescription(inputGuideSummary(inputGuideMask(e.cue.text),localeRef.current));notify('已显示本句长度提示，本句按辅助练习记录。')}
+  if(value.startsWith('hint-')){if(!referenceVisibleRef.current||!e||referenceBlocked()||builtinAnswerBlocked()||fixture||replaySnapshot.current||mediaKind!=='demo'||paused||composing.current)return;e.exposeHint('hint');if(!getDraft(e.getSnapshot()).hinted)return;inputGuideOwnerRef.current=inputGuideOwner();setInputGuideDescription(inputGuideSummary(inputGuideMask(e.cue.text),localeRef.current));notify(t('notice.guideShown'))}
   else inputGuideOwnerRef.current=null;
   inputStyleRef.current=value;setInputStyle(value);
  }
