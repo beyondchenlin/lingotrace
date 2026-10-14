@@ -437,29 +437,38 @@ export function keyboardKeyRects(rect:Rect):KeyboardKey[]{
 export function paintPassiveKeyboard(c:CanvasRenderingContext2D,card:InputCardGeometry,state:KeyboardFeedback|undefined,now:number,reducedMotion:boolean){
  const rect=card.keyboard;if(!rect||state?.visible===false)return;
  const pressed=new Set(state?.codes??[]),committed=!reducedMotion&&!!state&&state.committedUntil>now;
- c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,16);c.clip();
+ // continue18 — passive keyboard glass weight (deeper frost plate + specular + key caps; no caption capsule).
+ c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,17);c.clip();
  const plate=c.createLinearGradient(0,rect.y,0,rect.y+rect.h);
- plate.addColorStop(0,'rgba(24,36,42,.7)');plate.addColorStop(.45,'rgba(14,22,28,.54)');plate.addColorStop(1,'rgba(8,14,20,.42)');
+ plate.addColorStop(0,'rgba(26,40,46,.78)');plate.addColorStop(.42,'rgba(14,22,28,.60)');plate.addColorStop(1,'rgba(7,12,18,.48)');
  c.fillStyle=plate;c.fill();
- const vig=c.createLinearGradient(0,rect.y+rect.h*.55,0,rect.y+rect.h);
- vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,'rgba(4,10,14,.16)');
+ const vig=c.createLinearGradient(0,rect.y+rect.h*.48,0,rect.y+rect.h);
+ vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,'rgba(4,10,14,.22)');
  c.fillStyle=vig;c.fillRect(rect.x,rect.y,rect.w,rect.h);
- const spec=c.createLinearGradient(0,rect.y,0,rect.y+rect.h*.38);
- spec.addColorStop(0,'rgba(236,248,242,.14)');spec.addColorStop(.55,'rgba(236,248,242,.04)');spec.addColorStop(1,'rgba(236,248,242,0)');
- c.fillStyle=spec;c.fillRect(rect.x,rect.y,rect.w,rect.h*.38);
+ const spec=c.createLinearGradient(0,rect.y,0,rect.y+rect.h*.42);
+ spec.addColorStop(0,'rgba(236,248,242,.18)');spec.addColorStop(.48,'rgba(236,248,242,.06)');spec.addColorStop(1,'rgba(236,248,242,0)');
+ c.fillStyle=spec;c.fillRect(rect.x,rect.y,rect.w,rect.h*.42);
+ // Soft side falloff — grounds the QWERTY in the glass well.
+ const side=c.createLinearGradient(rect.x,0,rect.x+rect.w,0);
+ side.addColorStop(0,'rgba(4,10,14,.14)');side.addColorStop(.12,'rgba(4,10,14,0)');side.addColorStop(.88,'rgba(4,10,14,0)');side.addColorStop(1,'rgba(4,10,14,.14)');
+ c.fillStyle=side;c.fillRect(rect.x,rect.y,rect.w,rect.h);
  c.restore();
- c.save();c.beginPath();c.roundRect(rect.x+.5,rect.y+.5,rect.w-1,rect.h-1,16);
- c.strokeStyle=state?.composing?'#c7daefaa':committed?'#b8e7bfbb':'rgba(215,233,223,.52)';c.lineWidth=1.1;c.stroke();
+ c.save();c.beginPath();c.roundRect(rect.x+.5,rect.y+.5,rect.w-1,rect.h-1,17);
+ c.strokeStyle=state?.composing?'#c7daefbb':committed?'#b8e7bfcc':'rgba(215,233,223,.58)';c.lineWidth=1.2;c.stroke();
+ // Inner top hairline for optical rim weight.
+ c.beginPath();c.moveTo(rect.x+14,rect.y+1.2);c.lineTo(rect.x+rect.w-14,rect.y+1.2);
+ c.strokeStyle='rgba(245,252,248,.22)';c.lineWidth=1;c.stroke();
  for(const key of keyboardKeyRects(rect)){
-  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.1:0;
-  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,6.5);
-  if(active){c.fillStyle='#cce6bde8';c.fill()}else{
+  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.15:0;
+  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,7);
+  if(active){c.fillStyle='#cce6bdec';c.fill()}else{
    const kg=c.createLinearGradient(0,r.y+dy,0,r.y+dy+r.h);
-   kg.addColorStop(0,'rgba(236,246,238,.15)');kg.addColorStop(1,'rgba(220,232,226,.06)');
+   kg.addColorStop(0,'rgba(236,246,238,.18)');kg.addColorStop(.55,'rgba(220,232,226,.09)');kg.addColorStop(1,'rgba(200,214,208,.05)');
    c.fillStyle=kg;c.fill()}
-  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.38)';c.lineWidth=.9;c.stroke();
-  c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.5/card.cssScale,r.h*.52))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#edf3ef';
-  c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.5);
+  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.44)';c.lineWidth=1;c.stroke();
+  if(!active){c.beginPath();c.moveTo(r.x+3.5,r.y+dy+1);c.lineTo(r.x+r.w-3.5,r.y+dy+1);c.strokeStyle='rgba(245,252,248,.10)';c.lineWidth=.8;c.stroke()}
+  c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.8/card.cssScale,r.h*.54))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#f0f5f1';
+  c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.45);
  }
  c.restore();
 }

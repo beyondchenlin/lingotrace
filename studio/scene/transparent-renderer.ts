@@ -261,5 +261,16 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const speaker=zones.mute.x+zones.mute.w/2;c.save();c.translate(speaker,centerY);c.scale(iconScale,iconScale);c.translate(-speaker,-centerY);c.strokeStyle=WHITE;c.lineWidth=1.7;c.beginPath();c.moveTo(speaker-10,centerY-4);c.lineTo(speaker-5,centerY-4);c.lineTo(speaker+1,centerY-9);c.lineTo(speaker+1,centerY+9);c.lineTo(speaker-5,centerY+4);c.lineTo(speaker-10,centerY+4);c.closePath();c.stroke();if(!v.muted){c.beginPath();c.arc(speaker+1,centerY,8,-.85,.85);c.stroke()}else line(c,speaker-8,centerY-9,speaker+11,centerY+9,WHITE,1.7);c.restore();
 
  if(projected)mapRect(c,{x:1575,y:845,w:69,h:65},geometry.counter);
- {const cr={x:1575,y:845,w:69,h:65};c.save();c.beginPath();c.roundRect(cr.x,cr.y,cr.w,cr.h,12);const cg=c.createLinearGradient(0,cr.y,0,cr.y+cr.h);cg.addColorStop(0,'rgba(18,28,34,.55)');cg.addColorStop(1,'rgba(8,14,20,.28)');c.fillStyle=cg;c.fill();c.strokeStyle='rgba(201,226,216,.28)';c.lineWidth=1;c.stroke();c.restore();txt(c,String(transportCueIndex+1).padStart(2,'0'),1610,891,26,'#d2e2e0c8',500,'center');frame(c,cr,.32,palette?.frame??AQUA)}if(projected)c.restore();c.restore();c.restore();return presentation.mode;
+ // continue18 — cue-counter numeral optical (taller glass plate, tabular weight, hairline floor).
+ {const cr={x:1575,y:845,w:69,h:65};c.save();c.beginPath();c.roundRect(cr.x,cr.y,cr.w,cr.h,13);
+  const cg=c.createLinearGradient(0,cr.y,0,cr.y+cr.h);cg.addColorStop(0,'rgba(20,32,38,.68)');cg.addColorStop(.55,'rgba(12,20,26,.48)');cg.addColorStop(1,'rgba(8,14,20,.32)');
+  c.fillStyle=cg;c.fill();c.strokeStyle='rgba(201,226,216,.36)';c.lineWidth=1.1;c.stroke();
+  c.beginPath();c.moveTo(cr.x+10,cr.y+1.1);c.lineTo(cr.x+cr.w-10,cr.y+1.1);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=1;c.stroke();
+  c.beginPath();c.moveTo(cr.x+12,cr.y+cr.h-1.15);c.lineTo(cr.x+cr.w-12,cr.y+cr.h-1.15);c.strokeStyle='rgba(201,226,216,.14)';c.lineWidth=1;c.stroke();
+  c.restore();
+  const cueLabel=String(transportCueIndex+1).padStart(2,'0');
+  // Optical sit: numeral slightly high in the plate; muted cue caption on the floor hairline.
+  txt(c,cueLabel,1610,878,27,'#e8f2eef0',600,'center',STUDIO_SEMIBOLD);
+  txt(c,'CUE',1610,900,8.5,'#aebcbaaa',500,'center');
+  frame(c,cr,.36,palette?.frame??AQUA)}if(projected)c.restore();c.restore();c.restore();return presentation.mode;
 }

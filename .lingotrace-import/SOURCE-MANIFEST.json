@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "18533e9d91bfcb8a80d59c34446de1152071ba3c",
-  "source_file_count": 708,
+  "source_projection_tree_sha1": "ce856dd13dcc580a6acb5352846e241d51c14e9e",
+  "source_file_count": 710,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 74048,
-      "git_blob_sha1": "7f39d24ecdc3595b0a223f08f779e0bffb8a15ac",
-      "sha256": "61be5ccb8f5d3634201142d24e353b3bffe1f1bcd1659e2a7c13a7d76f18ba9d"
+      "bytes": 76429,
+      "git_blob_sha1": "b57f209e645ede655e816d25d9a0313d12253956",
+      "sha256": "53fa7115a84ff2bdd37a4e8f49965e2adb92d556da425c59ce22fffc702f9d59"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -4533,9 +4533,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 52968,
-      "git_blob_sha1": "df9975370baea70fa9834e5a1cf53e47ce8655a0",
-      "sha256": "6b44b7d7b9b8b93f7525fb23bbe443bdc0c9888c9ff0563d8cae2644c15ab0b2"
+      "bytes": 53825,
+      "git_blob_sha1": "98d81a8e5d77aeeb05074f829d13f17d4ccbb424",
+      "sha256": "7cf25237dc08e1a7fdb4978590d197beef57a03778bde88b2640575b3a4499d1"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4855,9 +4855,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 37548,
-      "git_blob_sha1": "134ae355b73c6f3e5e468240e8af2fe64d645117",
-      "sha256": "5a4935566f30e807c5a02eac056af4f3ab5b28449bd2afa495434429566a140a"
+      "bytes": 38190,
+      "git_blob_sha1": "8bdfff2116a217992ac4f5efaab8d2a2f567b9d8",
+      "sha256": "eddf6ac1a27d807e20926c21c3b5999abe524197a7597ce43283ca445727e385"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -4963,6 +4963,20 @@
       "bytes": 3534,
       "git_blob_sha1": "e61f3c721944477488ff6b3dfee2caac2aaaaa9e",
       "sha256": "634003b8d12a4b96fa52dbd5f79ac8b44e06223e93dd8a5b061f33ad3b41a29c"
+    },
+    {
+      "path": "qa/prd-continue18-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4078,
+      "git_blob_sha1": "01a1d920ec3bfeaad6c7b00101aa91206149ab6b",
+      "sha256": "14017feb9027e56c1426016294c43be128eec9d261958b742f77e5fdf6014fbd"
+    },
+    {
+      "path": "scripts/prd-continue18-qa.mts",
+      "mode": "100644",
+      "bytes": 4189,
+      "git_blob_sha1": "85f9fa25af32d51bf9e2bac686fb89101f3330f6",
+      "sha256": "b838ec2b609667707d81b3c0fb48ff430a0d076f763ef9a4944735b6b48b6bb1"
     }
   ],
   "large_resources": [
