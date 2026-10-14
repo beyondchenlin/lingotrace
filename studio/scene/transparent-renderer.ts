@@ -194,6 +194,7 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const cameraControl=cameraControlGeometry(geometry,v.camera,v.layout,{fixture:v.fixture,cssWidth:v.cameraViewport?.width,cssHeight:v.cameraViewport?.height});
  if(cameraControl.compact){
   // Bare camera line-art — same 20px / 1.5 stroke peer as keyboard/settings/Enter (size locked).
+  // continue29 — camera glyph peer polish only; size stays 20px locked (not inset enlarge).
   // continue21 — camera-inset frame (soft glass well behind peer glyph; do not enlarge icon).
   const r=cameraControl.visual;
   {c.save();c.beginPath();c.roundRect(r.x-2,r.y-2,r.w+4,r.h+4,8);
