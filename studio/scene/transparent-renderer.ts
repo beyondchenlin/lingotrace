@@ -123,25 +123,29 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  {c.save();c.beginPath();c.arc(cx,cy,3.4,0,Math.PI*2);c.fillStyle='#e8f4ee88';c.fill();c.beginPath();c.arc(cx,cy,3.4,0,Math.PI*2);c.strokeStyle='#c9e2d866';c.lineWidth=1;c.stroke();c.beginPath();c.arc(cx,cy,1.35,0,Math.PI*2);c.fillStyle='#0c1418cc';c.fill();c.restore()}
  txt(c,f.restoreFailed?'—':`${Math.round(ratio*100)}%`,cx,188,46,WHITE,700,'center');txt(c,f.restoreFailed?'':`${earned} / ${goal}`,cx,218,13,'#d7e4df',500,'center');if(!standby)txt(c,t('scene.confirmedWords').toUpperCase(),cx,242,10,tone,500,'center');if(standby&&!standby.frozen){c.save();c.globalAlpha=.42;c.strokeStyle=tone;c.lineWidth=1.5;c.beginPath();const angle=-Math.PI/2+standby.sweep*Math.PI*2;c.arc(cx,cy,r+8,angle,angle+.45);c.stroke();c.restore()}
  // Kids edition: soft decorative orbs only — freeze under reduced-motion; never affect geometry/facts.
- // continue16 kids contrast — brighter decorative orbs; freeze under reduced-motion; never affect geometry/facts.
- if(edition.id==='kids'){c.save();const orbs=[[cx-78,cy-62,.68],[cx+86,cy-48,.52],[cx-54,cy+78,.46],[cx+72,cy+70,.58]];for(const[ox,oy,a]of orbs){const pulse=v.reducedMotion?a:a*(.75+.25*Math.sin((now-f.enteredAt)/900+ox*.01));c.globalAlpha=pulse;c.fillStyle=tone;c.shadowColor=tone;c.shadowBlur=v.reducedMotion?0:6;c.beginPath();c.arc(ox,oy,v.reducedMotion?3.4:3.4+breath*1.7,0,Math.PI*2);c.fill()}c.restore()}
+ // continue17 kids motion — larger pulse amplitude + travel offsets; freeze under reduced-motion.
+ if(edition.id==='kids'){c.save();const orbs=[[cx-78,cy-62,.72],[cx+86,cy-48,.56],[cx-54,cy+78,.50],[cx+72,cy+70,.62]];for(const[ox,oy,a]of orbs){const phase=(now-f.enteredAt)/780+ox*.012;const pulse=v.reducedMotion?a:a*(.62+.38*Math.sin(phase));const dx=v.reducedMotion?0:Math.sin(phase*1.15)*3.2;const dy=v.reducedMotion?0:Math.cos(phase*.95)*2.6;c.globalAlpha=pulse;c.fillStyle=tone;c.shadowColor=tone;c.shadowBlur=v.reducedMotion?0:8;c.beginPath();c.arc(ox+dx,oy+dy,v.reducedMotion?3.5:3.5+breath*2.4,0,Math.PI*2);c.fill()}c.restore()}
  if(projected){c.restore();mapRect(c,{x:568,y:38,w:536,h:352/3},geometry.title)}
  {
  const titleText=m.kind==='demo'?materialStageTitle(s):t('scene.localMedia').toUpperCase();
  const statusText=f.restoreFailed?t('scene.restoreFailed'):f.replay?t('scene.replay'):v.paused?t('hud.paused'):standby?t('scene.standby').toUpperCase():'30 MIN';
- // Soft title band — continue15 product chrome (quiet glass, clear type hierarchy).
- c.save();c.font=`500 29px ${STUDIO_SANS}`;const tw=Math.min(520,c.measureText(titleText).width+64);c.restore();
- const band={x:836-tw/2,y:44,w:tw,h:74};
- c.save();c.beginPath();c.roundRect(band.x,band.y,band.w,band.h,17);
+ // Soft title band — continue17 optical type (hairline floor, title/status hierarchy).
+ c.save();c.font=`600 28px ${STUDIO_SANS}`;const tw=Math.min(528,c.measureText(titleText).width+76);c.restore();
+ const band={x:836-tw/2,y:42,w:tw,h:78};
+ c.save();c.beginPath();c.roundRect(band.x,band.y,band.w,band.h,18);
  const tg=c.createLinearGradient(0,band.y,0,band.y+band.h);
- tg.addColorStop(0,'rgba(18,28,34,.68)');tg.addColorStop(.5,'rgba(12,20,26,.46)');tg.addColorStop(1,'rgba(8,14,20,.32)');
- c.fillStyle=tg;c.fill();c.strokeStyle='rgba(201,226,216,.32)';c.lineWidth=1.05;c.stroke();
- c.beginPath();c.moveTo(band.x+20,band.y+1.1);c.lineTo(band.x+band.w-20,band.y+1.1);
- c.strokeStyle='rgba(245,252,248,.22)';c.lineWidth=1;c.stroke();c.restore();
- txt(c,titleText,836,71,24,WHITE,600,'center');
- line(c,836-Math.min(82,tw*.32),86,836+Math.min(82,tw*.32),86,'#c9e2d852',1);
- txt(c,statusText,836,106,10.5,'#aebcba',500,'center');
- if(f.restoreFailed)txt(c,t('scene.restoreDetail'),836,129,14,'#ffd4b7',400,'center');
+ tg.addColorStop(0,'rgba(18,28,34,.72)');tg.addColorStop(.48,'rgba(12,20,26,.50)');tg.addColorStop(1,'rgba(8,14,20,.34)');
+ c.fillStyle=tg;c.fill();c.strokeStyle='rgba(201,226,216,.36)';c.lineWidth=1.1;c.stroke();
+ c.beginPath();c.moveTo(band.x+22,band.y+1.15);c.lineTo(band.x+band.w-22,band.y+1.15);
+ c.strokeStyle='rgba(245,252,248,.26)';c.lineWidth=1.05;c.stroke();
+ // Inner bottom hairline for optical floor under status.
+ c.beginPath();c.moveTo(band.x+28,band.y+band.h-1.2);c.lineTo(band.x+band.w-28,band.y+band.h-1.2);
+ c.strokeStyle='rgba(201,226,216,.12)';c.lineWidth=1;c.stroke();c.restore();
+ // Title sits optically high; status sits on the floor hairline (no second subtitle system).
+ txt(c,titleText,836,69.5,23.5,WHITE,600,'center');
+ line(c,836-Math.min(90,tw*.35),84.5,836+Math.min(90,tw*.35),84.5,'#c9e2d870',1.2);
+ txt(c,statusText,836,106.5,10,'#b8c6c4',500,'center');
+ if(f.restoreFailed)txt(c,t('scene.restoreDetail'),836,130,14,'#ffd4b7',400,'center');
 }
  if(projected){c.restore();mapRect(c,{x:1297,y:40,w:352,h:192},geometry.trend)}
  // Cadence is a separate ephemeral reference projection. It never becomes f.input.
@@ -234,17 +238,23 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  for(const [z,direction,enabled] of[[zones.previous,-1,markers.some(p=>p.cueIndex===transportCueIndex-1)],[zones.next,1,markers.some(p=>p.cueIndex===transportCueIndex+1)]] as const){const x=z.x+z.w/2;c.save();c.translate(x,centerY);c.scale(iconScale,iconScale);c.translate(-x,-centerY);c.globalAlpha*=enabled?1:.35;line(c,x-direction*4,centerY-7,x+direction*3,centerY,WHITE,1.7);line(c,x+direction*3,centerY,x-direction*4,centerY+7,WHITE,1.7);line(c,x-direction*8,centerY-7,x-direction*8,centerY+7,WHITE,1.4);c.restore()}
  const railLeft=zones.seek.x+geometry.railInset,railWidth=zones.seek.w-geometry.railInset*2,railY=zones.seek.y+(portrait?34:26)*railScale;
  {
-  // continue15 timeline — deeper trough, progress bloom, dual-tone head, crisp ticks.
-  const trackH=Math.max(3.4,3.8*railScale);
-  c.save();c.beginPath();c.roundRect(railLeft,railY-trackH/2-1.2,railWidth,trackH+2.4,trackH);
-  c.fillStyle='#08121855';c.fill();
+  // continue17 timeline — heavier progress head, clearer ticks, denser trough rim.
+  const trackH=Math.max(3.55,4.0*railScale);
+  c.save();c.beginPath();c.roundRect(railLeft,railY-trackH/2-1.35,railWidth,trackH+2.7,trackH);
+  c.fillStyle='#08121866';c.fill();
   c.beginPath();c.roundRect(railLeft,railY-trackH/2,railWidth,trackH,trackH);
-  c.fillStyle='#d4e7e328';c.fill();
-  c.strokeStyle='#d4e7e338';c.lineWidth=.8;c.stroke();c.restore();
+  c.fillStyle='#d4e7e32e';c.fill();
+  c.strokeStyle='#d4e7e342';c.lineWidth=.9;c.stroke();c.restore();
   const progress=idleTimeline?movement.progressFraction:duration?clamp(v.playbackTime/duration):0,headX=railLeft+railWidth*progress;
-  if(progress>0){c.save();c.shadowColor=traceTone;c.shadowBlur=8;c.beginPath();c.roundRect(railLeft,railY-trackH/2,Math.max(trackH,railWidth*progress),trackH,trackH);c.fillStyle=traceTone;c.globalAlpha=.95;c.fill();c.restore()}
-  for(const marker of markers){const x=railLeft+marker.ratio*railWidth,selected=marker.cueIndex===transportCueIndex;line(c,x,railY-(selected?6.5:4),x,railY+(selected?6.5:4),selected?tone:'#d8e6e0a8',selected?2.35:1.1);txt(c,String(marker.cueIndex+1).padStart(2,'0'),x,zones.seek.y+(portrait?53:45)*railScale,Math.max(10,10/card.cssScale),selected?tone:'#c5d2cdb8',selected?600:400,'center')}
-  c.save();c.shadowBlur=idleTimeline&&!v.reducedMotion?12:4;c.shadowColor=tone;c.beginPath();c.arc(headX,railY,4.3,0,Math.PI*2);c.fillStyle=idleTimeline?tone:WHITE;c.fill();c.beginPath();c.arc(headX,railY,1.7,0,Math.PI*2);c.fillStyle='#0c1418bb';c.fill();c.restore();
+  if(progress>0){c.save();c.shadowColor=traceTone;c.shadowBlur=10;c.beginPath();c.roundRect(railLeft,railY-trackH/2,Math.max(trackH,railWidth*progress),trackH,trackH);c.fillStyle=traceTone;c.globalAlpha=.96;c.fill();c.restore()}
+  for(const marker of markers){const x=railLeft+marker.ratio*railWidth,selected=marker.cueIndex===transportCueIndex;line(c,x,railY-(selected?7.2:4.2),x,railY+(selected?7.2:4.2),selected?tone:'#d8e6e0b0',selected?2.55:1.15);txt(c,String(marker.cueIndex+1).padStart(2,'0'),x,zones.seek.y+(portrait?53:45)*railScale,Math.max(10,10/card.cssScale),selected?tone:'#c5d2cdc0',selected?650:400,'center')}
+  // continue17 timeline head weight — dual ring + tip hub + stronger idle bloom.
+  c.save();c.shadowBlur=idleTimeline&&!v.reducedMotion?16:6;c.shadowColor=tone;
+  c.beginPath();c.arc(headX,railY,5.15,0,Math.PI*2);c.fillStyle=idleTimeline?tone:WHITE;c.fill();
+  c.beginPath();c.arc(headX,railY,5.15,0,Math.PI*2);c.strokeStyle='#0c141866';c.lineWidth=1.15;c.stroke();
+  c.beginPath();c.arc(headX,railY,2.55,0,Math.PI*2);c.fillStyle='#0c1418cc';c.fill();
+  c.beginPath();c.arc(headX,railY,1.05,0,Math.PI*2);c.fillStyle=idleTimeline?'#fff6d8':'#e8f4ee';c.fill();
+  c.restore();
   const timeLabel=m.kind==='image'?t('scene.imageNoTimeline'):duration?`${format(v.playbackTime)} / ${format(duration)}`:t('scene.mediaWaiting');
   txt(c,timeLabel,railLeft,zones.seek.y+(portrait?13:12)*railScale,Math.max(11,10.5/card.cssScale),'#e8efec',500);txt(c,m.kind!=='demo'?t('scene.noCueMarkers'):'',railLeft+railWidth,zones.seek.y+(portrait?-2:12)*railScale,Math.max(11,10/card.cssScale),MUTED,400,'right');
 }

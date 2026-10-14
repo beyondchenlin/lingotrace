@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "d2472f452d195429f2ff4970715cfc8c2bab37a5",
+  "source_projection_tree_sha1": "18533e9d91bfcb8a80d59c34446de1152071ba3c",
   "source_file_count": 708,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 73467,
-      "git_blob_sha1": "a3cd86b8266ca4edf2469a4e3811d6764859cc1b",
-      "sha256": "6ddfdc02ac88bbda54dedfd85a0f91991d2b3c62948c69dc8da15790fd5fcb39"
+      "bytes": 74048,
+      "git_blob_sha1": "7f39d24ecdc3595b0a223f08f779e0bffb8a15ac",
+      "sha256": "61be5ccb8f5d3634201142d24e353b3bffe1f1bcd1659e2a7c13a7d76f18ba9d"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -4855,9 +4855,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 36788,
-      "git_blob_sha1": "94b51303c56d05573e21ae85e6e61262cc7c3bc7",
-      "sha256": "1a24447fc6f8bcfadd741673fe7ec3163ee439c9ab27f8cb9cc14752f34cfb56"
+      "bytes": 37548,
+      "git_blob_sha1": "134ae355b73c6f3e5e468240e8af2fe64d645117",
+      "sha256": "5a4935566f30e807c5a02eac056af4f3ab5b28449bd2afa495434429566a140a"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -4918,9 +4918,9 @@
     {
       "path": "studio/theme/kids-cartoon.ts",
       "mode": "100644",
-      "bytes": 1855,
-      "git_blob_sha1": "e6d771c67a712a20a3083193461d15658c9292b1",
-      "sha256": "e3373e9b0763c3b6beb510e2896ccb00a14d4cb20344792413bca5103c46e5e7"
+      "bytes": 1834,
+      "git_blob_sha1": "d62e7677ec7ecdf897be74928251857bb4b9c659",
+      "sha256": "62537d0577d90cf85074ad606cfc19012cd7438f243cfbaaf4e89c34c4269ec0"
     },
     {
       "path": "tsconfig.json",

@@ -312,8 +312,9 @@
   animation-delay:-4.5s;
 }
 @keyframes kids-float{
+  /* continue17 kids motion amplitude */
   0%,100%{transform:translate3d(0,0,0) scale(1)}
-  50%{transform:translate3d(12px,-18px,0) scale(1.08)}
+  50%{transform:translate3d(18px,-26px,0) scale(1.12)}
 }
 @media (prefers-reduced-motion: reduce){
   .studio-page[data-visual-edition=kids]::before,
@@ -1034,4 +1035,21 @@
   border-color:#ffc56e55;
   background:linear-gradient(168deg,#2a2418f2 0%,#1a1810f8 52%,#14120cfb 100%);
   box-shadow:0 22px 56px #00000078,inset 0 1px 0 #ffe6b430;
+}
+
+/* continue17 — timeline head / title-band optical / kids motion (no video caption capsule) */
+.studio-page[data-visual-edition=kids]::before,
+.studio-page[data-visual-edition=kids]::after{
+  opacity:.62;
+  filter:blur(.2px);
+}
+.studio-page[data-visual-edition=kids]::before{
+  width:156px;height:156px;
+}
+.studio-page[data-visual-edition=kids]::after{
+  width:124px;height:124px;
+}
+@media (prefers-reduced-motion: reduce){
+  .studio-page[data-visual-edition=kids]::before,
+  .studio-page[data-visual-edition=kids]::after{filter:none}
 }
