@@ -2139,3 +2139,67 @@
   .typing-follow-toggle.hud-glyph:active,
   .typing-follow-toolbar .typing-follow-toggle:active{transform:none}
 }
+
+
+/* continue31 — edition-switch chrome residual (kids/pro glass + stroke peer; no new edition features) + ZH residual ship companion */
+.edition-switch{
+  display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px;
+  padding:4px;
+  border-radius:999px;
+  border:1px solid #d7e7d828;
+  background:linear-gradient(168deg,#15241ed8,#0e181cd0);
+  box-shadow:0 8px 22px #00000055,inset 0 1px 0 #ffffff14,0 0 0 1px #c4fc570a;
+  backdrop-filter:blur(12px);
+}
+.edition-switch button{
+  min-height:44px;padding:10px 16px;border-radius:999px;
+  border:1px solid #d7e7d838;
+  background:linear-gradient(180deg,#1a2822cc,#121c18c8);
+  color:#e7f2df;
+  box-shadow:inset 0 1px 0 #ffffff10;
+  transition:border-color .15s ease,background .15s ease,color .15s ease,box-shadow .15s ease;
+}
+.edition-switch button:hover,
+.edition-switch button:focus-visible{
+  border-color:#c4fc5766;
+  background:linear-gradient(180deg,#223028d8,#15241ed0);
+  outline:none;
+}
+.edition-switch button[aria-pressed=true]{
+  border-color:#c4fc57aa;
+  background:linear-gradient(168deg,#c4fc5730,#1a2822e8);
+  color:#f0ffd2;
+  font-weight:700;
+  box-shadow:0 2px 12px #c4fc5722,inset 0 1px 0 #ffffff22;
+}
+.studio-page[data-visual-edition=kids] .edition-switch{
+  border-color:#ffc56e33;
+  background:linear-gradient(168deg,#2a2418d8,#1a1810d0);
+  box-shadow:0 8px 22px #00000060,inset 0 1px 0 #ffe6b428,0 0 0 1px #ffc56e12;
+}
+.studio-page[data-visual-edition=kids] .edition-switch button{
+  border-color:#ffc56e44;
+  background:linear-gradient(180deg,#2a2418d8,#1a1810c8);
+  color:#ffe8d0;
+}
+.studio-page[data-visual-edition=kids] .edition-switch button:hover,
+.studio-page[data-visual-edition=kids] .edition-switch button:focus-visible{
+  border-color:#ffc56e88;
+  background:linear-gradient(180deg,#322818e0,#1c1810d0);
+}
+.studio-page[data-visual-edition=kids] .edition-switch button[aria-pressed=true]{
+  background:linear-gradient(168deg,#ffb347,#ff9a2e);
+  color:#1a2414;
+  border-color:#ffb347;
+  font-weight:700;
+  box-shadow:0 2px 12px #ffb34733,inset 0 1px 0 #ffe6b460;
+}
+.studio-page[data-visual-edition=pro] .edition-switch button[aria-pressed=true]{
+  background:linear-gradient(168deg,#c4fc5738,#1a2822e8);
+  color:#f0ffd2;
+  border-color:#c4fc57aa;
+  font-weight:700;
+}
+@media (prefers-reduced-motion: reduce){
+  .edition-switch button{transition:none}
+}
