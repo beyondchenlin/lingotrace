@@ -24,7 +24,7 @@ export function carouselMotion(id:CarouselMotionId):CarouselMotionProfile{
  return id==='magnetic-reveal'?MAGNETIC_REVEAL:DEPTH_DECK;
 }
 
-export type LessonCardKind = 'fixed-pace' | 'dictation' | 'kids' | 'cafe' | 'assisted';
+export type LessonCardKind = 'fixed-pace' | 'dictation' | 'kids' | 'cafe' | 'assisted' | 'follow';
 
 export interface LessonCardSpec {
  id:string;
@@ -116,6 +116,21 @@ export const DEMO_LESSON_CARDS:LessonCardSpec[]=[
   kind:'cafe',
   cta:'Open Cafe Studio',
   ctaZh:'打开咖啡馆定速',
+ },
+ {
+  id:'connie-follow',
+  title:'Connie · Adaptive Follow',
+  titleZh:'Connie · 自适应跟音',
+  subtitle:'Sentence-level Beta · type to drive video · NPS only',
+  subtitleZh:'句级 Beta · 打字带动视频 · 仅 NPS',
+  aspect:'landscape',
+  posterSrc:'/studio-assets/nps-connie/poster.jpg',
+  videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
+  href:'/studio/?follow=1',
+  credit:'National Park Service · No claim to original U.S. Government works.',
+  kind:'follow',
+  cta:'Open Follow Beta',
+  ctaZh:'打开跟音 Beta',
  },
  {
   id:'connie-assisted',

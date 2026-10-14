@@ -20,6 +20,7 @@ A premium card browser for lessons / scenes with two signature motions and dual-
 - `kids` → `/studio/?edition=kids`
 - `cafe` → `/studio/?course=cafe` (verified original cafe video · SHA-bound fixed-pace; adaptive Follow remains NPS-only)
 - `assisted` → `/studio/` with reference-visible practice
+- `follow` → `/studio/?follow=1` (NPS adaptive sentence-level Follow Beta; opens Assist + pace sheet; phone audio still unverified)
 
 ## Acceptance
 1. Both motions respect `prefers-reduced-motion`.
