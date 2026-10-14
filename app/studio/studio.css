@@ -347,3 +347,33 @@
 .responsive-enabled[data-viewport-mode=portrait]>.portrait-layout[data-practice-compact=true]{
   height:auto;
 }
+
+
+/* Fixed-pace device gate chip + pace sheet (FP12 discoverability). */
+.typing-pace-chip{
+  min-height:32px;padding:6px 10px;border:1px solid #c4fc5744;border-radius:999px;
+  background:#102028cc;color:#e7f6d4;font:600 11px/1 "Lingo Studio Sans",Arial,sans-serif;
+  letter-spacing:.2px;white-space:nowrap;filter:drop-shadow(0 1px 2px #06101699);
+}
+.typing-pace-chip[aria-expanded=true]{background:#d3ebba22;border-color:#c4fc57aa;color:#dfffbf}
+.typing-follow-toolbar[data-pace-mode=adaptive] .typing-pace-chip{border-color:#7ad7ff66;color:#d7f3ff}
+.hud-popover.pace-sheet-popover{
+  position:absolute;z-index:12;right:0;top:calc(100% + 6px);width:min(320px,78vw);
+  max-height:min(62vh,420px);overflow:auto;
+}
+.pace-mode-row,.pace-rate-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pace-mode-row button,.pace-rate-row button{
+  min-height:40px;padding:8px 12px;border-radius:10px;border:1px solid #8b9f805c;
+  background:#1a2a24;color:#edf3e9;font-size:13px;
+}
+.pace-mode-row button[aria-pressed=true],.pace-rate-row button[aria-pressed=true]{
+  border-color:#c4fc57;background:#c4fc571a;color:#d7ff93;
+}
+.pace-expand-toggle{
+  min-height:32px;padding:4px 10px;border-radius:8px;border:1px solid #8b9f805c;
+  background:#1a2a24;color:#dce9df;font-size:12px;margin:0 8px;
+}
+.pace-timeline.is-expanded,.session-chart.is-expanded{padding:18px}
+.session-chart.is-expanded .chart-points{min-height:280px;height:280px}
+.pace-timeline .chart-labels{align-items:center}
+.portrait-layout[data-practice-compact=true] .typing-pace-chip{font-size:10px;padding:5px 8px}

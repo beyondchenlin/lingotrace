@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "450a180a9b3a0dc7cf51176089db4b88def6c8e9",
+  "source_projection_tree_sha1": "2fe5af004486e57701d0884279a0eeb95ab1df19",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 42489,
-      "git_blob_sha1": "c7eab72bde7c8b1145f0f38c1127473504baab9f",
-      "sha256": "3d55a79b0fa04828efd839143de0c8f40da953ec531d948f55312da56cabb1e4"
+      "bytes": 44060,
+      "git_blob_sha1": "fd62e66c45c6426c03db8b1ca4d0a190e0068b58",
+      "sha256": "a1031b704d5aab1879132a996906fd1f81d4547c5844f799d8633326c277ead0"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -2041,9 +2041,9 @@
     {
       "path": "studio/components/HudControls.tsx",
       "mode": "100644",
-      "bytes": 2934,
-      "git_blob_sha1": "39ad7860160bb6ffb6160b0984c2f31351220644",
-      "sha256": "5bf2caca180c52860dd26cb2ed90a9e4f582d9ee826f7730c7eda3ba87780b69"
+      "bytes": 2956,
+      "git_blob_sha1": "1e19b15b5b06c3fc7b56d9fc2aab3cc903b45234",
+      "sha256": "907cf4ff07e74cdf23c6ced284beb84373828b7f920b725df146e9f5109a509c"
     },
     {
       "path": "studio/components/LayoutEditor.tsx",
@@ -2125,9 +2125,9 @@
     {
       "path": "studio/components/PaceTimeline.tsx",
       "mode": "100644",
-      "bytes": 4823,
-      "git_blob_sha1": "2ccae0da23e32c45db420a3f21ae1229541eeffb",
-      "sha256": "106f3c6a5641c1a81fc9e25650ecee5692225d0882a709f7a45b9547be4b8904"
+      "bytes": 5368,
+      "git_blob_sha1": "2f05a46fc8cd231d3ba027cef7ec846ededba59d",
+      "sha256": "0eb79deb7481bf830a1a6155881e567c08612fbadc0a01f4d5d3c829774fd988"
     },
     {
       "path": "studio/components/RecordCalendarPanel.tsx",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 252964,
-      "git_blob_sha1": "f92cfe34d5d4a77db373d2afea9725d128ada204",
-      "sha256": "ca21e895bd5221d6663d17c3d70289e503d9b7cd10b667b2b5836c0bf2032f56"
+      "bytes": 255421,
+      "git_blob_sha1": "78904f6e35c0f744b4084598f912b4a47fcb4154",
+      "sha256": "cdb9a46c43cdb4171f962c25345e7b4938b9ceed83d79cbfc9c5b93ca8f94b56"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -3819,9 +3819,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 85525,
-      "git_blob_sha1": "e3a2d6dad3f48066f3e7b970fdec33afdedefec1",
-      "sha256": "c57c9441e535f56da1a82b2449929001826165833bb43ad932e8d06ac9ca0908"
+      "bytes": 86394,
+      "git_blob_sha1": "e45bf09fa5ecdb6887228ba3de85ddc533acc332",
+      "sha256": "70ba0c10270ff2ce170154c20e9e387015984ebfb4e9add35e8ebbd005e0c106"
     },
     {
       "path": "studio/i18n/react.tsx",

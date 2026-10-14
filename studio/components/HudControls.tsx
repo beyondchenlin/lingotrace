@@ -19,9 +19,9 @@ export function HudGlyph({name}:{name:HudGlyphName}){
  };
  return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
 }
-export function HudPopover({label,onClose,children,className='',style}:{label:string;onClose:()=>void;children:ReactNode;className?:string;style?:CSSProperties}){
+export function HudPopover({label,onClose,children,className='',style,id}:{label:string;onClose:()=>void;children:ReactNode;className?:string;style?:CSSProperties;id?:string}){
  const {t}=useStudioLocale();
  const ref=useRef<HTMLElement>(null),closeRef=useRef(onClose);closeRef.current=onClose;
  useEffect(()=>{const previous=document.activeElement as HTMLElement|null,panel=ref.current;ref.current?.querySelector<HTMLButtonElement>('button')?.focus({preventScroll:true});const key=(event:KeyboardEvent)=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeRef.current();previous?.focus({preventScroll:true})}};const outside=(event:PointerEvent)=>{const target=event.target as Node|null;if(target&&!panel?.contains(target)&&!previous?.contains(target))closeRef.current()};document.addEventListener('keydown',key,true);document.addEventListener('pointerdown',outside,true);return()=>{document.removeEventListener('keydown',key,true);document.removeEventListener('pointerdown',outside,true);if(document.activeElement===document.body||panel?.contains(document.activeElement))previous?.focus({preventScroll:true})}},[]);
- return <section ref={ref} role="region" aria-label={label} className={`hud-popover ${className}`} style={style}><header><span>{label}</span><button className="hud-glyph" type="button" aria-label={t('common.closeNamed',{label})} onClick={onClose}><HudGlyph name="close"/></button></header>{children}</section>;
+ return <section ref={ref} id={id} role="region" aria-label={label} className={`hud-popover ${className}`} style={style}><header><span>{label}</span><button className="hud-glyph" type="button" aria-label={t('common.closeNamed',{label})} onClick={onClose}><HudGlyph name="close"/></button></header>{children}</section>;
 }
