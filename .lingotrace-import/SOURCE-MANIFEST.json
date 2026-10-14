@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "b9ed846decc4c23ad77c16d038ef88dfa47ea9b4",
-  "source_file_count": 720,
+  "source_projection_tree_sha1": "e7f0e0745e609efbaed273308ab00f493e429662",
+  "source_file_count": 722,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 86145,
-      "git_blob_sha1": "192d13e84a79a46e1e867267c797a2f2d195e8a9",
-      "sha256": "9b31271232dcd22612b61cbf103139b612d304406396162f27925dc92ae55af2"
+      "bytes": 91029,
+      "git_blob_sha1": "a67da9b2ab626567386ce003e10de88f06e34657",
+      "sha256": "04d6760446f97eefabc115247a697b87c54773b65d803eab6c11a3f91e6c2f66"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -5047,6 +5047,20 @@
       "bytes": 4189,
       "git_blob_sha1": "cd6e558e7287b1d266d55369710cc56f31e5c838",
       "sha256": "e1402b9284d3f49f7a719fcf0ae7cead50298d75a27273bdc9d669c08e8e3a3a"
+    },
+    {
+      "path": "qa/prd-continue24-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4225,
+      "git_blob_sha1": "0674264468a426d31049bd20c0d0510782b6420b",
+      "sha256": "419ffb7f8aa8d4256c34eec245f7d412a9cb4e1e41964b7f4e852c07dc048780"
+    },
+    {
+      "path": "scripts/prd-continue24-qa.mts",
+      "mode": "100644",
+      "bytes": 4189,
+      "git_blob_sha1": "f64ce80154c521d493f28c996662235417aecc0e",
+      "sha256": "e5da05c0839c0adf4fe72315687606d430f48080a23c289327f07de806af872c"
     }
   ],
   "large_resources": [
