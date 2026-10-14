@@ -12,7 +12,8 @@ export function cameraControlGeometry(g:CameraGeometry,camera:CameraState,layout
  const cssWidth=typeof options.cssWidth==='number'&&Number.isFinite(options.cssWidth)&&options.cssWidth>0?options.cssWidth:g.width;
  const cssHeight=typeof options.cssHeight==='number'&&Number.isFinite(options.cssHeight)&&options.cssHeight>0?options.cssHeight:g.height;
  const sx=cssWidth/g.width,sy=cssHeight/g.height;
- const hitW=44/sx,hitH=44/sy,visualW=32/sx,visualH=32/sy;
+ // Match keyboard/settings/Enter hud-glyph: 44 CSS hit, 20 CSS bare icon.
+ const hitW=44/sx,hitH=44/sy,visualW=20/sx,visualH=20/sy;
  // Phone practice-compact: park below the trend plate on the right rail so the
  // icon never rides on the waveform (notch / trend clash).
  if(g.practiceCompact&&g.trend){

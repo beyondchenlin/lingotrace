@@ -111,11 +111,13 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  // Compact camera entry is presentation-only; enabled/split/course inset stays original.
  const cameraControl=cameraControlGeometry(geometry,v.camera,v.layout,{fixture:v.fixture,cssWidth:v.cameraViewport?.width,cssHeight:v.cameraViewport?.height});
  if(cameraControl.compact){
-  const r=cameraControl.visual;c.save();c.translate(r.x,r.y);c.scale(r.w/32,r.h/32);
-  c.strokeStyle='#edf2ee';c.lineWidth=1.4;c.beginPath();c.roundRect(1,1,30,30,7);c.stroke();
-  c.beginPath();c.roundRect(6,10,13,12,3);c.stroke();c.beginPath();c.moveTo(19,13);c.lineTo(26,9);c.lineTo(26,23);c.lineTo(19,19);c.stroke();
-  if(v.camera==='requesting')txt(c,'…',16,8,10,WHITE,600,'center');
-  else if(v.camera==='error')txt(c,'!',26,8,10,'#ffd2bb',600,'center');
+  // Bare camera line-art — same 20px / 1.5 stroke peer as keyboard/settings/Enter.
+  const r=cameraControl.visual;c.save();c.translate(r.x,r.y);c.scale(r.w/20,r.h/20);
+  c.strokeStyle='#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
+  c.beginPath();c.roundRect(2,5,11,10,2);c.stroke();
+  c.beginPath();c.moveTo(13,7);c.lineTo(18,4);c.lineTo(18,16);c.lineTo(13,13);c.closePath();c.stroke();
+  if(v.camera==='requesting')txt(c,'…',10,3,7,WHITE,600,'center');
+  else if(v.camera==='error')txt(c,'!',17,4,7,'#ffd2bb',600,'center');
   c.restore();
   // The Canvas REC clock remains at its original inset footer even when the
   // unused camera frame is collapsed. DOM-only status is not a recording.
@@ -160,11 +162,11 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  if(listening){if(!listening.hidden)paintInputText(c,card,{...v,draft:listening.text,caret:listening.text.length,selectionEnd:listening.text.length,inputFocused:false,composition:false,nativeInputDisplay:undefined,inputGuide:undefined,referenceGuide:undefined,scrollLeft:0,scrollTop:0});paintPassiveKeyboard(c,card,{visible:v.keyboardFeedback?.visible!==false,codes:listening.hidden||!listening.targetKey?[]:[listening.targetKey],committedUntil:0,composing:false},now,v.reducedMotion)}else{paintInputText(c,card,{...v,checkedAttempt:feedback});paintPassiveKeyboard(c,card,v.keyboardFeedback,now,v.reducedMotion)}
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
  const button=card.submit;if(!listening){
-  // Bare line-art only — same weight as keyboard/settings HudGlyph (no plate/circle).
+  // Bare line-art Enter/Return — same weight as keyboard/settings HudGlyph (no plate/circle).
   const cx=button.x+button.w/2,cy=button.y+button.h/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
   c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
   if(feedback?.errors===0){c.moveTo(cx-icon*.28,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.24);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.24)}
-  else{c.moveTo(cx-icon*.28,cy+icon*.04);c.lineTo(cx-icon*.04,cy+icon*.28);c.lineTo(cx+icon*.32,cy-icon*.28)}
+  else{c.moveTo(cx+icon*.26,cy-icon*.34);c.lineTo(cx+icon*.26,cy+icon*.14);c.lineTo(cx-icon*.30,cy+icon*.14);c.moveTo(cx-icon*.12,cy+icon*.14-icon*.16);c.lineTo(cx-icon*.30,cy+icon*.14);c.lineTo(cx-icon*.12,cy+icon*.14+icon*.16)}
   c.stroke();c.restore();
  };
  const statusSize=Math.max(portrait?12:14,12/card.cssScale),statusLineHeight=Math.max(portrait?16:18,16/card.cssScale);

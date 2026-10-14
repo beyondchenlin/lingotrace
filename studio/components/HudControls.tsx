@@ -13,7 +13,8 @@ export function HudGlyph({name}:{name:HudGlyphName}){
   display:<><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></>,
   // Metronome: fixed-pace / adaptive-assist toggle (pressed = active).
   pace:<><path d="M9 21h6L13.2 9H10.8L9 21z"/><path d="M12 9V5"/><path d="M12 9l4.5-2.5"/><circle cx="12" cy="17.5" r="1.2"/></>,
-  check:<path d="m5 12 5 5L19 7"/>,
+  // Keyboard Enter/Return (↵): vertical stem, leftward arm + arrowhead.
+  check:<><path d="M17 5v10H7"/><path d="m10 12-3 3 3 3"/></>,
   next:<><path d="M5 12h12"/><path d="m12 6 6 6-6 6"/></>,
  };
  return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;

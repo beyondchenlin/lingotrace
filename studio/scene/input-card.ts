@@ -256,21 +256,39 @@ export function applyInputCardLayout(base:StudioGeometry,options:InputCardOption
   const avail=Number.isFinite(options.availableHeight)&&options.availableHeight!>0?options.availableHeight!/scale:height;
   const folded=avail+1<height;
   if(folded){
-   // Keyboard-open: compact tall charts into a short HUD strip, park media
-   // between that strip and the typing focus zone, collapse transport (above).
-   const factor=.55,gy=6;
+   // Keyboard-open: title ABOVE gauges (never smash labels). Solve chart scale so
+   // HUD + thin media strip still fit above the typing card; prefer shrinking
+   // media then charts over crushing PRACTICE TARGET / INPUT TREND.
+   const cardTop=inputCard.card.y;
+   const titleH=Math.max(28,Math.min(40,title.h*.42)),titleY=4,gaugeGap=6,flowGap=4,mediaMin=64;
+   const flowH0=Math.max(40,metrics.h*.55);
+   const maxHud=Math.max(titleY+titleH+gaugeGap+80,cardTop-mediaMin-gap);
+   // titleY + titleH + gaugeGap + goalH*f + flowGap + flowH + gap <= maxHud
+   const flowH=flowH0;
+   const room=maxHud-(titleY+titleH+gaugeGap+flowGap+flowH+gap);
+   const factor=Math.max(.58,Math.min(.85,room/Math.max(1,goal.h)));
+   title={...title,y:titleY,h:titleH};
+   const gy=titleY+titleH+gaugeGap;
    goal={x:goal.x,y:gy,w:goal.w*factor,h:goal.h*factor};
    trend={x:base.width-trend.w*factor-14,y:gy,w:trend.w*factor,h:trend.h*factor};
-   title={...title,y:2,h:Math.min(title.h,28)};
-   const flowH=Math.max(36,metrics.h*.45);
-   metrics={x:goal.x,y:goal.y+goal.h+4,w:goal.w,h:flowH};
-   const hudBottom=Math.max(metrics.y+metrics.h,trend.y+trend.h)+gap;
-   const cardTop=inputCard.card.y;
-   const maxH=Math.max(96,cardTop-hudBottom-gap);
+   metrics={x:goal.x,y:goal.y+goal.h+flowGap,w:goal.w,h:flowH};
+   let hudBottom=Math.max(metrics.y+metrics.h,trend.y+trend.h)+gap;
+   // If still tight, drop flow height slightly (gauges stay).
+   if(hudBottom+mediaMin>cardTop){
+    const overflow=hudBottom+mediaMin-cardTop;
+    const shrink=Math.min(flowH-36,overflow);
+    if(shrink>0){metrics={...metrics,h:flowH-shrink};hudBottom=Math.max(metrics.y+metrics.h,trend.y+trend.h)+gap}
+   }
+   const maxH=Math.max(mediaMin,cardTop-hudBottom-gap);
    let mw=base.width,mh=mw*9/16;
    if(mh>maxH){mh=maxH;mw=mh*16/9}
    media={x:(base.width-mw)/2,y:hudBottom,w:mw,h:mh};
-   counter={...counter,y:Math.max(hudBottom,cardTop-counter.h-4),w:counter.w*factor,h:counter.h*factor};
+   // Never let the plate collide with typing; prefer a shorter plate over overlap.
+   if(media.y+media.h>cardTop-gap){
+    const h=Math.max(0,cardTop-gap-media.y);
+    media=h>0?{...media,h}: {x:media.x,y:Math.max(0,cardTop-gap),w:mw,h:0};
+   }
+   counter={...counter,y:Math.max(media.y,cardTop-counter.h-4),w:counter.w*factor,h:counter.h*factor};
    inset={...inset,y:media.y+4,w:inset.w*factor,h:inset.h*factor,x:media.x+media.w-inset.w*factor-4};
   }
   // Captions ride the media plate just above typing — never climb into the HUD band.

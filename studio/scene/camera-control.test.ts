@@ -5,11 +5,11 @@ import {responsiveLayout} from './responsive-layout';
 import {parseArrangement} from './transparent-layout';
 const overlap=(a:{x:number;y:number;w:number;h:number},b:{x:number;y:number;w:number;h:number})=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 for(const portrait of [false,true])for(const cssWidth of [280,320,375,430,500,768,1180,1920])for(const camera of ['off','requesting','error']as const){
- test(`compact ${camera} ${portrait?'portrait':'landscape'} width${cssWidth} is32px visible and44px hittable without moving input`,()=>{
+ test(`compact ${camera} ${portrait?'portrait':'landscape'} width${cssWidth} is20px visible and44px hittable without moving input`,()=>{
   const g=responsiveLayout(portrait,{},'lesson',820),before=JSON.stringify(g),cssHeight=cssWidth*g.height/g.width;
   const r=cameraControlGeometry(g,camera,'lesson',{cssWidth,cssHeight});assert.ok(r.compact);
   assert.ok(Math.abs(r.hit.w*cssWidth/g.width-44)<1e-8);assert.ok(Math.abs(r.hit.h*cssHeight/g.height-44)<1e-8);
-  assert.ok(Math.abs(r.visual.w*cssWidth/g.width-32)<1e-8);assert.ok(!overlap(r.hit,g.zones.input));assert.ok(!overlap(r.hit,g.zones.submit));assert.ok(!overlap(r.hit,g.zones.seek));assert.ok(!overlap(r.hit,g.title));
+  assert.ok(Math.abs(r.visual.w*cssWidth/g.width-20)<1e-8);assert.ok(!overlap(r.hit,g.zones.input));assert.ok(!overlap(r.hit,g.zones.submit));assert.ok(!overlap(r.hit,g.zones.seek));assert.ok(!overlap(r.hit,g.title));
   assert.ok(r.hit.x>=0&&r.hit.x+r.hit.w<=g.width+1e-8);assert.ok(r.hit.y>=0&&r.hit.y+r.hit.h<=g.height+1e-8);
   assert.equal(JSON.stringify(g),before);
  });

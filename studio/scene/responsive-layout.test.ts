@@ -188,6 +188,8 @@ test('phone one-screen stage never grows; transport stays off the picture',()=>{
   assert.ok(folded.player.y>=height*0.55-1,'collapsed transport parks at visual floor');
   // Keyboard-open: HUD charts compact; media sits between compact HUD and typing.
   assert.ok(folded.goal.h<normal.goal.h,'HUD charts compact when keyboard open');
+  assert.ok(folded.title.y+folded.title.h<=folded.goal.y+1e-6,'title clears PRACTICE TARGET / INPUT TREND band');
+  assert.ok(folded.goal.h>=normal.goal.h*.58-1e-6,'gauges keep readable min scale when keyboard open');
   assert.ok(folded.media.y+1>=folded.metrics.y+folded.metrics.h-1e-6,'media below compact flow');
   assert.ok(folded.media.y+folded.media.h<=folded.inputCard.card.y+1e-6,'media above typing focus zone');
   assert.ok(folded.inputCard.card.y+1>=folded.goal.y+folded.goal.h,'typing below compact goal');

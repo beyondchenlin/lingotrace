@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "a74b2ce71205aa9a1b790f5657649b0f7bde094c",
+  "source_projection_tree_sha1": "27eee9ae7b3ef7e4200523245174ecac043f635c",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -2041,9 +2041,9 @@
     {
       "path": "studio/components/HudControls.tsx",
       "mode": "100644",
-      "bytes": 2832,
-      "git_blob_sha1": "58eefde384387fe7ea6fe30288139cbeeb61b8f6",
-      "sha256": "4da53ae530b3f283d7b25de7968f81f26cb03a9bc40a461d1d25bb1d4fc80458"
+      "bytes": 2934,
+      "git_blob_sha1": "39ad7860160bb6ffb6160b0984c2f31351220644",
+      "sha256": "5bf2caca180c52860dd26cb2ed90a9e4f582d9ee826f7730c7eda3ba87780b69"
     },
     {
       "path": "studio/components/LayoutEditor.tsx",
@@ -4254,15 +4254,15 @@
       "path": "studio/scene/camera-control.test.ts",
       "mode": "100644",
       "bytes": 2793,
-      "git_blob_sha1": "d57e68acef41d04d8def91937e4c9c860acf42eb",
-      "sha256": "60f0b14b8de2b0cf1f3e4ab53b0dc91d92555c892624f8191017286599da1123"
+      "git_blob_sha1": "d11b682f5db5eff487504bd0e27a90792753b4e0",
+      "sha256": "7b8fa549c79fced5acc1146c94d674697dd0ee67bb696f79fea5af93fb132ffb"
     },
     {
       "path": "studio/scene/camera-control.ts",
       "mode": "100644",
-      "bytes": 2489,
-      "git_blob_sha1": "f552e18d03f404f973497e0f2b3a36873e96d4c8",
-      "sha256": "a6bd4bebf45c62d22c335995d959d986515e0b3da318c45ca2f4334104dd55c0"
+      "bytes": 2564,
+      "git_blob_sha1": "820405959e855d9c465adf52e9de241901ee7aa5",
+      "sha256": "c5d7dfa161139afa021c809706657d2b43db5542016925d4a3ae97e9c68245eb"
     },
     {
       "path": "studio/scene/centered-feedback.test.ts",
@@ -4386,16 +4386,16 @@
     {
       "path": "studio/scene/input-card.test.ts",
       "mode": "100644",
-      "bytes": 16747,
-      "git_blob_sha1": "3ce4023be72b8f983e97e4a3110a0dedf62f2404",
-      "sha256": "11f4f3a51071fcb0cd87d8087c3a8bbea0123555bb6ee3a32a717f9400fc8a1a"
+      "bytes": 17520,
+      "git_blob_sha1": "e658fcde0591bf198c1f32e37f26011c165b1aad",
+      "sha256": "bb110fb7863da0ef8a82e1acea1e5585778272b9ca189e099ddd7af615273806"
     },
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 49391,
-      "git_blob_sha1": "20e10399a46943d876c84c8aa0cfe96d2ce28c2c",
-      "sha256": "db9ef563c79bf3818b59ed7ff43c8312435b1a5234f3ae1299060aa8cded3ce6"
+      "bytes": 50437,
+      "git_blob_sha1": "7676b2fe4ea04cae5dbf10c7e7c571bc8532fa0f",
+      "sha256": "912e82ab785e153f4a6355130bc2f00da8fddc34b82b082f9079c90b4b682b19"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4617,9 +4617,9 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 15146,
-      "git_blob_sha1": "1d10024edcfd37848ebd5e1204336280ee3c66ce",
-      "sha256": "88b895444a98ad5bb248fd042ff8e3cffb99815af90bfafbc7c555a133683784"
+      "bytes": 15364,
+      "git_blob_sha1": "68bbde7b5f6d593d424be8fb29297ea6e33ff444",
+      "sha256": "3b6455181b6a195786d88c409ea60edc1d900cb63a7a9984d1ea143cb12f4509"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
@@ -4715,9 +4715,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31694,
-      "git_blob_sha1": "7d5eeb18c73d3ebe381729dee5b76cdf98054158",
-      "sha256": "492d7088fd87142cc65e405fb1cca44c07b9068e6616b106c43850cce04ba0e3"
+      "bytes": 31949,
+      "git_blob_sha1": "04741b9e5d7dbc809ab3245da56721cc5b45869c",
+      "sha256": "ed141d0b0d41dfb972c6ba15f5974aefd76b1e5310cf5418c539a5b0fd1ef0d1"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

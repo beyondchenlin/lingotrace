@@ -6,10 +6,26 @@ import {captureNativeInputDisplay,releaseNativeInputDisplay,applyInputCardLayout
 
 const intersects=(a:{x:number;y:number;w:number;h:number},b:{x:number;y:number;w:number;h:number})=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 for(const portrait of [false,true])for(const height of [820,940,1080,1400])test(`input card geometry preserves primary anchors and safely clears secondary HUD on visibility toggle ${portrait}/${height}`,()=>{
- const base=responsiveLayout(portrait,{},'lesson',height),shown=applyInputCardLayout(base),hidden=applyInputCardLayout(base,{keyboardVisible:false});
- if(portrait){assert.deepEqual(shown.inputCard.input,hidden.inputCard.input);assert.ok(hidden.height<shown.height)}else{assert.ok(shown.inputCard.input.y<hidden.inputCard.input.y);assert.equal(shown.height,base.height)};assert.deepEqual(shown.media,base.media);assert.deepEqual(shown.goal,base.goal);assert.deepEqual(shown.trend,base.trend);assert.deepEqual(shown.subtitle,base.subtitle);assert.deepEqual(shown.counter,base.counter);if(portrait){assert.deepEqual(shown.inset,base.inset);assert.deepEqual(shown.metrics,base.metrics)}else{assert.equal(shown.inset.x+shown.inset.w,base.inset.x+base.inset.w);assert.equal(shown.metrics.x,base.metrics.x)};
- assert.equal(hidden.inputCard.keyboard,null);assert.ok(shown.inputCard.keyboard);assert.ok(shown.inputCard.input.h-shown.inputCard.paddingY*2>=2*shown.inputCard.lineHeight);
- for(const rect of [shown.inputCard.card,shown.inputCard.keyboard!,shown.inputCard.toggle]){
+ const base=responsiveLayout(portrait,{},'lesson',height);
+ // Phone practice-compact uses the OS keyboard, never the in-app QWERTY plate.
+ const shown=applyInputCardLayout(base,base.practiceCompact?{keyboardVisible:false}:{}),hidden=applyInputCardLayout(base,{keyboardVisible:false});
+ if(portrait){
+  assert.deepEqual(shown.inputCard.input,hidden.inputCard.input);
+  if(base.practiceCompact){assert.equal(shown.height,hidden.height);assert.equal(shown.height,base.height)}
+  else assert.ok(hidden.height<shown.height);
+ }else{assert.ok(shown.inputCard.input.y<hidden.inputCard.input.y);assert.equal(shown.height,base.height)}
+ assert.deepEqual(shown.media,base.media);assert.deepEqual(shown.goal,base.goal);assert.deepEqual(shown.trend,base.trend);assert.deepEqual(shown.counter,base.counter);
+ if(portrait&&base.practiceCompact){
+  // Captions stay on the media plate above typing; y may differ from the base template.
+  assert.equal(shown.subtitle.x,base.subtitle.x);assert.equal(shown.subtitle.w,base.subtitle.w);assert.equal(shown.subtitle.h,base.subtitle.h);
+  assert.ok(shown.subtitle.y+shown.subtitle.h<=shown.inputCard.card.y+1e-6);
+ }else assert.deepEqual(shown.subtitle,base.subtitle);
+ if(portrait){assert.deepEqual(shown.inset,base.inset);assert.deepEqual(shown.metrics,base.metrics)}else{assert.equal(shown.inset.x+shown.inset.w,base.inset.x+base.inset.w);assert.equal(shown.metrics.x,base.metrics.x)};
+ assert.equal(hidden.inputCard.keyboard,null);
+ if(base.practiceCompact){assert.equal(shown.inputCard.keyboard,null)}else assert.ok(shown.inputCard.keyboard);
+ assert.ok(shown.inputCard.input.h-shown.inputCard.paddingY*2>=2*shown.inputCard.lineHeight);
+ const rects=[shown.inputCard.card,shown.inputCard.toggle].concat(shown.inputCard.keyboard?[shown.inputCard.keyboard]:[]);
+ for(const rect of rects){
   assert.ok(rect.x>=0&&rect.y>=0&&rect.x+rect.w<=shown.width&&rect.y+rect.h<=shown.height);
   if(rect!==shown.inputCard.card)assert.ok(!intersects(rect,shown.inset));assert.ok(!intersects(rect,shown.counter));assert.ok(!intersects(rect,shown.player));
  }
@@ -103,8 +119,8 @@ test('typed HELLO has five underline slots, word mode has one, and empty strict 
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:''});assert.equal(strokes,1);
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'',inputGuide:{mode:'letters',mask:'_____'}});assert.equal(strokes,5);
 });
-test('labeled check target has room for concise text and style selector does not cover editing or keyboard toggle',()=>{
- for(const portrait of[true,false])for(const cssScale of[.3,.414,.744,1]){const card=inputCardGeometry(responsiveLayout(portrait),{cssScale});assert.ok(card.submit.w>=card.submit.h);assert.ok(card.submit.w*cssScale>=86-1e-6);assert.ok(!intersects(card.modeToggle,card.input));assert.ok(!intersects(card.modeToggle,card.toggle));assert.ok(card.modeToggle.x+card.modeToggle.w<=1672);assert.ok(card.modeToggle.w*cssScale>=44)}
+test('Enter/Check target matches keyboard/settings 44px peer and style selector does not cover editing or keyboard toggle',()=>{
+ for(const portrait of[true,false])for(const cssScale of[.3,.414,.744,1]){const card=inputCardGeometry(responsiveLayout(portrait),{cssScale});assert.ok(Math.abs(card.submit.w-card.submit.h)<1e-6);assert.ok(card.submit.w*cssScale>=44-1e-6);assert.ok(!intersects(card.modeToggle,card.input));assert.ok(!intersects(card.modeToggle,card.toggle));assert.ok(card.modeToggle.x+card.modeToggle.w<=1672);assert.ok(card.modeToggle.w*cssScale>=44)}
 });
 
 test('native draft-end capture includes trailing tab independently of moved selection',()=>{
