@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "470e15cd74bb555be72f6d8f1a2a6ef214106782",
+  "source_projection_tree_sha1": "df99144a0c01e0d95f6a9ba67f456273855100c1",
   "source_file_count": 708,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 67279,
-      "git_blob_sha1": "80c5ed5fa11f0b9831feddf58cbc8d8dda7000ff",
-      "sha256": "960652f3233b4987efbf591a43945ed9fb47b48aba4274676c10e5ab371105a7"
+      "bytes": 71687,
+      "git_blob_sha1": "ab5134d3df8d04d7c6f69bb831319db274b22c61",
+      "sha256": "97b82e9310f8fc1030b08820e0f0976c6a2147f36ff49789948c39146d5c0c30"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -4533,9 +4533,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 52048,
-      "git_blob_sha1": "bc9aeb678ddf607b2631aeface2085ce3d32b0e0",
-      "sha256": "3fd390682cb7ee767d369a5a4b083c98d6d21135e2d1594ca02c6ee2809a3754"
+      "bytes": 52968,
+      "git_blob_sha1": "df9975370baea70fa9834e5a1cf53e47ce8655a0",
+      "sha256": "6b44b7d7b9b8b93f7525fb23bbe443bdc0c9888c9ff0563d8cae2644c15ab0b2"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4855,9 +4855,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 34276,
-      "git_blob_sha1": "3a7c3a8c30118a990677e40a8a37c865c3f97dad",
-      "sha256": "191a06c78b2767d138d1bb7156b227dd3c7d36c64e43b1ae9464a2266795a7c0"
+      "bytes": 35279,
+      "git_blob_sha1": "280975532a02eb8bed428abc63ccec55fa73c695",
+      "sha256": "a2fd4efad836e5342a95b8e752360808b6371739445c671c4e480c52e50f85bc"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -4918,9 +4918,9 @@
     {
       "path": "studio/theme/kids-cartoon.ts",
       "mode": "100644",
-      "bytes": 1750,
-      "git_blob_sha1": "b1692db0053cbf655346e2ede4e4d40f52bd7160",
-      "sha256": "5f31a9383b4992f877f7dd6e99fc1526a762afaeafc07c29f4fa38b178d6322e"
+      "bytes": 1751,
+      "git_blob_sha1": "0316f337852e582c3713e52c60ebbbc18075bae5",
+      "sha256": "777a90f2de285756ef3abe06da341b54f119c889b9edaab33d550560cba0f8fe"
     },
     {
       "path": "tsconfig.json",
