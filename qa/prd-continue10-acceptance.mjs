@@ -39,6 +39,9 @@ for (const key of libraryKeys) {
 check('library uses useStudioLocale', library.includes('useStudioLocale'));
 check('library no raw section aria ZH', !library.includes('aria-label="本机语境收藏"'));
 check('library displays via ui(error/message)', library.includes('ui(error)') && library.includes('ui(message)'));
+check('library invalidReference via t()', library.includes("t('library.invalidReference')") && panels.split('"library.invalidReference"').length - 1 >= 2);
+check('library no raw validateReference ZH', !library.includes('收藏的素材版本、参考或片段关联无法核验'));
+
 
 const layoutKeys = [
   'layoutPlan.title','layoutPlan.heading','layoutPlan.export','layoutPlan.choose','layoutPlan.previewLoaded',

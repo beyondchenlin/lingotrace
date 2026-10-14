@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "2b83a7b410272956f0eb9c2cf5f4143953ec2012",
+  "source_projection_tree_sha1": "bbac41769f7b9f458df16504ac4d4793e8ac8d93",
   "source_file_count": 700,
   "direct_source_file_count": 696,
   "restored_source_file_count": 4,
@@ -1824,9 +1824,9 @@
     {
       "path": "qa/prd-continue10-acceptance.mjs",
       "mode": "100644",
-      "bytes": 5280,
-      "git_blob_sha1": "acbba5f52f273f2ade2e51dcda0de5c2d6267842",
-      "sha256": "ba477b9b1015d02ca80d3bb5bccbc0b34a7c892d6b31821c26953a279a6de84b"
+      "bytes": 5563,
+      "git_blob_sha1": "a370bca4017c59eb59e3a500d1ef1c14d7cb99d6",
+      "sha256": "21668cf12ac875a182bf776d2ae32587d8a3c26028ca6817efe3847f75dc505b"
     },
     {
       "path": "qa/prd-continue7-acceptance.mjs",
@@ -2097,9 +2097,9 @@
     {
       "path": "studio/components/ContextBookmarkLibrary.tsx",
       "mode": "100644",
-      "bytes": 9666,
-      "git_blob_sha1": "74fa5bec61d8ed25e7e06bdec86a1d770d23bca1",
-      "sha256": "e6a4552d5f88574cd54cfe2770338ce3cd596c6b24c720c561170cda03b1f672"
+      "bytes": 9633,
+      "git_blob_sha1": "89a58395238a39de03f0c68acd03ae15492f397a",
+      "sha256": "25bc682fd9296a5dc322f11eb11afe46be7b0a0210b8f8a8d09b975dfd2c22de"
     },
     {
       "path": "studio/components/HistoryReferenceImpact.tsx",

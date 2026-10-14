@@ -45,7 +45,7 @@ export default function ContextBookmarkLibrary({repository,pool,controllerRef,mo
  useEffect(()=>{
   if(!video.current)return;
   const controller=createContextBookmarkPreviewController({video:video.current,pool,
-   validateReference:reference=>isCurrentBookmarkReference(reference)?null:'收藏的素材版本、参考或片段关联无法核验。',
+   validateReference:reference=>isCurrentBookmarkReference(reference)?null:t('library.invalidReference'),
    monitor,isRecordingBlocked:()=>guard.current(),
   });
   controllerRef.current=controller;setPreview(controller.getState());
