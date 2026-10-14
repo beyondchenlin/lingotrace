@@ -437,13 +437,17 @@ export function keyboardKeyRects(rect:Rect):KeyboardKey[]{
 export function paintPassiveKeyboard(c:CanvasRenderingContext2D,card:InputCardGeometry,state:KeyboardFeedback|undefined,now:number,reducedMotion:boolean){
  const rect=card.keyboard;if(!rect||state?.visible===false)return;
  const pressed=new Set(state?.codes??[]),committed=!reducedMotion&&!!state&&state.committedUntil>now;
- c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,10);c.fillStyle='#edf5f00a';c.fill();
- c.strokeStyle=state?.composing?'#c7daef99':committed?'#b8e7bfaa':'#d7e9df38';c.lineWidth=1;c.stroke();
+ c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,14);
+ const plate=c.createLinearGradient(0,rect.y,0,rect.y+rect.h);
+ plate.addColorStop(0,'rgba(18,28,34,.55)');plate.addColorStop(1,'rgba(10,16,22,.42)');
+ c.fillStyle=plate;c.fill();
+ c.strokeStyle=state?.composing?'#c7daef99':committed?'#b8e7bfaa':'rgba(215,233,223,.42)';c.lineWidth=1;c.stroke();
  for(const key of keyboardKeyRects(rect)){
-  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.3:0;
-  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,3);c.fillStyle=active?'#cce6bdc9':'#e6f0e50d';c.fill();
-  c.strokeStyle=active?'#ecf8e5':'#d6e5e231';c.lineWidth=.7;c.stroke();
-  c.font=`400 ${Math.max(10/card.cssScale,Math.min(12.5/card.cssScale,r.h*.52))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#ecf2ed';
+  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.1:0;
+  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,5);
+  c.fillStyle=active?'#cce6bde0':'rgba(230,240,229,.08)';c.fill();
+  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.28)';c.lineWidth=.8;c.stroke();
+  c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.5/card.cssScale,r.h*.52))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#edf3ef';
   c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.5);
  }
  c.restore();

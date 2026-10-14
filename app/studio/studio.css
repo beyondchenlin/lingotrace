@@ -417,33 +417,85 @@
 .pace-timeline .chart-labels{align-items:center}
 .portrait-layout[data-practice-compact=true] .typing-pace-chip{font-size:10px;padding:5px 8px}
 
-/* hud-premium-v2 */
+/* hud-premium-v3 — cohesive game-HUD + top English-learning chrome */
+.studio-stage{
+  background:#0a1218;
+  box-shadow:0 28px 96px #00000099,0 0 0 1px #c9e2d818,inset 0 1px 0 #ffffff0a;
+  border-radius:4px;
+}
 .typing-follow-toolbar{
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;
   padding:4px 2px;filter:drop-shadow(0 1px 2px #06101666);
 }
+.typing-pace-chip{
+  min-height:30px;padding:6px 11px;letter-spacing:.06em;
+  box-shadow:0 2px 12px #00000055,inset 0 1px 0 #ffffff14;
+}
+.hud-glyph{
+  transition:background .16s ease,color .16s ease,box-shadow .16s ease,transform .12s ease;
+}
+.hud-glyph:hover,.hud-glyph[data-active=true]{
+  background:#e4f3de1c;color:#e8f9d2;box-shadow:inset 0 0 0 1px #c4fc5740;
+}
+.hud-glyph:active{transform:scale(.96)}
 .studio-tools-sheet,.tools-drawer-grid{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;
-  padding:12px;border-radius:16px;
-  background:linear-gradient(165deg,#15221ceb,#0e171cf5);
-  border:1px solid #c9e2d838;backdrop-filter:blur(20px) saturate(1.12);
-  box-shadow:0 16px 40px #00000055,inset 0 1px 0 #ffffff0d;
+  padding:14px;border-radius:18px;
+  background:linear-gradient(165deg,#17252ceb 0%,#101a20f5 55%,#0c151af8 100%);
+  border:1px solid #c9e2d842;backdrop-filter:blur(22px) saturate(1.18);
+  box-shadow:0 18px 48px #00000066,inset 0 1px 0 #ffffff12;
 }
 .studio-tools-sheet button,.tools-drawer-grid button{
-  min-height:44px;border-radius:12px;border:1px solid #d7e7d822;
-  background:#0c1418a0;color:#eef4f0;font-size:11px;letter-spacing:.04em;
-  transition:border-color .15s ease,background .15s ease;
+  min-height:48px;border-radius:14px;border:1px solid #d7e7d828;
+  background:linear-gradient(180deg,#121c22cc,#0c1418b8);color:#eef4f0;
+  font-size:11px;font-weight:500;letter-spacing:.05em;
+  transition:border-color .15s ease,background .15s ease,transform .12s ease;
 }
-.studio-tools-sheet button:hover,.tools-drawer-grid button:hover{border-color:#9debe655;background:#122028cc}
+.studio-tools-sheet button:hover,.tools-drawer-grid button:hover{
+  border-color:#9debe666;background:linear-gradient(180deg,#182830dd,#101a20cc);
+}
+.studio-tools-sheet button:active,.tools-drawer-grid button:active{transform:scale(.97)}
 .studio-tools-sheet button[aria-pressed=true],.tools-drawer-grid button[aria-pressed=true]{
-  border-color:#c4fc5788;background:#c4fc5718;color:#e2f7c8;
+  border-color:#c4fc5799;background:linear-gradient(180deg,#c4fc5722,#102028e0);color:#e8f9d2;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button{
+  min-height:68px;border-radius:16px;
+  background:linear-gradient(180deg,#edf5e910,#0c141888);
+  border:1px solid #d7e7d822;
+  box-shadow:inset 0 1px 0 #ffffff08;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button:hover,
+.portrait-layout .studio-drawer[data-drawer=sheet] .studio-tools button:focus-visible{
+  background:linear-gradient(180deg,#edf5e918,#122028cc);
+  border-color:#8ec9a855;
 }
 .portrait-layout[data-practice-compact=true] .entry-viewport{
-  border-radius:12px;box-shadow:inset 0 0 0 1px #c9e2d814;
+  border-radius:14px;
+  box-shadow:inset 0 0 0 1px #c9e2d820,0 8px 28px #00000033;
+  background:linear-gradient(180deg,#0e181e55,#0a121855);
 }
 .hud-popover{
-  letter-spacing:.01em;
+  letter-spacing:.015em;
+  border-radius:18px;
+  border-color:#c9e2d844;
+  box-shadow:0 22px 56px #00000077,inset 0 1px 0 #ffffff12;
 }
+.hud-popover>header{
+  letter-spacing:.16em;font-weight:600;color:#e2f0e8;
+}
+.hud-popover .hud-panel-section{
+  border-radius:14px;border-color:#d7e7d828;
+  background:linear-gradient(180deg,#9debe60c,#9debe606);
+}
+.submit-hit{border-radius:16px}
 .responsive-enabled>.portrait-layout[data-practice-compact=true]{
-  box-shadow:0 18px 60px #00000077,0 0 0 1px #c9e2d810;
+  box-shadow:0 22px 72px #00000088,0 0 0 1px #c9e2d816;
+  border-radius:2px;
+}
+.portrait-layout .studio-drawer[data-drawer=sheet]{
+  border-radius:24px 24px 0 0;
+  box-shadow:0 -24px 64px #000a,inset 0 1px 0 #ffffff10;
+}
+.portrait-layout .studio-drawer-grabber{
+  width:42px;height:4px;background:#d7e7d855;
 }

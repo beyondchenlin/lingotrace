@@ -20,12 +20,12 @@ export interface EditionSurface {
 export const VISUAL_EDITION_STORAGE_KEY='lingotrace-studio-visual-edition-v1';
 
 export const PRO_EDITION:EditionSurface={
- id:'pro',tone:'#ffc15f',traceTone:'#9bddff',plateAlpha:1,breathScale:1,plateRadius:16,warmLift:0,
+ id:'pro',tone:'#ffc15f',traceTone:'#9bddff',plateAlpha:1.04,breathScale:1,plateRadius:18,warmLift:0.02,
 };
 
 /** Softer, warmer cartoon pass — still glanceable game HUD, not a toy strip. */
 export const KIDS_EDITION:EditionSurface={
- id:'kids',tone:'#ffb347',traceTone:'#7ad7ff',plateAlpha:1.14,breathScale:1.28,plateRadius:24,warmLift:.1,
+ id:'kids',tone:'#ffb347',traceTone:'#7ad7ff',plateAlpha:1.16,breathScale:1.28,plateRadius:22,warmLift:.12,
 };
 
 export function editionSurface(id:StudioVisualEdition|undefined):EditionSurface{
