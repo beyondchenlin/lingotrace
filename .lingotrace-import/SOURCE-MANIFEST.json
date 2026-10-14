@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "6254b1d7633710dcd3aacce2d2e0bd0325f8e7df",
+  "source_projection_tree_sha1": "5460fa4254b0eb7d5fc55f38e97bf0e1bd205025",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -1915,9 +1915,9 @@
     {
       "path": "scripts/onescreen-qa-render.mts",
       "mode": "100644",
-      "bytes": 5497,
-      "git_blob_sha1": "c099e8dc28c84869a3762e22f1b13911223da72d",
-      "sha256": "0824f1101e91ee39866ec6967e7b295a19013e5a74b0e9e671eb409c741454bc"
+      "bytes": 5923,
+      "git_blob_sha1": "9392cb08ef829851bb29b7958e1b2d61bf20e181",
+      "sha256": "c8d801bd517777c6ca3f993cc7ab8a25cc267dc952403d02a32e9334e2735039"
     },
     {
       "path": "scripts/prepare-subtitle-assets.mjs",
@@ -4393,9 +4393,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 48478,
-      "git_blob_sha1": "85dd8990d441a5214273f5c6a487fff448eef915",
-      "sha256": "02089ce026bfa77a608cf6215a6c813e866764f2ac896116665650353e24d75e"
+      "bytes": 49365,
+      "git_blob_sha1": "ac5154c86ac701c623f0247478d4bf6c3a9419fc",
+      "sha256": "39c3fe5ffb791ba52be62529466f7df29a29195c068fec7d8f10c3de28674bcc"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4617,16 +4617,16 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 14530,
-      "git_blob_sha1": "40a6fa7245cb626129f5e46a3d54b39750ffeef3",
-      "sha256": "98be51a6b9bec632bd7f0a00bc1cdd51617db031f21aa65006b5fcf95417e253"
+      "bytes": 15146,
+      "git_blob_sha1": "1d10024edcfd37848ebd5e1204336280ee3c66ce",
+      "sha256": "88b895444a98ad5bb248fd042ff8e3cffb99815af90bfafbc7c555a133683784"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
       "mode": "100644",
-      "bytes": 9272,
-      "git_blob_sha1": "f71d946fc496e02c28bc2d129c1b735a49b82e07",
-      "sha256": "d200dca596993e858f186c4be732c1f09bd9dd909fc1a83536537330a3a98aba"
+      "bytes": 9768,
+      "git_blob_sha1": "14c2f5dd43a5989494a56e03805945670e016556",
+      "sha256": "1cf138838868a8403ad6dbab36cab4ba3d56baccacb21434a8e2981516e05fd5"
     },
     {
       "path": "studio/scene/responsive-renderer.test.ts",
