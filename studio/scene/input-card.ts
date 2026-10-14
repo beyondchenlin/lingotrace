@@ -437,16 +437,24 @@ export function keyboardKeyRects(rect:Rect):KeyboardKey[]{
 export function paintPassiveKeyboard(c:CanvasRenderingContext2D,card:InputCardGeometry,state:KeyboardFeedback|undefined,now:number,reducedMotion:boolean){
  const rect=card.keyboard;if(!rect||state?.visible===false)return;
  const pressed=new Set(state?.codes??[]),committed=!reducedMotion&&!!state&&state.committedUntil>now;
- c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,14);
+ c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,16);c.clip();
  const plate=c.createLinearGradient(0,rect.y,0,rect.y+rect.h);
- plate.addColorStop(0,'rgba(18,28,34,.55)');plate.addColorStop(1,'rgba(10,16,22,.42)');
+ plate.addColorStop(0,'rgba(22,34,40,.62)');plate.addColorStop(.55,'rgba(14,22,28,.48)');plate.addColorStop(1,'rgba(8,14,20,.40)');
  c.fillStyle=plate;c.fill();
- c.strokeStyle=state?.composing?'#c7daef99':committed?'#b8e7bfaa':'rgba(215,233,223,.42)';c.lineWidth=1;c.stroke();
+ const spec=c.createLinearGradient(0,rect.y,0,rect.y+rect.h*.35);
+ spec.addColorStop(0,'rgba(236,248,242,.10)');spec.addColorStop(1,'rgba(236,248,242,0)');
+ c.fillStyle=spec;c.fillRect(rect.x,rect.y,rect.w,rect.h*.35);
+ c.restore();
+ c.save();c.beginPath();c.roundRect(rect.x+.5,rect.y+.5,rect.w-1,rect.h-1,16);
+ c.strokeStyle=state?.composing?'#c7daefaa':committed?'#b8e7bfbb':'rgba(215,233,223,.48)';c.lineWidth=1.05;c.stroke();
  for(const key of keyboardKeyRects(rect)){
   const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.1:0;
-  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,5);
-  c.fillStyle=active?'#cce6bde0':'rgba(230,240,229,.08)';c.fill();
-  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.28)';c.lineWidth=.8;c.stroke();
+  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,6);
+  if(active){c.fillStyle='#cce6bde8';c.fill()}else{
+   const kg=c.createLinearGradient(0,r.y+dy,0,r.y+dy+r.h);
+   kg.addColorStop(0,'rgba(236,246,238,.12)');kg.addColorStop(1,'rgba(220,232,226,.05)');
+   c.fillStyle=kg;c.fill()}
+  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.34)';c.lineWidth=.85;c.stroke();
   c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.5/card.cssScale,r.h*.52))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#edf3ef';
   c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.5);
  }
@@ -520,8 +528,10 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  // Assisted target: stable per-word rails under each reference word (karaoke / fill-in slots),
  // even when the draft is still empty — not only under already-typed draft runs.
  const underlineLines=guide?wrapInputText(guide.mask,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):state.referenceGuide&&mode==='words'?wrapInputText(state.referenceGuide,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):lines;
- c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;c.strokeStyle=guide?'#e4f6bfee':'#e4f6d9e6';c.lineWidth=Math.max(1,1/card.cssScale);
- for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;c.beginPath();c.moveTo(z.x+line.x+left+gap-scrollX,z.y+line.baseline+4-scrollY);c.lineTo(z.x+line.x+left+width-gap-scrollX,z.y+line.baseline+4-scrollY);c.stroke()}}
+ c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;
+ // Market word/letter rails: soft fill glow + one crisp stroke (stroke count = slot count).
+ const railColor=guide?'#e4f6bfee':'#e4f6d9ee',railW=Math.max(1.15,1.2/card.cssScale);
+ for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;const x0=z.x+line.x+left+gap-scrollX,x1=z.x+line.x+left+width-gap-scrollX,y=z.y+line.baseline+4-scrollY;c.fillStyle='#e4f6d938';c.fillRect(x0,y-1.1/card.cssScale,Math.max(0,x1-x0),2.4/card.cssScale);c.strokeStyle=railColor;c.lineWidth=railW;c.lineCap='round';c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke()}}
  const {ranges:feedbackRanges}=inputLetterFeedback(state.draft,state.referenceGuide,state.checkedAttempt??null,state.composition);
  for(const run of lines){if(run.y+run.height<scrollY||run.y>scrollY+z.h)continue;
   const boundaries=[0,run.text.length,...feedbackRanges.flatMap(r=>[Math.max(0,Math.min(run.text.length,r.start-run.start)),Math.max(0,Math.min(run.text.length,r.end-run.start))])].sort((a,b)=>a-b);
