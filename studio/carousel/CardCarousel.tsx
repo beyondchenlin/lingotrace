@@ -117,13 +117,15 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
        aria-hidden={!active}
        tabIndex={active?0:-1}
       >
-       <div className="lt-card-media">
+       <div className="lt-card-media" data-aspect={card.aspect} data-live={active&&!!card.videoSrc&&!reduced||undefined}>
         <span className="lt-card-aspect">{aspectLabel}</span>
-        {card.videoSrc&&active?(
-         <video src={card.videoSrc} poster={card.posterSrc} muted playsInline loop autoPlay={active&&!reduced} preload="metadata"/>
-        ):(
-         <img src={card.posterSrc} alt=""/>
-        )}
+        <div className="lt-card-media-frame">
+         {card.videoSrc&&active&&!reduced?(
+          <video src={card.videoSrc} poster={card.posterSrc} muted playsInline loop autoPlay preload="metadata"/>
+         ):(
+          <img src={card.posterSrc} alt="" loading={active?'eager':'lazy'}/>
+         )}
+        </div>
        </div>
        <div className="lt-card-meta">
         <span className="lt-card-kind" data-kind={card.kind}>{kindLabel(card.kind,locale)}</span>
