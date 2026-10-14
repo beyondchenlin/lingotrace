@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "3a580438de3144ba8c193babc291adeba87357b0",
-  "source_file_count": 716,
+  "source_projection_tree_sha1": "0a5f19f687ecc826d22d13afca2c595f3ea20936",
+  "source_file_count": 718,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 79920,
-      "git_blob_sha1": "4c229b59f33006857873516f7632afe82dc5ac47",
-      "sha256": "47126b109c33610526708e4fad4572e40e4c725453ac47951b5937be068f57bd"
+      "bytes": 81586,
+      "git_blob_sha1": "54e70921825e42cd202c38b3234a7b3d86f93485",
+      "sha256": "ef9ce936eb63e7a435a038a2549de6a71995f00d45a0b39ca5d1b57becf7d0da"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -4533,9 +4533,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 53825,
-      "git_blob_sha1": "98d81a8e5d77aeeb05074f829d13f17d4ccbb424",
-      "sha256": "7cf25237dc08e1a7fdb4978590d197beef57a03778bde88b2640575b3a4499d1"
+      "bytes": 54080,
+      "git_blob_sha1": "6248d2b30ec059a46224cc069953e3c415100dea",
+      "sha256": "cab3f467d47fdc223369d650e3eb2772234800d8fea9793b084ee01346b8f8ce"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4855,9 +4855,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 45428,
-      "git_blob_sha1": "b4c955f16d8a2f8fb5d83b099266523a9dbaae24",
-      "sha256": "08a1526b07edeae11dbc98067d19a25cda228f81d0ec590768a7464a41eb6e2f"
+      "bytes": 46735,
+      "git_blob_sha1": "9f089de216ff22b3b1d6c3a22fb54f066026b438",
+      "sha256": "40cefa19b6c39245d33b0964e0e4c921c3c6062bb982d956a3f2c5a4e385fa1f"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -5019,6 +5019,20 @@
       "bytes": 4335,
       "git_blob_sha1": "dde86a83629500b26bd479d7d1ee614ee7df5b8c",
       "sha256": "e238ff9d4917c9e8523fc51db64445645cd578ea4ea05faf8993e1f026e7f50b"
+    },
+    {
+      "path": "qa/prd-continue22-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4153,
+      "git_blob_sha1": "1e4eaaaca44ad9b2387ab7723c67106d2977baae",
+      "sha256": "8f06f209d958fb6206782ce82640684ed5e386ccf55552d1ead78276e52d3a33"
+    },
+    {
+      "path": "scripts/prd-continue22-qa.mts",
+      "mode": "100644",
+      "bytes": 4189,
+      "git_blob_sha1": "808f8372ea104d90feb1b8bbf8eefb7d8328d276",
+      "sha256": "0603fbf24fd75b4d21eeb2f9dbffd2f84ceeaf26dcf012054ad348a0211a7a07"
     }
   ],
   "large_resources": [

@@ -511,8 +511,9 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  const z=card.input,native=state.nativeInputDisplay?.text===state.draft?state.nativeInputDisplay:undefined;
  c.save();c.beginPath();c.roundRect(z.x,z.y,z.w,z.h,9);c.clip();
  // continue15 — soft typing well (inset glass fill only; no extra stroke — rail stroke counts stay exact). Never a second subtitle.
- {const well=c.createLinearGradient(0,z.y,0,z.y+z.h);well.addColorStop(0,'rgba(14,22,28,.22)');well.addColorStop(.55,'rgba(10,16,22,.12)');well.addColorStop(1,'rgba(8,14,20,.18)');c.fillStyle=well;c.fillRect(z.x,z.y,z.w,z.h);
-  const sheen=c.createLinearGradient(0,z.y,0,z.y+Math.max(8,z.h*.18));sheen.addColorStop(0,'rgba(245,252,248,.08)');sheen.addColorStop(1,'rgba(245,252,248,0)');c.fillStyle=sheen;c.fillRect(z.x,z.y,z.w,Math.max(8,z.h*.18))}
+ // continue22 — input-card plate (deeper frost + specular; still no full-width focus rail).
+ {const well=c.createLinearGradient(0,z.y,0,z.y+z.h);well.addColorStop(0,'rgba(16,26,32,.30)');well.addColorStop(.5,'rgba(10,16,22,.16)');well.addColorStop(1,'rgba(7,12,18,.24)');c.fillStyle=well;c.fillRect(z.x,z.y,z.w,z.h);
+  const sheen=c.createLinearGradient(0,z.y,0,z.y+Math.max(8,z.h*.22));sheen.addColorStop(0,'rgba(245,252,248,.12)');sheen.addColorStop(.55,'rgba(245,252,248,.04)');sheen.addColorStop(1,'rgba(245,252,248,0)');c.fillStyle=sheen;c.fillRect(z.x,z.y,z.w,Math.max(8,z.h*.22))}
  // Match the native viewport's inner clip: padding must not reveal fragments
  // of a fourth line. Neither drawing nor recording rewraps the current page.
  if(native?.window){c.beginPath();c.rect(z.x,z.y+native.window.clipTop,z.w,native.window.clipBottom-native.window.clipTop);c.clip()}
@@ -545,8 +546,9 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  const underlineLines=guide?wrapInputText(guide.mask,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):state.referenceGuide&&mode==='words'?wrapInputText(state.referenceGuide,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):lines;
  c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;
  // continue15 word/letter rails: soft fill bloom + crisp stroke (stroke count = slot count).
- const railColor=guide?'#e4f6bfee':'#e4f6d9ee',railW=Math.max(1.2,1.25/card.cssScale);
- for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;const x0=z.x+line.x+left+gap-scrollX,x1=z.x+line.x+left+width-gap-scrollX,y=z.y+line.baseline+4-scrollY;c.fillStyle='#e4f6d942';c.fillRect(x0,y-1.25/card.cssScale,Math.max(0,x1-x0),2.6/card.cssScale);c.strokeStyle=railColor;c.lineWidth=railW;c.lineCap='round';c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke()}}
+ // continue22 — word-rail residual polish (softer bloom only; stroke count stays exact; no full-width rails).
+ const railColor=guide?'#e4f6bff2':'#e4f6d9f0',railW=Math.max(1.2,1.25/card.cssScale);
+ for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;const x0=z.x+line.x+left+gap-scrollX,x1=z.x+line.x+left+width-gap-scrollX,y=z.y+line.baseline+4-scrollY;c.fillStyle='#e4f6d94a';c.fillRect(x0,y-1.35/card.cssScale,Math.max(0,x1-x0),2.8/card.cssScale);c.strokeStyle=railColor;c.lineWidth=railW;c.lineCap='round';c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke()}}
  const {ranges:feedbackRanges}=inputLetterFeedback(state.draft,state.referenceGuide,state.checkedAttempt??null,state.composition);
  for(const run of lines){if(run.y+run.height<scrollY||run.y>scrollY+z.h)continue;
   const boundaries=[0,run.text.length,...feedbackRanges.flatMap(r=>[Math.max(0,Math.min(run.text.length,r.start-run.start)),Math.max(0,Math.min(run.text.length,r.end-run.start))])].sort((a,b)=>a-b);

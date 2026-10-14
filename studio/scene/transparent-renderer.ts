@@ -245,13 +245,24 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const card=geometry.inputCard,header=inputHeaderControls(card);
  const activeReward=feedback&&feedback.attemptId===v.rewardAttemptId&&now-v.rewardAt>=0&&now-v.rewardAt<1300;
  // Mode controls use native DOM; the recorded scene carries the same concise label.
+ // continue22 — input-card plate hairline rim/floor on the typing card (peer to flow/trend plates).
+ {const pc=card.card;c.save();c.beginPath();c.roundRect(pc.x+.5,pc.y+.5,pc.w-1,pc.h-1,14);
+  c.strokeStyle='rgba(201,226,216,.30)';c.lineWidth=1.05;c.stroke();
+  c.beginPath();c.moveTo(pc.x+16,pc.y+1.15);c.lineTo(pc.x+pc.w-16,pc.y+1.15);c.strokeStyle='rgba(245,252,248,.16)';c.lineWidth=.9;c.stroke();
+  c.beginPath();c.moveTo(pc.x+18,pc.y+pc.h-1.2);c.lineTo(pc.x+pc.w-18,pc.y+pc.h-1.2);c.strokeStyle='rgba(201,226,216,.10)';c.lineWidth=.9;c.stroke();c.restore()}
  if(!v.listeningDisplay?.active)txt(c,v.referenceGuideUnavailable?t('scene.referenceUnavailable'):v.referenceGuide?t('scene.referenceActionCompact'):t('scene.dictationActionCompact'),header.reference.x,card.helper.y+card.helper.h*.75,Math.max(12,12/card.cssScale),'#c8d8d2');
  if(listening){if(!listening.hidden)paintInputText(c,card,{...v,draft:listening.text,caret:listening.text.length,selectionEnd:listening.text.length,inputFocused:false,composition:false,nativeInputDisplay:undefined,inputGuide:undefined,referenceGuide:undefined,scrollLeft:0,scrollTop:0});paintPassiveKeyboard(c,card,{visible:v.keyboardFeedback?.visible!==false,codes:listening.hidden||!listening.targetKey?[]:[listening.targetKey],committedUntil:0,composing:false},now,v.reducedMotion)}else{paintInputText(c,card,{...v,checkedAttempt:feedback});paintPassiveKeyboard(c,card,v.keyboardFeedback,now,v.reducedMotion)}
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
  const button=card.submit;if(!listening){
+  // continue22 — Check-hit glass well under Enter glyph (glyph stays 1.5 stroke peer; no filled circle CTA).
+  {c.save();c.beginPath();c.roundRect(button.x+1,button.y+1,button.w-2,button.h-2,12);
+   const ok=feedback?.errors===0,cg=c.createLinearGradient(0,button.y,0,button.y+button.h);
+   cg.addColorStop(0,ok?'rgba(196,252,87,.16)':'rgba(18,28,34,.58)');cg.addColorStop(1,ok?'rgba(14,28,18,.34)':'rgba(8,14,20,.30)');
+   c.fillStyle=cg;c.fill();c.strokeStyle=ok?'rgba(196,252,87,.42)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
+   c.beginPath();c.moveTo(button.x+8,button.y+2);c.lineTo(button.x+button.w-8,button.y+2);c.strokeStyle='rgba(245,252,248,.16)';c.lineWidth=.85;c.stroke();c.restore()}
   // Bare line-art Enter/Return — same weight as keyboard/settings HudGlyph (no plate/circle).
   const cx=button.x+button.w/2,cy=button.y+button.h/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
-  c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
+  c.save();c.strokeStyle=feedback?.errors===0?'#eafad6':'#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
   if(feedback?.errors===0){c.moveTo(cx-icon*.28,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.24);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.24)}
   else{c.moveTo(cx+icon*.26,cy-icon*.34);c.lineTo(cx+icon*.26,cy+icon*.14);c.lineTo(cx-icon*.30,cy+icon*.14);c.moveTo(cx-icon*.12,cy+icon*.14-icon*.16);c.lineTo(cx-icon*.30,cy+icon*.14);c.lineTo(cx-icon*.12,cy+icon*.14+icon*.16)}
   c.stroke();c.restore();
