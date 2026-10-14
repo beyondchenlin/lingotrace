@@ -1808,3 +1808,110 @@
   background:linear-gradient(168deg,#2a2418f0,#1a1810e8);
 }
 .studio-page[data-visual-edition=kids] .empty-glyph{color:#ffb7d0cc}
+
+/* continue28 — mute-hit residual / submit-hit residual / hud-popover chrome (no video caption capsule) */
+.studio-stage:not(.reference-mode) .mute-hit{
+  border-radius:12px;
+  box-shadow:inset 0 0 0 1px #c9e2d828,inset 0 1px 0 #ffffff10;
+  background:linear-gradient(180deg,#14202833,#0a141a22);
+}
+.studio-stage:not(.reference-mode) .mute-hit:focus-visible{
+  outline:2px solid #c4fc5799;outline-offset:1px;
+  box-shadow:inset 0 0 0 1px #c4fc5744,0 0 0 1px #c4fc5722;
+}
+.studio-stage:not(.reference-mode) .mute-hit[aria-pressed=true]{
+  box-shadow:inset 0 0 0 1px #ffb07a44,inset 0 1px 0 #ffd2bb22;
+  background:linear-gradient(180deg,#3a221833,#1a100a22);
+}
+
+.studio-stage:not(.reference-mode) .submit-hit{
+  border-radius:14px;
+  box-shadow:inset 0 0 0 1px #c9e2d828,inset 0 1px 0 #ffffff10;
+  transition:box-shadow .12s ease,background .12s ease,transform .1s ease;
+}
+.studio-stage:not(.reference-mode) .submit-hit:hover{
+  box-shadow:inset 0 0 0 1px #c4fc5740,inset 0 1px 0 #ffffff18;
+}
+.studio-stage:not(.reference-mode) .submit-hit:active{
+  transform:scale(.985);
+  box-shadow:inset 0 2px 8px #00000055,inset 0 0 0 1px #c4fc5755;
+  background:linear-gradient(180deg,#c4fc5718,#0a141a33);
+}
+.studio-stage:not(.reference-mode) .submit-hit:focus-visible{
+  outline:2px solid #c4fc5799;outline-offset:1px;
+}
+@media (prefers-reduced-motion: reduce){
+  .studio-stage:not(.reference-mode) .submit-hit{transition:none}
+  .studio-stage:not(.reference-mode) .submit-hit:active{transform:none}
+}
+
+/* hud-popover chrome — denser glass plate, hairline rim, clearer item hierarchy (no new IA) */
+.hud-popover{
+  background:linear-gradient(168deg,#1a2c34f4 0%,#142028f2 48%,#0e181ef5 100%);
+  border:1px solid #c9e2d852;
+  border-radius:20px;
+  box-shadow:0 24px 64px #00000088,inset 0 1px 0 #ffffff16,0 0 0 1px #c9e2d814;
+  backdrop-filter:blur(24px) saturate(1.16);
+  -webkit-backdrop-filter:blur(24px) saturate(1.16);
+}
+.hud-popover>header{
+  background:linear-gradient(180deg,#1c2e36f8 0%,#152028f0 70%,#15202800);
+  border-bottom:1px solid #c9e2d832;
+  box-shadow:inset 0 1px 0 #ffffff12;
+  letter-spacing:.18em;font-weight:600;color:#e8f4ec;
+}
+.hud-popover>header::after{
+  content:"";display:block;position:absolute;left:18px;right:48px;bottom:0;height:1px;
+  background:linear-gradient(90deg,#c9e2d848,transparent 92%);
+  pointer-events:none;
+}
+.hud-popover>header{position:sticky}
+.hud-popover .hud-panel-section{
+  margin:12px 0 0;padding:14px 14px 12px;border-radius:14px;
+  background:linear-gradient(168deg,#142028cc,#0e181eb8);
+  border:1px solid #c9e2d832;
+  box-shadow:inset 0 1px 0 #ffffff0a;
+}
+.hud-popover .hud-panel-section+.hud-panel-section{
+  margin-top:12px;
+  border-top-color:#c9e2d828;
+}
+.hud-popover .hud-section-label{
+  letter-spacing:.14em;color:#a8d4cc;font-weight:550;
+  padding-bottom:6px;margin-bottom:10px;
+  border-bottom:1px solid #c9e2d820;
+}
+.hud-popover select,.hud-popover button:not(.hud-glyph){
+  border:1px solid #c9e2d838;
+  background:linear-gradient(180deg,#162830d0,#0e181ec0);
+  box-shadow:inset 0 1px 0 #ffffff0a;
+  border-radius:12px;
+}
+.hud-popover select:hover,.hud-popover button:not(.hud-glyph):hover{
+  border-color:#c4fc5748;background:linear-gradient(180deg,#1e323ad8,#142028d0);
+}
+.hud-popover button:not(.hud-glyph)[aria-pressed=true]{
+  border-color:#c4fc57aa;background:linear-gradient(180deg,#c4fc5728,#142820d0);
+  color:#eafad6;box-shadow:inset 0 1px 0 #ffffff18,0 0 0 1px #c4fc5722;
+}
+.hud-popover .hud-reference-choice{
+  border-radius:12px;
+  box-shadow:inset 0 1px 0 #ffffff08;
+}
+.hud-popover .hud-contrast-note{
+  border-top:1px solid #c9e2d828;
+  letter-spacing:.05em;color:#8fa39c;
+}
+.studio-page[data-visual-edition=kids] .hud-popover{
+  border-color:#ffc56e55;
+  background:linear-gradient(168deg,#2a2418f4,#1a1810f2);
+  box-shadow:0 24px 64px #00000088,inset 0 1px 0 #ffe6b430,0 0 0 1px #ffc56e14;
+}
+.studio-page[data-visual-edition=kids] .hud-popover>header{
+  background:linear-gradient(180deg,#2e261af8,#1c1810f0 70%,#1c181000);
+  border-bottom-color:#ffc56e33;color:#ffe8d0;
+}
+.studio-page[data-visual-edition=kids] .hud-popover .hud-panel-section{
+  border-color:#ffc56e33;
+  background:linear-gradient(168deg,#2a2418cc,#1a1810b8);
+}

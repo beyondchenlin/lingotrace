@@ -255,11 +255,15 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
  const button=card.submit;if(!listening){
   // continue22 — Check-hit glass well under Enter glyph (glyph stays 1.5 stroke peer; no filled circle CTA).
+  // continue28 — submit-hit residual specular/press polish (Enter glyph stays).
   {c.save();c.beginPath();c.roundRect(button.x+1,button.y+1,button.w-2,button.h-2,12);
    const ok=feedback?.errors===0,cg=c.createLinearGradient(0,button.y,0,button.y+button.h);
-   cg.addColorStop(0,ok?'rgba(196,252,87,.16)':'rgba(18,28,34,.58)');cg.addColorStop(1,ok?'rgba(14,28,18,.34)':'rgba(8,14,20,.30)');
-   c.fillStyle=cg;c.fill();c.strokeStyle=ok?'rgba(196,252,87,.42)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
-   c.beginPath();c.moveTo(button.x+8,button.y+2);c.lineTo(button.x+button.w-8,button.y+2);c.strokeStyle='rgba(245,252,248,.16)';c.lineWidth=.85;c.stroke();c.restore()}
+   cg.addColorStop(0,ok?'rgba(196,252,87,.20)':'rgba(18,28,34,.62)');cg.addColorStop(.55,ok?'rgba(20,36,22,.40)':'rgba(12,20,26,.42)');cg.addColorStop(1,ok?'rgba(14,28,18,.36)':'rgba(8,14,20,.32)');
+   c.fillStyle=cg;c.fill();c.strokeStyle=ok?'rgba(196,252,87,.48)':'rgba(201,226,216,.38)';c.lineWidth=1.05;c.stroke();
+   c.beginPath();c.moveTo(button.x+8,button.y+2);c.lineTo(button.x+button.w-8,button.y+2);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=.9;c.stroke();
+   c.beginPath();c.moveTo(button.x+10,button.y+button.h-2.1);c.lineTo(button.x+button.w-10,button.y+button.h-2.1);c.strokeStyle=ok?'rgba(196,252,87,.18)':'rgba(201,226,216,.12)';c.lineWidth=.85;c.stroke();
+   // Soft inner specular rim (presentation only; press optical via CSS :active).
+   c.beginPath();c.roundRect(button.x+3,button.y+3,button.w-6,button.h-6,10);c.strokeStyle='rgba(255,255,255,.06)';c.lineWidth=.7;c.stroke();c.restore()}
   // Bare line-art Enter/Return — same weight as keyboard/settings HudGlyph (no plate/circle).
   const cx=button.x+button.w/2,cy=button.y+button.h/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
   c.save();c.strokeStyle=feedback?.errors===0?'#eafad6':'#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
@@ -347,11 +351,19 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
   txt(c,timeLabel,railLeft,zones.seek.y+(portrait?13:12)*railScale,Math.max(11,10.5/card.cssScale),'#e8efec',500);txt(c,m.kind!=='demo'?t('scene.noCueMarkers'):'',railLeft+railWidth,zones.seek.y+(portrait?-2:12)*railScale,Math.max(11,10/card.cssScale),MUTED,400,'right');
 }
  // continue21 — mute-volume cluster (glass well + 1.5 stroke peer + volume ticks).
+ // continue28 — mute-hit residual glass peer to play-hit continue27 (stroke/glass only).
  {const mz=zones.mute;const cluster={x:mz.x-2,y:mz.y+2,w:mz.w+56,h:mz.h-4};
   c.save();c.beginPath();c.roundRect(cluster.x,cluster.y,cluster.w,cluster.h,11);
   const mg=c.createLinearGradient(0,cluster.y,0,cluster.y+cluster.h);mg.addColorStop(0,'rgba(18,28,34,.58)');mg.addColorStop(1,'rgba(8,14,20,.30)');
   c.fillStyle=mg;c.fill();c.strokeStyle=v.muted?'rgba(255,180,140,.36)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
   c.beginPath();c.moveTo(cluster.x+8,cluster.y+1.05);c.lineTo(cluster.x+cluster.w-8,cluster.y+1.05);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.85;c.stroke();c.restore();
+  // Mute hit residual well (peer play-hit glass; cluster chrome retained).
+  {c.save();c.beginPath();c.roundRect(mz.x+2,mz.y+3,mz.w-4,mz.h-6,10);
+   const ug=c.createLinearGradient(0,mz.y,0,mz.y+mz.h);
+   ug.addColorStop(0,v.muted?'rgba(255,180,140,.16)':'rgba(18,28,34,.48)');
+   ug.addColorStop(1,v.muted?'rgba(40,20,14,.30)':'rgba(8,14,20,.24)');
+   c.fillStyle=ug;c.fill();c.strokeStyle=v.muted?'rgba(255,180,140,.40)':'rgba(201,226,216,.30)';c.lineWidth=1;c.stroke();
+   c.beginPath();c.moveTo(mz.x+8,mz.y+4.2);c.lineTo(mz.x+mz.w-8,mz.y+4.2);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.8;c.stroke();c.restore()}
   const speaker=mz.x+mz.w/2;c.save();c.translate(speaker,centerY);c.scale(iconScale,iconScale);c.translate(-speaker,-centerY);
   c.strokeStyle=v.muted?'#ffd2bb':'#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
   c.beginPath();c.moveTo(speaker-9.5,centerY-3.8);c.lineTo(speaker-5,centerY-3.8);c.lineTo(speaker+.8,centerY-8.5);c.lineTo(speaker+.8,centerY+8.5);c.lineTo(speaker-5,centerY+3.8);c.lineTo(speaker-9.5,centerY+3.8);c.closePath();c.stroke();
