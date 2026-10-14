@@ -1016,7 +1016,7 @@ function StudioContent({responsive=false}:{responsive?:boolean}){
   try{
    if(listening.playerRef.current||listening.hasScope()){await listening.beforeTransition();assertCurrent()}
    if(!canvas.captureStream)throw Error(t('error.recordUnsupported'));
-   const stream=inputs.ownStream(canvas.captureStream(30));let label='无音频';let sourceTracks:MediaStreamTrack[]=[];
+   const stream=inputs.ownStream(canvas.captureStream(30));let label=t('record.audioNone');let sourceTracks:MediaStreamTrack[]=[];
    if(lessonAudio||micAudio||promptAudio){
     if(typeof AudioContext==='undefined')throw Error(t('error.recordAudioUnavailable'));
     if(micAudio&&!navigator.mediaDevices?.getUserMedia)throw Error(t('error.recordMicUnavailable'));
@@ -1034,15 +1034,16 @@ function StudioContent({responsive=false}:{responsive?:boolean}){
     ac.addEventListener('statechange',onMixStateChange);inputs.cleanup(()=>ac.removeEventListener('statechange',onMixStateChange));
     const dest=ac.createMediaStreamDestination();inputs.ownStream(dest.stream);inputs.cleanup(()=>dest.disconnect());
     if(lessonAudio&&lessonRef.current){
-     const routing=await prepareCourseRouting();assertCurrent();inputs.cleanup(routing.connectRecording(dest));label=t('record.audioCourse');
+     const routing=await prepareCourseRouting();assertCurrent();inputs.cleanup(routing.connectRecording(dest));
     }
     if(micAudio){
      const mic=inputs.ownStream(await navigator.mediaDevices.getUserMedia({audio:true,video:false}));assertCurrent();
      sourceTracks=mic.getAudioTracks();if(!sourceTracks.length||sourceTracks.some(t=>t.readyState!=='live'))throw Error(t('error.recordMicDisconnected'));
-     const source=ac.createMediaStreamSource(mic);source.connect(dest);inputs.cleanup(()=>source.disconnect());label=lessonAudio?t('record.audioCourseMic'):t('record.audioMic');
+     const source=ac.createMediaStreamSource(mic);source.connect(dest);inputs.cleanup(()=>source.disconnect());
     }
     if(promptAudio){const cues=submissionSound.audio.current;if(!cues)throw Error(t('error.recordCueNotReady'));inputs.cleanup(cues.attachRecordingTarget(ac,dest));}
-    label='含'+[lessonAudio?'课程音频':null,micAudio?'麦克风':null,promptAudio?'提交提示音':null].filter(Boolean).join('、');
+    // ZH-canonical audioLabel via existing record.audio* keys (banner uses ui()).
+    label=t(lessonAudio&&micAudio&&promptAudio?'record.audioAll':lessonAudio&&micAudio?'record.audioCourseMicList':lessonAudio&&promptAudio?'record.audioCoursePrompts':micAudio&&promptAudio?'record.audioMicPrompts':promptAudio?'record.audioPrompts':lessonAudio?'record.audioCourse':micAudio?'record.audioMic':'record.audioNone');
     stream.addTrack(dest.stream.getAudioTracks()[0].clone());
    }
    assertCurrent();if(visualRef.current?.fixture||replaySnapshot.current)throw new RecordingPreparationCanceled();
