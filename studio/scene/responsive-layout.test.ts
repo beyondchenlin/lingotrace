@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {containRect} from './renderer';
+import {containLearningMedia} from './learning-surface';
 import {responsiveLayout,PORTRAIT_RECTS,PORTRAIT_CONTENT_BOTTOM,portraitRects,portraitContentBottom,resolvePortraitHeight,PORTRAIT_MIN_HEIGHT,isPortraitPracticeCompact} from './responsive-layout';
 import {applyInputCardLayout} from './input-card';
 import {CONSOLE_RECT,PLAYER_RECT,DEFAULT_RECTS,ZONES,rectStyle,cueMarkerRect,timelinePointerProgress,insetRect,type Rect} from './transparent-layout';
@@ -177,5 +179,25 @@ test('phone one-screen stage never grows and leaves no empty bottom band',()=>{
   assert.ok(folded.inputCard.card.y<normal.inputCard.card.y,'OS keyboard folds stack upward onto video');
   assert.ok(folded.player.h<=120,'folded transport stays thin (no inflate under OS keyboard)');
   assert.ok(folded.player.y+folded.player.h<=height*0.55+1,'transport sits in the visual viewport above the OS keyboard');
+ }
+});
+
+test('phone practice-compact media paint uses aspect-preserving contain, not cover',()=>{
+ for(const height of[820,844,880,930]){
+  const g=responsiveLayout(true,{},'lesson',height);
+  assert.equal(g.practiceCompact,true);
+  assert.equal(g.media.w,430);
+  assert.equal(g.media.h,height);
+  for(const source of[{w:1280,h:720},{w:1671,h:941},{w:1920,h:1080}]){
+   const fit=containRect(source.w,source.h,g.media.x,g.media.y,g.media.w,g.media.h);
+   assert.ok(Math.abs(fit.w/fit.h-source.w/source.h)<1e-9,'aspect preserved');
+   assert.ok(fit.w<=g.media.w+1e-6&&fit.h<=g.media.h+1e-6,'fits inside plate');
+   assert.ok(fit.w>=g.media.w-1||fit.h>=g.media.h-1,'max contain touches an edge');
+   const coverScale=Math.max(g.media.w/source.w,g.media.h/source.h);
+   assert.ok(fit.w+1<source.w*coverScale||fit.h+1<source.h*coverScale,'contain is smaller than cover blow-up');
+   const fitted=containLearningMedia({width:source.w,height:source.h},g.media,1,'fit');
+   assert.ok(Math.abs(fitted.w/fitted.h-source.w/source.h)<1e-9);
+   assert.ok(fitted.w<=g.media.w+1e-6&&fitted.h<=g.media.h+1e-6);
+  }
  }
 });

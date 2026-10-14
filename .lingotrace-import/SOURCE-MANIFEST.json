@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "2e16090ca65e3b50a80652e32236023488e76fff",
+  "source_projection_tree_sha1": "2648a56f9ddfc31fdcbb68dada696776052d1ecf",
   "source_file_count": 686,
   "direct_source_file_count": 682,
   "restored_source_file_count": 4,
@@ -1901,9 +1901,9 @@
     {
       "path": "scripts/onescreen-qa-render.mts",
       "mode": "100644",
-      "bytes": 4974,
-      "git_blob_sha1": "6132b463f77d76675bd81b8ac332deff46fbb4ca",
-      "sha256": "884ba9f78342d54190532bb78bf3f94c83e075150c5c4a3b1d7473b042c9ca3f"
+      "bytes": 5497,
+      "git_blob_sha1": "c099e8dc28c84869a3762e22f1b13911223da72d",
+      "sha256": "0824f1101e91ee39866ec6967e7b295a19013e5a74b0e9e671eb409c741454bc"
     },
     {
       "path": "scripts/prepare-subtitle-assets.mjs",
@@ -4603,16 +4603,16 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 12261,
-      "git_blob_sha1": "8ae20d5fbf0a8680a8f1dd72e6dbd74d27f6b121",
-      "sha256": "1c94097643e3665c54cb08d5f979512f3cce18c141d1be03c170b068e43b800c"
+      "bytes": 13458,
+      "git_blob_sha1": "cb2a3de0a3cdd749462a02c69e43adf20b417db3",
+      "sha256": "af9d298808b7e4dc75d9965a25aa7c47b0efe561cd780cd73ddbbc40c2ff144b"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
       "mode": "100644",
-      "bytes": 9136,
-      "git_blob_sha1": "90e1248b1673c00cb508c5ac9be9796e5b60cdea",
-      "sha256": "4de5187271e1a4cd9168031fc81c15d2181fbc407621ff9ed404e792749f6cac"
+      "bytes": 9160,
+      "git_blob_sha1": "be8d385f0984071cd0766109b0de77936409b426",
+      "sha256": "0f01899a7ef2712ccf2c60306c1b459754838751564e43feb444df964a2e8809"
     },
     {
       "path": "studio/scene/responsive-renderer.test.ts",
@@ -4701,9 +4701,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31224,
-      "git_blob_sha1": "72c86c1f4e82bcd66ab5fafd0db6614af98fcea1",
-      "sha256": "9c2139e25d1db29011b5f66815b9453c6f8ad6a29cc7fb8fab15df956ff5bd32"
+      "bytes": 31201,
+      "git_blob_sha1": "ea256f70a6880bf512753148c5571c4aaad4398a",
+      "sha256": "8570b18e909cbb6e4431732de7a305db5b7fc3f85641034e8c8ecce615b9f2d8"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

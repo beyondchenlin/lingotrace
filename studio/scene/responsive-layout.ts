@@ -36,8 +36,8 @@ function portraitOverlayConsole(height:number):Rect{
 }
 function portraitOverlayMedia(height:number):Rect{
  const H=resolvePortraitHeight(height);
- // Full-stage media backdrop. Paint uses cover-fit so the picture fills the
- // plate; lower chrome overlays live video — no empty letterbox band.
+ // Full-stage media plate. Paint uses aspect-preserving contain/fit (full frame
+ // visible). HUD/input/transport overlay the plate; stage never grows an empty chrome band.
  return{x:0,y:0,w:PORTRAIT_WIDTH,h:H};
 }
 function portraitOverlayTitle(height:number):Rect{
