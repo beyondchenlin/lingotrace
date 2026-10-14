@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "599ae73d33352a600c68269bcf6308bcd7fc1fb8",
+  "source_projection_tree_sha1": "a74b2ce71205aa9a1b790f5657649b0f7bde094c",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 39814,
-      "git_blob_sha1": "6f47025020514630513d9e069563ab26267b9914",
-      "sha256": "47c5ea340dbf7d4ea6f262a11b5249763fdf30301dc1e505088de549a9d8bb84"
+      "bytes": 41004,
+      "git_blob_sha1": "45e7b53e1aad8b2fd114e79db06087df68e2ace2",
+      "sha256": "0ab62b6e5b624e7ee7bcea01bf0d1ef610ce4af6dbc45b137b3196d4d8a2a35e"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -2041,9 +2041,9 @@
     {
       "path": "studio/components/HudControls.tsx",
       "mode": "100644",
-      "bytes": 2722,
-      "git_blob_sha1": "9b075be8ba4f011bbf54779b416866d2ce9167ec",
-      "sha256": "5bb345e7fd572c826a90e8ded8f0aae65de7daee89bbf0e9e07dd447c261f2cb"
+      "bytes": 2832,
+      "git_blob_sha1": "58eefde384387fe7ea6fe30288139cbeeb61b8f6",
+      "sha256": "4da53ae530b3f283d7b25de7968f81f26cb03a9bc40a461d1d25bb1d4fc80458"
     },
     {
       "path": "studio/components/LayoutEditor.tsx",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 249929,
-      "git_blob_sha1": "18255e764b801eec4dfdcac85591905bc1041f97",
-      "sha256": "c44273aa7c6147697547937a38709dda4211148214a47f19e74e264effa6c2e5"
+      "bytes": 251505,
+      "git_blob_sha1": "01d2992d6492846564213a31de18b09cf75fc12c",
+      "sha256": "4c1b7b9d299d9ef39a4cc611378b8170423b70faa5450077cbc76f41d6253840"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4708,16 +4708,16 @@
     {
       "path": "studio/scene/transparent-renderer.test.ts",
       "mode": "100644",
-      "bytes": 17827,
-      "git_blob_sha1": "aaaf147dc416ab480ad64908a07fbd21737be287",
-      "sha256": "dbd05e0c1fd511dc6f29dcc252b4b209a1c0d94248317ca472f45d06ac031282"
+      "bytes": 17778,
+      "git_blob_sha1": "9ec38b8b5decd25977a4627a9bf46acb31ad6bf0",
+      "sha256": "7c8e04c9b9203e263ce9bcc47f5ff7d7a7f2caa8d6e97f65f196e5d0706a9509"
     },
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31780,
-      "git_blob_sha1": "989b25fdb8e5a407518b9518810eb496a2f18895",
-      "sha256": "e4d9302dc5d00cee775edf19f1cf8f506a12f0fac946d7a3a7818b3c013d6ed9"
+      "bytes": 31694,
+      "git_blob_sha1": "7d5eeb18c73d3ebe381729dee5b76cdf98054158",
+      "sha256": "492d7088fd87142cc65e405fb1cca44c07b9068e6616b106c43850cce04ba0e3"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

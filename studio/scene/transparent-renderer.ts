@@ -160,12 +160,11 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  if(listening){if(!listening.hidden)paintInputText(c,card,{...v,draft:listening.text,caret:listening.text.length,selectionEnd:listening.text.length,inputFocused:false,composition:false,nativeInputDisplay:undefined,inputGuide:undefined,referenceGuide:undefined,scrollLeft:0,scrollTop:0});paintPassiveKeyboard(c,card,{visible:v.keyboardFeedback?.visible!==false,codes:listening.hidden||!listening.targetKey?[]:[listening.targetKey],committedUntil:0,composing:false},now,v.reducedMotion)}else{paintInputText(c,card,{...v,checkedAttempt:feedback});paintPassiveKeyboard(c,card,v.keyboardFeedback,now,v.reducedMotion)}
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
  const button=card.submit;if(!listening){
-  // Same visual language as keyboard/settings hud-glyph (44 hit, ~20px stroke icon).
-  const cx=button.x+button.w/2,cy=button.y+button.h/2,r=Math.min(button.w,button.h)/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
-  c.save();c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.fillStyle='#e4f3de12';c.fill();c.restore();
-  c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.beginPath();
-  if(feedback?.errors===0){c.moveTo(cx-icon*.22,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.22);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.22)}
-  else{c.moveTo(cx-icon*.28,cy+icon*.02);c.lineTo(cx-icon*.05,cy+icon*.28);c.lineTo(cx+icon*.32,cy-icon*.28)}
+  // Bare line-art only — same weight as keyboard/settings HudGlyph (no plate/circle).
+  const cx=button.x+button.w/2,cy=button.y+button.h/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
+  c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
+  if(feedback?.errors===0){c.moveTo(cx-icon*.28,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.24);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.24)}
+  else{c.moveTo(cx-icon*.28,cy+icon*.04);c.lineTo(cx-icon*.04,cy+icon*.28);c.lineTo(cx+icon*.32,cy-icon*.28)}
   c.stroke();c.restore();
  };
  const statusSize=Math.max(portrait?12:14,12/card.cssScale),statusLineHeight=Math.max(portrait?16:18,16/card.cssScale);
