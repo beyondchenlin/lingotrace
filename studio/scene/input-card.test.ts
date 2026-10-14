@@ -16,7 +16,7 @@ for(const portrait of [false,true])for(const height of [820,940,1080,1400])test(
  }else{assert.ok(shown.inputCard.input.y<hidden.inputCard.input.y);assert.equal(shown.height,base.height)}
  assert.deepEqual(shown.media,base.media);assert.deepEqual(shown.goal,base.goal);assert.deepEqual(shown.trend,base.trend);assert.deepEqual(shown.counter,base.counter);
  if(portrait&&base.practiceCompact){
-  // Captions stay on the media plate above typing; y may differ from the base template.
+  // Subtitle geometry slot stays above typing for layout; no video capsule is painted there.
   assert.equal(shown.subtitle.x,base.subtitle.x);assert.equal(shown.subtitle.w,base.subtitle.w);assert.equal(shown.subtitle.h,base.subtitle.h);
   assert.ok(shown.subtitle.y+shown.subtitle.h<=shown.inputCard.card.y+1e-6);
  }else assert.deepEqual(shown.subtitle,base.subtitle);

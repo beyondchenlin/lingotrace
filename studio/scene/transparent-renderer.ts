@@ -169,39 +169,9 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.2+.65*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.2,138-height,2.4,height,1.2);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.45*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=6;c.beginPath();c.roundRect(x-2,138-height-1,4,height+2,2);c.fill();c.restore()}}
  c.restore();c.restore();
 
- // SINGLE caption system: only `referenceGuide` paints the media-plate glass capsule.
- // `showSubtitle` stays on SceneVisual for fixture/legacy paintScene — it must NOT open a
- // second caption path here (「两套字幕」). Dictation clears referenceGuide. Typing card
- // paints user draft + word rails only — never a ghost copy of the same cue.
- if(!!v.referenceGuide&&m.kind==='demo'&&!v.listeningDisplay?.active){
- const shownCaption=geometry.inputCard.overlayControls?{...geometry.subtitle,y:geometry.inputCard.card.y-geometry.subtitle.h-12}:geometry.subtitle;
- if(projected)mapRect(c,{x:686,y:646,w:300,h:49},shownCaption);const caption=projected?{x:686,y:646,w:300,h:49}:shownCaption;const cue=s?.material.cues[s.cueIndex].text??'';c.save();
- // Premium glass caption pill — only when there is real cue text (hidden/empty stay glass-free).
- if(cue){c.save();c.beginPath();c.roundRect(caption.x,caption.y,caption.w,caption.h,Math.min(16,caption.h*.4));
-  const fill=c.createLinearGradient(caption.x,caption.y,caption.x,caption.y+caption.h);
-  fill.addColorStop(0,'rgba(6,14,20,.78)');fill.addColorStop(.55,'rgba(8,16,22,.68)');fill.addColorStop(1,'rgba(8,16,20,.58)');
-  c.fillStyle=fill;c.fill();
-  c.strokeStyle='rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
-  // top specular
-  c.beginPath();c.roundRect(caption.x+1,caption.y+1,caption.w-2,Math.max(2,caption.h*.34),Math.min(12,caption.h*.28));
-  const spec=c.createLinearGradient(0,caption.y,0,caption.y+caption.h*.4);
-  spec.addColorStop(0,'rgba(236,246,240,.12)');spec.addColorStop(1,'rgba(236,246,240,0)');
-  c.fillStyle=spec;c.fill();c.restore()}
- if(portrait){
-  // Two balanced lines keep the complete reference visible at a readable size.
-  let size=12/.58,lines=[cue];c.font=`400 ${size}px ${STUDIO_SANS}`;
-  if(c.measureText(cue).width>caption.w-24){
-   const words=cue.split(' ');let best=Infinity;
-   for(let i=1;i<words.length;i++){const pair=[words.slice(0,i).join(' '),words.slice(i).join(' ')],width=Math.max(...pair.map(text=>c.measureText(text).width));if(width<best){best=width;lines=pair}}
-   if(lines.length===1){const middle=Math.ceil(cue.length/2);lines=[cue.slice(0,middle),cue.slice(middle)]}
-   const longest=Math.max(...lines.map(text=>c.measureText(text).width));size=Math.max(10/.58,Math.min(size,size*(caption.w-24)/longest));
-  }
-  const lineHeight=22,center=caption.y+caption.h/2;
-  lines.forEach((text,index)=>txt(c,text,caption.x+caption.w/2,center+(index-(lines.length-1)/2)*lineHeight+size*.34,size,WHITE,400,'center'));
- }else{c.font=`400 24px ${STUDIO_SANS}`;const font=Math.min(24,(caption.w-25)/Math.max(1,c.measureText(cue).width)*24);txt(c,cue,caption.x+caption.w/2,caption.y+caption.h/2+font*.34,font,WHITE,400,'center')}
- c.restore();
- if(projected)c.restore();
- }
+ // No video-overlay caption capsule. Assisted reference lives only in the typing card
+ // (Assisted · Show → pale remainder + word rails). Dictation clears referenceGuide.
+ // `showSubtitle` stays fixture/legacy for paintScene — never a transparent-stage path.
  // One complete native editing card; the recording uses its browser-measured
  // lines, selection and scroll offsets. No wrapping alters the actual draft.
  const card=geometry.inputCard,header=inputHeaderControls(card);

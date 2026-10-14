@@ -110,62 +110,65 @@ test('portrait text labels stay legible and timeline remains fully on the record
  }
  }
 });
-test('assisted referenceGuide restores media-plate captions without showSubtitle flag',()=>{
+test('assisted referenceGuide paints typing-zone reference, never a video media-plate capsule',()=>{
  const {visual,frame}=state();
- const height=PORTRAIT_MIN_HEIGHT,g=responsiveLayout(true,{},'lesson',height);
+ const height=PORTRAIT_MIN_HEIGHT;
+ const g=learningGeometry(responsiveLayout(true,{},'lesson',height),{keyboardVisible:false,cssWidth:430});
  const cue=visual.snapshot!.material.cues[0].text;
- const hidden=render({...visual,showSubtitle:false,referenceGuide:undefined},frame,true,1,height);
- assert.ok(!hidden.labels.some(label=>label.text===cue||label.text.includes(cue.split(' ')[0])),'dictation must not paint cue on media');
- const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,snapshot:{...visual.snapshot!,cueIndex:0}},frame,true,1,height);
- const lines=assisted.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h);
- assert.ok(lines.length>=1,`assisted must paint caption for ${cue}`);
- assert.equal(lines.map(line=>line.text).join(' '),cue);
+ const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+ const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+ const hidden=render({...visual,showSubtitle:false,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false}},frame,true,1,height);
+ assert.ok(!hidden.labels.some(isCue),'dictation must not paint cue');
+ const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,true,1,height);
+ const mediaHits=assisted.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h&&isCue(label));
+ assert.equal(mediaHits.length,0,`video capsule leaked: ${mediaHits.map(l=>l.text).join('|')}`);
+ const typing=assisted.labels.filter(label=>label.x>=g.inputCard.input.x-4&&label.x<=g.inputCard.input.x+g.inputCard.input.w+4&&label.centerY>=g.inputCard.input.y-4&&label.centerY<=g.inputCard.input.y+g.inputCard.input.h+4);
+ assert.ok(typing.some(isCue),`typing reference missing for ${cue}`);
 });
-test('assisted keeps a single subtitle system — cue on media only, no typing-card ghost copy',()=>{
+test('assisted keeps a single subtitle system — typing zone only, no video capsule',()=>{
  const {visual,frame}=state();
  const cue=visual.snapshot!.material.cues[0].text;
  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+ const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
  for(const portrait of[true,false]){
   const height=portrait?PORTRAIT_MIN_HEIGHT:941;
-  const g=responsiveLayout(portrait,{},'lesson',height);
+  const g=learningGeometry(responsiveLayout(portrait,{},'lesson',height),{keyboardVisible:false,cssWidth:portrait?430:1672});
   const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
-  // Media caption owns the cue (may wrap to two lines on portrait).
-  const captionHits=assisted.labels.filter(label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word)));
-  assert.ok(captionHits.length>=1,`media caption missing (${portrait?'mobile':'desktop'})`);
-  // Empty draft: typing card must not fillText cue words (rails are strokes only).
-  const typing=assisted.labels.filter(label=>label.x>=g.inputCard.input.x-2&&label.x<=g.inputCard.input.x+g.inputCard.input.w+2&&label.centerY>=g.inputCard.input.y-2&&label.centerY<=g.inputCard.input.y+g.inputCard.input.h+2);
-  const leaked=typing.filter(label=>label.text===cue||words.some(word=>label.text===word));
-  assert.equal(leaked.length,0,`typing ghost leaked (${portrait?'mobile':'desktop'}): ${leaked.map(l=>l.text).join('|')}`);
-  // Cue text glyphs appear once as the caption system (not duplicated across bands).
-  const cueLabelCount=assisted.labels.filter(label=>label.text===cue).length;
-  const wordHits=words.map(word=>assisted.labels.filter(label=>label.text===word).length);
-  assert.ok(cueLabelCount<=1,`full cue duplicated (${portrait?'mobile':'desktop'}): ${cueLabelCount}`);
-  assert.ok(wordHits.every(count=>count<=2),`cue words over-painted (${portrait?'mobile':'desktop'}): ${JSON.stringify(wordHits)}`);
+  const mediaHits=assisted.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h&&isCue(label));
+  assert.equal(mediaHits.length,0,`video capsule leaked (${portrait?'mobile':'desktop'}): ${mediaHits.map(l=>l.text).join('|')}`);
+  const typing=assisted.labels.filter(label=>label.x>=g.inputCard.input.x-4&&label.x<=g.inputCard.input.x+g.inputCard.input.w+4&&label.centerY>=g.inputCard.input.y-4&&label.centerY<=g.inputCard.input.y+g.inputCard.input.h+4);
+  assert.ok(typing.some(isCue),`typing reference missing (${portrait?'mobile':'desktop'})`);
+  const aboveTyping=assisted.labels.filter(label=>label.centerY<g.inputCard.card.y-4&&isCue(label));
+  assert.equal(aboveTyping.length,0,`cue above typing (${portrait?'mobile':'desktop'}): ${aboveTyping.map(l=>l.text).join('|')}`);
  }
 });
-test('showSubtitle alone must not open a second caption system on the transparent stage',()=>{
+test('showSubtitle alone must not paint cue on the transparent stage',()=>{
  const {visual,frame}=state();
  const cue=visual.snapshot!.material.cues[0].text;
  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+ const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
  for(const portrait of[true,false]){
   const height=portrait?PORTRAIT_MIN_HEIGHT:941;
-  const leaked=render({...visual,showSubtitle:true,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
-  const hits=leaked.labels.filter(label=>label.text===cue||words.some(word=>label.text===word));
+  const leaked=render({...visual,showSubtitle:true,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
+  const hits=leaked.labels.filter(isCue);
   assert.equal(hits.length,0,`showSubtitle-only leaked caption (${portrait?'mobile':'desktop'}): ${hits.map(l=>l.text).join('|')}`);
-  const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
-  assert.ok(assisted.labels.some(label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word))),'referenceGuide must own the only caption');
+  const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
+  assert.ok(assisted.labels.some(isCue),'referenceGuide must own the typing-zone reference');
  }
 });
-test('portrait preserves every reference using at most two readable lines inside the subtitle frame',()=>{
+test('assisted never paints a video subtitle-frame capsule across portrait heights',()=>{
  const {visual,frame}=state();
  for(const height of [PORTRAIT_MIN_HEIGHT,880,940,1080]){
- const g=responsiveLayout(true,{},'lesson',height);
+ const g=learningGeometry(responsiveLayout(true,{},'lesson',height),{keyboardVisible:false,cssWidth:430});
  for(let cueIndex=0;cueIndex<visual.snapshot!.material.cues.length;cueIndex++){
-  const snapshot={...visual.snapshot!,cueIndex},cue=snapshot.material.cues[cueIndex].text,result=render({...visual,snapshot,showSubtitle:false,referenceGuide:cue},frame,true,1,height);
-  const lines=result.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h);
-  assert.ok(lines.length>=1&&lines.length<=2,cue);assert.equal(lines.map(line=>line.text).join(' '),cue);
-  for(const line of lines){assert.ok(line.size>=9.999);assert.ok(line.left>=g.subtitle.x&&line.right<=g.subtitle.x+g.subtitle.w,cue);assert.ok(line.top>=g.subtitle.y&&line.bottom<=g.subtitle.y+g.subtitle.h,cue)}
-  if(lines.length===2)assert.ok(lines[0].bottom<lines[1].top,cue);
+  const snapshot={...visual.snapshot!,cueIndex},cue=snapshot.material.cues[cueIndex].text;
+  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+  const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+  const result=render({...visual,snapshot,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false}},frame,true,1,height);
+  const mediaHits=result.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h&&isCue(label));
+  assert.equal(mediaHits.length,0,`video capsule at h=${height}: ${cue}`);
+  const typing=result.labels.filter(label=>label.x>=g.inputCard.input.x-4&&label.x<=g.inputCard.input.x+g.inputCard.input.w+4&&label.centerY>=g.inputCard.input.y-4&&label.centerY<=g.inputCard.input.y+g.inputCard.input.h+4);
+  assert.ok(typing.some(isCue),`typing reference missing at h=${height}: ${cue}`);
  }
  }
 });
