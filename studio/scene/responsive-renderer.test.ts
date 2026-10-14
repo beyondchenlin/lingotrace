@@ -116,7 +116,7 @@ test('assisted referenceGuide paints typing-zone reference, never a video media-
  const g=learningGeometry(responsiveLayout(true,{},'lesson',height),{keyboardVisible:false,cssWidth:430});
  const cue=visual.snapshot!.material.cues[0].text;
  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
- const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+ const isCue=(label:{text:string})=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
  const hidden=render({...visual,showSubtitle:false,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false}},frame,true,1,height);
  assert.ok(!hidden.labels.some(isCue),'dictation must not paint cue');
  const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,true,1,height);
@@ -129,7 +129,7 @@ test('assisted keeps a single subtitle system — typing zone only, no video cap
  const {visual,frame}=state();
  const cue=visual.snapshot!.material.cues[0].text;
  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
- const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+ const isCue=(label:{text:string})=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
  for(const portrait of[true,false]){
   const height=portrait?PORTRAIT_MIN_HEIGHT:941;
   const g=learningGeometry(responsiveLayout(portrait,{},'lesson',height),{keyboardVisible:false,cssWidth:portrait?430:1672});
@@ -146,7 +146,7 @@ test('showSubtitle alone must not paint cue on the transparent stage',()=>{
  const {visual,frame}=state();
  const cue=visual.snapshot!.material.cues[0].text;
  const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
- const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+ const isCue=(label:{text:string})=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
  for(const portrait of[true,false]){
   const height=portrait?PORTRAIT_MIN_HEIGHT:941;
   const leaked=render({...visual,showSubtitle:true,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
@@ -163,7 +163,7 @@ test('assisted never paints a video subtitle-frame capsule across portrait heigh
  for(let cueIndex=0;cueIndex<visual.snapshot!.material.cues.length;cueIndex++){
   const snapshot={...visual.snapshot!,cueIndex},cue=snapshot.material.cues[cueIndex].text;
   const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
-  const isCue=label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
+  const isCue=(label:{text:string})=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word));
   const result=render({...visual,snapshot,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false}},frame,true,1,height);
   const mediaHits=result.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h&&isCue(label));
   assert.equal(mediaHits.length,0,`video capsule at h=${height}: ${cue}`);

@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "70c29def551e0a9945d29dc0d9eb00cdbc4adfa2",
+  "source_projection_tree_sha1": "879fa94f40f0f4b76efda7bb1b4316aacc54bc92",
   "source_file_count": 689,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -2181,9 +2181,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 258434,
-      "git_blob_sha1": "56a915e0a5ceb94b0b9149db6a2d8b77dde7693a",
-      "sha256": "e9e58c71b7029cde14d12c594b1841347a983802d44ec322ac7760592ce9d017"
+      "bytes": 258441,
+      "git_blob_sha1": "309cd6b48c9580bc1e1998bfc3430c4125265b33",
+      "sha256": "1f63ffa16303beff19237c7a9a258116edf69cc9ea741cdc8fbade83aeeb7965"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4393,16 +4393,16 @@
     {
       "path": "studio/scene/input-card.test.ts",
       "mode": "100644",
-      "bytes": 19287,
-      "git_blob_sha1": "eb0bca75043791f66fbaf46560e07231aefb0de4",
-      "sha256": "eb2c38762ba838702dab5c3fdf9cdfff6fbca386f8bfaf3263ff86c4f25fa6ca"
+      "bytes": 19292,
+      "git_blob_sha1": "1c29cf8d8d958ccc2681a10de70c50d286f3dd08",
+      "sha256": "6b3d93f327f101b5b5b4c8666b5307b5928e372f50d44596e1f704ac7a5d4db5"
     },
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 50709,
-      "git_blob_sha1": "e19c5b6883af168d4f70f3b9c6d9cfc830d0966f",
-      "sha256": "383dbed630a3a31fdf17727afe33143d1bd15bf5507f2696dbd20a561d6140a9"
+      "bytes": 51270,
+      "git_blob_sha1": "1c24b7dc907df5d6308dad00c3cd7ab1ad75721c",
+      "sha256": "f6e92bce86580b510590cfe8f93b3fa6a0377a8deba779f6d398c692262fbdad"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4498,9 +4498,9 @@
     {
       "path": "studio/scene/live-letter-feedback.test.ts",
       "mode": "100644",
-      "bytes": 15568,
-      "git_blob_sha1": "fd447be70e2693804c8dc2b9af0d4da9087d9c02",
-      "sha256": "30aa8c995c070f004a8945a4679189e7433ae4c2cf30410f9f41bbdf3d4146b0"
+      "bytes": 15511,
+      "git_blob_sha1": "ff4c255229882257cc083c3cfa1834f87ed7c92e",
+      "sha256": "56467253a9b52d48236d059eb493e99e6299fea5ba92d9da58d95c6d88eda994"
     },
     {
       "path": "studio/scene/live-letter-feedback.ts",
@@ -4638,9 +4638,9 @@
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 25499,
-      "git_blob_sha1": "170afcc16e343a8c4d8b4a39019273caca635118",
-      "sha256": "39564c8134ec93906e41f4c829cbf4e0e34995939fb90f5e24ee8644171ae4ba"
+      "bytes": 26419,
+      "git_blob_sha1": "292b43f758cac29e324d8de909a497c12e8715b8",
+      "sha256": "8e9838a92baa3893ee205d263416f784c4d16f4bdf1c424497554979737d1483"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",
@@ -4722,9 +4722,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 35476,
-      "git_blob_sha1": "9a356075e2779556d26f9b26b847eb7400db552d",
-      "sha256": "3b4184923efcc8bdff5f41ae822a4715ae192cdbe2cde124c77f53474fbc9899"
+      "bytes": 32961,
+      "git_blob_sha1": "95241edb138c9f067ef005d48d9bee23618a5b6c",
+      "sha256": "dced651afa6c4a3b046d6ce7fb9246e58182c27f5a1f0430d2b1807ff077e5b0"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
