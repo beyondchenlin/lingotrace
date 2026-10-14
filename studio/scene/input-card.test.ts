@@ -119,6 +119,14 @@ test('typed HELLO has five underline slots, word mode has one, and empty strict 
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:''});assert.equal(strokes,1);
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'',inputGuide:{mode:'letters',mask:'_____'}});assert.equal(strokes,5);
 });
+test('assisted reference paints one stable word rail under each target word even with empty draft',()=>{
+ const card=inputCardGeometry(responsiveLayout(false)),ctx=createCanvas(1672,1000).getContext('2d'),stroke=ctx.stroke.bind(ctx);let strokes=0;ctx.stroke=(...args:any[])=>{strokes++;return Reflect.apply(stroke,ctx,args)};
+ const state={draft:'',referenceGuide:'Hi, everybody.',underlineMode:'words' as const,scrollLeft:0,caret:0,selectionEnd:0,inputFocused:false,composition:false,reducedMotion:true,renderTime:0};
+ paintInputText(ctx as unknown as CanvasRenderingContext2D,card,state);assert.equal(strokes,2);
+ // Partial draft still keeps both target rails (plus live correct underlines on matched letters).
+ strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'Hi'});assert.ok(strokes>=2);
+ strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,underlineMode:'letters',referenceGuide:undefined,draft:''});assert.equal(strokes,1);
+});
 test('Enter/Check target matches keyboard/settings 44px peer and style selector does not cover editing or keyboard toggle',()=>{
  for(const portrait of[true,false])for(const cssScale of[.3,.414,.744,1]){const card=inputCardGeometry(responsiveLayout(portrait),{cssScale});assert.ok(Math.abs(card.submit.w-card.submit.h)<1e-6);assert.ok(card.submit.w*cssScale>=44-1e-6);assert.ok(!intersects(card.modeToggle,card.input));assert.ok(!intersects(card.modeToggle,card.toggle));assert.ok(card.modeToggle.x+card.modeToggle.w<=1672);assert.ok(card.modeToggle.w*cssScale>=44)}
 });

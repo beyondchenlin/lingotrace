@@ -507,10 +507,15 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  if(state.inputFocused&&rangeStart!==rangeEnd){c.fillStyle='#8bd2df66';for(const r of selection)c.fillRect(z.x+r.x-scrollX,z.y+r.y-scrollY,r.w,r.h)}
  // Underlines are visual only; never rewrite or split the native editing value.
  const guide=state.inputGuide;
+ const mode=guide?.mode??state.underlineMode??'letters';
  const guidePadding=native?.paddingX??lines[0]?.x??card.paddingX;
- const underlineLines=guide?wrapInputText(guide.mask,(native?.width??z.w)-guidePadding*2,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:(lines[0]?.baseline??card.paddingY+card.lineHeight*.8)+index*card.lineHeight})):lines;
+ const railWidth=(native?.width??z.w)-guidePadding*2;
+ const railBaseline=(lines[0]?.baseline??card.paddingY+card.lineHeight*.8);
+ // Assisted target: stable per-word rails under each reference word (karaoke / fill-in slots),
+ // even when the draft is still empty — not only under already-typed draft runs.
+ const underlineLines=guide?wrapInputText(guide.mask,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):state.referenceGuide&&mode==='words'?wrapInputText(state.referenceGuide,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):lines;
  c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;c.strokeStyle=guide?'#e4f6bfee':'#e4f6d9e6';c.lineWidth=Math.max(1,1/card.cssScale);
- for(const line of underlineLines){const mode=guide?.mode??state.underlineMode??'letters';const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;c.beginPath();c.moveTo(z.x+line.x+left+gap-scrollX,z.y+line.baseline+4-scrollY);c.lineTo(z.x+line.x+left+width-gap-scrollX,z.y+line.baseline+4-scrollY);c.stroke()}}
+ for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;c.beginPath();c.moveTo(z.x+line.x+left+gap-scrollX,z.y+line.baseline+4-scrollY);c.lineTo(z.x+line.x+left+width-gap-scrollX,z.y+line.baseline+4-scrollY);c.stroke()}}
  const {ranges:feedbackRanges}=inputLetterFeedback(state.draft,state.referenceGuide,state.checkedAttempt??null,state.composition);
  for(const run of lines){if(run.y+run.height<scrollY||run.y>scrollY+z.h)continue;
   const boundaries=[0,run.text.length,...feedbackRanges.flatMap(r=>[Math.max(0,Math.min(run.text.length,r.start-run.start)),Math.max(0,Math.min(run.text.length,r.end-run.start))])].sort((a,b)=>a-b);

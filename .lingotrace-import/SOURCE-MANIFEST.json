@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "b6ca524b151a32fb85fe986bf47303a894733c03",
+  "source_projection_tree_sha1": "422da7ef44bcc7e3c4d9422674235c3ffacf3932",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 41004,
-      "git_blob_sha1": "45e7b53e1aad8b2fd114e79db06087df68e2ace2",
-      "sha256": "0ab62b6e5b624e7ee7bcea01bf0d1ef610ce4af6dbc45b137b3196d4d8a2a35e"
+      "bytes": 41079,
+      "git_blob_sha1": "fc992f82719b6e0582d6e931362b2f37b68e89ab",
+      "sha256": "7c10e25368652036fe5a625d56cc4f2236b9ab54cef7ffd5b4d22b015326e339"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 251505,
-      "git_blob_sha1": "01d2992d6492846564213a31de18b09cf75fc12c",
-      "sha256": "4c1b7b9d299d9ef39a4cc611378b8170423b70faa5450077cbc76f41d6253840"
+      "bytes": 252915,
+      "git_blob_sha1": "7615c86d0526347cf929c0015739ce78136b55ac",
+      "sha256": "1e4b861424b31b3f60332e7e3cb1fa2777879cf2ad755db9730a3a6a0434c0f0"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4386,16 +4386,16 @@
     {
       "path": "studio/scene/input-card.test.ts",
       "mode": "100644",
-      "bytes": 17520,
-      "git_blob_sha1": "e658fcde0591bf198c1f32e37f26011c165b1aad",
-      "sha256": "bb110fb7863da0ef8a82e1acea1e5585778272b9ca189e099ddd7af615273806"
+      "bytes": 18527,
+      "git_blob_sha1": "02a81acfdc2c8da9ff8cbed2bcccb417efe081cb",
+      "sha256": "be9b9bff3cd7cb6870f173b274aa0bbe8086571eff67e331ac30192d874a5cbb"
     },
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 50437,
-      "git_blob_sha1": "7676b2fe4ea04cae5dbf10c7e7c571bc8532fa0f",
-      "sha256": "912e82ab785e153f4a6355130bc2f00da8fddc34b82b082f9079c90b4b682b19"
+      "bytes": 50886,
+      "git_blob_sha1": "7b75820079fd227fc23315e3bc8ac58b75ef266d",
+      "sha256": "b8f7510b03f2bfe4b7d2a2cf62530e953d454d1daa112e2fccc493d124181bd6"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
