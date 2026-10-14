@@ -48,9 +48,10 @@ export default function LegacyHistoryHud({ session }: { session: LegacyHistorySe
   const displayCoverage = (value: string) => {
     const match = /^原始点 (\d+)–(\d+) \/ (\d+)；([^；]*)；(.+)。窗口独立，不跨窗口连线；横轴从该窗口首个实点计秒。$/.exec(value);
     if (!match) return ui(value);
+    const stateKeys = {'已测':'historyHud.stateMeasured','采样中':'historyHud.stateSampling','暂停':'historyHud.frozen','不可测':'historyHud.unmeasurable'} as const;
     const states = match[4].split('，').map(part => {
       const state = /^(已测|采样中|暂停|不可测) (\d+)$/.exec(part);
-      return state ? `${ui(state[1])} ${state[2]}` : part;
+      return state && state[1] in stateKeys ? `${t(stateKeys[state[1] as keyof typeof stateKeys])} ${state[2]}` : part;
     }).join(', ');
     return t('historyHud.coverage', {start: match[1], end: match[2], total: match[3], states, boundary: ui(match[5])});
   };

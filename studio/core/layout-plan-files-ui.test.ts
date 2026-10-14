@@ -5,6 +5,7 @@ import {createRequire} from 'node:module';
 import vm from 'node:vm';
 import React from 'react';
 import * as format from '../scene/layout-plan-file';
+import {translate,translateKnownUi} from '../i18n/locale';
 const require=createRequire(import.meta.url),swc=require('next/dist/build/swc');await swc.loadBindings();
 const source=await readFile(new URL('../components/LayoutPlanFiles.tsx',import.meta.url),'utf8');
 const {code}=await swc.transform(source,{jsc:{parser:{syntax:'typescript',tsx:true},transform:{react:{runtime:'automatic'}},target:'es2022'},module:{type:'commonjs'}});
@@ -14,7 +15,8 @@ const tick=()=>new Promise(r=>setImmediate(r));
 function mount(){let cursor=0,effectRun=false;const slots:any[]=[],cleanups:(()=>void)[]=[],calls:any[]=[];const exports:any={};
  const props:any={applied,context,onBegin:()=>true,onPreview:(value:any,ctx:any)=>{calls.push(['preview',value,ctx]);return true},onBusy:(busy:boolean)=>calls.push(['busy',busy]),download:(name:string,blob:Blob)=>calls.push(['download',name,blob])};
  const hooks={...React,useRef:(value:any)=>{const i=cursor++;return slots[i]??(slots[i]={current:value})},useState:(value:any)=>{const i=cursor++;if(!(i in slots))slots[i]=value;return[slots[i],(v:any)=>{slots[i]=v}]},useEffect:(f:()=>()=>void)=>{if(!effectRun)cleanups.push(f())}};
- vm.runInNewContext(code,{exports,Blob,Error,require:(name:string)=>name==='react'?hooks:name.includes('layout-plan-file')?format:require(name)});
+ const i18n={useStudioLocale:()=>({locale:'zh-CN' as const,t:(key:any,params?:any)=>translate('zh-CN',key,params??{}),ui:(message:string|null|undefined)=>translateKnownUi('zh-CN',message),setLocale:()=>{},preferenceSaved:true})};
+ vm.runInNewContext(code,{exports,Blob,Error,require:(name:string)=>name==='react'?hooks:name.includes('layout-plan-file')?format:name.includes('i18n/react')?i18n:require(name)});
  function render(){cursor=0;const tree=exports.default(props);effectRun=true;return tree}
  function nodes(value:any,out:any[]=[]):any[]{if(Array.isArray(value)){value.forEach(v=>nodes(v,out));return out}if(value&&typeof value==='object'){out.push(value);nodes(value.props?.children,out)}return out}
  function input(){return nodes(render()).find(x=>x.type==='input')}

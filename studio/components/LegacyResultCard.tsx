@@ -24,7 +24,7 @@ function Preview({ session, repository, download, close }: Props & { close: () =
         const ctx = canvas.current.getContext('2d'); if (!ctx) throw Error('Canvas unavailable');
         renderLegacyResultCard(ctx, result.model);
         if (!cancelled) setReady(true);
-      } catch { if (!cancelled) { setDrawFailed(true); setMessage('图片暂不能生成。原记录没有改动，可取消后重试。'); } }
+      } catch { if (!cancelled) { setDrawFailed(true); setMessage(t('resultCard.generationFailed')); } }
     };
     void paint();
     return () => { cancelled = true; delivery.invalidate(); };
@@ -38,8 +38,8 @@ function Preview({ session, repository, download, close }: Props & { close: () =
       const delivered = await delivery.download(session, () => new Promise<Blob>((resolve, reject) => {
         target.toBlob(blob => blob ? resolve(blob) : reject(Error('PNG unavailable')), 'image/png');
       }), download);
-      if (alive.current && delivered) setMessage('PNG 已交给浏览器下载；没有发布到任何平台，也没有另存卡片历史。');
-    } catch { if (alive.current) setMessage('下载未开始：原记录可能已更新或暂不可读，或图片生成失败。请取消并重新打开该记录后重试。'); }
+      if (alive.current && delivered) setMessage(t('resultCard.downloaded'));
+    } catch { if (alive.current) setMessage(t('resultCard.downloadFailed')); }
     finally { if (alive.current) setBusy(false); }
   };
   return <section aria-label={t('resultCard.previewLabel')} style={{ marginBlock: 20, minWidth: 0 }}>

@@ -152,3 +152,31 @@ test('continue9 Studio notify residuals use t() for recording/fullscreen/course 
  assert.ok(!source.includes("'页面已进入后台，录像已中断，已写入片段保留"));
  assert.ok(!source.includes("'录像已停止，请在本机录像中检查与下载。'"));
 });
+
+test('continue10 panel chrome library/layout keys translate both ways via ui bridge',()=>{
+ for(const key of ['library.title','library.refresh','library.empty','library.invalidReference','layoutPlan.title','layoutPlan.heading','layoutPlan.errSizeLimit','layoutPlan.changeStage','layoutPlan.previewLoaded'] as const){
+  if(key==='layoutPlan.previewLoaded'){
+   const zh=translate('zh-CN',key,{changes:'舞台主次、小窗'});
+   const en=translate('en',key,{changes:'Stage primary/secondary, Inset'});
+   assert.equal(translateKnownUi('en',zh),translate('en',key,{changes:'舞台主次、小窗'}));
+   assert.equal(translateKnownUi('zh-CN',en),translate('zh-CN',key,{changes:'Stage primary/secondary, Inset'}));
+   continue;
+  }
+  assert.equal(translateKnownUi('en',translate('zh-CN',key)),translate('en',key));
+  assert.equal(translateKnownUi('zh-CN',translate('en',key)),translate('zh-CN',key));
+ }
+ assert.equal(translateKnownUi('en','布局文件不能超过 64 KiB。'),translate('en','layoutPlan.errSizeLimit'));
+ assert.equal(translateKnownUi('en','舞台主次'),translate('en','layoutPlan.changeStage'));
+});
+
+test('continue10 ListeningSessionHistory / LayoutPlanFiles / ContextBookmarkLibrary use t() chrome',async()=>{
+ const listening=await readFile(new URL('../components/ListeningSessionHistory.tsx',import.meta.url),'utf8');
+ const layout=await readFile(new URL('../components/LayoutPlanFiles.tsx',import.meta.url),'utf8');
+ const library=await readFile(new URL('../components/ContextBookmarkLibrary.tsx',import.meta.url),'utf8');
+ assert.ok(listening.includes('assistanceKeys')&&listening.includes("t(assistanceKeys[assistance])"));
+ assert.ok(!listening.includes("'有参考帮助'"));
+ assert.ok(layout.includes("t('layoutPlan.title')")&&layout.includes('useStudioLocale'));
+ assert.ok(!layout.includes('<h3>保存与恢复布局</h3>'));
+ assert.ok(library.includes("t('library.title')")&&library.includes('useStudioLocale'));
+ assert.ok(!library.includes('aria-label="本机语境收藏"'));
+});

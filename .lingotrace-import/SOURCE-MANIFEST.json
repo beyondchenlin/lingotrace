@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "c489353c7f8f7415413130de1b53d90d58f9e8f3",
-  "source_file_count": 697,
-  "direct_source_file_count": 693,
+  "source_projection_tree_sha1": "2b83a7b410272956f0eb9c2cf5f4143953ec2012",
+  "source_file_count": 700,
+  "direct_source_file_count": 696,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -1822,6 +1822,13 @@
       "sha256": "f7ca6f774f4dee6e67232a796df739bcb02dda2b48314dcfe2573d8bb42d6d4a"
     },
     {
+      "path": "qa/prd-continue10-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5280,
+      "git_blob_sha1": "acbba5f52f273f2ade2e51dcda0de5c2d6267842",
+      "sha256": "ba477b9b1015d02ca80d3bb5bccbc0b34a7c892d6b31821c26953a279a6de84b"
+    },
+    {
       "path": "qa/prd-continue7-acceptance.mjs",
       "mode": "100644",
       "bytes": 5333,
@@ -1946,6 +1953,13 @@
       "bytes": 5923,
       "git_blob_sha1": "9392cb08ef829851bb29b7958e1b2d61bf20e181",
       "sha256": "c8d801bd517777c6ca3f993cc7ab8a25cc267dc952403d02a32e9334e2735039"
+    },
+    {
+      "path": "scripts/prd-continue10-qa.mts",
+      "mode": "100644",
+      "bytes": 3646,
+      "git_blob_sha1": "8207dbafd5a64121d9225064670f23b6ec280dcf",
+      "sha256": "5de5dab068f4b54fba4ce999f8f691c11097ecb6a4f44fa57435e84f31c68e35"
     },
     {
       "path": "scripts/prd-continue4-qa.mts",
@@ -2083,9 +2097,9 @@
     {
       "path": "studio/components/ContextBookmarkLibrary.tsx",
       "mode": "100644",
-      "bytes": 10374,
-      "git_blob_sha1": "c1e500985aedc0874f309b3d9b48566df3a551b4",
-      "sha256": "99728531a1b7ad71cdf74b9304745f320a79516a03fc9f0fa83687236ea5a50c"
+      "bytes": 9666,
+      "git_blob_sha1": "74fa5bec61d8ed25e7e06bdec86a1d770d23bca1",
+      "sha256": "e6a4552d5f88574cd54cfe2770338ce3cd596c6b24c720c561170cda03b1f672"
     },
     {
       "path": "studio/components/HistoryReferenceImpact.tsx",
@@ -2111,9 +2125,9 @@
     {
       "path": "studio/components/LayoutPlanFiles.tsx",
       "mode": "100644",
-      "bytes": 3203,
-      "git_blob_sha1": "0604ecfb113e6f8c68c3a19de8ec6d9084aeb47e",
-      "sha256": "a8002d68e03c6225fb6669810ebc1a61ddfcab40b01f460c131d353c3f3c9bb8"
+      "bytes": 3107,
+      "git_blob_sha1": "e4c8fa6186d77ee1048a5d29c9020ad385613349",
+      "sha256": "03085b5067dba46b04165f8544eeca09ee5c68cede85c9c8680e37652069a0ad"
     },
     {
       "path": "studio/components/LegacyAttemptReview.tsx",
@@ -2125,9 +2139,9 @@
     {
       "path": "studio/components/LegacyHistoryHud.tsx",
       "mode": "100644",
-      "bytes": 9528,
-      "git_blob_sha1": "a58d9586b2d945e1efdc73a9a5bbb26796bd454d",
-      "sha256": "6091abbc130eca3eecabc490fe66d0939ef61994703e2158e5c163bdd881d719"
+      "bytes": 9765,
+      "git_blob_sha1": "d0969b4b219322a0d20de485d0f473d3d66e4850",
+      "sha256": "d8193d32164aba351210ed80345f8b0a93937b1cd169d9e46405013da1e02d9f"
     },
     {
       "path": "studio/components/LegacyHistoryPanel.tsx",
@@ -2139,9 +2153,9 @@
     {
       "path": "studio/components/LegacyResultCard.tsx",
       "mode": "100644",
-      "bytes": 5980,
-      "git_blob_sha1": "3bb1ebef59ed6493097d763f37d556e55697142c",
-      "sha256": "969432cce6edc692a470ae26fd54654cb83637cbe4654875f1aa6cf4ac46a300"
+      "bytes": 5773,
+      "git_blob_sha1": "7464c8c1de135a5a2c0c65ef53358fe0e9ad5d98",
+      "sha256": "973763e93c88de26a47971aea8118ee27e79d67510df4f1748548a20fcecb6f9"
     },
     {
       "path": "studio/components/ListeningControls.tsx",
@@ -2153,9 +2167,9 @@
     {
       "path": "studio/components/ListeningSessionHistory.tsx",
       "mode": "100644",
-      "bytes": 9824,
-      "git_blob_sha1": "ad16d2b1357bee44d9f31ba9b7a69a2fbb2327ff",
-      "sha256": "e519798b9f302714493edee035fcb95d564fec5428bf41c9ddc2e15898faa00f"
+      "bytes": 9970,
+      "git_blob_sha1": "925791cc152238e31c89a3a2071bc3bb82996633",
+      "sha256": "6418e67e1f59b7f295fff7feb2bb130416872b5ebb953bd495bdb38e592595b4"
     },
     {
       "path": "studio/components/MaterialCorrectionPanel.tsx",
@@ -2496,16 +2510,16 @@
     {
       "path": "studio/core/interface-locale.test.ts",
       "mode": "100644",
-      "bytes": 13018,
-      "git_blob_sha1": "26789581672d8a1e53fa77d1672350bbea9429ed",
-      "sha256": "baa2b451f5bde1ef85be4ae2c236b3c07e1081af7d528ca990c9e9e440d769ea"
+      "bytes": 15037,
+      "git_blob_sha1": "45205d6899dd27809acf8a41964969aa1aee2774",
+      "sha256": "b55bc73cca0d682c3aaa2a49c22dea6c769e4cf0a6a342f0d0e699f446a852dc"
     },
     {
       "path": "studio/core/layout-plan-files-ui.test.ts",
       "mode": "100644",
-      "bytes": 6122,
-      "git_blob_sha1": "e8861e0642265c6fe6d14bf4abd0863d930436c2",
-      "sha256": "b0d9e1cce4a92ccd1582dd9ed2aef7e3f9c6e824e34a7c7f95e6293b0577f716"
+      "bytes": 6444,
+      "git_blob_sha1": "5409dcf2b9d6605c73ae8f1aa057828fb3bdb618",
+      "sha256": "bd9562eaad3ee7e1adfa33798961d2fda2255ac37523788a56c31bcc74803e8a"
     },
     {
       "path": "studio/core/legacy-attempt-review-integration.test.ts",
@@ -3840,9 +3854,9 @@
     {
       "path": "studio/i18n/locale.ts",
       "mode": "100644",
-      "bytes": 4656,
-      "git_blob_sha1": "d061ee2ec0a852454a7af330a16a7ba887c6838f",
-      "sha256": "9bbcf131148aa681457404f3e944b0203df95807c3578a6bcfdb0ba1b6383c26"
+      "bytes": 4756,
+      "git_blob_sha1": "9124d14daad17e56168f2833c8985573f56e01ee",
+      "sha256": "4df769c7a19e31181b7cd3a04dea98eb7cedbb3383b8721680698797ec56c8ad"
     },
     {
       "path": "studio/i18n/messages-correction.ts",
@@ -3857,6 +3871,13 @@
       "bytes": 44084,
       "git_blob_sha1": "aac1945a3288582653d492f3792bed62d778fa26",
       "sha256": "22004db0700d80ba477684221bbd6c505e941a7527bc3091a0cef7e333d3f905"
+    },
+    {
+      "path": "studio/i18n/messages-panels.ts",
+      "mode": "100644",
+      "bytes": 10204,
+      "git_blob_sha1": "e51292759d2de78b4138399f865d787088eed503",
+      "sha256": "bd735ed04b11e642765acc7ff3ee99de1fe9cabec099061cd12c579c5b87a6ad"
     },
     {
       "path": "studio/i18n/messages-reference-impact.ts",

@@ -1,5 +1,6 @@
 'use client';
 import {useStudioLocale} from '../i18n/react';
+import type { MessageKey } from '../i18n/locale';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { IndexedDBTrainingRepository } from '../core/repository';
 import type { ListeningSessionRecord, PartialListeningScope } from '../core/listening-session';
@@ -20,8 +21,8 @@ type HistoryRead = {
   initialSessionId: string | undefined;
   detailOnly: boolean;
 };
-const assistanceLabels: Record<Assistance, string> = { 'known-assisted': '有参考帮助', 'no-observed-assistance': '未观察到帮助', unknown: '帮助情况未知' };
-const coverageLabels: Record<AssistanceCoverage, string> = { 'complete-to-submit': '提交前证据完整', partial: '仅部分证据', unavailable: '证据覆盖未知' };
+const assistanceKeys: Record<Assistance, MessageKey> = { 'known-assisted': 'listeningHistory.assisted', 'no-observed-assistance': 'listeningHistory.noObservedAssistance', unknown: 'listeningHistory.unknownAssistance' };
+const coverageKeys: Record<AssistanceCoverage, MessageKey> = { 'complete-to-submit': 'listeningHistory.completeCoverage', partial: 'listeningHistory.partialCoverage', unavailable: 'listeningHistory.unknownCoverage' };
 const errorText = (error: unknown) => error instanceof Error ? error.message : String(error);
 
 /** Read-only B history. No restore, migration or same-round clean recovery action. */
@@ -41,9 +42,9 @@ export default function ListeningSessionHistory({ repository, download, initialS
     try {
       const records = await repository.listListeningSessions();
       if (mounted.current && token === readToken.current) setRead({ records, repository, initialSessionId, detailOnly });
-    } catch (error) { if (mounted.current && token === readToken.current) setError(`听力条件记录读取失败：${errorText(error)}`); }
+    } catch (error) { if (mounted.current && token === readToken.current) setError(t('listeningHistory.readFailed', { details: errorText(error) })); }
     finally { if (mounted.current && token === readToken.current) setLoading(false); }
-  }, [repository, initialSessionId, detailOnly]);
+  }, [repository, initialSessionId, detailOnly, t]);
   useEffect(() => { mounted.current = true; void refresh(); return () => { mounted.current = false; ++readToken.current; ++exportToken.current; exporting.current = false; activeRecord.current = null; }; }, [refresh]);
   // A new repository/target must not expose the previous render's payload while
   // its effect is waiting to run. detailOnly always follows the exact supplied ID.
@@ -60,11 +61,11 @@ export default function ListeningSessionHistory({ repository, download, initialS
     try {
       const artifact = listeningSessionExport(selected, format);
       await repository.deliverListeningSession(selected.sessionId, selected, () => {
-        if (!mounted.current || token !== exportToken.current || activeRecord.current !== selected || selectionReadToken !== readToken.current) throw new Error('导出选择已改变，请重新选择记录。');
+        if (!mounted.current || token !== exportToken.current || activeRecord.current !== selected || selectionReadToken !== readToken.current) throw new Error(t('listeningHistory.changedExport'));
         download(artifact.name, new Blob([artifact.text], { type: artifact.mime }));
       });
-      if (mounted.current && token === exportToken.current) setNotice('已发起完整听力条件封装下载。');
-    } catch (error) { if (mounted.current && token === exportToken.current) setError(`导出未完成：${errorText(error)}`); }
+      if (mounted.current && token === exportToken.current) setNotice(t('listeningHistory.downloadStarted'));
+    } catch (error) { if (mounted.current && token === exportToken.current) setError(t('listeningHistory.exportFailed', { details: errorText(error) })); }
     finally { if (mounted.current && token === exportToken.current) { exporting.current = false; setDownloading(false); } }
   };
   return <section className="listening-session-history" aria-label={t('listeningHistory.title')}>
@@ -82,11 +83,11 @@ export default function ListeningSessionHistory({ repository, download, initialS
       <p className="note">{t('listeningHistory.legacyTime')}{(selected.trainingSnapshot.activeMs / 1000).toFixed(1)}{t('listeningHistory.separateDuration')}</p>
       {projected.attempts.length === 0 && <p>{t('listeningHistory.noAttempts')}</p>}
       <ol>{projected.attempts.map(({ attempt, assistance, coverage, boundaryRecorded }) => <li key={attempt.attemptId}>
-        <p><strong>{attempt.conditions.exposure === 'first' ? t('listeningHistory.firstAttempt') : t('review.retry')}</strong>{t('listeningHistory.accuracy')}{attempt.accuracy.toFixed(1)}{t('listeningHistory.originalGain')}{attempt.gain} · {ui(assistanceLabels[assistance])} · {ui(coverageLabels[coverage])}</p>
+        <p><strong>{attempt.conditions.exposure === 'first' ? t('listeningHistory.firstAttempt') : t('review.retry')}</strong>{t('listeningHistory.accuracy')}{attempt.accuracy.toFixed(1)}{t('listeningHistory.originalGain')}{attempt.gain} · {t(assistanceKeys[assistance])} · {t(coverageKeys[coverage])}</p>
         {!boundaryRecorded && <p className="note">{t('listeningHistory.noBoundary')}</p>}
         <p>{t('listeningHistory.answer')}{attempt.answer}</p><p>{t('listeningHistory.reference')}{attempt.reference}</p>
       </li>)}</ol>
-      {(projected.pending.length > 0 || projected.discarded.length > 0) && <details><summary>{t('listeningHistory.unscoredFacts')}</summary><ul>{[...projected.pending, ...projected.discarded].map(boundary => <li key={boundary.eventId}>{boundary.disposition === 'pending' ? t('listeningHistory.pending') : t('listeningHistory.discarded')}{t('listeningHistory.cueSeparator')}{boundary.cueId} · {ui(assistanceLabels[boundary.assistance])} · {ui(coverageLabels[boundary.coverage])}</li>)}</ul></details>}
+      {(projected.pending.length > 0 || projected.discarded.length > 0) && <details><summary>{t('listeningHistory.unscoredFacts')}</summary><ul>{[...projected.pending, ...projected.discarded].map(boundary => <li key={boundary.eventId}>{boundary.disposition === 'pending' ? t('listeningHistory.pending') : t('listeningHistory.discarded')}{t('listeningHistory.cueSeparator')}{boundary.cueId} · {t(assistanceKeys[boundary.assistance])} · {t(coverageKeys[boundary.coverage])}</li>)}</ul></details>}
       <details><summary>{t('listeningHistory.oldReceipt')}</summary>{selected.preBRecord ? <p>{t('listeningHistory.originalSequence')}{selected.preBRecord.sequence}{t('listeningHistory.originalAttempts')}{selected.preBRecord.snapshot.attempts.length}{t('listeningHistory.savedAt')}{new Date(selected.preBRecord.updatedAt).toLocaleString(locale)}{t('listeningHistory.receiptExport')}</p> : <p>{t('listeningHistory.noReceipt')}</p>}<p className="note">{t('listeningHistory.receiptNotice')}</p></details>
       <div className="button-row"><button disabled={downloading || loading} onClick={() => void exportRecord('json')}>{t('listeningHistory.json')}</button><button disabled={downloading || loading} onClick={() => void exportRecord('csv')}>{t('listeningHistory.csv')}</button></div>
       <p className="note">{t('listeningHistory.csvNotice')}</p>
