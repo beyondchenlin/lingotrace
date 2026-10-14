@@ -11,17 +11,35 @@ export interface EditionSurface {
  plateAlpha:number;
  /** Slightly rounder drafting breath amplitude. */
  breathScale:number;
+ /** HUD plate corner radius (Canvas). */
+ plateRadius:number;
+ /** Warm fill tint over standard plate (0–1). */
+ warmLift:number;
 }
 
+export const VISUAL_EDITION_STORAGE_KEY='lingotrace-studio-visual-edition-v1';
+
 export const PRO_EDITION:EditionSurface={
- id:'pro',tone:'#e8b86d',traceTone:'#e8b86d',plateAlpha:1,breathScale:1,
+ id:'pro',tone:'#ffc15f',traceTone:'#9bddff',plateAlpha:1,breathScale:1,plateRadius:16,warmLift:0,
 };
 
 /** Softer, warmer cartoon pass — still glanceable game HUD, not a toy strip. */
 export const KIDS_EDITION:EditionSurface={
- id:'kids',tone:'#ffb347',traceTone:'#7ad7ff',plateAlpha:1.08,breathScale:1.15,
+ id:'kids',tone:'#ffb347',traceTone:'#7ad7ff',plateAlpha:1.12,breathScale:1.2,plateRadius:22,warmLift:.08,
 };
 
 export function editionSurface(id:StudioVisualEdition|undefined):EditionSurface{
  return id==='kids'?KIDS_EDITION:PRO_EDITION;
+}
+
+export function normalizeVisualEdition(value:unknown):StudioVisualEdition{
+ return value==='kids'?'kids':'pro';
+}
+
+export function readVisualEdition(storage:Pick<Storage,'getItem'>|null):StudioVisualEdition{
+ try{return normalizeVisualEdition(storage?.getItem(VISUAL_EDITION_STORAGE_KEY))}catch{return 'pro'}
+}
+
+export function writeVisualEdition(storage:Pick<Storage,'setItem'>|null,edition:StudioVisualEdition):boolean{
+ try{if(!storage)return false;storage.setItem(VISUAL_EDITION_STORAGE_KEY,edition);return true}catch{return false}
 }

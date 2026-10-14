@@ -1,7 +1,7 @@
 import {translate,translateKnownUi,type MessageKey,type MessageParams} from '../i18n/locale';
 import {learningGeometry,inputHeaderControls,containLearningMedia} from './learning-surface';
 import {HudContrastController,HUD_CONTRAST_MIN_ALPHA,type HudContrastState} from './hud-contrast';
-import {containRect,type SceneMedia,type SceneVisual} from './renderer';
+import {containRect,coverRect,type SceneMedia,type SceneVisual} from './renderer';
 import {validateVideoPalette,type VideoPalette} from './video-palette';
 import {type Rect} from './transparent-layout';
 import {inputFeedbackLines,applyInputCardLayout,paintInputText,paintPassiveKeyboard,wrapInputText} from './input-card';
@@ -17,6 +17,7 @@ import type {TransparentInputFrame} from './transparent-input';
 import {materialStageTitle} from './material-title';
 import {cameraControlGeometry} from './camera-control';
 import {hudPanelBackingRects,hudPanelContentRects} from './hud-panel-backing';
+import {editionSurface} from '../theme/kids-cartoon';
 
 export interface TransparentSceneFrame {input:TransparentInputFrame;enteredAt:number;mediaChangedAt:number;mediaLoading:boolean;wallNowMs:number;replay:boolean;restored?:boolean;restoreFailed?:boolean;pageInputStarted:boolean;standbyPaused?:boolean;mediaInteracted?:boolean}
 export const TRANSPARENT_VERSION='v27-continuous-input-traces';
@@ -28,17 +29,17 @@ function centeredText(c:CanvasRenderingContext2D,s:string,x:number,centerY:numbe
 function line(c:CanvasRenderingContext2D,x:number,y:number,xx:number,yy:number,color:string,width=1){c.beginPath();c.moveTo(x,y);c.lineTo(xx,yy);c.strokeStyle=color;c.lineWidth=width;c.stroke()}
 function cross(c:CanvasRenderingContext2D,x:number,y:number,alpha=.5,glow='#c6e1da'){c.save();c.globalAlpha*=alpha*.45;c.shadowColor=glow;c.shadowBlur=4;c.beginPath();c.arc(x,y,1.1,0,Math.PI*2);c.fillStyle='#d9eee7';c.fill();c.restore()}
 function frame(c:CanvasRenderingContext2D,r:Rect,alpha=.5,color='#c9e2d8'){c.save();c.globalAlpha*=alpha*.65;c.strokeStyle=color;c.lineWidth=.8;for(const[x,y,dx,dy]of[[r.x,r.y,1,1],[r.x+r.w,r.y,-1,1],[r.x,r.y+r.h,1,-1],[r.x+r.w,r.y+r.h,-1,-1]]){c.beginPath();c.moveTo(x+dx*18,y);c.lineTo(x+dx*8,y);c.quadraticCurveTo(x,y,x,y+dy*8);c.lineTo(x,y+dy*18);c.stroke()}c.restore()}
-function media(c:CanvasRenderingContext2D,m:SceneMedia,v:SceneVisual,r:Rect,camera=false,cssScale=1){let source:CanvasImageSource|undefined,sw=1,sh=1;
+function media(c:CanvasRenderingContext2D,m:SceneMedia,v:SceneVisual,r:Rect,camera=false,cssScale=1,cover=false){let source:CanvasImageSource|undefined,sw=1,sh=1;
  if(camera&&v.camera==='on'&&m.camera.readyState>=2){source=m.camera;sw=m.camera.videoWidth;sh=m.camera.videoHeight}
  else if(!camera&&m.kind==='image'&&m.image.complete&&m.image.naturalWidth){source=m.image;sw=m.image.naturalWidth;sh=m.image.naturalHeight}
  else if(!camera&&m.kind!=='image'&&m.lesson.readyState>=2&&m.lesson.videoWidth){source=m.lesson;sw=m.lesson.videoWidth;sh=m.lesson.videoHeight}
  else if(!camera&&m.kind==='demo'&&m.poster.complete&&m.poster.naturalWidth){source=m.poster;sw=m.poster.naturalWidth;sh=m.poster.naturalHeight}
- if(source){let fit=containRect(sw,sh,r.x,r.y,r.w,r.h);if(!camera&&v.videoSize)fit=containLearningMedia({width:sw,height:sh},r,cssScale,v.videoSize,v.mediaViewport);c.fillStyle='#0b1419';c.fillRect(r.x,r.y,r.w,r.h);try{c.drawImage(source,fit.x,fit.y,fit.w,fit.h);return{source,fit,identity:'currentSrc' in source?source.currentSrc:'src' in source?String(source.src):String(source)}}catch{}}else if(camera){c.fillStyle='#111a2020';c.fillRect(r.x,r.y,r.w,r.h)}
+ if(source){let fit=containRect(sw,sh,r.x,r.y,r.w,r.h);if(!camera&&v.videoSize)fit=containLearningMedia({width:sw,height:sh},r,cssScale,v.videoSize,v.mediaViewport);if(cover)fit=coverRect(sw,sh,r.x,r.y,r.w,r.h);c.fillStyle='#0b1419';c.fillRect(r.x,r.y,r.w,r.h);c.save();if(cover){c.beginPath();c.rect(r.x,r.y,r.w,r.h);c.clip()}try{c.drawImage(source,fit.x,fit.y,fit.w,fit.h);c.restore();return{source,fit:{x:r.x,y:r.y,w:r.w,h:r.h},identity:'currentSrc' in source?source.currentSrc:'src' in source?String(source.src):String(source)}}catch{c.restore()}}else if(camera){c.fillStyle='#111a2020';c.fillRect(r.x,r.y,r.w,r.h)}
 }
 const hudContrastControllers=new WeakMap<HTMLCanvasElement,HudContrastController>();
 const hudContrastStates=new WeakMap<HTMLCanvasElement,HudContrastState['status']|'letterbox'>();
 export function readHudContrastStatus(canvas:HTMLCanvasElement){return hudContrastStates.get(canvas)??'waiting'}
-function hudBacking(c:CanvasRenderingContext2D,r:Rect,alpha:number,content:Rect){c.save();c.beginPath();c.roundRect(r.x,r.y,r.w,r.h,16);const shade=c.createLinearGradient(0,content.y,0,content.y+content.h);shade.addColorStop(0,`rgba(8,18,23,${alpha})`);shade.addColorStop(1,`rgba(8,18,23,${alpha*.92})`);c.fillStyle=shade;c.fill();c.restore()}
+function hudBacking(c:CanvasRenderingContext2D,r:Rect,alpha:number,content:Rect,radius=16,warmLift=0){c.save();c.beginPath();c.roundRect(r.x,r.y,r.w,r.h,radius);const shade=c.createLinearGradient(0,content.y,0,content.y+content.h);const top=8+Math.round(warmLift*28),mid=18+Math.round(warmLift*18);shade.addColorStop(0,`rgba(${top},${mid},23,${alpha})`);shade.addColorStop(1,`rgba(${top},${mid},23,${alpha*.92})`);c.fillStyle=shade;c.fill();c.restore()}
 export function transparentEntrance(now:number,enteredAt:number,changedAt:number,loading:boolean,reduced:boolean){if(reduced)return 1;const age=Math.max(0,now-(changedAt||enteredAt));return loading?1-.62*clamp(age/220):.38+.62*(1-Math.pow(1-clamp(age/720),3))}
 function mapRect(c:CanvasRenderingContext2D,source:Rect,target:Rect){c.save();c.translate(target.x,target.y);c.scale(target.w/source.w,target.h/source.h);c.translate(-source.x,-source.y)}
 const sceneText=txt;
@@ -51,20 +52,20 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
   const transform=ctx.getTransform(),scale=Math.hypot(transform.a,transform.b)/(canvas.width/W);
   sceneText(ctx,text,x,y,Math.max(size,10/scale),color,weight,align,font,max);
  }:sceneText;
- const presentation=deriveTransparentPresentation(s,{nowMs:now,enteredAtMs:f.enteredAt,reducedMotion:v.reducedMotion,paused:f.pageInputStarted?v.paused:!!f.standbyPaused,pageInputStarted:f.pageInputStarted||!!listening,restoreFailed:f.restoreFailed,restored:!!f.restored,replay:f.replay,scorable:m.kind==='demo'}),standby=presentation.standby,tone=presentation.accent==='mint'?'#c8e4b4':presentation.accent==='amber'?'#efbd78':GOLD,traceTone=presentation.accent==='neutral'?BLUE:tone,hudNow=standby?.nowMs??now;
+ const presentation=deriveTransparentPresentation(s,{nowMs:now,enteredAtMs:f.enteredAt,reducedMotion:v.reducedMotion,paused:f.pageInputStarted?v.paused:!!f.standbyPaused,pageInputStarted:f.pageInputStarted||!!listening,restoreFailed:f.restoreFailed,restored:!!f.restored,replay:f.replay,scorable:m.kind==='demo'}),standby=presentation.standby,edition=editionSurface(v.visualEdition);let tone=presentation.accent==='mint'?'#c8e4b4':presentation.accent==='amber'?'#efbd78':GOLD,traceTone=presentation.accent==='neutral'?BLUE:tone;if(edition.id==='kids'){tone=edition.tone;traceTone=edition.traceTone}const hudNow=standby?.nowMs??now;
  if(standby)f={...f,input:{commits10s:standby.commits10s,energy:standby.energy,latestRate:null,observedMs:0,frozen:standby.frozen,points:standby.points,pulses:standby.pulses}};
- c.save();c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);c.fillStyle='#101a20';c.fillRect(0,0,W,H);const primary=geometry.media,picture=media(c,m,v,primary,v.layout==='camera',(v.cameraViewport?.width??W)/W);
+ c.save();c.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);c.clearRect(0,0,W,H);c.fillStyle='#101a20';c.fillRect(0,0,W,H);const primary=geometry.media,picture=media(c,m,v,primary,v.layout==='camera',(v.cameraViewport?.width??W)/W,!!geometry.practiceCompact&&portrait&&v.layout!=='camera');
  const cameraRect=cameraControlGeometry(geometry,v.camera,v.layout,{fixture:v.fixture,cssWidth:v.cameraViewport?.width,cssHeight:v.cameraViewport?.height}).visual,contentRects=hudPanelContentRects(geometry,cameraRect),contrastRects=hudPanelBackingRects(geometry,cameraRect,contentRects);
  let contrast=hudContrastControllers.get(canvas);if(!contrast){contrast=new HudContrastController();hudContrastControllers.set(canvas,contrast)}
  const letterboxed=new Set(Object.entries(contrastRects).filter(([,r])=>picture&&(r.x+r.w<=picture.fit.x||r.x>=picture.fit.x+picture.fit.w||r.y+r.h<=picture.fit.y||r.y>=picture.fit.y+picture.fit.h)).map(([key])=>key));
  const regions=Object.fromEntries(Object.entries(contrastRects).filter(([key])=>!letterboxed.has(key)).map(([key,r])=>[key,picture?{x:(r.x-picture.fit.x)/picture.fit.w,y:(r.y-picture.fit.y)/picture.fit.h,w:r.w/picture.fit.w,h:r.h/picture.fit.h}:{x:0,y:0,w:1,h:1}]));
  const contrastState=contrast.update(picture?.source??null,picture?.identity??'no-media',regions,now,v.reducedMotion);hudContrastStates.set(canvas,picture&&Object.keys(regions).length===0?'letterbox':contrastState.status);
- for(const[key,r]of Object.entries(contrastRects)){hudBacking(c,r,letterboxed.has(key)?HUD_CONTRAST_MIN_ALPHA:contrastState.alpha[key],contentRects[key]);}
+ for(const[key,r]of Object.entries(contrastRects)){hudBacking(c,r,Math.min(.94,(letterboxed.has(key)?HUD_CONTRAST_MIN_ALPHA:contrastState.alpha[key])*edition.plateAlpha),contentRects[key],edition.plateRadius,edition.warmLift);}
  // Below appends only a keyboard; it must not stretch the video HUD shading.
  const shadeBottom=geometry.inputCard.overlayControls?geometry.player.y+geometry.player.h:H;
  const shade=c.createLinearGradient(0,0,0,shadeBottom);shade.addColorStop(0,'#07111a70');shade.addColorStop(.24,'#07111a05');shade.addColorStop(.6,'#07111a00');shade.addColorStop(1,'#07111a35');c.fillStyle=shade;c.fillRect(0,0,W,H);
  if(!v.ready)txt(c,translateKnownUi(locale,v.message)||t('hud.loading'),portrait?W/2:836,portrait?primary.y+primary.h/2:475,24,WHITE,400,'center');
- const entrance=transparentEntrance(now,f.enteredAt,f.mediaChangedAt,f.mediaLoading,v.reducedMotion),breath=v.reducedMotion?0:.5+.5*Math.sin((now-f.enteredAt)/1200);c.save();c.globalAlpha=entrance;
+ const entrance=transparentEntrance(now,f.enteredAt,f.mediaChangedAt,f.mediaLoading,v.reducedMotion),breath=(v.reducedMotion?0:.5+.5*Math.sin((now-f.enteredAt)/1200))*edition.breathScale;c.save();c.globalAlpha=entrance;
  // Subtle drafting marks have no measurement meaning and never change geometry.
  if(!portrait){line(c,45,24,45,314,'#b6e9ed28');line(c,45,24,285,24,'#b6e9ed24');line(c,304,91,658,91,'#a9d8df28');line(c,1037,89,1285,89,'#a9d8df2a');[ [45,24],[45,91],[284,185],[304,91],[635,89],[1037,89],[1642,44],[1643,845] ].forEach(([x,y])=>cross(c,x,y,.28+breath*.25,palette?.glow));}else{
   // The original upper-left drafting L follows the goal's uniform scale.

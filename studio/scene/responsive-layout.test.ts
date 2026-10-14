@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {responsiveLayout,PORTRAIT_RECTS,PORTRAIT_CONTENT_BOTTOM,portraitRects,portraitContentBottom,resolvePortraitHeight,PORTRAIT_MIN_HEIGHT,isPortraitPracticeCompact} from './responsive-layout';
+import {applyInputCardLayout} from './input-card';
 import {CONSOLE_RECT,PLAYER_RECT,DEFAULT_RECTS,ZONES,rectStyle,cueMarkerRect,timelinePointerProgress,insetRect,type Rect} from './transparent-layout';
 
 const overlap=(a:Rect,b:Rect)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
@@ -155,5 +156,26 @@ test('phone practice-compact portrait keeps full-scale HUD layered over media-fo
    assert.ok(g.zones[key].w>=44);assert.ok(g.zones[key].h>=44);
   }
   assert.equal(overlap(g.zones.input,g.zones.submit),0);
+ }
+});
+
+test('phone one-screen stage never grows and leaves no empty bottom band',()=>{
+ for(const height of [820,844,880,930]){
+  const base=responsiveLayout(true,{},'lesson',height);
+  for(const keyboardVisible of [false,true]){
+   const g=applyInputCardLayout(base,{keyboardVisible});
+   assert.equal(g.height,base.height,`height ${height} kb=${keyboardVisible}`);
+   assert.ok(g.player.y+g.player.h<=g.height+1e-6);
+   assert.ok(g.player.h<=120,'transport stays a thin rail');
+   assert.ok(g.inputCard.card.y+g.inputCard.card.h<=g.player.y+1e-6 || g.inputCard.card.y<g.media.y+g.media.h,'card overlays media or sits above transport');
+   assert.equal(g.media.h,g.height,'media fills the stage backdrop');
+   assert.equal(g.media.y,0);
+  }
+  const normal=applyInputCardLayout(base,{keyboardVisible:false});
+  const folded=applyInputCardLayout(base,{keyboardVisible:false,availableHeight:height*0.55});
+  assert.equal(folded.height,base.height);
+  assert.ok(folded.inputCard.card.y<normal.inputCard.card.y,'OS keyboard folds stack upward onto video');
+  assert.ok(folded.player.h<=120,'folded transport stays thin (no inflate under OS keyboard)');
+  assert.ok(folded.player.y+folded.player.h<=height*0.55+1,'transport sits in the visual viewport above the OS keyboard');
  }
 });

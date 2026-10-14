@@ -36,8 +36,9 @@ function portraitOverlayConsole(height:number):Rect{
 }
 function portraitOverlayMedia(height:number):Rect{
  const H=resolvePortraitHeight(height);
- // Backdrop from the top rail to the transport — picture contain-fits inside.
- return{x:0,y:0,w:PORTRAIT_WIDTH,h:portraitOverlayTransportTop(H)};
+ // Full-stage media backdrop. Paint uses cover-fit so the picture fills the
+ // plate; lower chrome overlays live video — no empty letterbox band.
+ return{x:0,y:0,w:PORTRAIT_WIDTH,h:H};
 }
 function portraitOverlayTitle(height:number):Rect{
  const w=expand(height,335,380);
@@ -47,12 +48,14 @@ export function portraitRects(height=PORTRAIT_HEIGHT):Record<Movable,Rect>{
  if(isPortraitPracticeCompact(height)){
   const H=resolvePortraitHeight(height),scale=hudScale(),media=portraitOverlayMedia(H);
   const consoleRect=portraitOverlayConsole(H);
-  const metricsH=168*scale,metricsY=Math.min(consoleRect.y-metricsH-10,media.y+media.h*0.62);
+  const metricsH=168*scale,metricsY=Math.min(consoleRect.y-metricsH-10,media.h*0.55);
+  const subH=Math.max(44,49*scale);
   return{
    media,
    inset:{x:416-240*scale,y:Math.max(media.y+12,portraitOverlayTitle(H).y+portraitOverlayTitle(H).h+4),w:240*scale,h:152*scale},
-   metrics:{x:14,y:Math.max(media.y+media.h*0.48,metricsY),w:309*scale,h:metricsH},
-   subtitle:{x:65,y:Math.max(media.y+8,consoleRect.y-36),w:300,h:28},
+   metrics:{x:14,y:Math.max(media.h*0.42,metricsY),w:309*scale,h:metricsH},
+   // Two readable caption lines must fit above the typing card overlay.
+   subtitle:{x:65,y:Math.max(media.y+8,consoleRect.y-subH-10),w:300,h:subH},
   };
  }
  const extra=extraHeight(height),scale=hudScale(),mediaWidth=PORTRAIT_WIDTH;

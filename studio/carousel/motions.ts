@@ -3,23 +3,21 @@ export type CarouselMotionId = 'depth-deck' | 'magnetic-reveal';
 
 export interface CarouselMotionProfile {
  id:CarouselMotionId;
- /** Active card scale. */
  focusScale:number;
- /** Neighbor scale / opacity for depth. */
  neighborScale:number;
  neighborOpacity:number;
- /** Settle spring-ish duration in ms (ignored when reduced motion). */
  settleMs:number;
- /** Extra magnetic snap overshoot in CSS px. */
  snapOvershoot:number;
+ stackOffsetY:number;
+ stackScaleStep:number;
 }
 
 export const DEPTH_DECK:CarouselMotionProfile={
- id:'depth-deck',focusScale:1,neighborScale:.92,neighborOpacity:.55,settleMs:420,snapOvershoot:0,
+ id:'depth-deck',focusScale:1,neighborScale:.9,neighborOpacity:.42,settleMs:440,snapOvershoot:0,stackOffsetY:18,stackScaleStep:.06,
 };
 
 export const MAGNETIC_REVEAL:CarouselMotionProfile={
- id:'magnetic-reveal',focusScale:1.02,neighborScale:.88,neighborOpacity:.4,settleMs:520,snapOvershoot:18,
+ id:'magnetic-reveal',focusScale:1.03,neighborScale:.86,neighborOpacity:.28,settleMs:560,snapOvershoot:22,stackOffsetY:10,stackScaleStep:.08,
 };
 
 export function carouselMotion(id:CarouselMotionId):CarouselMotionProfile{
@@ -28,14 +26,63 @@ export function carouselMotion(id:CarouselMotionId):CarouselMotionProfile{
 
 export interface LessonCardSpec {
  id:string;
- titleKey:string;
+ title:string;
+ titleZh:string;
+ subtitle:string;
+ subtitleZh:string;
  aspect:'landscape'|'portrait';
  posterSrc:string;
+ videoSrc?:string;
  href:string;
+ credit?:string;
 }
 
-/** Demo deck — uses existing studio poster until kids art lands. */
+/** Dual-aspect demo deck: cafe landscape + Connie portrait-framed landscape media. */
 export const DEMO_LESSON_CARDS:LessonCardSpec[]=[
- {id:'cafe-landscape',titleKey:'studio.media',aspect:'landscape',posterSrc:'/studio-assets/06-cafe-poster.jpg',href:'/studio/'},
- {id:'cafe-portrait',titleKey:'studio.media',aspect:'portrait',posterSrc:'/studio-assets/06-cafe-poster.jpg',href:'/studio/'},
+ {
+  id:'cafe-landscape',
+  title:'Cafe Conversation',
+  titleZh:'咖啡馆对话',
+  subtitle:'Landscape practice · 16:9',
+  subtitleZh:'横版练习 · 16:9',
+  aspect:'landscape',
+  posterSrc:'/studio-assets/06-cafe-poster.jpg',
+  videoSrc:'/studio-assets/06-cafe.mp4',
+  href:'/studio/',
+ },
+ {
+  id:'connie-landscape',
+  title:'Education Ranger',
+  titleZh:'教育护林员',
+  subtitle:'NPS Connie Lau · landscape',
+  subtitleZh:'NPS Connie Lau · 横版',
+  aspect:'landscape',
+  posterSrc:'/studio-assets/nps-connie/poster.jpg',
+  videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
+  href:'/studio/',
+  credit:'National Park Service · No claim to original U.S. Government works.',
+ },
+ {
+  id:'cafe-portrait-frame',
+  title:'Cafe · Portrait frame',
+  titleZh:'咖啡馆 · 竖版框',
+  subtitle:'Same media, portrait card',
+  subtitleZh:'同一素材 · 竖版卡片',
+  aspect:'portrait',
+  posterSrc:'/studio-assets/06-cafe-poster.jpg',
+  videoSrc:'/studio-assets/06-cafe.mp4',
+  href:'/studio/',
+ },
+ {
+  id:'connie-portrait-frame',
+  title:'Ranger · Portrait frame',
+  titleZh:'护林员 · 竖版框',
+  subtitle:'Portrait card · dual aspect',
+  subtitleZh:'竖版卡片 · 双画幅',
+  aspect:'portrait',
+  posterSrc:'/studio-assets/nps-connie/poster.jpg',
+  videoSrc:'/studio-assets/nps-connie/connie-lau-education-ranger-720p.mp4',
+  href:'/studio/',
+  credit:'National Park Service · No claim to original U.S. Government works.',
+ },
 ];

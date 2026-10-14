@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "ab282a0982f2a4752c9c1e5ca25bcb0aa41ac20d",
-  "source_file_count": 678,
-  "direct_source_file_count": 674,
+  "source_projection_tree_sha1": "2e16090ca65e3b50a80652e32236023488e76fff",
+  "source_file_count": 686,
+  "direct_source_file_count": 682,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -28,6 +28,20 @@
       "bytes": 15786,
       "git_blob_sha1": "41af7201f9628ac349eb99bb03369c2803f76035",
       "sha256": "a1ae8ee589dea03935e912e0af181a87388ddc5f2c8a8ccc050decc2fbe27bd3"
+    },
+    {
+      "path": "app/cards/layout.tsx",
+      "mode": "100644",
+      "bytes": 263,
+      "git_blob_sha1": "d223b262343ac72b7b39a42ceedcdc8a077a2a13",
+      "sha256": "291baa9622f6b3d5572c347e398903da7167e1544b38bdaef4590a0f6668ca9e"
+    },
+    {
+      "path": "app/cards/page.tsx",
+      "mode": "100644",
+      "bytes": 407,
+      "git_blob_sha1": "da3801749501fbb2b28446cd2cf1ad4f0d7eb541",
+      "sha256": "c614074e002bc8add79fe2843691207afe4862de5f207134642b7f5b7fe1b85f"
     },
     {
       "path": "app/layout.tsx",
@@ -67,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 32535,
-      "git_blob_sha1": "98d4488a63d97f538b398b3d165c58ba8862d31f",
-      "sha256": "8a602a83fa14b5965db8c0c445f2b5ceba1290a1370fdd995715f3ed9f33989e"
+      "bytes": 33658,
+      "git_blob_sha1": "7a3995da8ce18ff3b0249a0cac94009f293add1d",
+      "sha256": "451ec2feb91e1d52f08350bb0e8c26d6d3a2247fce7835b8db9ab2efe70540d3"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1507,6 +1521,13 @@
       "sha256": "dc941432e89e292aa56800b35ca60bb9565dc3154946e74be458a274001a3cb8"
     },
     {
+      "path": "public/studio-assets/nps-connie/poster.jpg",
+      "mode": "100644",
+      "bytes": 263068,
+      "git_blob_sha1": "368ccb6667b2baa127bf05bfddfefd16f7b02989",
+      "sha256": "1aeeab769db2f201e17e445cff46687eedf14f8c6a6e4a8f62f63e5fd0f838bc"
+    },
+    {
       "path": "public/studio-assets/nps-connie/sentences.json",
       "mode": "100644",
       "bytes": 1903,
@@ -1810,9 +1831,9 @@
     {
       "path": "scripts/assemble-site.mjs",
       "mode": "100644",
-      "bytes": 1458,
-      "git_blob_sha1": "d0dda46bf8adda1bac71b0076a8480597814203f",
-      "sha256": "61fd29af846a2acf14e26d482655834d43a85aec44fd40cba3ca5a62ff232a8d"
+      "bytes": 1588,
+      "git_blob_sha1": "e8a27cef5ad228794b51680ee66b8436567c7824",
+      "sha256": "d3abe1528d4dc95544ba9ff283420b09921b835c374c8e4af6e298e58130f33c"
     },
     {
       "path": "scripts/assemble-studio-metric.mjs",
@@ -1878,6 +1899,13 @@
       "sha256": "36b0fecd8d2b5f93d79a8d51a7bcaa94ac318bb10350b8ee55beeb8e98086f62"
     },
     {
+      "path": "scripts/onescreen-qa-render.mts",
+      "mode": "100644",
+      "bytes": 4974,
+      "git_blob_sha1": "6132b463f77d76675bd81b8ac332deff46fbb4ca",
+      "sha256": "884ba9f78342d54190532bb78bf3f94c83e075150c5c4a3b1d7473b042c9ca3f"
+    },
+    {
       "path": "scripts/prepare-subtitle-assets.mjs",
       "mode": "100644",
       "bytes": 8485,
@@ -1927,6 +1955,13 @@
       "sha256": "0d32dcb8fd474716f2b5d56eaba506c8dda7b4402239a7f6cfa4ddc0ad7f8cb9"
     },
     {
+      "path": "scripts/rescue-kids-qa-render.mts",
+      "mode": "100644",
+      "bytes": 2581,
+      "git_blob_sha1": "227150d8db902411d4f54d3f6af56368fe735ed6",
+      "sha256": "395afa6d707c48390b82c09b8b75d83cce1d309b2d748eed8b70c2daad7aed3f"
+    },
+    {
       "path": "scripts/rescue-qa-render.mts",
       "mode": "100644",
       "bytes": 2897,
@@ -1934,18 +1969,32 @@
       "sha256": "2ffeb365ac7d8b5dca1000409600cb3ea2b228f5b78d50104e1196685947e3be"
     },
     {
+      "path": "studio/carousel/CardCarousel.tsx",
+      "mode": "100644",
+      "bytes": 6257,
+      "git_blob_sha1": "b62baf81f7804bc4d09776c14ed4b0e791fddd30",
+      "sha256": "28d118d181f50053ba75d96e732d482e46dfc974ff47f333b3f166eec0a9e22c"
+    },
+    {
       "path": "studio/carousel/carousel.css",
       "mode": "100644",
-      "bytes": 996,
-      "git_blob_sha1": "ff429c16cd004a733f251e4867fd40b6d40ed279",
-      "sha256": "0a45125c31451815f7a603a850d5efcf15ea2f7f34432ba6fe512b02cddb1dc2"
+      "bytes": 3021,
+      "git_blob_sha1": "8e60cd8046bb49cb08885b48293d12184e9e3692",
+      "sha256": "dd6031f098de10a22bfaa8a683b915bf3c93baf956a16750dc7e6997a9db9b24"
+    },
+    {
+      "path": "studio/carousel/motions.test.ts",
+      "mode": "100644",
+      "bytes": 869,
+      "git_blob_sha1": "d730b769b7712e0c342abb5aa8842fd2d28742df",
+      "sha256": "c14012be8387578b7bd6f310fa188c9076cf1342ea173c7279b6f6dfb4a0130e"
     },
     {
       "path": "studio/carousel/motions.ts",
       "mode": "100644",
-      "bytes": 1455,
-      "git_blob_sha1": "89113b3b88c85c45b80bd1da29e224cb528432d1",
-      "sha256": "23233101b7d791431377ba435352898f5e02d25d48e8c3d9a87392c1786a09ad"
+      "bytes": 2711,
+      "git_blob_sha1": "26eb42e1576ef3181b9f9965651486843b22cb92",
+      "sha256": "182442f202dfabd916a5226f178f21a85643772b141f42ae444a2751cbb53874"
     },
     {
       "path": "studio/components/CheckedAnswerReview.tsx",
@@ -2111,9 +2160,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 247985,
-      "git_blob_sha1": "278f9c9ff905f55a49acfee154e2c8ab968dd615",
-      "sha256": "f09bf4b38ee4a4398ae51b22f7f204e445a972a55f9830e2033571c7b1018b04"
+      "bytes": 248958,
+      "git_blob_sha1": "4f0dbc2fa02b4ba082eefa50d9474fadd37d46dc",
+      "sha256": "46f201a032c3f84d612c272255992f16daaff8d15ad8a5bc1fcf8bc219dd5d69"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -3756,9 +3805,9 @@
     {
       "path": "studio/i18n/messages-studio.ts",
       "mode": "100644",
-      "bytes": 84938,
-      "git_blob_sha1": "09d122ef7864c3300b7552e9cdcd9d1b5f45e936",
-      "sha256": "d06d6538c1f104a7ad71d3f554d772c6a21c45618f1c74a336a5ace878e0b57d"
+      "bytes": 85473,
+      "git_blob_sha1": "fcf1878a6d6983d059e7ef388481c9cf00f3b10e",
+      "sha256": "d6e4b3a1f277732863e86b12a6748889104138e283c9af886f0912d522107ac7"
     },
     {
       "path": "studio/i18n/react.tsx",
@@ -4330,9 +4379,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 45037,
-      "git_blob_sha1": "b9ed717b3e8d4429b13b00981302f613117a3d59",
-      "sha256": "2cd49f6717c7a51fc646faee4389c1acfc0d320bbb34cea54d9dcf0ee7c5070b"
+      "bytes": 48478,
+      "git_blob_sha1": "85dd8990d441a5214273f5c6a487fff448eef915",
+      "sha256": "02089ce026bfa77a608cf6215a6c813e866764f2ac896116665650353e24d75e"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4533,9 +4582,9 @@
     {
       "path": "studio/scene/renderer.ts",
       "mode": "100644",
-      "bytes": 20258,
-      "git_blob_sha1": "bca9c4408ed9417bf9d86b590078f709aff2b184",
-      "sha256": "72d1ba7e2d6333ba2ceb980ba1c59f978dbf99ed6680681ce6de7290189d2e87"
+      "bytes": 20701,
+      "git_blob_sha1": "45c08c47ac2725023a3b8192a69dbcc3be4c4649",
+      "sha256": "844a0611c11efe8915e477d897177d685af6618386adfff0e3aa9b39b28de0fe"
     },
     {
       "path": "studio/scene/responsive-editor.test.ts",
@@ -4554,16 +4603,16 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 10937,
-      "git_blob_sha1": "0a4a274dc45f91db224743f42f243cf418a3fdfd",
-      "sha256": "2c48e8e50dabe63bc9a514ffb79816f90f89f0fd52616597d6762eec92a9b947"
+      "bytes": 12261,
+      "git_blob_sha1": "8ae20d5fbf0a8680a8f1dd72e6dbd74d27f6b121",
+      "sha256": "1c94097643e3665c54cb08d5f979512f3cce18c141d1be03c170b068e43b800c"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
       "mode": "100644",
-      "bytes": 8996,
-      "git_blob_sha1": "c201caeba65b95b54a1ab4495c7b684723136004",
-      "sha256": "6a323d5859f9600f122bead0771bdb0cb041efb3f28802ef9b754b30967e1ad6"
+      "bytes": 9136,
+      "git_blob_sha1": "90e1248b1673c00cb508c5ac9be9796e5b60cdea",
+      "sha256": "4de5187271e1a4cd9168031fc81c15d2181fbc407621ff9ed404e792749f6cac"
     },
     {
       "path": "studio/scene/responsive-renderer.test.ts",
@@ -4652,9 +4701,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 30605,
-      "git_blob_sha1": "f11e31cb4ecb4d61399c6a39087ecc2cdb4e8306",
-      "sha256": "c54993788e047580813d71de60341457d85a8bc2d79a32665dce9eb9059fcb2a"
+      "bytes": 31224,
+      "git_blob_sha1": "72c86c1f4e82bcd66ab5fafd0db6614af98fcea1",
+      "sha256": "9c2139e25d1db29011b5f66815b9453c6f8ad6a29cc7fb8fab15df956ff5bd32"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
@@ -4706,11 +4755,18 @@
       "sha256": "2288c5cd4e36917d419d3395d2700d3c7699d802d7d7f7e36e467e756253be26"
     },
     {
+      "path": "studio/theme/kids-cartoon.test.ts",
+      "mode": "100644",
+      "bytes": 991,
+      "git_blob_sha1": "95c4048ff652d8f5aa735c6d1375b4c24017f15c",
+      "sha256": "3f7e0d42ce0599d273af99c70ac29e376dcee78d45b8354afab1a4412600c4f3"
+    },
+    {
       "path": "studio/theme/kids-cartoon.ts",
       "mode": "100644",
-      "bytes": 939,
-      "git_blob_sha1": "6a2295fa0ed0475c0ac96ed38bdee19787d88926",
-      "sha256": "5c86ef41e2563906b4376ab787f870b74f4c3ae38ffb8d43c34ad5e3069a7b0e"
+      "bytes": 1744,
+      "git_blob_sha1": "d4111d8b21fb9335fb8bcf6ed89cc556a9ac9484",
+      "sha256": "8cf776395625deb05a311718ae38862bf65cd75deb3684a84c19034826421a33"
     },
     {
       "path": "tsconfig.json",
