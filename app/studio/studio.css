@@ -99,3 +99,36 @@
 .typing-follow-toolbar button{min-height:44px;max-width:100%;padding:4px 7px;border:1px solid #d7e7d838;border-radius:7px;background:#edf5e909;color:#f2f6ef;font:inherit;white-space:normal}
 .typing-follow-toolbar button[aria-pressed=true]{background:#d3ebba1a;border-color:#d2edbda0}.typing-follow-rate{font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}.typing-follow-toolbar :focus-visible{outline:2px solid #d2edbd;outline-offset:-2px}
 .editing-layout>.typing-follow-toolbar{pointer-events:none;visibility:hidden}
+
+
+/* P0 mobile one-screen + HUD declutter */
+.responsive-enabled.studio-page{justify-content:flex-start;min-height:100dvh;overflow:hidden}
+.responsive-enabled>.portrait-layout{overflow:hidden}
+.portrait-layout[data-practice-compact=true]{--practice-sheet-radius:18px}
+.portrait-layout .studio-tools{
+  position:absolute;left:10px!important;right:10px!important;top:auto!important;bottom:12px!important;
+  transform:none!important;flex-wrap:wrap;gap:6px;max-height:min(42%,320px);overflow:auto;
+  padding:12px;border-radius:var(--practice-sheet-radius,16px);background:#0f1a20f2!important;
+  border:1px solid #d7e7d838;box-shadow:0 -8px 36px #0006;
+  opacity:0;pointer-events:none;translate:0 12px;transition:opacity .2s ease,translate .2s ease;
+}
+.portrait-layout.tools-open .studio-tools{opacity:1;pointer-events:auto;translate:0 0;display:flex}
+.portrait-layout.tools-open .status-strip{
+  top:auto!important;bottom:calc(12px + min(42%,320px) + 8px)!important;left:10px!important;right:10px!important;
+  transform:none!important;flex-wrap:wrap;max-height:28%;overflow:auto;
+  border-radius:14px;background:#102028f0;padding:8px 10px;
+  opacity:0;pointer-events:none;translate:0 8px;transition:opacity .2s ease,translate .2s ease;
+}
+.portrait-layout.tools-open .status-strip{opacity:1;pointer-events:auto;translate:0 0;display:flex}
+.portrait-layout .pace-mode-chip{
+  position:absolute;z-index:6;left:12px;top:8px;min-height:28px;padding:4px 10px;border-radius:999px;
+  border:1px solid #d7e7d838;background:#14211acc;color:#e7f2df;font:11px/1.2 "Lingo Studio Sans",Arial,sans-serif;
+  letter-spacing:.04em;pointer-events:none;backdrop-filter:blur(10px);
+}
+.portrait-layout .submit-hit{transition:transform .16s ease,background .16s ease}
+.portrait-layout .submit-hit:active{transform:scale(.96);background:#dbe9e520}
+.portrait-layout[data-software-keyboard=true] .studio-tools,
+.portrait-layout[data-software-keyboard=true].tools-open .status-strip{display:none!important}
+@media(prefers-reduced-motion:reduce){
+  .portrait-layout .studio-tools,.portrait-layout.tools-open .status-strip,.portrait-layout .submit-hit{transition:none!important;translate:none!important}
+}

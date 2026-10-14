@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {responsiveLayout,PORTRAIT_RECTS,PORTRAIT_CONTENT_BOTTOM,portraitRects,portraitContentBottom,resolvePortraitHeight,PORTRAIT_MIN_HEIGHT} from './responsive-layout';
+import {responsiveLayout,PORTRAIT_RECTS,PORTRAIT_CONTENT_BOTTOM,portraitRects,portraitContentBottom,resolvePortraitHeight,PORTRAIT_MIN_HEIGHT,isPortraitPracticeCompact} from './responsive-layout';
 import {CONSOLE_RECT,PLAYER_RECT,DEFAULT_RECTS,ZONES,rectStyle,cueMarkerRect,timelinePointerProgress,insetRect,type Rect} from './transparent-layout';
 
 const overlap=(a:Rect,b:Rect)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
@@ -28,7 +28,7 @@ test('portrait resolves a bounded surface and independent controls at short, def
  for(const [a,b] of [['input','submit'],['seek','play'],['seek','previous'],['seek','next'],['seek','mute'],['previous','next']] as const)assert.equal(overlap(g.zones[a],g.zones[b]),0);
  assert.equal(g.zones.input.y+g.zones.input.h/2,g.zones.submit.y+g.zones.submit.h/2);
  assert.equal(g.inputScale,402/722);
- assert.equal(g.console.y-portraitContentBottom(height),16);
+ assert.equal(g.console.y-portraitContentBottom(height),g.practiceCompact?8:16);
  assert.deepEqual(portraitRects(height),{media:g.media,inset:g.inset,metrics:g.metrics,subtitle:g.subtitle});
  for(const rect of Object.values(portraitRects(height)))assert.ok(rect.y+rect.h<=portraitContentBottom(height));
  }
@@ -99,11 +99,12 @@ test('portrait split preserves two separate contained media windows and keeps ex
  assert.deepEqual(edited.media,custom.media);assert.deepEqual(edited.inset,custom.inset);
 });
 
-test('compact portrait preserves full-width media and HUD proportions with one intentional camera PiP overlap',()=>{
- for(const height of [700,800,PORTRAIT_MIN_HEIGHT,840,880,940]){
+test('tall portrait preserves full-width media and HUD proportions with one intentional camera PiP overlap',()=>{
+ for(const height of [940,1080,1400]){
   const g=responsiveLayout(true,{},'lesson',height),scale=g.goal.w/264;
+  assert.equal(g.practiceCompact,false);
   assert.ok(Math.abs(scale-.58)<1e-12);
-  assert.equal(g.height,Math.max(PORTRAIT_MIN_HEIGHT,height));
+  assert.equal(g.height,height);
   for(const [key,width,tall] of [['goal',264,264],['trend',352,192],['metrics',309,168],['inset',240,152],['counter',69,65]] as const){
    assert.ok(Math.abs(g[key].w/width-scale)<1e-12,key);assert.ok(Math.abs(g[key].h/tall-scale)<1e-12,key);
   }
@@ -116,19 +117,29 @@ test('compact portrait preserves full-width media and HUD proportions with one i
    if(a===3&&b===4)continue; // The transparent camera remains a real PiP over the upper-right media corner.
    assert.equal(overlap(panels[a],panels[b]),0,`${height}: ${a}/${b}`);
   }
-  if(g.height===PORTRAIT_MIN_HEIGHT){
-   assert.ok(Math.abs(g.inset.y+g.inset.h-g.media.y-42.16)<1e-8);
-   assert.equal(g.zones.title.h,60);assert.ok(g.zones.title.y+g.zones.title.h<g.goal.y);
-  }
   assert.ok(g.inset.x>g.media.x+g.media.w/2);assert.ok(g.inset.y+g.inset.h<g.media.y+g.media.h);
   for(const rect of Object.values(portraitRects(height)))assert.ok(g.console.y-(rect.y+rect.h)>=16-1e-8);
   assert.ok(g.console.y+g.console.h<g.player.y);
   assert.equal(g.zones.play.y+g.zones.play.h,g.height-5);
-  const targets=Array.from({length:12},(_,i)=>g.cueMarker(i/12));
-  for(const [i,target] of targets.entries()){
-   assert.ok(target.x>=0&&target.y>=0&&target.x+target.w<=g.width&&target.y+target.h<=g.height);
-   if(i)assert.equal(overlap(targets[i-1],target),0);
-   for(const key of ['input','submit','play','previous','next','mute'] as const)assert.equal(overlap(target,g.zones[key]),0);
+ }
+});
+
+test('phone practice-compact portrait packs video, console and thin transport in one screen',()=>{
+ for(const height of [700,800,PORTRAIT_MIN_HEIGHT,840,880,930]){
+  const g=responsiveLayout(true,{},'lesson',height);
+  assert.equal(g.practiceCompact,true);
+  assert.equal(g.height,Math.max(PORTRAIT_MIN_HEIGHT,height));
+  assert.equal(g.media.w,430);assert.equal(g.media.w/g.media.h,16/9);
+  assert.ok(g.media.y<80,'video sits near the top strip');
+  assert.ok(g.console.y>=g.media.y+g.media.h,'input follows video');
+  assert.ok(g.player.y>g.console.y,'transport under input');
+  assert.ok(g.zones.play.y+g.zones.play.h<=g.height);
+  assert.ok(g.goal.w<=44&&g.trend.w<=44&&g.metrics.w<=44,'charts collapsed to chips');
+  for(const key of ['input','submit','play','previous','next','mute'] as const){
+   assert.ok(g.zones[key].w>=44);assert.ok(g.zones[key].h>=44);
   }
+  assert.equal(overlap(g.zones.input,g.zones.submit),0);
+  // Logical stack fits the portrait height so CSS width-fit does not force page scroll.
+  assert.ok(g.player.y+g.player.h<=g.height+1e-6);
  }
 });

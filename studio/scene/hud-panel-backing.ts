@@ -11,7 +11,8 @@ export function hudBackingRect(content:Rect):Rect{
 
 /** Original content bounds still determine the existing decorative gradients. */
 export function hudPanelContentRects(geometry:Geometry,camera:Rect):Record<string,Rect>{
- return{goal:geometry.goal,title:geometry.title,trend:geometry.trend,camera,flow:geometry.metrics,typing:geometry.inputCard.card,transport:geometry.player,...geometry.inputCard.keyboard?{keyboard:geometry.inputCard.keyboard}:{}};
+ const charts=!(geometry as {practiceCompact?:boolean}).practiceCompact;
+ return{...(charts?{goal:geometry.goal,trend:geometry.trend,flow:geometry.metrics}:{}),title:geometry.title,camera,typing:geometry.inputCard.card,transport:geometry.player,...geometry.inputCard.keyboard?{keyboard:geometry.inputCard.keyboard}:{}};
 }
 
 /** Align the desktop plates without moving their established content/hit anchors.
@@ -19,11 +20,11 @@ export function hudPanelContentRects(geometry:Geometry,camera:Rect):Record<strin
  * An explicitly moved flow panel keeps its own horizontal position.
  */
 export function hudPanelBackingRects(geometry:Geometry,camera:Rect,contents=hudPanelContentRects(geometry,camera)):Record<string,Rect>{
- const rects=Object.fromEntries(Object.entries(contents).map(([key,content])=>[key,hudBackingRect(content)])),{goal,title,trend,flow}=rects;
- if(!geometry.portrait){
+ const rects=Object.fromEntries(Object.entries(contents).map(([key,content])=>[key,hudBackingRect(content)])),{goal,title,trend,flow}=rects as Record<string,Rect|undefined>;
+ if(!geometry.portrait&&goal&&title&&trend&&flow){
   const top=Math.min(goal.y,title.y,trend.y);
   for(const rect of[goal,title,trend]){rect.h+=rect.y-top;rect.y=top;}
   if(geometry.metrics.x===DEFAULT_RECTS.metrics.x){flow.w+=flow.x-goal.x;flow.x=goal.x;}
  }
- return rects;
+ return rects as Record<string,Rect>;
 }

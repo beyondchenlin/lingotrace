@@ -65,8 +65,9 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const shade=c.createLinearGradient(0,0,0,shadeBottom);shade.addColorStop(0,'#07111a70');shade.addColorStop(.24,'#07111a05');shade.addColorStop(.6,'#07111a00');shade.addColorStop(1,'#07111a35');c.fillStyle=shade;c.fillRect(0,0,W,H);
  if(!v.ready)txt(c,translateKnownUi(locale,v.message)||t('hud.loading'),portrait?W/2:836,portrait?primary.y+primary.h/2:475,24,WHITE,400,'center');
  const entrance=transparentEntrance(now,f.enteredAt,f.mediaChangedAt,f.mediaLoading,v.reducedMotion),breath=v.reducedMotion?0:.5+.5*Math.sin((now-f.enteredAt)/1200);c.save();c.globalAlpha=entrance;
+ const chartsOpen=!(geometry as {practiceCompact?:boolean}).practiceCompact;
  // Subtle drafting marks have no measurement meaning and never change geometry.
- if(!portrait){line(c,45,24,45,314,'#b6e9ed28');line(c,45,24,285,24,'#b6e9ed24');line(c,304,91,658,91,'#a9d8df28');line(c,1037,89,1285,89,'#a9d8df2a');[ [45,24],[45,91],[284,185],[304,91],[635,89],[1037,89],[1642,44],[1643,845] ].forEach(([x,y])=>cross(c,x,y,.28+breath*.25,palette?.glow));}else{
+ if(!portrait){line(c,45,24,45,314,'#b6e9ed28');line(c,45,24,285,24,'#b6e9ed24');line(c,304,91,658,91,'#a9d8df28');line(c,1037,89,1285,89,'#a9d8df2a');[ [45,24],[45,91],[284,185],[304,91],[635,89],[1037,89],[1642,44],[1643,845] ].forEach(([x,y])=>cross(c,x,y,.28+breath*.25,palette?.glow));}else if(chartsOpen){
   // The original upper-left drafting L follows the goal's uniform scale.
   mapRect(c,{x:32,y:54,w:264,h:264},geometry.goal);
   line(c,45,24,45,314,'#b6e9ed28');line(c,45,24,285,24,'#b6e9ed24');
@@ -79,14 +80,27 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
   mapRect(c,{x:1575,y:845,w:69,h:65},geometry.counter);cross(c,1643,845,.28+breath*.25,palette?.glow);c.restore();
  }
  // Goal is explicit configuration, not a score fabricated from the reference art.
+ // Practice-compact phones hide the target ring so standby % cannot look like progress.
+ if(chartsOpen){
  if(projected)mapRect(c,{x:32,y:54,w:264,h:264},geometry.goal);
  const earned=standby?.goalWords??s?.earnedWords??0,goal=24,ratio=standby?.goalFraction??Math.min(1,earned/goal),cx=164,cy=186,r=92;const aura=c.createRadialGradient(cx,cy,25,cx,cy,132);aura.addColorStop(0,'#08121799');aura.addColorStop(1,'#08121700');c.fillStyle=aura;c.fillRect(32,54,264,264);c.save();c.shadowColor=tone;c.shadowBlur=v.reducedMotion?6:8+breath*5;line(c,65,62,90,62,tone,7);c.restore();txt(c,t('hud.goal').toUpperCase(),portrait?103:109,portrait?Math.max(70,54+9/(geometry.goal.w/264)):70,portrait?12/(geometry.goal.w/264):19);
  for(let i=0;i<48;i++){const angle=-Math.PI/2+i*Math.PI/24;line(c,cx+Math.cos(angle)*107,cy+Math.sin(angle)*107,cx+Math.cos(angle)*(i%4===0?115:111),cy+Math.sin(angle)*(i%4===0?115:111),'#c9e4e077')}
  c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.strokeStyle='#c5e0dc66';c.lineWidth=2;c.stroke();if(ratio>0){c.save();c.shadowColor=tone;c.shadowBlur=12+breath*5;c.beginPath();c.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*ratio);c.lineWidth=7;c.lineCap='round';c.strokeStyle=tone;c.stroke();const theta=-Math.PI/2+Math.PI*2*ratio;c.beginPath();c.arc(cx+Math.cos(theta)*r,cy+Math.sin(theta)*r,5,0,Math.PI*2);c.fillStyle='#fff0be';c.fill();c.restore()}
  txt(c,f.restoreFailed?'—':`${Math.round(ratio*100)}%`,cx,194,39,WHITE,700,'center');txt(c,f.restoreFailed?'':`${earned} / ${goal}`,cx,221,17,WHITE,400,'center');if(!standby)txt(c,t('scene.confirmedWords'),cx,246,12,tone,500,'center');if(standby&&!standby.frozen){c.save();c.globalAlpha=.42;c.strokeStyle=tone;c.lineWidth=1.5;c.beginPath();const angle=-Math.PI/2+standby.sweep*Math.PI*2;c.arc(cx,cy,r+8,angle,angle+.45);c.stroke();c.restore()}
- if(projected){c.restore();mapRect(c,{x:568,y:38,w:536,h:352/3},geometry.title)}
+ if(projected)c.restore();
+ }
+ if(portrait&&!chartsOpen){
+  // Slim one-screen title strip in geometry space (no desktop title mapRect).
+  const tx=geometry.title.x+geometry.title.w/2,ty=geometry.title.y+geometry.title.h*.42;
+  txt(c,m.kind==='demo'?materialStageTitle(s):t('scene.localMedia').toUpperCase(),tx,ty,14,WHITE,500,'center');
+  txt(c,f.restoreFailed?t('scene.restoreFailed'):f.replay?t('scene.replay'):v.paused?t('hud.paused'):standby?t('scene.standby').toUpperCase():'LIVE',tx,ty+14,11,'#d2d8d7',400,'center');
+ }else{
+ if(projected)mapRect(c,{x:568,y:38,w:536,h:352/3},geometry.title);
  txt(c,m.kind==='demo'?materialStageTitle(s):t('scene.localMedia').toUpperCase(),836,70,29,WHITE,400,'center');const phase=(s?.activeMs??0)<600000?'WARM UP':(s?.activeMs??0)<1500000?'PRACTICE':'REVIEW';txt(c,f.restoreFailed?t('scene.restoreFailed'):f.replay?t('scene.replay'):v.paused?t('hud.paused'):standby?t('scene.standby').toUpperCase():'30 MIN',836,103,14,'#d2d8d7',400,'center');if(f.restoreFailed)txt(c,t('scene.restoreDetail'),836,129,14,'#ffd4b7',400,'center');
- if(projected){c.restore();mapRect(c,{x:1297,y:40,w:352,h:192},geometry.trend)}
+ if(projected)c.restore();
+ }
+ if(chartsOpen&&projected){mapRect(c,{x:1297,y:40,w:352,h:192},geometry.trend)}
+ if(chartsOpen){
  // Cadence is a separate ephemeral reference projection. It never becomes f.input.
  const cadence=listening&&!listening.hidden&&!v.reducedMotion?listening.cadence:null;
  const cadencePoints=cadence?.status==='active'?cadence.points:[];
@@ -106,6 +120,7 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  }c.restore();
  if(!displayedPoints.some(p=>p.value!==null))txt(c,listening?(listening.hidden?t('scene.hidden'):v.reducedMotion?t('scene.reducedMotion'):cadence?.status==='paused'?t('hud.paused'):t('scene.awaitingPlayback')):f.replay?t('scene.replayPaused'):t('scene.typeToTrace'),1485,portrait?159:153,15,'#e0e9e7c9',400,'center');
  if(projected)c.restore();
+ }
  // Compact camera entry is presentation-only; enabled/split/course inset stays original.
  const cameraControl=cameraControlGeometry(geometry,v.camera,v.layout,{fixture:v.fixture,cssWidth:v.cameraViewport?.width,cssHeight:v.cameraViewport?.height});
  if(cameraControl.compact){
@@ -125,10 +140,12 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  if(portrait)c.restore();
  }
  // Each genuine input event keeps a stable height and flows left with its timestamp.
+ if(chartsOpen){
  const pulseRect=geometry.metrics;c.save();c.translate(pulseRect.x,pulseRect.y);c.scale(pulseRect.w/309,pulseRect.h/168);frame(c,{x:0,y:0,w:309,h:168},.3,palette?.frame);line(c,14,27,34,27,tone,6);txt(c,t('hud.flow').toUpperCase(),49,32,portrait?12/(pulseRect.w/309):18);const count=f.replay||f.restoreFailed?'—':String(f.input.commits10s),countSize=Math.min(36,92/(count.length*.62));c.save();c.font=`600 ${countSize}px ${STUDIO_SEMIBOLD}`;const labelX=Math.max(75,16+c.measureText(count).width+13);c.restore();txt(c,count,16,75,countSize,WHITE,600,'left',STUDIO_SEMIBOLD);if(portrait&&!standby&&count.length<=3){txt(c,t('scene.committedEvents').toUpperCase(),labelX,64,10/(pulseRect.w/309));txt(c,'/ 10s',labelX,84,10/(pulseRect.w/309))}else txt(c,standby?'':count.length>3?t('scene.events'):`${t('scene.committedEvents').toUpperCase()} / 10s`,labelX,73,15,WHITE,400,'left',STUDIO_SANS,298-labelX);line(c,12,138,300,138,'#9debe655');
  const bars=eventBars(f.input.pulses,hudNow,10000);c.save();c.beginPath();c.rect(12,92,288,56);c.clip();
  for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.2+.65*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.2,138-height,2.4,height,1.2);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.45*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=6;c.beginPath();c.roundRect(x-2,138-height-1,4,height+2,2);c.fill();c.restore()}}
  c.restore();c.restore();
+ }
 
  // No inactive instruction pill, and strict listening never exposes old captions.
  if(v.showSubtitle&&!v.referenceGuide&&m.kind==='demo'&&!v.listeningDisplay?.active){

@@ -72,8 +72,9 @@ export function inputCardGeometry(base:StudioGeometry,options:InputCardOptions={
  // learning surface, with a 30–64px landscape / 28–38px portrait clamp.
  const fontSize=Math.max((base.portrait?28:30)/scale,Math.min(base.portrait?34:60,(base.portrait?38:64)/scale)),lineHeight=fontSize*1.25;
  const paddingX=Math.max(base.portrait?8:12,6/scale),paddingY=Math.max(base.portrait?7:8,6/scale),outer=Math.max(base.portrait?8:20,6/scale),gap=Math.max(6,5/scale);
+ const practiceCompact=!!(base as {practiceCompact?:boolean}).practiceCompact;
  const width=base.portrait?base.width-20:Math.min(base.width*.9,2*(base.counter.x-1/scale-base.width/2+outer)),x=(base.width-width)/2,y=base.portrait?base.console.y-4:724;
- const header=Math.max(44,44/scale),inputHeight=lineHeight*(base.portrait?3:2)+paddingY*2;
+ const header=Math.max(practiceCompact?36:44,44/scale),inputLines=base.portrait?(practiceCompact?2:3):2,inputHeight=lineHeight*inputLines+paddingY*2;
  const input={x:x+outer,y:y+header,w:width-outer*2,h:inputHeight};
  const submitWidth=Math.max(touch,86/scale);
  const submit={x:x+width-outer-submitWidth,y:input.y+input.h+gap,w:submitWidth,h:touch};
@@ -122,6 +123,25 @@ export function inputCardGeometry(base:StudioGeometry,options:InputCardOptions={
    const room=(options.availableHeight??0)/scale-keyboardRect.y-gap;
    keyboardRect.h=Math.max(150/scale,Math.min(260/scale,room));
    stageHeight=Math.ceil(keyboardRect.y+keyboardRect.h+gap);
+  }
+ }else if(practiceCompact&&base.portrait){
+  // Phone one-screen: park transport under Check inside the resolved portrait height.
+  // Prefer the OS soft keyboard; an optional in-app keyboard may extend the stage.
+  const transportH=Math.max(96/scale,base.player.h||96);
+  if(!visible){
+   playerTop=Math.min(base.height-transportH,card.y+card.h+gap);
+   const overflow=card.y+card.h+gap+transportH-base.height;
+   if(overflow>0){
+    const lift=Math.min(overflow,Math.max(0,card.y-(base.media.y+base.media.h+gap)));
+    for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y-=lift;
+    playerTop=card.y+card.h+gap;
+   }
+   stageHeight=base.height;
+   playerOffsetY=0;
+  }else{
+   const occupiedBottom=keyboardRect.y+keyboardRect.h;
+   playerOffsetY=Math.max(0,occupiedBottom+gap-base.player.y);stageHeight=Math.ceil(base.height+playerOffsetY);
+   playerTop=stageHeight-transportH;
   }
  }else{
   const occupiedBottom=visible?keyboardRect.y+keyboardRect.h:card.y+card.h;
