@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "4c812e98e7c84a17dc7c417f7784d28ba7bd1dd0",
+  "source_projection_tree_sha1": "4c9f9f9f3add0da162c28ea101edee9c184ef204",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 258441,
-      "git_blob_sha1": "309cd6b48c9580bc1e1998bfc3430c4125265b33",
-      "sha256": "1f63ffa16303beff19237c7a9a258116edf69cc9ea741cdc8fbade83aeeb7965"
+      "bytes": 258434,
+      "git_blob_sha1": "56a915e0a5ceb94b0b9149db6a2d8b77dde7693a",
+      "sha256": "e9e58c71b7029cde14d12c594b1841347a983802d44ec322ac7760592ce9d017"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4393,9 +4393,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 51095,
-      "git_blob_sha1": "bfa633336402108ce914160c7cf35196cecafe70",
-      "sha256": "011fa98e966d9d39933b65909f852a5778f6e0faf131550fc126c9a8209e1f57"
+      "bytes": 50674,
+      "git_blob_sha1": "0e257dc9e33d4419cda43644661763fb75997189",
+      "sha256": "ed59370964f00e7d6158a7c4760886209aba02bd88716276cbb831af72d8d516"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4491,9 +4491,9 @@
     {
       "path": "studio/scene/live-letter-feedback.test.ts",
       "mode": "100644",
-      "bytes": 15467,
-      "git_blob_sha1": "cde3ad5d99bd731c54c398376d2ed8cd05135e7d",
-      "sha256": "ae91665ca28b9958f829a7e50a0385b8112632dcc3fa2dca8f37037db3dc2da7"
+      "bytes": 15568,
+      "git_blob_sha1": "fd447be70e2693804c8dc2b9af0d4da9087d9c02",
+      "sha256": "30aa8c995c070f004a8945a4679189e7433ae4c2cf30410f9f41bbdf3d4146b0"
     },
     {
       "path": "studio/scene/live-letter-feedback.ts",
@@ -4631,9 +4631,9 @@
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 22411,
-      "git_blob_sha1": "f9283db61c0f0f94bafa682ecbcb27f4f844041a",
-      "sha256": "9d9327307adcf982f0dff6aed0f13d353a1f0270e0823d3090fd3b6f99dbf6eb"
+      "bytes": 24384,
+      "git_blob_sha1": "b6dc7129d3ad5fb2457fb354add3968f3bd1578f",
+      "sha256": "84e90e31daa2423545eef6b08fd09ebffed10e781407be0f4c7d07e7a9b61c2c"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",

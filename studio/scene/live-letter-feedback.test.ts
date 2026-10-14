@@ -84,7 +84,7 @@ test('live rendering cannot create attempts, score, submission sounds, or replac
  assert.equal(engine.getSnapshot(),before);assert.equal(JSON.stringify(engine.getSnapshot()),serialized);assert.equal(engine.getSnapshot().attempts.length,attemptCount);assert.equal(engine.getSnapshot().earnedWords,0);
  assert.equal(engine.draft,'Hxello world');assert.equal(engine.submit()!.errors,1);
 });
-test('shared Canvas paints green straight underlines and red waves, keeping ghost pale and native positions unchanged',async()=>{
+test('shared Canvas paints green straight underlines and red waves without a second reference ghost subtitle',async()=>{
  const {createCanvas}=await import('@napi-rs/canvas'),ctx=createCanvas(1672,1500).getContext('2d');
  const labels:{text:string;x:number;y:number;color:string}[]=[],strokes:string[]=[],fill=ctx.fillText.bind(ctx),stroke=ctx.stroke.bind(ctx);
  ctx.fillText=((text:string,x:number,y:number)=>{labels.push({text,x,y,color:String(ctx.fillStyle)});fill(text,x,y)}) as typeof ctx.fillText;
@@ -92,11 +92,14 @@ test('shared Canvas paints green straight underlines and red waves, keeping ghos
  const draft='Hxello',display={text:draft,lines:[{start:0,end:6,text:draft,x:200,y:8,width:120,height:40,baseline:38}],selection:[{x:220,y:8,w:40,h:40}],caret:{x:260,y:8,w:1,h:40},scrollLeft:0,scrollTop:3,width:800,height:100,font:'400 24px monospace',letterSpacing:0,lineHeight:40,paddingX:200,paddingY:8};
  const state={draft,referenceGuide:'Hello world',nativeInputDisplay:display,scrollLeft:0,caret:1,selectionEnd:3,inputFocused:true,composition:false,reducedMotion:true,renderTime:0},before=JSON.stringify(state),card=inputCardGeometry(responsiveLayout(false));
  paintInputText(ctx as unknown as CanvasRenderingContext2D,card,state);
- assert.equal(JSON.stringify(state),before);assert.ok(labels.some(r=>r.text==='x'&&r.color==='#ff858b'));assert.ok(labels.some(r=>r.text==='H'&&r.color==='#8ff0bd'));assert.ok(labels.some(r=>r.color==='#b7c6c1'));assert.ok(strokes.includes('#ff858b'));assert.ok(strokes.includes('#8ff0bd'));
- const shownPositions=labels.filter(r=>r.color!=='#b7c6c1').map(r=>({text:r.text,x:r.x,y:r.y}));
+ assert.equal(JSON.stringify(state),before);assert.ok(labels.some(r=>r.text==='x'&&r.color==='#ff858b'));assert.ok(labels.some(r=>r.text==='H'&&r.color==='#8ff0bd'));
+ // Unified caption: typing card must not paint pale reference ghost glyphs (media plate owns the cue).
+ assert.ok(!labels.some(r=>r.color==='#b7c6c1'));assert.ok(!labels.some(r=>r.text.includes('world')));
+ assert.ok(strokes.includes('#ff858b'));assert.ok(strokes.includes('#8ff0bd'));
+ const shownPositions=labels.map(r=>({text:r.text,x:r.x,y:r.y}));
  assert.equal(shownPositions[0].x,card.input.x+200);assert.equal(shownPositions[0].y,card.input.y+38-3);
  labels.length=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,referenceGuide:undefined});assert.ok(labels.every(r=>r.color==='#f4f6f5'));
- labels.length=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,composition:true});assert.ok(labels.every(r=>r.color==='#f4f6f5'||r.color==='#b7c6c1'));
+ labels.length=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,composition:true});assert.ok(labels.every(r=>r.color==='#f4f6f5'));
 });
 test('an erroneous pasted newline has a visible wavy cue without inventing an input glyph',async()=>{
  const {createCanvas}=await import('@napi-rs/canvas'),ctx=createCanvas(1672,1500).getContext('2d'),colors:string[]=[],labels:string[]=[],stroke=ctx.stroke.bind(ctx),fill=ctx.fillText.bind(ctx);

@@ -501,11 +501,9 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
   const metrics=c.measureText('Mg'),asc=metrics.fontBoundingBoxAscent||metrics.actualBoundingBoxAscent,desc=metrics.fontBoundingBoxDescent||metrics.actualBoundingBoxDescent,baseline=(card.lineHeight-asc-desc)/2+asc;
   lines=wrapInputText(state.draft,z.w-centeredPadding*2,text=>c.measureText(text).width).map((line,index)=>({...line,x:centeredPadding,y:card.paddingY+index*card.lineHeight,width:c.measureText(line.text).width,height:card.lineHeight,baseline:card.paddingY+index*card.lineHeight+baseline}));
  }
- const guideText=state.referenceGuide?referenceGuideText(state.draft,state.referenceGuide):undefined;
- if(guideText){
-  const guideLines=native?.reference?.text===guideText?native.reference.lines:layoutReferenceRemainder(state.draft,state.referenceGuide!,{lines,draftEnd:native?.draftEnd,width:z.w,paddingX:native?.paddingX??lines[0]?.x??card.paddingX,paddingY:card.paddingY,lineHeight:card.lineHeight},text=>c.measureText(text).width);
-  c.fillStyle='#b7c6c1';c.globalAlpha=.76;for(const run of guideLines){if(run.y+run.height<scrollY||run.y>scrollY+z.h)continue;c.fillText(run.text,z.x+run.x-scrollX,z.y+run.baseline-scrollY)}c.globalAlpha=1;
- }
+ // Single subtitle system: assisted reference text lives only on the media-plate
+ // caption capsule. Typing card paints user draft + word rails — never a second
+ // ghost copy of the same cue sentence (「两套字幕」).
  const rangeStart=Math.min(state.caret,state.selectionEnd),rangeEnd=Math.max(state.caret,state.selectionEnd);
  const selection=native?.selection??lines.flatMap(line=>{const begin=Math.max(line.start,rangeStart),end=Math.min(line.end,rangeEnd);if(begin>=end)return[];return[{x:line.x+c.measureText(line.text.slice(0,begin-line.start)).width,y:line.y,w:c.measureText(line.text.slice(begin-line.start,end-line.start)).width,h:line.height}]});
  if(state.inputFocused&&rangeStart!==rangeEnd){c.fillStyle='#8bd2df66';for(const r of selection)c.fillRect(z.x+r.x-scrollX,z.y+r.y-scrollY,r.w,r.h)}

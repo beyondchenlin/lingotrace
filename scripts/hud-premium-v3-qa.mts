@@ -54,10 +54,12 @@ async function shot(name:string,opts:{portrait:boolean;height?:number;keyboard?:
  console.log(JSON.stringify({name,path,w:canvas.width,h:canvas.height,compact:!!(layout as any).practiceCompact||isPortraitPracticeCompact(height),keyboard:!!opts.keyboard}));
 }
 
-await shot('mobile-nps-assisted',{portrait:true,height:930,reference:true,draft:cue,keyboard:false});
+await shot('mobile-nps-assisted',{portrait:true,height:930,reference:true,draft:'',keyboard:false});
+await shot('mobile-nps-assisted-typed',{portrait:true,height:930,reference:true,draft:cue,keyboard:false});
 await shot('mobile-nps-keyboard',{portrait:true,height:930,reference:true,draft:'Hi,',keyboard:true});
 await shot('mobile-nps-dictation',{portrait:true,height:930,dictation:true,draft:'',keyboard:false});
-await shot('desktop-nps-assisted',{portrait:false,reference:true,draft:cue,keyboard:true});
+await shot('desktop-nps-assisted',{portrait:false,reference:true,draft:'',keyboard:false});
+await shot('desktop-nps-assisted-typed',{portrait:false,reference:true,draft:cue,keyboard:false});
 await shot('desktop-nps-quiet',{portrait:false,reference:true,draft:cue,keyboard:false});
 await shot('mobile-kids-assisted',{portrait:true,height:930,reference:true,draft:cue,edition:'kids'});
 console.log('premium-v3 qa done');

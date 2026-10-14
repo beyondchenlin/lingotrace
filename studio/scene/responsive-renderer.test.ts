@@ -121,6 +121,28 @@ test('assisted referenceGuide restores media-plate captions without showSubtitle
  assert.ok(lines.length>=1,`assisted must paint caption for ${cue}`);
  assert.equal(lines.map(line=>line.text).join(' '),cue);
 });
+test('assisted keeps a single subtitle system — cue on media only, no typing-card ghost copy',()=>{
+ const {visual,frame}=state();
+ const cue=visual.snapshot!.material.cues[0].text;
+ const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+ for(const portrait of[true,false]){
+  const height=portrait?PORTRAIT_MIN_HEIGHT:941;
+  const g=responsiveLayout(portrait,{},'lesson',height);
+  const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,keyboardFeedback:{visible:false,codes:[],committedUntil:0,composing:false},snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
+  // Media caption owns the cue (may wrap to two lines on portrait).
+  const captionHits=assisted.labels.filter(label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word)));
+  assert.ok(captionHits.length>=1,`media caption missing (${portrait?'mobile':'desktop'})`);
+  // Empty draft: typing card must not fillText cue words (rails are strokes only).
+  const typing=assisted.labels.filter(label=>label.x>=g.inputCard.input.x-2&&label.x<=g.inputCard.input.x+g.inputCard.input.w+2&&label.centerY>=g.inputCard.input.y-2&&label.centerY<=g.inputCard.input.y+g.inputCard.input.h+2);
+  const leaked=typing.filter(label=>label.text===cue||words.some(word=>label.text===word));
+  assert.equal(leaked.length,0,`typing ghost leaked (${portrait?'mobile':'desktop'}): ${leaked.map(l=>l.text).join('|')}`);
+  // Cue text glyphs appear once as the caption system (not duplicated across bands).
+  const cueLabelCount=assisted.labels.filter(label=>label.text===cue).length;
+  const wordHits=words.map(word=>assisted.labels.filter(label=>label.text===word).length);
+  assert.ok(cueLabelCount<=1,`full cue duplicated (${portrait?'mobile':'desktop'}): ${cueLabelCount}`);
+  assert.ok(wordHits.every(count=>count<=2),`cue words over-painted (${portrait?'mobile':'desktop'}): ${JSON.stringify(wordHits)}`);
+ }
+});
 test('portrait preserves every reference using at most two readable lines inside the subtitle frame',()=>{
  const {visual,frame}=state();
  for(const height of [PORTRAIT_MIN_HEIGHT,880,940,1080]){
