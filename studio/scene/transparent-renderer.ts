@@ -284,8 +284,15 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const iconScale=Math.max(1,16/(18*card.cssScale)),railScale=(portrait||card.cssScale<1)?1/card.cssScale:1;
  const playX=zones.play.x+zones.play.w/2+movement.playOffsetPx,centerY=zones.play.y+zones.play.h/2;
  // continue21 — transport-rail glyphs (1.5 stroke peer to keyboard/Enter; idle/active tone).
- {const playing=!m.lesson.paused&&m.kind!=='image',glyph=idleTimeline?tone:'#edf4ef',sw=1.5*iconScale;
-  c.save();c.strokeStyle=glyph;c.fillStyle=glyph;c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
+ // continue27 — play-hit glass well peer to Check-hit/fullscreen-hit (glyph stroke stays 1.5; glass/specular only).
+ {const playing=!m.lesson.paused&&m.kind!=='image',glyph=idleTimeline?tone:'#edf4ef',sw=1.5*iconScale,pz=zones.play;
+  c.save();c.beginPath();c.roundRect(pz.x+2,pz.y+3,pz.w-4,pz.h-6,10);
+  const pg=c.createLinearGradient(0,pz.y,0,pz.y+pz.h);
+  pg.addColorStop(0,playing?'rgba(196,252,87,.14)':'rgba(18,28,34,.55)');
+  pg.addColorStop(1,playing?'rgba(14,28,18,.32)':'rgba(8,14,20,.28)');
+  c.fillStyle=pg;c.fill();c.strokeStyle=playing?'rgba(196,252,87,.38)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
+  c.beginPath();c.moveTo(pz.x+8,pz.y+4.2);c.lineTo(pz.x+pz.w-8,pz.y+4.2);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.8;c.stroke();
+  c.strokeStyle=glyph;c.fillStyle=glyph;c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
   if(playing){c.beginPath();c.moveTo(playX-5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX-5.2*iconScale,centerY+8.5*iconScale);c.moveTo(playX+5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX+5.2*iconScale,centerY+8.5*iconScale);c.stroke()}
   else{c.beginPath();c.moveTo(playX-4.8*iconScale,centerY-8.2*iconScale);c.lineTo(playX+8.2*iconScale,centerY);c.lineTo(playX-4.8*iconScale,centerY+8.2*iconScale);c.closePath();c.stroke()}
   c.restore()}
