@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "4c9f9f9f3add0da162c28ea101edee9c184ef204",
-  "source_file_count": 688,
+  "source_projection_tree_sha1": "70c29def551e0a9945d29dc0d9eb00cdbc4adfa2",
+  "source_file_count": 689,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -1841,6 +1841,13 @@
       "bytes": 2395,
       "git_blob_sha1": "9bcc2f12749f44aede382411555a8d6dab3d7fee",
       "sha256": "3ee099ca5defc31e602c09f4466ca9aafa6ed0dbf732d91c62bd0acb62a7bd09"
+    },
+    {
+      "path": "scripts/caption-single-audit.mts",
+      "mode": "100644",
+      "bytes": 6540,
+      "git_blob_sha1": "7828bca9e15b01e93d2740d0d7d7195c05005c3b",
+      "sha256": "1f7b2ac791729ba382c66e5424844ea568e38c6a13d5f80360e10cbfda90e86b"
     },
     {
       "path": "scripts/check-cafe-story.mjs",
@@ -4393,9 +4400,9 @@
     {
       "path": "studio/scene/input-card.ts",
       "mode": "100644",
-      "bytes": 50674,
-      "git_blob_sha1": "0e257dc9e33d4419cda43644661763fb75997189",
-      "sha256": "ed59370964f00e7d6158a7c4760886209aba02bd88716276cbb831af72d8d516"
+      "bytes": 50709,
+      "git_blob_sha1": "e19c5b6883af168d4f70f3b9c6d9cfc830d0966f",
+      "sha256": "383dbed630a3a31fdf17727afe33143d1bd15bf5507f2696dbd20a561d6140a9"
     },
     {
       "path": "studio/scene/input-viewport.test.ts",
@@ -4631,9 +4638,9 @@
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 24384,
-      "git_blob_sha1": "b6dc7129d3ad5fb2457fb354add3968f3bd1578f",
-      "sha256": "84e90e31daa2423545eef6b08fd09ebffed10e781407be0f4c7d07e7a9b61c2c"
+      "bytes": 25499,
+      "git_blob_sha1": "170afcc16e343a8c4d8b4a39019273caca635118",
+      "sha256": "39564c8134ec93906e41f4c829cbf4e0e34995939fb90f5e24ee8644171ae4ba"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",
@@ -4715,9 +4722,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 35408,
-      "git_blob_sha1": "7b6806007a400c1aae6d2fc61cff9d055639e0c1",
-      "sha256": "7a7ea6309a04c2a19c8ce7caa070b1ffc74624c8c093d21c3fcb2f2f1086228b"
+      "bytes": 35476,
+      "git_blob_sha1": "9a356075e2779556d26f9b26b847eb7400db552d",
+      "sha256": "3b4184923efcc8bdff5f41ae822a4715ae192cdbe2cde124c77f53474fbc9899"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

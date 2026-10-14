@@ -143,12 +143,25 @@ test('assisted keeps a single subtitle system — cue on media only, no typing-c
   assert.ok(wordHits.every(count=>count<=2),`cue words over-painted (${portrait?'mobile':'desktop'}): ${JSON.stringify(wordHits)}`);
  }
 });
+test('showSubtitle alone must not open a second caption system on the transparent stage',()=>{
+ const {visual,frame}=state();
+ const cue=visual.snapshot!.material.cues[0].text;
+ const words=cue.split(/\s+/).filter(word=>word.replace(/\W/g,'').length>2);
+ for(const portrait of[true,false]){
+  const height=portrait?PORTRAIT_MIN_HEIGHT:941;
+  const leaked=render({...visual,showSubtitle:true,referenceGuide:undefined,draft:'',caret:0,selectionEnd:0,snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
+  const hits=leaked.labels.filter(label=>label.text===cue||words.some(word=>label.text===word));
+  assert.equal(hits.length,0,`showSubtitle-only leaked caption (${portrait?'mobile':'desktop'}): ${hits.map(l=>l.text).join('|')}`);
+  const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,draft:'',caret:0,selectionEnd:0,snapshot:{...visual.snapshot!,cueIndex:0}},frame,portrait,1,height);
+  assert.ok(assisted.labels.some(label=>label.text===cue||words.some(word=>label.text===word||label.text.includes(word))),'referenceGuide must own the only caption');
+ }
+});
 test('portrait preserves every reference using at most two readable lines inside the subtitle frame',()=>{
  const {visual,frame}=state();
  for(const height of [PORTRAIT_MIN_HEIGHT,880,940,1080]){
  const g=responsiveLayout(true,{},'lesson',height);
  for(let cueIndex=0;cueIndex<visual.snapshot!.material.cues.length;cueIndex++){
-  const snapshot={...visual.snapshot!,cueIndex},result=render({...visual,snapshot,showSubtitle:true},frame,true,1,height),cue=snapshot.material.cues[cueIndex].text;
+  const snapshot={...visual.snapshot!,cueIndex},cue=snapshot.material.cues[cueIndex].text,result=render({...visual,snapshot,showSubtitle:false,referenceGuide:cue},frame,true,1,height);
   const lines=result.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h);
   assert.ok(lines.length>=1&&lines.length<=2,cue);assert.equal(lines.map(line=>line.text).join(' '),cue);
   for(const line of lines){assert.ok(line.size>=9.999);assert.ok(line.left>=g.subtitle.x&&line.right<=g.subtitle.x+g.subtitle.w,cue);assert.ok(line.top>=g.subtitle.y&&line.bottom<=g.subtitle.y+g.subtitle.h,cue)}

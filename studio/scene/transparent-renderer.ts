@@ -169,10 +169,11 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.2+.65*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.2,138-height,2.4,height,1.2);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.45*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=6;c.beginPath();c.roundRect(x-2,138-height-1,4,height+2,2);c.fill();c.restore()}}
  c.restore();c.restore();
 
- // Assisted reference (or explicit showSubtitle) paints the current cue on the media plate.
- // Dictation / strict listening keep captions off. Phone stacked layout needs this bar —
- // typing-card ghost alone no longer sits on the video the way desktop overlay did.
- if((v.showSubtitle||!!v.referenceGuide)&&m.kind==='demo'&&!v.listeningDisplay?.active){
+ // SINGLE caption system: only `referenceGuide` paints the media-plate glass capsule.
+ // `showSubtitle` stays on SceneVisual for fixture/legacy paintScene — it must NOT open a
+ // second caption path here (「两套字幕」). Dictation clears referenceGuide. Typing card
+ // paints user draft + word rails only — never a ghost copy of the same cue.
+ if(!!v.referenceGuide&&m.kind==='demo'&&!v.listeningDisplay?.active){
  const shownCaption=geometry.inputCard.overlayControls?{...geometry.subtitle,y:geometry.inputCard.card.y-geometry.subtitle.h-12}:geometry.subtitle;
  if(projected)mapRect(c,{x:686,y:646,w:300,h:49},shownCaption);const caption=projected?{x:686,y:646,w:300,h:49}:shownCaption;const cue=s?.material.cues[s.cueIndex].text??'';c.save();
  // Premium glass caption pill — only when there is real cue text (hidden/empty stay glass-free).
