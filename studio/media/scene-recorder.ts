@@ -1,5 +1,6 @@
 import { IndexedDBRecordingStore, recordingExtension, selectRecordingMime } from './recording-storage.js';
 import{CapacityMonitor,INITIAL_CAPACITY,type CapacityAssessment,type EstimateReader}from'./storage-capacity.ts';
+import{RECORD_STOP_REASON,RECORD_STOP_FAILURE_MESSAGE,type RecordStopReason}from'../core/record-stop-reason.ts';
 
 const MiB = 1024 * 1024;
 const RETENTION_MS = 7 * 24 * 60 * 60 * 1000;
@@ -281,7 +282,7 @@ export class SceneRecorder {
     void completion.promise.catch(() => {});
     const session: Session = { stream, recorder: null, recorderStarted: false, metadata: null,
       completion, writeTail: Promise.resolve(), pendingBytes: 0, queuedChunks: 0, receivedBytes: 0,
-      writeFailed: false, failure: null, requestedStop: false, stoppedAt: null, stopReason: '用户停止',
+      writeFailed: false, failure: null, requestedStop: false, stoppedAt: null, stopReason: RECORD_STOP_REASON.userStop,
       finishing: false, finished: false, unlisten: [] };
     this.active = session;
     this.lastSaved = null;
@@ -390,7 +391,7 @@ export class SceneRecorder {
     this.requestStop(session, '录制失败');
   }
 
-  private requestStop(session: Session, reason = '用户停止'): void {
+  private requestStop(session: Session, reason: RecordStopReason | string = RECORD_STOP_REASON.userStop): void {
     if (session.finished || session.requestedStop) return;
     session.requestedStop = true;
     session.stoppedAt = this.now();
@@ -414,7 +415,7 @@ export class SceneRecorder {
     // encoder listeners and final data/write draining must remain intact.
   }
 
-  stop(reason: '用户停止' | '练习暂停' | '录制混音中断' | '画面渲染中断' | '页面后台化' = '用户停止'): Promise<RecordMeta> {
+  stop(reason: RecordStopReason = RECORD_STOP_REASON.userStop): Promise<RecordMeta> {
     const session = this.active;
     if (!session) {
       if (this.lastSaved) return Promise.resolve({ ...this.lastSaved });
@@ -435,9 +436,9 @@ export class SceneRecorder {
     await session.writeTail;
     // Classify lifecycle interruption only after accepted final encoder chunks drain.
     // Setting failure at cutoff would make onData discard those salvageable bytes.
-    if(session.stopReason==='画面渲染中断')session.failure ||= new SceneRecorderError('SCENE_RENDER_INTERRUPTED','画面渲染中断，录像可能不完整。');
-    if(session.stopReason==='录制混音中断')session.failure ||= new SceneRecorderError('AUDIO_MIX_INTERRUPTED','录制混音已中断，声音可能不完整。');
-    if(session.stopReason==='页面后台化')session.failure ||= new SceneRecorderError('PAGE_BACKGROUND_INTERRUPTED','页面已进入后台，录像已中断；画面和声音可能不完整。');
+    if(session.stopReason===RECORD_STOP_REASON.renderInterrupted)session.failure ||= new SceneRecorderError('SCENE_RENDER_INTERRUPTED',RECORD_STOP_FAILURE_MESSAGE[RECORD_STOP_REASON.renderInterrupted]);
+    if(session.stopReason===RECORD_STOP_REASON.mixInterrupted)session.failure ||= new SceneRecorderError('AUDIO_MIX_INTERRUPTED',RECORD_STOP_FAILURE_MESSAGE[RECORD_STOP_REASON.mixInterrupted]);
+    if(session.stopReason===RECORD_STOP_REASON.backgrounded)session.failure ||= new SceneRecorderError('PAGE_BACKGROUND_INTERRUPTED',RECORD_STOP_FAILURE_MESSAGE[RECORD_STOP_REASON.backgrounded]);
     for (const unlisten of session.unlisten.splice(0)) unlisten();
     for (const track of session.stream.getTracks()) {
       try { if (track.readyState !== 'ended') track.stop(); } catch { /* Release remaining owned tracks. */ }

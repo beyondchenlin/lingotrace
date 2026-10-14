@@ -33,7 +33,7 @@ test('persistent renderer and course errors have native visible recovery control
  assert.match(source,/frameLoopRef\.current\?\.retry\(\)/);
  assert.match(source,/courseError&&!builtinMediaReady&&mediaKind==='demo'&&!visualRef.current\?\.ready&&visualRef.current\?\.message==='视频暂不可用，请重新加载'&&<div className="scene-media-error" role="alert"/);
  assert.match(source,/if\(sceneFailureRef\.current\)\{notify\(t\('studio.displayInterrupted'\)\);return\}/);
- assert.match(source,/stopRecording\('画面渲染中断'\)/);
+ assert.match(source,/stopRecording\(RECORD_STOP_REASON\.renderInterrupted\)/);
 });
 
 test('native recovery dialog target cannot invoke underlying playback or cue shortcuts',()=>{

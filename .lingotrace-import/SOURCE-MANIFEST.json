@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "3cfc9adff21fd49193f88aaadaf4782d44ef4ca3",
-  "source_file_count": 746,
+  "source_projection_tree_sha1": "6fc83d8f69990bb50bfe37cd40e746893fc6a403",
+  "source_file_count": 749,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -2300,9 +2300,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 260167,
-      "git_blob_sha1": "3453b311f475bd5d94a85c39b4854310ab44b566",
-      "sha256": "d575c036c68e9ce3c0789a327b97861dc59881744ed0b069ea3bba1a3a3b0b02"
+      "bytes": 260269,
+      "git_blob_sha1": "e1f7df41dc4d0ca34773685e429e21c39c35b421",
+      "sha256": "a365fa255810576c693fbf60b1d14368541d87cdefee675b26a04a3fa2c43184"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4176,9 +4176,9 @@
     {
       "path": "studio/media/scene-recorder.ts",
       "mode": "100644",
-      "bytes": 28017,
-      "git_blob_sha1": "8c17c44995c8e3f77701d7d173e4dbbf7a208f13",
-      "sha256": "72b0bf8a3a9cff36f46b4289cc238cfcb7e84ede6b035a4c4b3866ad5d9d83fe"
+      "bytes": 28171,
+      "git_blob_sha1": "e8c3fb37ea8492592e69e19328e75487beba5bef",
+      "sha256": "7e5705a89262b7e2fcb29fd9daba24c7c9b582843757cf7f86cf1626435552b3"
     },
     {
       "path": "studio/media/standby-audio.test.mjs",
@@ -4687,9 +4687,9 @@
     {
       "path": "studio/scene/portrait-blackout-host.test.ts",
       "mode": "100644",
-      "bytes": 6092,
-      "git_blob_sha1": "061b5ae2670176dbed9e96284f193d4a2a1ceb92",
-      "sha256": "196d5953fd781e7623bc1d2648e368c24b1922e01da7ee186c43ac6149170d5e"
+      "bytes": 6109,
+      "git_blob_sha1": "f26e231305c69920d23ad126a35ca861315a9f8f",
+      "sha256": "0a65fb0ab6890207fa37dff0c046c04ec7cf0e1fa3b700eb87ceb1ad4d160ba7"
     },
     {
       "path": "studio/scene/portrait-input-window.test.ts",
@@ -5229,6 +5229,27 @@
       "bytes": 1619,
       "sha256": "c5a398f58fef9a39effb67d95f586f13bfea34843452e6a3a30a75fea4cd050e",
       "git_blob_sha1": "f042b75f89cb1325e19ab1507c20578a7b41babe"
+    },
+    {
+      "path": "studio/core/record-stop-reason.ts",
+      "mode": "100644",
+      "bytes": 1814,
+      "sha256": "bc326893baa3df1600060d1e5d8806e3c713f8ddc4cfc0fd331b3dd7330bbc19",
+      "git_blob_sha1": "d89bcc0996c74c789153ad9113486d5cb685f76d"
+    },
+    {
+      "path": "qa/prd-continue37-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5713,
+      "sha256": "fa5e2949eaec602f3d7a32e43708060c3147ab8ed17633c7aa8a4462599f031a",
+      "git_blob_sha1": "978dc7b8306a2d0d404832f9ebfd45ee197bb492"
+    },
+    {
+      "path": "scripts/prd-continue37-qa.mts",
+      "mode": "100644",
+      "bytes": 1613,
+      "sha256": "2cb713224048b7a9e615590130f2563f74ba837561e642f72ef509dd7c8f38ff",
+      "git_blob_sha1": "f35dc244a297da5be8c3d56918a3cfa40b246732"
     }
   ],
   "large_resources": [
