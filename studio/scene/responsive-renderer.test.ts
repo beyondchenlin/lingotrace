@@ -110,6 +110,17 @@ test('portrait text labels stay legible and timeline remains fully on the record
  }
  }
 });
+test('assisted referenceGuide restores media-plate captions without showSubtitle flag',()=>{
+ const {visual,frame}=state();
+ const height=PORTRAIT_MIN_HEIGHT,g=responsiveLayout(true,{},'lesson',height);
+ const cue=visual.snapshot!.material.cues[0].text;
+ const hidden=render({...visual,showSubtitle:false,referenceGuide:undefined},frame,true,1,height);
+ assert.ok(!hidden.labels.some(label=>label.text===cue||label.text.includes(cue.split(' ')[0])),'dictation must not paint cue on media');
+ const assisted=render({...visual,showSubtitle:false,referenceGuide:cue,snapshot:{...visual.snapshot!,cueIndex:0}},frame,true,1,height);
+ const lines=assisted.labels.filter(label=>label.x>g.subtitle.x&&label.x<g.subtitle.x+g.subtitle.w&&label.centerY>=g.subtitle.y&&label.centerY<=g.subtitle.y+g.subtitle.h);
+ assert.ok(lines.length>=1,`assisted must paint caption for ${cue}`);
+ assert.equal(lines.map(line=>line.text).join(' '),cue);
+});
 test('portrait preserves every reference using at most two readable lines inside the subtitle frame',()=>{
  const {visual,frame}=state();
  for(const height of [PORTRAIT_MIN_HEIGHT,880,940,1080]){

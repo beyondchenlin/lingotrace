@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "c4147a31c46329a93a32029f170af13f1970c4d0",
+  "source_projection_tree_sha1": "90833209d2d0efec6f59c438ead213e8422c2312",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 45670,
-      "git_blob_sha1": "bc47e02ed10c3a10cb9cff26176171088b864aa0",
-      "sha256": "d756753bff91c466db76635dfab423c7ec4e063fd6a8753cd7079793ca5fc6b9"
+      "bytes": 47365,
+      "git_blob_sha1": "ac2478b8e3e614309f239f822013460fc214f304",
+      "sha256": "abfafdd188ee8fa634c12fce73e80f880c714a23cc4370492b886bd7b0de3847"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 258210,
-      "git_blob_sha1": "687c1e60c649c792c26fba304b47a96d0c21f821",
-      "sha256": "78ebf4522ea1c3338f0494eed80f9f72db90eb999f1df709ad0e2d47b52dcd10"
+      "bytes": 258441,
+      "git_blob_sha1": "309cd6b48c9580bc1e1998bfc3430c4125265b33",
+      "sha256": "1f63ffa16303beff19237c7a9a258116edf69cc9ea741cdc8fbade83aeeb7965"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4631,9 +4631,9 @@
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 21480,
-      "git_blob_sha1": "e55833e2e40dd49b2caffc28de37d703ea28f98b",
-      "sha256": "b46ff7efe008c88c33f159bb2be508db2aa9e72a751f257695c555035c86c596"
+      "bytes": 22411,
+      "git_blob_sha1": "f9283db61c0f0f94bafa682ecbcb27f4f844041a",
+      "sha256": "9d9327307adcf982f0dff6aed0f13d353a1f0270e0823d3090fd3b6f99dbf6eb"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",
@@ -4715,9 +4715,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 32414,
-      "git_blob_sha1": "f827d02c302571bdce1181f19a0a84a0d11aa1e9",
-      "sha256": "46f5ac555dd13a04092882f58d1bb7586e7640830bc063ae5e6675c7b86ca29c"
+      "bytes": 33094,
+      "git_blob_sha1": "e138c589bd50d94b1a48f9bbf7566ac9e41a117f",
+      "sha256": "be85954f6e5f863e485687a95a9bd09dcd005a85e26795f05c37cf4cb4282018"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

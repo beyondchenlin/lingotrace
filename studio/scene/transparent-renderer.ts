@@ -136,10 +136,17 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.2+.65*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.2,138-height,2.4,height,1.2);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.45*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=6;c.beginPath();c.roundRect(x-2,138-height-1,4,height+2,2);c.fill();c.restore()}}
  c.restore();c.restore();
 
- // No inactive instruction pill, and strict listening never exposes old captions.
- if(v.showSubtitle&&!v.referenceGuide&&m.kind==='demo'&&!v.listeningDisplay?.active){
+ // Assisted reference (or explicit showSubtitle) paints the current cue on the media plate.
+ // Dictation / strict listening keep captions off. Phone stacked layout needs this bar —
+ // typing-card ghost alone no longer sits on the video the way desktop overlay did.
+ if((v.showSubtitle||!!v.referenceGuide)&&m.kind==='demo'&&!v.listeningDisplay?.active){
  const shownCaption=geometry.inputCard.overlayControls?{...geometry.subtitle,y:geometry.inputCard.card.y-geometry.subtitle.h-12}:geometry.subtitle;
  if(projected)mapRect(c,{x:686,y:646,w:300,h:49},shownCaption);const caption=projected?{x:686,y:646,w:300,h:49}:shownCaption;const cue=s?.material.cues[s.cueIndex].text??'';c.save();
+ // Premium glass caption pill — only when there is real cue text (hidden/empty stay glass-free).
+ if(cue){c.save();c.beginPath();c.roundRect(caption.x,caption.y,caption.w,caption.h,Math.min(14,caption.h*.35));
+  const fill=c.createLinearGradient(caption.x,caption.y,caption.x,caption.y+caption.h);
+  fill.addColorStop(0,'rgba(8,16,20,.72)');fill.addColorStop(1,'rgba(8,16,20,.58)');
+  c.fillStyle=fill;c.fill();c.strokeStyle='rgba(201,226,216,.28)';c.lineWidth=1;c.stroke();c.restore()}
  if(portrait){
   // Two balanced lines keep the complete reference visible at a readable size.
   let size=12/.58,lines=[cue];c.font=`400 ${size}px ${STUDIO_SANS}`;
