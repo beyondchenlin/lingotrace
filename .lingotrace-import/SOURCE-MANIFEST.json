@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "34b6287fc7e5789896b876e78069029f5f915cfe",
-  "source_file_count": 695,
-  "direct_source_file_count": 691,
+  "source_projection_tree_sha1": "c489353c7f8f7415413130de1b53d90d58f9e8f3",
+  "source_file_count": 697,
+  "direct_source_file_count": 693,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -1836,6 +1836,13 @@
       "sha256": "a28ce6194d9401f2d2ffdc726bd170182e3ce5a4a68e6956dcf4b3642bb4b5d8"
     },
     {
+      "path": "qa/prd-continue9-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4464,
+      "git_blob_sha1": "ffb39467959ac30e08ae8c8ceca3ef1717ed00c0",
+      "sha256": "ed33bae96dc714c661ba470345db7da0424b6db56c533e14ed7f7107edfa08a7"
+    },
+    {
       "path": "scripts/assemble-portrait-preview.mjs",
       "mode": "100644",
       "bytes": 2040,
@@ -1960,6 +1967,13 @@
       "bytes": 3644,
       "git_blob_sha1": "efeedace88c35feef6ed6644d70568bef49fcf26",
       "sha256": "c1b148fc611bb9c9ff61f940a4bb6bb68d281de39f64490ae9dc5de4d69837bf"
+    },
+    {
+      "path": "scripts/prd-continue9-qa.mts",
+      "mode": "100644",
+      "bytes": 3644,
+      "git_blob_sha1": "c0d49ab6a121a9a13fdbc4ea62d589237bf39681",
+      "sha256": "e5503464470080aa9b12293c70d3f0b2a6f4c17cdf90a8fadf2b57239f971b02"
     },
     {
       "path": "scripts/prepare-subtitle-assets.mjs",
@@ -2216,9 +2230,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 264691,
-      "git_blob_sha1": "763ae3ccd116866d952ef56677520872b9b9ca9b",
-      "sha256": "732c392f9afd7547882f6b87bbf155bed1304e7d159371e07e80029fe7fb6ad0"
+      "bytes": 264079,
+      "git_blob_sha1": "3c1dfce13bb0c861811d67244a2472b1b0a17d63",
+      "sha256": "d9552e43f8baf6b431e66ecb9163a21435482d04866b5e7eda38bcf207edc1fe"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -2482,9 +2496,9 @@
     {
       "path": "studio/core/interface-locale.test.ts",
       "mode": "100644",
-      "bytes": 10631,
-      "git_blob_sha1": "993f67b377f6ac6231c1f3ebe0a20415322098e1",
-      "sha256": "4c923ecf033c422528591368c4865c10cd07637dc016c0e12c9c3f27d05e1add"
+      "bytes": 13018,
+      "git_blob_sha1": "26789581672d8a1e53fa77d1672350bbea9429ed",
+      "sha256": "baa2b451f5bde1ef85be4ae2c236b3c07e1081af7d528ca990c9e9e440d769ea"
     },
     {
       "path": "studio/core/layout-plan-files-ui.test.ts",
@@ -3826,9 +3840,9 @@
     {
       "path": "studio/i18n/locale.ts",
       "mode": "100644",
-      "bytes": 4590,
-      "git_blob_sha1": "80247eee2a40c62506700b7975861762a2930c04",
-      "sha256": "8c4ce262e9811fb8b80974483f18073005e5d48209b8b9addb998f9be18183a6"
+      "bytes": 4656,
+      "git_blob_sha1": "d061ee2ec0a852454a7af330a16a7ba887c6838f",
+      "sha256": "9bbcf131148aa681457404f3e944b0203df95807c3578a6bcfdb0ba1b6383c26"
     },
     {
       "path": "studio/i18n/messages-correction.ts",
@@ -3840,9 +3854,9 @@
     {
       "path": "studio/i18n/messages-diagnostics.ts",
       "mode": "100644",
-      "bytes": 41479,
-      "git_blob_sha1": "d1308e85043f28d3aa22e4cb6d627b3ef3d0f84d",
-      "sha256": "66b46c0934e53dc7aa605109bd27342629787a6609da5370eb646f5a8465b5e1"
+      "bytes": 44084,
+      "git_blob_sha1": "aac1945a3288582653d492f3792bed62d778fa26",
+      "sha256": "22004db0700d80ba477684221bbd6c505e941a7527bc3091a0cef7e333d3f905"
     },
     {
       "path": "studio/i18n/messages-reference-impact.ts",
