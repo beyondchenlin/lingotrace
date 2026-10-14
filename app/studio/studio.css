@@ -1131,3 +1131,66 @@
   background:linear-gradient(165deg,#1a2a32e8,#0e181ce0);
   box-shadow:inset 0 1px 0 #ffffff14,0 4px 14px #00000034;
 }
+
+/* continue19 — listening-dock glass / flow peers (no video caption capsule) */
+.listening-dock{
+  gap:6px;padding:8px 10px;border-radius:16px;
+  background:linear-gradient(168deg,#1a2a32f0 0%,#101a20f6 55%,#0c151af8 100%);
+  border:1px solid #c9e2d848;
+  box-shadow:0 14px 36px #00000066,inset 0 1px 0 #ffffff14;
+  backdrop-filter:blur(18px) saturate(1.15);
+}
+.listening-dock button,.listening-dock .hud-glyph{
+  min-height:44px;min-width:44px;border-radius:14px;
+  border:1px solid #d7e7d830;
+  background:linear-gradient(180deg,#142028d0,#0c1418c0);
+  box-shadow:inset 0 1px 0 #ffffff0c,0 4px 12px #00000028;
+}
+.listening-dock button:hover,.listening-dock .hud-glyph:hover,
+.listening-dock button[data-active=true],.listening-dock .hud-glyph[data-active=true]{
+  background:#e4f3de18;border-color:#c4fc5748;color:#eafad6;
+}
+.listening-controls{
+  border-radius:20px;padding:14px 16px;
+  background:linear-gradient(168deg,#1a2a32f2 0%,#101a20f8 52%,#0c151afc 100%);
+  border:1px solid #c9e2d84a;
+  box-shadow:0 22px 56px #00000070,inset 0 1px 0 #ffffff14;
+  backdrop-filter:blur(22px) saturate(1.18);
+}
+.listening-controls input[type=range]{
+  accent-color:#c4fc57;
+  filter:drop-shadow(0 0 8px #c4fc5722);
+}
+.listening-options label{
+  padding:6px 10px;border-radius:999px;
+  border:1px solid #c9e2d828;
+  background:linear-gradient(180deg,#edf5e90c,#0c141806);
+  letter-spacing:.04em;
+}
+.listening-history>div{
+  border-top:1px solid #c9e2d828;
+  padding:12px 0;
+}
+.listening-details>summary{
+  letter-spacing:.05em;color:#e0eee9;
+  border-radius:12px;padding:0 10px;
+  background:linear-gradient(180deg,#edf5e908,#0c141804);
+  border:1px solid #d7e7d820;
+}
+.hud-error-flag{
+  border-radius:14px;
+  background:linear-gradient(165deg,#3a2a1ef0,#241810f0);
+  border:1px solid #eeb98777;
+  box-shadow:0 12px 32px #00000055,inset 0 1px 0 #ffd2a822;
+  backdrop-filter:blur(12px);
+}
+.portrait-layout .listening-dock{
+  border-radius:18px;padding:10px 12px;
+  box-shadow:0 18px 44px #00000070,inset 0 1px 0 #ffffff16;
+}
+.studio-page[data-visual-edition=kids] .listening-dock,
+.studio-page[data-visual-edition=kids] .listening-controls{
+  border-color:#ffc56e55;
+  background:linear-gradient(168deg,#2a2418f2 0%,#1a1810f8 52%,#14120cfb 100%);
+  box-shadow:0 18px 44px #00000078,inset 0 1px 0 #ffe6b430;
+}
