@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "28682450526d9d6927d6b7fe1d343411e7c2d50e",
-  "source_file_count": 692,
-  "direct_source_file_count": 684,
+  "source_projection_tree_sha1": "34b6287fc7e5789896b876e78069029f5f915cfe",
+  "source_file_count": 695,
+  "direct_source_file_count": 691,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -1829,6 +1829,13 @@
       "sha256": "fdb7ae0212becfac4bf86a76ad37f0b010b3832d5c4bcf91cdd909c5dc128185"
     },
     {
+      "path": "qa/prd-continue8-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 4707,
+      "git_blob_sha1": "7b983603f07c5d184537176cbf8c4cb219cad8cf",
+      "sha256": "a28ce6194d9401f2d2ffdc726bd170182e3ce5a4a68e6956dcf4b3642bb4b5d8"
+    },
+    {
       "path": "scripts/assemble-portrait-preview.mjs",
       "mode": "100644",
       "bytes": 2040,
@@ -1946,6 +1953,13 @@
       "bytes": 3644,
       "git_blob_sha1": "24b70f1d77d476662b589fb4f1700af417085e1e",
       "sha256": "cf150c0ddaa8023b98efef0cb307c18dff70a12c176a5cb3d651cbf939de5cdc"
+    },
+    {
+      "path": "scripts/prd-continue8-qa.mts",
+      "mode": "100644",
+      "bytes": 3644,
+      "git_blob_sha1": "efeedace88c35feef6ed6644d70568bef49fcf26",
+      "sha256": "c1b148fc611bb9c9ff61f940a4bb6bb68d281de39f64490ae9dc5de4d69837bf"
     },
     {
       "path": "scripts/prepare-subtitle-assets.mjs",
@@ -2132,9 +2146,9 @@
     {
       "path": "studio/components/MaterialCorrectionPanel.tsx",
       "mode": "100644",
-      "bytes": 25343,
-      "git_blob_sha1": "8cc32c903b447740e66e486c6d3071193a0cec93",
-      "sha256": "67b9cd219a4922abfeef6040ce176cd42daa2219625e97134a59fcec15b52289"
+      "bytes": 23639,
+      "git_blob_sha1": "0c7796b33a8b971da68d4009c4cbe68b72e111bc",
+      "sha256": "b63f9ab012bbd9329d4f952952d341547f37876cab20867a19320900640cebe4"
     },
     {
       "path": "studio/components/MutedRecordingCopy.tsx",
@@ -2202,9 +2216,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 267198,
-      "git_blob_sha1": "49206220f69ed574ff6996b36450851f433cea47",
-      "sha256": "9c86734e2a60add47e1d94e87aa847e02ec8b7e22f530568a98ef39b68b053cf"
+      "bytes": 264691,
+      "git_blob_sha1": "763ae3ccd116866d952ef56677520872b9b9ca9b",
+      "sha256": "732c392f9afd7547882f6b87bbf155bed1304e7d159371e07e80029fe7fb6ad0"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -2468,9 +2482,9 @@
     {
       "path": "studio/core/interface-locale.test.ts",
       "mode": "100644",
-      "bytes": 10647,
-      "git_blob_sha1": "8b78609931f0433e8e8206b171aeab2b337d2a1f",
-      "sha256": "b301f9f99cdee7358852c81bf841a8d222913b889f1b6664c83530107931feaf"
+      "bytes": 10631,
+      "git_blob_sha1": "993f67b377f6ac6231c1f3ebe0a20415322098e1",
+      "sha256": "4c923ecf033c422528591368c4865c10cd07637dc016c0e12c9c3f27d05e1add"
     },
     {
       "path": "studio/core/layout-plan-files-ui.test.ts",
@@ -2741,9 +2755,9 @@
     {
       "path": "studio/core/material-correction-panel.test.ts",
       "mode": "100644",
-      "bytes": 39135,
-      "git_blob_sha1": "79d8ef54b2c763fbc0bad7dda9ca42d7ed5243ab",
-      "sha256": "ec4752e050f95ddf107635e2e4b209a996d9828db965ea50abc3d13ab4a5da14"
+      "bytes": 39416,
+      "git_blob_sha1": "996827ccb6c111a2785d5114d1849d3595e1c522",
+      "sha256": "ad8d78094fd6935d4b8087d9f5f2ad35d0b358e9c693b9eb204d972b6fe01811"
     },
     {
       "path": "studio/core/native-input-evidence.ts",
@@ -3126,9 +3140,9 @@
     {
       "path": "studio/core/round-review-ui.test.ts",
       "mode": "100644",
-      "bytes": 7348,
-      "git_blob_sha1": "02fd53ad9a6e1b6a320e8dfdff3ae1eafda1895d",
-      "sha256": "19fd9d8690f628d8667be389a36c55f8281ef683f80c151cc5dc31555505a3fc"
+      "bytes": 7368,
+      "git_blob_sha1": "a579d333bc7b7c04c35d436bec69968130a6f15a",
+      "sha256": "c927053818a9c614cc82b77febbb569dfee7908298806d99ce4b1b761fc7ee8b"
     },
     {
       "path": "studio/core/round-review.test.ts",
@@ -3812,16 +3826,23 @@
     {
       "path": "studio/i18n/locale.ts",
       "mode": "100644",
-      "bytes": 4470,
-      "git_blob_sha1": "7608a4b1a76fb1c0120dcf8f99b318e2a1c7cb29",
-      "sha256": "d4034d013c17b95e3a62053013f34730b93a382c2db4fa360f3c54a6bc50b04b"
+      "bytes": 4590,
+      "git_blob_sha1": "80247eee2a40c62506700b7975861762a2930c04",
+      "sha256": "8c4ce262e9811fb8b80974483f18073005e5d48209b8b9addb998f9be18183a6"
+    },
+    {
+      "path": "studio/i18n/messages-correction.ts",
+      "mode": "100644",
+      "bytes": 14020,
+      "git_blob_sha1": "064b7cc14ccc1dbf9be379e791627af2013d859a",
+      "sha256": "9f99f994026c05015beafc17b2658cb3aff84e9fee2a5e1fc71d86118423320f"
     },
     {
       "path": "studio/i18n/messages-diagnostics.ts",
       "mode": "100644",
-      "bytes": 38899,
-      "git_blob_sha1": "24c3b27b9dbc756f1fed38ae97aa085a7dcc6ee8",
-      "sha256": "5e9bde315f0404ba80ca1c81c7c719f843d7c2293ae1c2100828d33a21c297b5"
+      "bytes": 41479,
+      "git_blob_sha1": "d1308e85043f28d3aa22e4cb6d627b3ef3d0f84d",
+      "sha256": "66b46c0934e53dc7aa605109bd27342629787a6609da5370eb646f5a8465b5e1"
     },
     {
       "path": "studio/i18n/messages-reference-impact.ts",
