@@ -119,3 +119,36 @@ test('background recording diagnostics translate both ways without changing safe
  assert.match(translate('en','notice.recordBackgroundSaved'),/Returning will not restart/);
  assert.match(translate('en','error.recordBackgroundEmpty'),/No written recording data has been confirmed/);
 });
+
+test('review-task linked result template and suffixes translate both ways via ui bridge',()=>{
+ const attemptId='attempt-qa-42';
+ const words=11, errors=2;
+ const disposition=translate('zh-CN','reviewTask.dispositionWinner');
+ const coverage=translate('zh-CN','reviewTask.coveragePartial');
+ const zh=translate('zh-CN','reviewTask.resultLinked',{attemptId,words,errors,disposition,coverage});
+ const en=translate('en','reviewTask.resultLinked',{
+  attemptId,words,errors,
+  disposition:translate('en','reviewTask.dispositionWinner'),
+  coverage:translate('en','reviewTask.coveragePartial'),
+ });
+ assert.match(zh,/部分记录/);assert.ok(zh.includes(attemptId));
+ assert.equal(translateKnownUi('en',zh),en);
+ assert.equal(translateKnownUi('zh-CN',en),zh);
+ for(const key of ['reviewTask.refHasNewer','reviewTask.refInstanceMissing','reviewTask.refEvidenceUnavailable','reviewTask.resultNone'] as const){
+  assert.equal(translateKnownUi('en',translate('zh-CN',key)),translate('en',key));
+  assert.equal(translateKnownUi('zh-CN',translate('en',key)),translate('zh-CN',key));
+ }
+ const stacked=translate('zh-CN','reviewTask.refOriginal')+' '+translate('zh-CN','reviewTask.refHasNewer');
+ assert.match(translateKnownUi('en',stacked),/Fixed original.*newer version/s);
+});
+
+test('continue9 Studio notify residuals use t() for recording/fullscreen/course prepare',async()=>{
+ const source=await readFile(new URL('../components/Studio.tsx',import.meta.url),'utf8');
+ for(const key of ['studio.fullscreenUnavailable','notice.recordStopped','notice.recordBackgroundSaved','error.recordBackgroundEmpty','notice.recordMixSaved','error.recordMixEmpty','notice.recordIncomplete','error.recordStart','error.recordFinalize','error.recordRead','error.recordPreview','error.downloadStart','error.courseMonitor','error.correctedClipPlay','error.correctedVerifiedPlayback','error.courseVerification','error.reviewTasksRead','error.recordStorage','error.recordStorageRestore'] as const){
+  assert.ok(source.includes(`t('${key}')`),key);
+ }
+ assert.ok(source.includes("'error.cafeCoursePrepare'")&&source.includes("'error.npsCoursePrepare'"));
+ assert.ok(!source.includes("notify('Fullscreen is unavailable"));
+ assert.ok(!source.includes("'页面已进入后台，录像已中断，已写入片段保留"));
+ assert.ok(!source.includes("'录像已停止，请在本机录像中检查与下载。'"));
+});

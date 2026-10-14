@@ -219,6 +219,19 @@ export const diagnosticEnglish = {
   "notice.newPracticeHistoryOff": "A new practice was created, but history could not be enabled; this view stays on the current page only.",
   "error.mediaSeekUnavailable": "Media cannot be seeked yet; waiting for the browser to load.",
   "media.verifyingCourse": "Verifying course video…",
+  "reviewTask.refHasNewer": "Source has a newer version; this task stays on the fixed original. Starting means you explicitly choose the original.",
+  "reviewTask.refInstanceMissing": "The current retest instance is missing; start is unavailable.",
+  "reviewTask.refEvidenceUnavailable": "Original submission evidence is unavailable; start is blocked. Missing records are not treated as zero scores.",
+  "reviewTask.dispositionWinner": "the first saved valid submission for that instance",
+  "reviewTask.dispositionFollowOn": "a later real submission from the same instance",
+  "reviewTask.coveragePartial": "Partial record; assistance and reference sources are unknown.",
+  "reviewTask.coverageComplete": "Assistance conditions follow the original complete record.",
+  "reviewTask.resultLinked": "Latest linked submission {attemptId}: {words} reference words, {errors} errors; {disposition}. {coverage} Export to verify the session, events, and instance.",
+  "error.correctedVerifiedPlayback": "The verified original for this corrected version could not play. Historical text and scores remain; it was not switched to an unverified URL.",
+  "error.correctedClipPlay": "The corrected clip could not play. Retry.",
+  "error.cafeCoursePrepare": "The café course could not be prepared.",
+  "error.npsCoursePrepare": "The NPS course could not be prepared.",
+  "error.reviewTasksRead": "Review tasks could not be read.",
   "listening.retryError": "Listening-record retry failed"
 } as const;
 
@@ -442,5 +455,18 @@ export const diagnosticChinese: Record<keyof typeof diagnosticEnglish,string> = 
   "notice.newPracticeHistoryOff": "新练习已创建，历史记录未能开启；本次查看仅保留在当前页面。",
   "error.mediaSeekUnavailable": "素材暂时不可定位，等待浏览器加载。",
   "media.verifyingCourse": "正在核验课程视频…",
+  "reviewTask.refHasNewer": "来源已有新版本，本任务继续固定原版；开始表示明确选择原版。",
+  "reviewTask.refInstanceMissing": "当前复测实例缺失，不能开始。",
+  "reviewTask.refEvidenceUnavailable": "原提交证据不可用，不能开始；未将缺失记录视为零分。",
+  "reviewTask.dispositionWinner": "该实例首个已保存有效提交",
+  "reviewTask.dispositionFollowOn": "同一实例的后续真实提交",
+  "reviewTask.coveragePartial": "部分记录，辅助与参考来源未知。",
+  "reviewTask.coverageComplete": "辅助条件见原完整记录。",
+  "reviewTask.resultLinked": "最近关联提交 {attemptId}：参考词数 {words}，错误 {errors}；{disposition}。{coverage}可导出核对会话、事件与实例。",
+  "error.correctedVerifiedPlayback": "校正版本的已核验原片未能播放。历史文字和成绩保留；没有切换为未核验 URL。",
+  "error.correctedClipPlay": "校正片段未能播放，请重试。",
+  "error.cafeCoursePrepare": "咖啡馆课程未能准备。",
+  "error.npsCoursePrepare": "NPS 课程未能准备。",
+  "error.reviewTasksRead": "复习任务未能读取。",
   "listening.retryError": "听力记录重试失败"
 };

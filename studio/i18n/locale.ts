@@ -54,7 +54,8 @@ function translateKnownMessage(locale: StudioLocale, message: string | null | un
   if (depth < 3) for (const template of templateMessages) {
     const match = template.pattern.exec(message);
     if (match) {
-      const params = Object.fromEntries(template.names.map((name,index) => [name,name === 'details' ? translateKnownMessage(locale,match[index+1],depth+1) : match[index+1]]));
+      const nested = new Set(['details','disposition','coverage']);
+      const params = Object.fromEntries(template.names.map((name,index) => [name,nested.has(name) ? translateKnownMessage(locale,match[index+1],depth+1) : match[index+1]]));
       return translate(locale, template.key, params);
     }
   }
