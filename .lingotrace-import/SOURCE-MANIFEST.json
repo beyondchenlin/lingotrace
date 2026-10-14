@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "2648a56f9ddfc31fdcbb68dada696776052d1ecf",
-  "source_file_count": 686,
-  "direct_source_file_count": 682,
+  "source_projection_tree_sha1": "a23753ac16403992af71ad8529bd551ac47ee600",
+  "source_file_count": 687,
+  "direct_source_file_count": 683,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 33658,
-      "git_blob_sha1": "7a3995da8ce18ff3b0249a0cac94009f293add1d",
-      "sha256": "451ec2feb91e1d52f08350bb0e8c26d6d3a2247fce7835b8db9ab2efe70540d3"
+      "bytes": 33887,
+      "git_blob_sha1": "8f9aeea6055ded1283e4d4cfd07f0b31fcf9f066",
+      "sha256": "4dd5f5e83e337ff7c063a55eb3c1f66a1a552acb898ed290a31b9d3f0863af33"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1890,6 +1890,13 @@
       "bytes": 359,
       "git_blob_sha1": "7dd05e480899f051d21fa1675757965524f6a784",
       "sha256": "52c8d2f3b36e1a8d2380283ffffcbd7106eb0900909c533f7a7b4b05bc8b6b6b"
+    },
+    {
+      "path": "scripts/desktop-center-qa.mts",
+      "mode": "100644",
+      "bytes": 3241,
+      "git_blob_sha1": "9bb95087ce2a62db4bd9ad0805ab2de1208e3462",
+      "sha256": "c7591a536724b7068aa27a3559749ab1125460d2c1bed5bf1ae337a5d1ed6b01"
     },
     {
       "path": "scripts/native-input-projection-fixture.mjs",
