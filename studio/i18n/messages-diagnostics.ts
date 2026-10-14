@@ -232,7 +232,14 @@ export const diagnosticEnglish = {
   "error.cafeCoursePrepare": "The café course could not be prepared.",
   "error.npsCoursePrepare": "The NPS course could not be prepared.",
   "error.reviewTasksRead": "Review tasks could not be read.",
-  "listening.retryError": "Listening-record retry failed"
+  "listening.retryError": "Listening-record retry failed",
+  "error.historyBoundaryMissing": "The course save boundary has not been established yet.",
+  "error.historyBoundaryChanged": "The course save boundary changed. Reopen to restore; previously saved records remain.",
+  "error.historyPermissionChanged": "The course’s history permission changed. Reopen to restore; previously saved records remain.",
+  "error.historySavePending": "This practice has not been saved yet. The current practice remains on this page; retry saving.",
+  "error.referenceTransitionWait": "Wait for or retry saving currently permitted content and history settings before switching material versions.",
+  "error.referenceTransitionUnsaved": "This round still has unsaved content; no switch was made. Retry saving or export explicitly first.",
+  "error.referenceTransitionChanged": "The current practice, version selection, or history permission changed; no switch was made. Check and retry; the original practice remains.",
 } as const;
 
 export const diagnosticChinese: Record<keyof typeof diagnosticEnglish,string> = {
@@ -468,5 +475,12 @@ export const diagnosticChinese: Record<keyof typeof diagnosticEnglish,string> = 
   "error.cafeCoursePrepare": "咖啡馆课程未能准备。",
   "error.npsCoursePrepare": "NPS 课程未能准备。",
   "error.reviewTasksRead": "复习任务未能读取。",
-  "listening.retryError": "听力记录重试失败"
+  "listening.retryError": "听力记录重试失败",
+  "error.historyBoundaryMissing": "课程保存边界尚未建立。",
+  "error.historyBoundaryChanged": "课程保存边界已变化，请重新打开恢复；原已存记录保留。",
+  "error.historyPermissionChanged": "课程的历史许可已变化，请重新打开恢复；原已存记录保留。",
+  "error.historySavePending": "这段练习尚未保存。当前练习仍在本页，请重试保存。",
+  "error.referenceTransitionWait": "请先等待或重试当前允许内容的保存与历史设置，再切换素材版本。",
+  "error.referenceTransitionUnsaved": "当前轮仍有尚未保存的内容，本次没有切换。请先重试保存或主动导出。",
+  "error.referenceTransitionChanged": "当前练习、版本选择或历史许可已变化，本次没有切换。请核对后重试；原练习仍保留。",
 };

@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "bbac41769f7b9f458df16504ac4d4793e8ac8d93",
-  "source_file_count": 700,
-  "direct_source_file_count": 696,
+  "source_projection_tree_sha1": "80de100d0cca8a3bb05d4ceb121619ee54092225",
+  "source_file_count": 702,
+  "direct_source_file_count": 698,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 66121,
-      "git_blob_sha1": "5eec2b83239077be006bdc89f3bad3576deb67da",
-      "sha256": "3df8f621f814b738ea2f6c34956ab4fc179087b18f71a032ef34309c5ae17b9c"
+      "bytes": 66542,
+      "git_blob_sha1": "8762cf10f3d60b0d5d728287913e53ca60e1f732",
+      "sha256": "bdc476fb1dcba64cb0515287a3773d266cafa16683172ae3116623186e0f08c7"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -1829,6 +1829,13 @@
       "sha256": "21668cf12ac875a182bf776d2ae32587d8a3c26028ca6817efe3847f75dc505b"
     },
     {
+      "path": "qa/prd-continue11-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 6664,
+      "git_blob_sha1": "146114a28c2e3afcfb0cc4c7dc4549aa3aec7280",
+      "sha256": "a9941a3736638e4e443e0fc77214e97339297929954b7f083ec0e2f8b4e3548e"
+    },
+    {
       "path": "qa/prd-continue7-acceptance.mjs",
       "mode": "100644",
       "bytes": 5333,
@@ -1960,6 +1967,13 @@
       "bytes": 3646,
       "git_blob_sha1": "8207dbafd5a64121d9225064670f23b6ec280dcf",
       "sha256": "5de5dab068f4b54fba4ce999f8f691c11097ecb6a4f44fa57435e84f31c68e35"
+    },
+    {
+      "path": "scripts/prd-continue11-qa.mts",
+      "mode": "100644",
+      "bytes": 3646,
+      "git_blob_sha1": "556e7cdb93106e5b49eeeb4c7d139adc6667fcaa",
+      "sha256": "54af688edad2a14fd81fc419f2bbde8db26fe26efa36b489b15ed4a54e009682"
     },
     {
       "path": "scripts/prd-continue4-qa.mts",
@@ -2181,9 +2195,9 @@
     {
       "path": "studio/components/MutedRecordingCopy.tsx",
       "mode": "100644",
-      "bytes": 3708,
-      "git_blob_sha1": "cccccb4f95b41e44d68d15aea69a36956c1799e9",
-      "sha256": "bccf06f603fa7507240f78ef323f01e67d69861bb559c6f9ead01d367177de95"
+      "bytes": 3374,
+      "git_blob_sha1": "a85677ea7e1dd3f66e6b74a9d21060206a33df84",
+      "sha256": "6ee8918016be00ebbd59841324e28aa4906c89dc6ac53305c95db3925faf3241"
     },
     {
       "path": "studio/components/NpsTransportCheck.tsx",
@@ -2510,9 +2524,9 @@
     {
       "path": "studio/core/interface-locale.test.ts",
       "mode": "100644",
-      "bytes": 15037,
-      "git_blob_sha1": "45205d6899dd27809acf8a41964969aa1aee2774",
-      "sha256": "b55bc73cca0d682c3aaa2a49c22dea6c769e4cf0a6a342f0d0e699f446a852dc"
+      "bytes": 16579,
+      "git_blob_sha1": "28e12cf6fce166ba33e3d76cf199a2e93568b75c",
+      "sha256": "e74072237235a6be461de406a5c5964f19e7fe4cf2ee739b34a70efeaa2a2e3c"
     },
     {
       "path": "studio/core/layout-plan-files-ui.test.ts",
@@ -3868,16 +3882,16 @@
     {
       "path": "studio/i18n/messages-diagnostics.ts",
       "mode": "100644",
-      "bytes": 44084,
-      "git_blob_sha1": "aac1945a3288582653d492f3792bed62d778fa26",
-      "sha256": "22004db0700d80ba477684221bbd6c505e941a7527bc3091a0cef7e333d3f905"
+      "bytes": 45872,
+      "git_blob_sha1": "a5288eefd04f41036d8cb6c065ecac23eaef96aa",
+      "sha256": "3d3baa818222510763d35ac4b3a1dd9db9304800a7b978d0c4dc3d236d73f65b"
     },
     {
       "path": "studio/i18n/messages-panels.ts",
       "mode": "100644",
-      "bytes": 10204,
-      "git_blob_sha1": "e51292759d2de78b4138399f865d787088eed503",
-      "sha256": "bd735ed04b11e642765acc7ff3ee99de1fe9cabec099061cd12c579c5b87a6ad"
+      "bytes": 20424,
+      "git_blob_sha1": "7187ab8409bf420623fe806dc638abca419d1a4e",
+      "sha256": "56491bcf9d4e9c514fa6f63af7e1e75300362a08c2f8f68b9e2d39a49c29577e"
     },
     {
       "path": "studio/i18n/messages-reference-impact.ts",
@@ -4043,9 +4057,9 @@
     {
       "path": "studio/media/muted-copy-ui.test.mjs",
       "mode": "100644",
-      "bytes": 6676,
-      "git_blob_sha1": "0a5072634dc195cd9d532c0f9f893fc21a3ad400",
-      "sha256": "f62d6471cec4a7d4960e55ef5f97b1ed9c811e2bbc697f62846baa6574cbb9e7"
+      "bytes": 7377,
+      "git_blob_sha1": "82e67ca6ab8233b16b5b56d9eba6eeab540e772b",
+      "sha256": "49f6b91c6bd5445f89fe15e98bb0b6b121561bace89ef813976aa0a42aa5f56a"
     },
     {
       "path": "studio/media/nps-playback.ts",

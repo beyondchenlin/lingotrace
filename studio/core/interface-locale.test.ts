@@ -40,6 +40,17 @@ test('known diagnostics translate without altering raw failures, unknown details
  assert.equal(translateKnownUi('zh-CN','Total duration: 3.20 seconds (reported by the browser).'),'总时长：3.20 秒（浏览器报告）。');
  assert.equal(translateKnownUi('en','Unrecognized permission failure / 9'),'Unrecognized permission failure / 9');
  assert.equal(translateKnownUi('en','未知错误，保留细节'),'未知错误，保留细节');
+ assert.equal(translateKnownUi('en','原录像没有可读取的视频数据。'),'The original recording has no readable video data.');
+ assert.equal(translateKnownUi('en','录像超过 256 MiB 的静音副本上限，未处理原录像。'),'Recording exceeds the 256 MiB muted-copy limit; the original was not processed.');
+ assert.equal(translateKnownUi('en','课程保存边界尚未建立。'),'The course save boundary has not been established yet.');
+ assert.equal(translateKnownUi('en','请先等待或重试当前允许内容的保存与历史设置，再切换素材版本。'),'Wait for or retry saving currently permitted content and history settings before switching material versions.');
+ assert.equal(translateKnownUi('en','原片请求失败。'),'Original media request failed.');
+ assert.equal(translateKnownUi('en','原片字节校验不匹配，不能播放当前片段。请重新加载原片后重试。 [hash; SHA256_MISMATCH]'),'Original media byte check mismatch; this clip cannot play. Reload the original and retry. [hash; SHA256_MISMATCH]');
+ assert.equal(translateKnownUi('en','原片未能加载，请手动重试。 [fetch; HTTP_404] detail'),'Original media could not load. Retry manually. [fetch; HTTP_404] detail');
+ assert.equal(translateKnownUi('zh-CN','The original recording has no readable video data.'),'原录像没有可读取的视频数据。');
+ assert.equal(translate('en','mutedCopy.generate'),'Create muted copy');
+ assert.equal(translate('zh-CN','mutedCopy.generate'),'生成静音副本');
+
  const engine=new TrainingEngine();engine.input('My English draft stays exactly the same.');const before=JSON.stringify(engine.getSnapshot());
  for(const locale of ['en','zh-CN'] as const){translate(locale,'hud.check');translateKnownUi(locale,raw)}
  assert.equal(JSON.stringify(engine.getSnapshot()),before);
