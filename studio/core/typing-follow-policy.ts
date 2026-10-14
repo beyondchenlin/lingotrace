@@ -1,5 +1,18 @@
 import { NPS_MATERIAL } from './builtin-material.ts';
-import { graphemes } from './training.ts';
+import { LOCAL_REFERENCE_MEDIA_ID, LOCAL_REFERENCE_MEDIA_SHA256 } from './local-reference.ts';
+import { CAFE_MATERIAL, graphemes } from './training.ts';
+
+/** Cafe original cue map identity for fixed-pace only. Synthetic still-image video + authored sentences; not acoustically aligned. */
+export const CAFE_FIXED_PACE_COURSE = Object.freeze({
+  courseId: CAFE_MATERIAL.id,
+  courseVersion: CAFE_MATERIAL.version,
+  mediaId: LOCAL_REFERENCE_MEDIA_ID,
+  mediaSha256: LOCAL_REFERENCE_MEDIA_SHA256,
+  durationSeconds: 72,
+  sentenceMapVersion: 'cafe-studio-cues-v1',
+  sentenceMapSha256: '374a870b1963846e2a2902ab53d64e77be7ebe150e81b686596f80f48a78637b',
+  cues: CAFE_MATERIAL.cues,
+});
 
 /** Candidate sentence-average tuning, NOT word timing or a durable learning metric. */
 export const TYPING_FOLLOW_TUNING = Object.freeze({
@@ -171,12 +184,44 @@ function holdsRateToken(a: Active, env: TypingFollowEnvironment): boolean {
 function ownsRate(a: Active, env: TypingFollowEnvironment): boolean {
   return holdsRateToken(a, env) && Number.isFinite(env.mediaRate) && Math.abs(env.mediaRate - a.rateWrite.rate) <= 1e-6;
 }
-function registeredCue(identity: TypingFollowIdentity) {
+function registeredNpsCue(identity: TypingFollowIdentity) {
   const source = NPS_MATERIAL.builtinReference;
   if (identity.courseId !== NPS_MATERIAL.id || identity.courseVersion !== NPS_MATERIAL.version ||
     identity.mediaId !== source.media.id || identity.mediaSha256 !== source.media.sha256 ||
     identity.sentenceMapVersion !== source.sentenceMapVersion || identity.sentenceMapSha256 !== source.sentenceMapSha256) return null;
   return NPS_MATERIAL.cues.find(cue => cue.id === identity.cueId && cue.start === identity.cueStartSeconds && cue.end === identity.cueEndSeconds) ?? null;
+}
+function registeredCafeCue(identity: TypingFollowIdentity) {
+  const course = CAFE_FIXED_PACE_COURSE;
+  if (identity.courseId !== course.courseId || identity.courseVersion !== course.courseVersion ||
+    identity.mediaId !== course.mediaId || identity.mediaSha256 !== course.mediaSha256 ||
+    identity.sentenceMapVersion !== course.sentenceMapVersion || identity.sentenceMapSha256 !== course.sentenceMapSha256) return null;
+  return course.cues.find(cue => cue.id === identity.cueId && cue.start === identity.cueStartSeconds && cue.end === identity.cueEndSeconds) ?? null;
+}
+/** Adaptive Follow remains NPS-only. Fixed primary also admits verified cafe original. */
+function registeredCue(identity: TypingFollowIdentity, strategy: TypingFollowPacingStrategy) {
+  const nps = registeredNpsCue(identity);
+  if (nps) return { cue: nps, durationSeconds: NPS_MATERIAL.builtinReference.media.durationSeconds, kind: 'nps' as const };
+  if (strategy === 'fixed') {
+    const cafe = registeredCafeCue(identity);
+    if (cafe) return { cue: cafe, durationSeconds: CAFE_FIXED_PACE_COURSE.durationSeconds, kind: 'cafe' as const };
+  }
+  return null;
+}
+/** Studio identity fields for a registered fixed-pace / Follow course. */
+export function typingFollowCourseIdentity(material: { readonly id: string; readonly version: string; readonly builtinReference?: { readonly media: { readonly id: string; readonly sha256: string }; readonly sentenceMapVersion: string; readonly sentenceMapSha256: string } | null } | null | undefined, cue: { readonly id: string; readonly start: number; readonly end: number } | null | undefined): TypingFollowIdentity | null {
+  if (!material || !cue) return null;
+  if (material.id === NPS_MATERIAL.id && material.version === NPS_MATERIAL.version && material.builtinReference) {
+    const source = material.builtinReference;
+    return { courseId: material.id, courseVersion: material.version, mediaId: source.media.id, mediaSha256: source.media.sha256,
+      sentenceMapVersion: source.sentenceMapVersion, sentenceMapSha256: source.sentenceMapSha256, cueId: cue.id, cueStartSeconds: cue.start, cueEndSeconds: cue.end };
+  }
+  if (material.id === CAFE_FIXED_PACE_COURSE.courseId && material.version === CAFE_FIXED_PACE_COURSE.courseVersion) {
+    const course = CAFE_FIXED_PACE_COURSE;
+    return { courseId: course.courseId, courseVersion: course.courseVersion, mediaId: course.mediaId, mediaSha256: course.mediaSha256,
+      sentenceMapVersion: course.sentenceMapVersion, sentenceMapSha256: course.sentenceMapSha256, cueId: cue.id, cueStartSeconds: cue.start, cueEndSeconds: cue.end };
+  }
+  return null;
 }
 /** Fixed primary may run assisted (reference shown) or intentional dictation (reference hidden).
  * Adaptive assist still requires a shown reference and ordinary typing. */
@@ -203,8 +248,9 @@ function unavailable(env: TypingFollowEnvironment, allowComposition = false, all
   if (!env.practiceActive || env.blocked) return 'practice-blocked';
   if (!env.inputProvenanceAvailable) return 'input-provenance-unavailable';
   if (typeof Intl.Segmenter !== 'function') return 'grapheme-segmentation-unavailable';
-  if (!env.sourceVerified || (!env.mediaReady && !((allowBuffering && env.mediaBuffering === true) || allowInitialSeek)) || typeof env.playbackOwnerId !== 'string' || !env.playbackOwnerId || !registeredCue(env.identity)) return 'source-unqualified';
-  if (!finitePositive(env.mediaDurationSeconds) || Math.abs(env.mediaDurationSeconds - NPS_MATERIAL.builtinReference.media.durationSeconds) > T.durationToleranceSeconds ||
+  const registered = registeredCue(env.identity, pacingStrategy(env));
+  if (!env.sourceVerified || (!env.mediaReady && !((allowBuffering && env.mediaBuffering === true) || allowInitialSeek)) || typeof env.playbackOwnerId !== 'string' || !env.playbackOwnerId || !registered) return 'source-unqualified';
+  if (!finitePositive(env.mediaDurationSeconds) || Math.abs(env.mediaDurationSeconds - registered.durationSeconds) > T.durationToleranceSeconds ||
     env.identity.cueStartSeconds < 0 || env.identity.cueEndSeconds <= env.identity.cueStartSeconds || env.identity.cueEndSeconds > env.mediaDurationSeconds) return 'invalid-range';
   if (!finitePositive(env.mediaRate)) return 'invalid-rate';
   if (pacingStrategy(env) !== 'adaptive' && pacingStrategy(env) !== 'fixed') return 'invalid-pacing-strategy';
@@ -275,7 +321,8 @@ export function reduceTypingFollow(state: TypingFollowState, event: TypingFollow
     if (blocked || !Number.isFinite(env.nowMs) || env.nowMs < 0) {
       return state.active ? finish(state, env, blocked ?? 'invalid-clock') : result({ ...state, phase: 'off', reason: blocked ?? 'invalid-clock' });
     }
-    const cue = registeredCue(env.identity)!;
+    const registered = registeredCue(env.identity, pacingStrategy(env))!;
+    const cue = registered.cue;
     const nominal = graphemes(cue.text).length / (cue.end - cue.start);
     if (!finitePositive(nominal)) return finish(state, env, 'invalid-nominal-pace');
     const previous = state.active;

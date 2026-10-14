@@ -3,12 +3,13 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { NPS_MATERIAL } from './builtin-material.ts';
 import {
-  createTypingFollowState, estimatedTypingFollowRate, qualifyingTypingFollowAppend,
-  reduceTypingFollow, TYPING_FOLLOW_FIXED_RATES, TYPING_FOLLOW_TUNING as T,
+  CAFE_FIXED_PACE_COURSE, createTypingFollowState, estimatedTypingFollowRate, qualifyingTypingFollowAppend,
+  reduceTypingFollow, typingFollowCourseIdentity, TYPING_FOLLOW_FIXED_RATES, TYPING_FOLLOW_TUNING as T,
   type TypingFollowAppend, type TypingFollowDecision, type TypingFollowEnvironment,
   type TypingFollowEvent, type TypingFollowIdentity, type TypingFollowIntent,
   type TypingFollowInterrupt, type TypingFollowState,
 } from './typing-follow-policy.ts';
+import { CAFE_MATERIAL } from './training.ts';
 
 function identity(index = 5): TypingFollowIdentity {
   const cue = NPS_MATERIAL.cues[index], source = NPS_MATERIAL.builtinReference;
@@ -902,4 +903,60 @@ test('identity capture retains only declared identity primitives, never extra ca
   assert.equal(JSON.stringify(f.state).includes('SECRET_DRAFT'), false);
   assert.equal(Object.keys(f.state.active!.scope.identity).length, Object.keys(identity()).length);
   assert.equal(Object.isFrozen(id), false, 'capturing identity must not mutate/freeze caller objects');
+});
+
+
+function cafeIdentity(index = 0): TypingFollowIdentity {
+  const cue = CAFE_FIXED_PACE_COURSE.cues[index], course = CAFE_FIXED_PACE_COURSE;
+  return { courseId: course.courseId, courseVersion: course.courseVersion,
+    mediaId: course.mediaId, mediaSha256: course.mediaSha256,
+    sentenceMapVersion: course.sentenceMapVersion, sentenceMapSha256: course.sentenceMapSha256,
+    cueId: cue.id, cueStartSeconds: cue.start, cueEndSeconds: cue.end };
+}
+
+test('cafe fixed-pace admits verified original course and rejects adaptive Follow', () => {
+  const id = cafeIdentity(0);
+  const adaptive = fixture({ identity: id, mediaDurationSeconds: CAFE_FIXED_PACE_COURSE.durationSeconds, mediaPositionSeconds: id.cueStartSeconds, pacingStrategy: 'adaptive' });
+  assert.deepEqual(types(adaptive.send({ type: 'start', explicitUserGesture: true })), []);
+  assert.equal(adaptive.state.reason, 'source-unqualified');
+  const fixed = fixture({ identity: id, mediaDurationSeconds: CAFE_FIXED_PACE_COURSE.durationSeconds, mediaPositionSeconds: id.cueStartSeconds, pacingStrategy: 'fixed', fixedRate: 1, mediaRate: 1 });
+  fixed.start();
+  assert.equal(fixed.state.phase, 'following');
+  assert.equal(fixed.state.active?.scope.identity.courseId, CAFE_MATERIAL.id);
+  assert.equal(fixed.state.active?.pacingStrategy, 'fixed');
+});
+
+test('every registered cafe sentence is admitted under fixed pacing only', () => {
+  assert.equal(CAFE_FIXED_PACE_COURSE.cues.length, 12);
+  for (let i = 0; i < CAFE_FIXED_PACE_COURSE.cues.length; i++) {
+    const id = cafeIdentity(i);
+    const f = fixture({ identity: id, mediaDurationSeconds: CAFE_FIXED_PACE_COURSE.durationSeconds, mediaPositionSeconds: id.cueStartSeconds, pacingStrategy: 'fixed', fixedRate: 1, mediaRate: 1 });
+    f.start();
+    assert.equal(f.state.phase, 'following');
+    assert.equal(f.state.active?.scope.identity.cueEndSeconds, CAFE_FIXED_PACE_COURSE.cues[i].end);
+  }
+});
+
+test('typingFollowCourseIdentity binds NPS builtin and cafe original without inventing foreign courses', () => {
+  const npsCue = NPS_MATERIAL.cues[0];
+  const nps = typingFollowCourseIdentity(NPS_MATERIAL, npsCue);
+  assert.equal(nps?.courseId, NPS_MATERIAL.id);
+  assert.equal(nps?.mediaSha256, NPS_MATERIAL.builtinReference.media.sha256);
+  const cafeCue = CAFE_MATERIAL.cues[2];
+  const cafe = typingFollowCourseIdentity(CAFE_MATERIAL, cafeCue);
+  assert.equal(cafe?.courseId, CAFE_MATERIAL.id);
+  assert.equal(cafe?.mediaId, CAFE_FIXED_PACE_COURSE.mediaId);
+  assert.equal(cafe?.sentenceMapSha256, CAFE_FIXED_PACE_COURSE.sentenceMapSha256);
+  assert.equal(typingFollowCourseIdentity({ id: 'foreign', version: 'v1' }, cafeCue), null);
+});
+
+test('cafe fixed-pace rejects wrong duration or altered media hash', () => {
+  const id = cafeIdentity(1);
+  const wrongDuration = fixture({ identity: id, mediaDurationSeconds: 43.366667, mediaPositionSeconds: id.cueStartSeconds, pacingStrategy: 'fixed', fixedRate: 1, mediaRate: 1 });
+  assert.deepEqual(types(wrongDuration.send({ type: 'start', explicitUserGesture: true })), []);
+  assert.equal(wrongDuration.state.reason, 'invalid-range');
+  const forged = { ...id, mediaSha256: '0'.repeat(64) };
+  const wrongHash = fixture({ identity: forged, mediaDurationSeconds: CAFE_FIXED_PACE_COURSE.durationSeconds, mediaPositionSeconds: id.cueStartSeconds, pacingStrategy: 'fixed', fixedRate: 1, mediaRate: 1 });
+  assert.deepEqual(types(wrongHash.send({ type: 'start', explicitUserGesture: true })), []);
+  assert.equal(wrongHash.state.reason, 'source-unqualified');
 });

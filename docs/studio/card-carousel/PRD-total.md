@@ -1,6 +1,6 @@
 # Card carousel — Depth Deck + Magnetic Reveal (total)
 
-**Status:** richer catalog shipped (fixed / dictation / kids / cafe-preview / assisted; dual-aspect; presentation only)  
+**Status:** richer catalog shipped (fixed / dictation / kids / cafe fixed-pace / assisted; dual-aspect; presentation only)  
 **SoT:** product shell / story surfaces; does not alter Studio training facts.
 
 ## Purpose
@@ -18,7 +18,7 @@ A premium card browser for lessons / scenes with two signature motions and dual-
 - `fixed-pace` → `/studio/`
 - `dictation` → `/studio/?dictation=1` (hides reference for fixed dictation)
 - `kids` → `/studio/?edition=kids`
-- `cafe-preview` → cafe poster/video art only; CTA still opens verified NPS Studio (cafe is not a Studio fixed-pace material yet)
+- `cafe` → `/studio/?course=cafe` (verified original cafe video · SHA-bound fixed-pace; adaptive Follow remains NPS-only)
 - `assisted` → `/studio/` with reference-visible practice
 
 ## Acceptance
@@ -26,4 +26,4 @@ A premium card browser for lessons / scenes with two signature motions and dual-
 2. Keyboard: Left/Right and focus-visible cards.
 3. Opening a card into `/studio/` does not invent materials or change scoring.
 4. Portrait phone and desktop landscape both show readable cards (not clipped titles).
-5. Cafe preview copy must not claim Studio cafe fixed-pace training.
+5. Cafe cards must open `?course=cafe` Studio fixed-pace; do not claim adaptive Follow or acoustic word timing for cafe.

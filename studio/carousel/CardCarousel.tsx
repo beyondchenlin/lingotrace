@@ -79,7 +79,7 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
     <div>
      <p className="lt-cards-kicker">{locale==='zh-CN'?'课程卡片':'Lesson cards'}</p>
      <h1>{locale==='zh-CN'?'双动效卡组':'Dual-motion deck'}</h1>
-     <p className="lt-cards-lede">{locale==='zh-CN'?'Depth Deck / Magnetic Reveal · 定速 / 听写 / 儿童版 / 咖啡馆预览 · 不改变训练事实':'Depth Deck / Magnetic Reveal · fixed / dictation / kids / cafe preview · training facts unchanged'}</p>
+     <p className="lt-cards-lede">{locale==='zh-CN'?'Depth Deck / Magnetic Reveal · 定速 / 听写 / 儿童版 / 咖啡馆定速 · 不改变训练事实':'Depth Deck / Magnetic Reveal · fixed / dictation / kids / cafe fixed · training facts unchanged'}</p>
     </div>
     <nav className="lt-cards-nav" aria-label={locale==='zh-CN'?'动效模式':'Motion mode'}>
      {([['depth-deck','Depth Deck'],['magnetic-reveal','Magnetic Reveal']] as const).map(([id,label])=>(
@@ -151,7 +151,7 @@ function kindLabel(kind:LessonCardSpec['kind'],locale:'en'|'zh-CN'){
   'fixed-pace':['Fixed pace','定速'],
   dictation:['Dictation','听写'],
   kids:['Kids','儿童版'],
-  'cafe-preview':['Cafe preview','咖啡馆预览'],
+  'cafe':['Cafe fixed','咖啡馆定速'],
   assisted:['Assisted','辅助'],
  } as const;
  return locale==='zh-CN'?map[kind][1]:map[kind][0];

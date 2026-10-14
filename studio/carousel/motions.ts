@@ -24,7 +24,7 @@ export function carouselMotion(id:CarouselMotionId):CarouselMotionProfile{
  return id==='magnetic-reveal'?MAGNETIC_REVEAL:DEPTH_DECK;
 }
 
-export type LessonCardKind = 'fixed-pace' | 'dictation' | 'kids' | 'cafe-preview' | 'assisted';
+export type LessonCardKind = 'fixed-pace' | 'dictation' | 'kids' | 'cafe' | 'assisted';
 
 export interface LessonCardSpec {
  id:string;
@@ -42,7 +42,7 @@ export interface LessonCardSpec {
  ctaZh?:string;
 }
 
-/** Richer dual-aspect lesson catalog: NPS Studio paths + cafe media preview (not Studio cafe training). */
+/** Richer dual-aspect lesson catalog: NPS Studio paths + verified cafe fixed-pace Studio material. */
 export const DEMO_LESSON_CARDS:LessonCardSpec[]=[
  {
   id:'connie-fixed',
@@ -90,32 +90,32 @@ export const DEMO_LESSON_CARDS:LessonCardSpec[]=[
   ctaZh:'打开儿童版',
  },
  {
-  id:'cafe-preview-landscape',
-  title:'Cafe · Media preview',
-  titleZh:'咖啡馆 · 素材预览',
-  subtitle:'Preview art only · Studio trains on verified NPS',
-  subtitleZh:'仅预览画面 · Studio 仍用已核验 NPS',
+  id:'cafe-fixed-landscape',
+  title:'Cafe · Fixed pace',
+  titleZh:'咖啡馆 · 定速跟音',
+  subtitle:'Verified original cafe video · SHA-bound · fixed 1×',
+  subtitleZh:'已核验原创咖啡馆视频 · SHA 绑定 · 定速 1×',
   aspect:'landscape',
   posterSrc:'/studio-assets/06-cafe-poster.jpg',
   videoSrc:'/studio-assets/06-cafe.mp4',
-  href:'/studio/',
-  kind:'cafe-preview',
-  cta:'Open Studio (NPS)',
-  ctaZh:'打开 Studio（NPS）',
+  href:'/studio/?course=cafe',
+  kind:'cafe',
+  cta:'Open Cafe Studio',
+  ctaZh:'打开咖啡馆定速',
  },
  {
-  id:'cafe-preview-portrait',
-  title:'Cafe · Portrait preview',
-  titleZh:'咖啡馆 · 竖版预览',
-  subtitle:'Dual-aspect preview · not cafe Studio training',
-  subtitleZh:'双画幅预览 · 非咖啡馆定速训练',
+  id:'cafe-fixed-portrait',
+  title:'Cafe · Portrait fixed',
+  titleZh:'咖啡馆 · 竖版定速',
+  subtitle:'Dual-aspect · same verified cafe course',
+  subtitleZh:'双画幅 · 同一已核验咖啡馆课程',
   aspect:'portrait',
   posterSrc:'/studio-assets/06-cafe-poster.jpg',
   videoSrc:'/studio-assets/06-cafe.mp4',
-  href:'/studio/',
-  kind:'cafe-preview',
-  cta:'Open Studio (NPS)',
-  ctaZh:'打开 Studio（NPS）',
+  href:'/studio/?course=cafe',
+  kind:'cafe',
+  cta:'Open Cafe Studio',
+  ctaZh:'打开咖啡馆定速',
  },
  {
   id:'connie-assisted',
