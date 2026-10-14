@@ -58,8 +58,10 @@ export function containLearningMedia(intrinsic:{width:number;height:number},rect
 
 /** Keep the reference toggle and opt-in playback near typing, outside its line slots. */
 export function inputHeaderControls(card:InputCardGeometry){
- const h=card.helper,gap=6/card.cssScale,w=Math.min(172/card.cssScale,h.w*.48);
- return{reference:{...h,w:h.w-w-gap},follow:{...h,x:h.x+h.w-w,w}};
+ const h=card.helper,gap=6/card.cssScale;
+ // Icon-sized pace toggle (44 CSS px); reference keeps the remaining header band.
+ const followW=Math.max(44/card.cssScale,44);
+ return{reference:{...h,w:Math.max(0,h.w-followW-gap)},follow:{x:h.x+h.w-followW,y:h.y,w:followW,h:h.h}};
 }
 
 /** Scroll the page to editing and nearby transport without shrinking the learning surface. */

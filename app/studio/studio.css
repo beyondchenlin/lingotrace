@@ -96,8 +96,9 @@
 
 /* Small opt-in transport shares the input header, never its complete line slots. */
 .typing-follow-toolbar{position:absolute;z-index:4;display:flex;align-items:center;justify-content:flex-end;gap:4px;color:#dce9df;font:12px/1.2 "Lingo Studio Sans",Arial,sans-serif;pointer-events:auto}
-.typing-follow-toolbar button{min-height:44px;max-width:100%;padding:4px 7px;border:1px solid #d7e7d838;border-radius:7px;background:#edf5e909;color:#f2f6ef;font:inherit;white-space:normal}
-.typing-follow-toolbar button[aria-pressed=true]{background:#d3ebba1a;border-color:#d2edbda0}.typing-follow-rate{font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}.typing-follow-toolbar :focus-visible{outline:2px solid #d2edbd;outline-offset:-2px}
+.typing-follow-toolbar .typing-follow-toggle{min-width:44px;min-height:44px;max-width:100%;padding:11px;border:0;border-radius:50%;background:transparent;color:#edf4ef;filter:drop-shadow(0 1px 2px #06101699)}
+.typing-follow-toolbar .typing-follow-toggle[aria-pressed=true],.typing-follow-toolbar .typing-follow-toggle[data-active=true]{background:#d3ebba1a;color:#d4efbf}
+.typing-follow-rate{font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}.typing-follow-toolbar :focus-visible{outline:2px solid #d2edbd;outline-offset:-2px}
 .editing-layout>.typing-follow-toolbar{pointer-events:none;visibility:hidden}
 
 
@@ -185,9 +186,9 @@
 .portrait-layout[data-practice-compact=true] .typing-follow-toolbar[data-compact-secondary]{
   opacity:.92;
 }
-.portrait-layout[data-practice-compact=true] .typing-follow-toolbar[data-compact-secondary] button{
-  min-height:36px;padding:4px 8px;font-size:11px;border-radius:8px;
-  background:#102028aa;border:1px solid #d7e7d828;
+.portrait-layout[data-practice-compact=true] .typing-follow-toolbar[data-compact-secondary] .typing-follow-toggle{
+  min-width:44px;min-height:44px;padding:10px;border-radius:50%;
+  background:#102028aa;
 }
 
 

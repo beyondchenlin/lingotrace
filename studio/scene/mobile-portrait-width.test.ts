@@ -20,7 +20,7 @@ test('portrait learning surface uses all available width even when input, contro
 test('compact Follow and reference controls remain outside every native input line',()=>{
  for(const aw of[280,320,360,390,430,485]){
   const g=learningGeometry(responsiveLayout(true),{keyboardVisible:false,cssWidth:aw}),header=inputHeaderControls(g.inputCard),scale=aw/g.width;
-  assert.ok(header.reference.w>0);assert.ok(header.reference.x+header.reference.w<header.follow.x);assert.ok(header.follow.w*scale>=100);assert.ok(header.follow.h*scale>=44);
+  assert.ok(header.reference.w>0);assert.ok(header.reference.x+header.reference.w<header.follow.x);assert.ok(header.follow.w*scale>=44-1e-6,'pace icon keeps 44px touch');assert.ok(header.follow.h*scale>=44);
   assert.ok(header.follow.y+header.follow.h<=g.inputCard.input.y);assert.equal(header.reference.y+header.reference.h,g.inputCard.input.y);
  }
 });

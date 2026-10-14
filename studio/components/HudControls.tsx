@@ -1,7 +1,7 @@
 'use client';
 import {useStudioLocale} from '../i18n/react';
 import {useEffect,useRef,type CSSProperties,type ReactNode} from 'react';
-export type HudGlyphName='listen'|'history'|'keyboard'|'settings'|'close'|'display';
+export type HudGlyphName='listen'|'history'|'keyboard'|'settings'|'close'|'display'|'pace';
 /** Small, unfilled visuals; the shared button still supplies a 44px target. */
 export function HudGlyph({name}:{name:HudGlyphName}){
  const paths:Record<HudGlyphName,ReactNode>={
@@ -11,6 +11,8 @@ export function HudGlyph({name}:{name:HudGlyphName}){
   settings:<><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></>,
   close:<path d="m6 6 12 12M6 18 18 6"/>,
   display:<><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></>,
+  // Metronome: fixed-pace / adaptive-assist toggle (pressed = active).
+  pace:<><path d="M9 21h6L13.2 9H10.8L9 21z"/><path d="M12 9V5"/><path d="M12 9l4.5-2.5"/><circle cx="12" cy="17.5" r="1.2"/></>,
  };
  return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
 }
