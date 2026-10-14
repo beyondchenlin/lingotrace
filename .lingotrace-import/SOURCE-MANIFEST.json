@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "27eee9ae7b3ef7e4200523245174ecac043f635c",
+  "source_projection_tree_sha1": "b6ca524b151a32fb85fe986bf47303a894733c03",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -1306,9 +1306,9 @@
     {
       "path": "package.json",
       "mode": "100644",
-      "bytes": 787,
-      "git_blob_sha1": "4475265144bbe9527caa31ac736b6b24a6bd0739",
-      "sha256": "72d4875303d51f3b12deebf24bad613c9b4312252b44ebefa78edeaf4ce6a303"
+      "bytes": 835,
+      "git_blob_sha1": "393c176b1fef232d6e071eca078f52e2c66c99a3",
+      "sha256": "4d55a5c972f55c082afb5d73f1c77307f63a8f40929362ab61db5970390747d6"
     },
     {
       "path": "previews/portrait/.gitignore",
@@ -1852,9 +1852,9 @@
     {
       "path": "scripts/check-export.mjs",
       "mode": "100644",
-      "bytes": 1612,
-      "git_blob_sha1": "e1b8a5ca656f224c675cbf511d7ba971882c14e2",
-      "sha256": "0be715be992e8f6d3d1f4ee09073e6722713ca3e82504ccc60735d273a54d412"
+      "bytes": 1922,
+      "git_blob_sha1": "809a0aa5264d09a98f477d99184c8ca3027c531e",
+      "sha256": "241d37954648386df1451fe178e49a01649183a31ad15be5db2e727bd09b7e66"
     },
     {
       "path": "scripts/compare-accepted-standby.ts",

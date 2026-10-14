@@ -5,6 +5,13 @@ if(!html.includes('studio-answer')||!html.includes('scene-canvas'))throw Error('
 const refs=[...html.matchAll(/(?:src|href)="(\/_next\/[^"?]+)(?:\?[^\"]*)?"/g)].map(m=>m[1]);
 for(const path of refs)await access(`dist${path}`);
 for(const name of ['06-cafe.mp4','06-cafe-poster.jpg','06-reference.png','rights.json'])await access(`dist/studio-assets/${name}`);
+for(const name of [
+  'nps-connie/connie-lau-education-ranger-720p.mp4',
+  'nps-connie/connie-lau-compatible-mp4-v1.mp4',
+  'nps-connie/1ae4ef4410aa49a86a654303c7fe52ef26b86484e22fae234911bb2ec1c46526.mp4',
+  'nps-connie/poster.jpg',
+  'nps-connie/manifest.json',
+])await access(`dist/studio-assets/${name}`);
 for(const name of['studio-sans-regular.woff','studio-sans-bold.woff','studio-mono-regular.woff','studio-semibold.woff','LIBERATION-LICENSE.txt','OPEN-SANS-LICENSE.txt'])await access(`dist/studio-assets/fonts/${name}`);
 const old=execFileSync('git',['diff','--name-only','a72f4c2acb173a185221002ebea1f5011c9bf4b5','--','dist/demo','dist/hud'],{encoding:'utf8'}).trim();if(old)throw Error(`Archived v12 changed: ${old}`);
 if(!Buffer.from(await readFile('dist/index.html')).equals(await readFile('public/index.html')))throw Error('Root entry differs from its authored source');

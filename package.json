@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack --hostname 0.0.0.0 --port 4173",
-    "build": "next build --webpack && node scripts/assemble-site.mjs",
+    "build": "python3 .lingotrace-import/restore-source.py && next build --webpack && node scripts/assemble-site.mjs",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test studio/core/*.test.ts studio/scene/*.test.ts && node --experimental-strip-types --test studio/media/*.test.mjs"
   },
