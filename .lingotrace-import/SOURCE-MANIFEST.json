@@ -1,8 +1,8 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "41088d56504afc246c821c8a2e63ad61483780e3",
-  "source_file_count": 742,
+  "source_projection_tree_sha1": "3d9218d559ef99b59a60058c1a9e7e1c2bfcfb01",
+  "source_file_count": 744,
   "direct_source_file_count": 704,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
@@ -2258,9 +2258,9 @@
     {
       "path": "studio/components/RecordCalendarPanel.tsx",
       "mode": "100644",
-      "bytes": 14223,
-      "git_blob_sha1": "f2d1bc1bcea4dff4942d34ad403fd4332ec5d90d",
-      "sha256": "7b08f4f1345cfe89623d472fe55971e8f383b599bfb3347eb7529d86f9f4aacc"
+      "bytes": 14139,
+      "git_blob_sha1": "0a87f7c798493890d0d25548124ccf1fd94364e1",
+      "sha256": "c330aea6bcf91b96e10afa741e91c2d708eb21fc86571eac856b985708751ef7"
     },
     {
       "path": "studio/components/ReviewDueTimeInput.tsx",
@@ -2300,9 +2300,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 263498,
-      "git_blob_sha1": "a480485d93c3e33e1ba2e8319406287672e5f56e",
-      "sha256": "27448c4a3e1f72cd7a5a9565cdfbf5dac5afed1b5e7b3dd80223f532db34b20e"
+      "bytes": 263286,
+      "git_blob_sha1": "7a5df50096dedbd30b404865981ff0da7a7b4bd8",
+      "sha256": "084d5e4febf3a296bd2e5fea9f9a4ee57fc8609750edf95671794d1f3e3a1bdc"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -2335,9 +2335,9 @@
     {
       "path": "studio/components/useListening.ts",
       "mode": "100644",
-      "bytes": 16386,
-      "git_blob_sha1": "146c85a30ebed2cd06661ed0f02e18d6d838ae3f",
-      "sha256": "7cc0273672352c651f81f72be827a6af4db8c48f144739d5540229de4232b17e"
+      "bytes": 16559,
+      "git_blob_sha1": "4f91d9ee344578591b5512fcb0566c9f0ec09547",
+      "sha256": "3e5736679fbb8886604c4a68d37bd5af7b5355103099ab307e1daaa34bbe55fd"
     },
     {
       "path": "studio/core/automatic-history-control.test.ts",
@@ -3924,9 +3924,9 @@
     {
       "path": "studio/i18n/messages-diagnostics.ts",
       "mode": "100644",
-      "bytes": 64860,
-      "git_blob_sha1": "5eb66e9ed4b9b2115821e214ba9065211546668c",
-      "sha256": "cb492a2009c650b884a86eb8d0f8bee792a3403e9ca78fd76a40d78255c52c09"
+      "bytes": 65254,
+      "git_blob_sha1": "c2356b63072f20d565e2a289875174b21bd79fb2",
+      "sha256": "bd4bc83eff588c429d1aafd20ce94e80b296d9657aff31b25112637b4e52c4e4"
     },
     {
       "path": "studio/i18n/messages-panels.ts",
@@ -5201,6 +5201,20 @@
       "bytes": 1578,
       "sha256": "2f55f6602f86b8cafe067b975c5878431fda47148a532507eb020796912f6f70",
       "git_blob_sha1": "bfab1d718b47d2ec68797d212e3563bfd3345d67"
+    },
+    {
+      "path": "qa/prd-continue35-acceptance.mjs",
+      "mode": "100644",
+      "bytes": 5611,
+      "sha256": "ca5e3e1cfcf73c89d12e02376cf3a0e91cb67d8a5a6519a3d3b593395686d7b0",
+      "git_blob_sha1": "5a0f57d6f62903abda9ec7e7463713023b580621"
+    },
+    {
+      "path": "scripts/prd-continue35-qa.mts",
+      "mode": "100644",
+      "bytes": 1450,
+      "sha256": "1892548cd7ab5d6f61c39ea97a837a349e73b6f163d5d9ce10432d516668fbf8",
+      "git_blob_sha1": "09f9adcf809bdccf8b7960e1f8b3be39a668de64"
     }
   ],
   "large_resources": [
