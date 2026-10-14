@@ -7,6 +7,7 @@ test('both carousel motions stay distinct and reduced-motion friendly by timing 
  assert.equal(carouselMotion('magnetic-reveal').id,'magnetic-reveal');
  assert.ok(MAGNETIC_REVEAL.snapOvershoot>DEPTH_DECK.snapOvershoot);
  assert.ok(MAGNETIC_REVEAL.focusScale>=DEPTH_DECK.focusScale);
+ assert.ok(MAGNETIC_REVEAL.settleMs>=DEPTH_DECK.settleMs);
 });
 
 test('demo deck includes landscape and portrait cards with practice hrefs',()=>{
@@ -15,5 +16,6 @@ test('demo deck includes landscape and portrait cards with practice hrefs',()=>{
  for(const card of DEMO_LESSON_CARDS){
   assert.ok(card.posterSrc.startsWith('/studio-assets/'));
   assert.equal(card.href,'/studio/');
+  assert.ok(card.titleZh.length>0);
  }
 });

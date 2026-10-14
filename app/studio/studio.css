@@ -288,16 +288,53 @@
 
 
 /* Kids / cartoon visual edition — DOM chrome only; Canvas uses edition tokens. */
+.studio-page[data-visual-edition=kids]{
+  background:
+    radial-gradient(900px 480px at 12% -8%,#ffb34722,transparent 55%),
+    radial-gradient(700px 420px at 92% 8%,#7ad7ff1f,transparent 50%),
+    #10181c;
+}
 .studio-stage[data-visual-edition=kids] .studio-tools{
-  border-radius:18px;border-color:#ffd59a55;background:#1a2418d8;
+  border-radius:20px;border-color:#ffd59a66;background:#1c2818e8;
+  box-shadow:0 18px 40px #0007, inset 0 1px 0 #ffe6b428;
 }
-.studio-stage[data-visual-edition=kids] .studio-tools button{border-radius:12px;min-height:44px}
+.studio-stage[data-visual-edition=kids] .studio-tools button{
+  border-radius:14px;min-height:44px;border-color:#ffd59a33;
+}
+.studio-stage[data-visual-edition=kids] .studio-tools button:hover,
+.studio-stage[data-visual-edition=kids] .studio-tools button:focus-visible{
+  background:#ffb34728;border-color:#ffb34788;
+}
+.studio-stage[data-visual-edition=kids] .studio-drawer[data-drawer=sheet]{
+  border-radius:22px 22px 0 0;border-color:#ffd59a44;background:#152018f2;
+}
 .studio-stage[data-visual-edition=kids].tools-open .status-strip{
-  border-radius:16px;border-color:#9ad7ff55;background:#152228ee;
+  border-radius:18px;border-color:#9ad7ff66;background:#15282eee;
+  box-shadow:0 12px 28px #0006;
 }
-.studio-stage[data-visual-edition=kids] .hud-glyph{border-radius:14px}
-.studio-stage[data-visual-edition=kids] .submit-hit{border-radius:14px}
-.studio-page[data-visual-edition=kids]{background:#10181c}
+.studio-stage[data-visual-edition=kids] .hud-glyph{
+  border-radius:16px;border-color:#ffd59a44;background:#1a2618cc;
+}
+.studio-stage[data-visual-edition=kids] .submit-hit{
+  border-radius:16px;border-color:#ffb34766;background:#ffb34722;
+}
+.studio-stage[data-visual-edition=kids] .hud-popover,
+.studio-page[data-visual-edition=kids] .panel,
+.studio-page[data-visual-edition=kids] .modal-card{
+  border-radius:18px;border-color:#ffd59a44;
+}
+.studio-page[data-visual-edition=kids] .edition-switch{
+  display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px;
+}
+.studio-page[data-visual-edition=kids] .edition-switch button[aria-pressed=true],
+.studio-page[data-visual-edition=pro] .edition-switch button[aria-pressed=true]{
+  background:#ffb347;color:#1a2414;border-color:#ffb347;font-weight:700;
+}
+.edition-switch{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.edition-switch button{
+  min-height:44px;padding:10px 14px;border-radius:999px;
+  border:1px solid #d7e7d838;background:#14211acc;color:#e7f2df;
+}
 
 
 /* One-screen phone: stage fills the stable viewport; no dead bottom scroll band. */

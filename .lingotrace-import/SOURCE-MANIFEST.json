@@ -1,7 +1,7 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "55b278f259462cd40ac3b602fc83002dc629c353",
+  "source_projection_tree_sha1": "450a180a9b3a0dc7cf51176089db4b88def6c8e9",
   "source_file_count": 688,
   "direct_source_file_count": 684,
   "restored_source_file_count": 4,
@@ -81,9 +81,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 41008,
-      "git_blob_sha1": "dd690eeb08236d0363bc26449c2ff90be7e7006a",
-      "sha256": "0d75f07839edcdc7b24a3df77820a7e3441ee77615a33e9f43e93372c67282f8"
+      "bytes": 42489,
+      "git_blob_sha1": "c7eab72bde7c8b1145f0f38c1127473504baab9f",
+      "sha256": "3d55a79b0fa04828efd839143de0c8f40da953ec531d948f55312da56cabb1e4"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -347,9 +347,9 @@
     {
       "path": "docs/studio/card-carousel/PRD-total.md",
       "mode": "100644",
-      "bytes": 1100,
-      "git_blob_sha1": "830c11bb81d62e927ea6398593425febabf88485",
-      "sha256": "24f77075f5e10031bd073e0f47cb87b83f5fbdcb79e5af5030d779073598fb0b"
+      "bytes": 1161,
+      "git_blob_sha1": "2af9fcc87e4913866ea4697fd7704d604686a5f9",
+      "sha256": "34bf18c51dd8482744c358ac3fa02523d817488fef37d9b1bb9c519fa80daff5"
     },
     {
       "path": "docs/studio/centered-english-hud/PRD-detailed-v80.md",
@@ -585,9 +585,9 @@
     {
       "path": "docs/studio/kids-edition/PRD-total.md",
       "mode": "100644",
-      "bytes": 1305,
-      "git_blob_sha1": "31669f9dd937d11ac953b32bd59c5eb0faf27a67",
-      "sha256": "3d552041de7ad51931fe1bf50069677280da260624963e2b307211676dde82db"
+      "bytes": 1350,
+      "git_blob_sha1": "1f0995b0bf3dfa45a680ffc74e839704fc99c9fd",
+      "sha256": "3ec6abefbbad567141bed4e447eeddc4539d73db48f198f0d8327a5fdbdd7caa"
     },
     {
       "path": "docs/studio/layout-plan-files.md",
@@ -1985,23 +1985,23 @@
     {
       "path": "studio/carousel/CardCarousel.tsx",
       "mode": "100644",
-      "bytes": 6257,
-      "git_blob_sha1": "b62baf81f7804bc4d09776c14ed4b0e791fddd30",
-      "sha256": "28d118d181f50053ba75d96e732d482e46dfc974ff47f333b3f166eec0a9e22c"
+      "bytes": 7406,
+      "git_blob_sha1": "8823c1c26cf8407878d00d9fec9cce61115ee668",
+      "sha256": "36f369e2abd396e19bc691b145c9e35d15ef1784ddd40db9a8733bd52db33a3d"
     },
     {
       "path": "studio/carousel/carousel.css",
       "mode": "100644",
-      "bytes": 3021,
-      "git_blob_sha1": "8e60cd8046bb49cb08885b48293d12184e9e3692",
-      "sha256": "dd6031f098de10a22bfaa8a683b915bf3c93baf956a16750dc7e6997a9db9b24"
+      "bytes": 4694,
+      "git_blob_sha1": "93a178e1c985083341a5a6a0dadd566cec3f456f",
+      "sha256": "1670e1ffc987e86719176694d8c0950c8f5833d1ffacc79e3d71afd28d1436f0"
     },
     {
       "path": "studio/carousel/motions.test.ts",
       "mode": "100644",
-      "bytes": 869,
-      "git_blob_sha1": "d730b769b7712e0c342abb5aa8842fd2d28742df",
-      "sha256": "c14012be8387578b7bd6f310fa188c9076cf1342ea173c7279b6f6dfb4a0130e"
+      "bytes": 964,
+      "git_blob_sha1": "3ecea8fc27cff4a68094ef2d9214197ef41caea4",
+      "sha256": "b14818ef3e622b3ea05ed733a31854ce35863dda6020cd64df4e66e3aed145a9"
     },
     {
       "path": "studio/carousel/motions.ts",
@@ -2174,9 +2174,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 252915,
-      "git_blob_sha1": "7615c86d0526347cf929c0015739ce78136b55ac",
-      "sha256": "1e4b861424b31b3f60332e7e3cb1fa2777879cf2ad755db9730a3a6a0434c0f0"
+      "bytes": 252964,
+      "git_blob_sha1": "f92cfe34d5d4a77db373d2afea9725d128ada204",
+      "sha256": "ca21e895bd5221d6663d17c3d70289e503d9b7cd10b667b2b5836c0bf2032f56"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4715,9 +4715,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31949,
-      "git_blob_sha1": "04741b9e5d7dbc809ab3245da56721cc5b45869c",
-      "sha256": "ed141d0b0d41dfb972c6ba15f5974aefd76b1e5310cf5418c539a5b0fd1ef0d1"
+      "bytes": 32414,
+      "git_blob_sha1": "f827d02c302571bdce1181f19a0a84a0d11aa1e9",
+      "sha256": "46f5ac555dd13a04092882f58d1bb7586e7640830bc063ae5e6675c7b86ca29c"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",

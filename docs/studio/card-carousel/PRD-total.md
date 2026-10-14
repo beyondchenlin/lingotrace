@@ -1,6 +1,6 @@
 # Card carousel — Depth Deck + Magnetic Reveal (total)
 
-**Status:** planned after HUD rescue mid-checkpoint  
+**Status:** first vertical shipped (Depth Deck + Magnetic Reveal, contain media, dual-aspect; presentation only)  
 **SoT:** product shell / story surfaces; does not alter Studio training facts.
 
 ## Purpose

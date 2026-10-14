@@ -15,22 +15,41 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
  const [reduced,setReduced]=useState(false);
  const [dragX,setDragX]=useState(0);
  const [settling,setSettling]=useState(false);
+ const [revealed,setRevealed]=useState(true);
  const startX=useRef<number|null>(null);
+ const settleTimer=useRef<number|null>(null);
  const profile=carouselMotion(motionId);
  const count=cards.length;
+ const clearSettle=()=>{if(settleTimer.current!=null){window.clearTimeout(settleTimer.current);settleTimer.current=null}};
  const go=useCallback((next:number)=>{
   if(!count)return;
+  clearSettle();
   setSettling(true);
+  setRevealed(reduced||motionId!=='magnetic-reveal');
   setIndex(((next%count)+count)%count);
   setDragX(0);
-  window.setTimeout(()=>setSettling(false),reduced?160:profile.settleMs);
- },[count,profile.settleMs,reduced]);
+  const settle=reduced?160:profile.settleMs;
+  settleTimer.current=window.setTimeout(()=>{
+   setSettling(false);
+   setRevealed(true);
+   settleTimer.current=null;
+  },settle);
+ },[count,motionId,profile.settleMs,reduced]);
  useEffect(()=>{
   const mq=window.matchMedia('(prefers-reduced-motion: reduce)');
   const sync=()=>setReduced(mq.matches);
   sync();mq.addEventListener('change',sync);
   return()=>mq.removeEventListener('change',sync);
  },[]);
+ useEffect(()=>()=>clearSettle(),[]);
+ useEffect(()=>{
+  // Switching motion should re-settle active card content for Magnetic Reveal.
+  if(motionId==='magnetic-reveal'&&!reduced){
+   setRevealed(false);
+   clearSettle();
+   settleTimer.current=window.setTimeout(()=>{setRevealed(true);setSettling(false)},profile.settleMs);
+  }else setRevealed(true);
+ },[motionId,profile.settleMs,reduced]);
  useEffect(()=>{
   const onKey=(e:KeyboardEvent)=>{
    if(e.key==='ArrowRight'){e.preventDefault();go(index+1)}
@@ -85,10 +104,13 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
      const style=cardStyle(motionId,stack,dragX,profile,reduced);
      const title=locale==='zh-CN'?card.titleZh:card.title;
      const subtitle=locale==='zh-CN'?card.subtitleZh:card.subtitle;
+     const aspectLabel=card.aspect==='portrait'
+      ?(locale==='zh-CN'?'竖版':'Portrait')
+      :(locale==='zh-CN'?'横版':'Landscape');
      return(
       <article
        key={card.id}
-       className={`lt-card ${active?'is-active':''}`}
+       className={`lt-card ${active?'is-active':''} ${active&&revealed?'is-revealed':''}`}
        data-aspect={card.aspect}
        data-stack={stack}
        style={style}
@@ -96,6 +118,7 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
        tabIndex={active?0:-1}
       >
        <div className="lt-card-media">
+        <span className="lt-card-aspect">{aspectLabel}</span>
         {card.videoSrc&&active?(
          <video src={card.videoSrc} poster={card.posterSrc} muted playsInline loop autoPlay={active&&!reduced} preload="metadata"/>
         ):(
@@ -117,7 +140,7 @@ export function CardCarousel({cards=DEMO_LESSON_CARDS,locale='en',initialMotion=
      <button key={card.id} type="button" role="tab" aria-selected={i===index} aria-label={`${i+1}`} onClick={()=>go(i)}/>
     ))}
    </div>
-   <p className="lt-cards-hint">{locale==='zh-CN'?'左右键或拖拽切换 · 减少动效时改为淡入':'Arrow keys or drag · reduced motion uses fade'}</p>
+   <p className="lt-cards-hint">{locale==='zh-CN'?'左右键或拖拽切换 · 减少动效时改为淡入 · 媒体 contain 不裁切':'Arrow keys or drag · reduced motion uses fade · media uses contain'}</p>
   </section>
  );
 }
@@ -127,11 +150,11 @@ function cardStyle(motionId:CarouselMotionId,stack:number,dragX:number,profile:R
   return{opacity:stack===0?1:0,transform:'none',zIndex:20-stack,pointerEvents:stack===0?'auto':'none',transition:`opacity ${profile.settleMs*.4}ms ease`};
  }
  const depth=Math.min(stack,3);
- const x=stack===0?dragX:0;
+ const x=stack===0?dragX:depth*(motionId==='depth-deck'?10:6);
  const y=depth*profile.stackOffsetY+(motionId==='magnetic-reveal'&&stack===0&&Math.abs(dragX)>8?-profile.snapOvershoot*0.15:0);
  const scale=stack===0?profile.focusScale*(1-Math.min(Math.abs(dragX),120)/2400):Math.max(.72,1-depth*profile.stackScaleStep);
  const opacity=stack===0?1:Math.max(.12,profile.neighborOpacity-depth*.08);
- const rot=stack===0?dragX*.03:depth*-1.4;
+ const rot=stack===0?dragX*.03:depth*(motionId==='depth-deck'?-2.2:-1.4);
  return{
   transform:`translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) rotate(${rot}deg) scale(${scale})`,
   opacity,

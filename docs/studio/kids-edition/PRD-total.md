@@ -1,6 +1,6 @@
 # Kids / cartoon edition (total)
 
-**Status:** planned after HUD rescue mid-checkpoint  
+**Status:** first vertical shipped (theme tokens + DOM chrome + soft accents; presentation only)  
 **SoT:** v1.4.8 + transparent-learning-hud v77 + fixed-pace; kids edition is a **presentation theme pack**, not a second training engine.
 
 ## Purpose
