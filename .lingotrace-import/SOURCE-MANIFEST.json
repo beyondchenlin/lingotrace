@@ -1,9 +1,9 @@
 {
   "format": "lingotrace-self-contained-source-archive-v1",
   "source_candidate_commit": "b8285030fe8889a1de894f7cfe4ecb91b4d3746a",
-  "source_projection_tree_sha1": "149683b8c7175b880d711aba2ed5f1eb97900b6c",
-  "source_file_count": 670,
-  "direct_source_file_count": 666,
+  "source_projection_tree_sha1": "6e879e157a86fe8ce1901729b140a834928adbad",
+  "source_file_count": 675,
+  "direct_source_file_count": 671,
   "restored_source_file_count": 4,
   "original_source_tree_recovered": false,
   "source_projection_excludes": "Generated dist outputs and historical dependency directories are not part of this 670-file source projection. Archive tooling is excluded from the projected hash.",
@@ -67,9 +67,9 @@
     {
       "path": "app/studio/studio.css",
       "mode": "100644",
-      "bytes": 32828,
-      "git_blob_sha1": "807a02b1dd2a3f269ef2bb2da30e6545f8e0e0f3",
-      "sha256": "e0fe2c88833d77cc59099b590b47703f956974f361ebba0e503ef725418b6f97"
+      "bytes": 32535,
+      "git_blob_sha1": "98d4488a63d97f538b398b3d165c58ba8862d31f",
+      "sha256": "8a602a83fa14b5965db8c0c445f2b5ceba1290a1370fdd995715f3ed9f33989e"
     },
     {
       "path": "docs/hud-component-library-v0.1.md",
@@ -331,6 +331,13 @@
       "sha256": "2a5a0d63efb4e0d171d461f232a19ca05d9e919cf1e61e8c69a0c3938df0a847"
     },
     {
+      "path": "docs/studio/card-carousel/PRD-total.md",
+      "mode": "100644",
+      "bytes": 1100,
+      "git_blob_sha1": "830c11bb81d62e927ea6398593425febabf88485",
+      "sha256": "24f77075f5e10031bd073e0f47cb87b83f5fbdcb79e5af5030d779073598fb0b"
+    },
+    {
       "path": "docs/studio/centered-english-hud/PRD-detailed-v80.md",
       "mode": "100644",
       "bytes": 11899,
@@ -562,6 +569,13 @@
       "sha256": "70370812f7192a14ef3525696485ed942b6f885754632cc3a696ec15a176461e"
     },
     {
+      "path": "docs/studio/kids-edition/PRD-total.md",
+      "mode": "100644",
+      "bytes": 1305,
+      "git_blob_sha1": "31669f9dd937d11ac953b32bd59c5eb0faf27a67",
+      "sha256": "3d552041de7ad51931fe1bf50069677280da260624963e2b307211676dde82db"
+    },
+    {
       "path": "docs/studio/layout-plan-files.md",
       "mode": "100644",
       "bytes": 3161,
@@ -665,6 +679,20 @@
       "bytes": 4698,
       "git_blob_sha1": "22993851513cade17771e4a41b3af94cc7f5bb6b",
       "sha256": "17a5c994330bbb8dd9263eda169a392351dad1976127d60de88bb176fb13e2d8"
+    },
+    {
+      "path": "docs/studio/mobile-onescreen/PRD-detailed.md",
+      "mode": "100644",
+      "bytes": 1007,
+      "git_blob_sha1": "fc61bed055c9dcc2951447eb0409cf994062ffb2",
+      "sha256": "6518adef34f78d4ea30fde46cb93aa743a8eaca2c0445767d241139144702815"
+    },
+    {
+      "path": "docs/studio/mobile-onescreen/PRD-total.md",
+      "mode": "100644",
+      "bytes": 1050,
+      "git_blob_sha1": "f9bf13ebd21e7181feedd7d44296050ebb8509eb",
+      "sha256": "67d458dc92fe2e03944c21a35af72ef859e698ae3851502fdab8c7939193e394"
     },
     {
       "path": "docs/studio/mobile-width-follow/PRD-detailed.md",
@@ -1899,6 +1927,13 @@
       "sha256": "0d32dcb8fd474716f2b5d56eaba506c8dda7b4402239a7f6cfa4ddc0ad7f8cb9"
     },
     {
+      "path": "scripts/rescue-qa-render.mts",
+      "mode": "100644",
+      "bytes": 2897,
+      "git_blob_sha1": "aa3fd0a9509da8129c77e7b9dc48839b308c7b47",
+      "sha256": "2ffeb365ac7d8b5dca1000409600cb3ea2b228f5b78d50104e1196685947e3be"
+    },
+    {
       "path": "studio/components/CheckedAnswerReview.tsx",
       "mode": "100644",
       "bytes": 1156,
@@ -2062,9 +2097,9 @@
     {
       "path": "studio/components/Studio.tsx",
       "mode": "100644",
-      "bytes": 248128,
-      "git_blob_sha1": "5dd678c537f0dca832983378e3248f906f793786",
-      "sha256": "c6821d21c7c7d1bcb77276a709372e865b404e1684f5cb9c29e1d27bf438583f"
+      "bytes": 247985,
+      "git_blob_sha1": "278f9c9ff905f55a49acfee154e2c8ab968dd615",
+      "sha256": "f09bf4b38ee4a4398ae51b22f7f204e445a972a55f9830e2033571c7b1018b04"
     },
     {
       "path": "studio/components/SubmissionSoundSettings.tsx",
@@ -4246,9 +4281,9 @@
     {
       "path": "studio/scene/hud-panel-backing.ts",
       "mode": "100644",
-      "bytes": 1739,
-      "git_blob_sha1": "063770e21dd79dfb0d6fa77aca71d949cda668c2",
-      "sha256": "615c257421cf5fbe179e17d7f542e5bae611968fff5120933760e60da344e5ad"
+      "bytes": 1567,
+      "git_blob_sha1": "fe173aa99957d1f7afd433730a922da2aff3ba5a",
+      "sha256": "0f4b854e9d4a9627ea3a63595ec99910637f99c15025f239f17ccbc0442a7c95"
     },
     {
       "path": "studio/scene/hud-panel-geometry.test.ts",
@@ -4505,23 +4540,23 @@
     {
       "path": "studio/scene/responsive-layout.test.ts",
       "mode": "100644",
-      "bytes": 10256,
-      "git_blob_sha1": "34c28fd539ce69f5c768c9dee3b9f8ee23378ec3",
-      "sha256": "f5d86d06a067b8c7db03b90589e6511c5d6edb063cbd490be63aa98a143ce23c"
+      "bytes": 10937,
+      "git_blob_sha1": "0a4a274dc45f91db224743f42f243cf418a3fdfd",
+      "sha256": "2c48e8e50dabe63bc9a514ffb79816f90f89f0fd52616597d6762eec92a9b947"
     },
     {
       "path": "studio/scene/responsive-layout.ts",
       "mode": "100644",
-      "bytes": 8304,
-      "git_blob_sha1": "174c04fdd0123fffae73c6b6626f9a50845cca43",
-      "sha256": "69f1e73831627dbc162cebf0368b962e839e2e8212fe339605caa81bdf895c59"
+      "bytes": 8996,
+      "git_blob_sha1": "c201caeba65b95b54a1ab4495c7b684723136004",
+      "sha256": "6a323d5859f9600f122bead0771bdb0cb041efb3f28802ef9b754b30967e1ad6"
     },
     {
       "path": "studio/scene/responsive-renderer.test.ts",
       "mode": "100644",
-      "bytes": 21916,
-      "git_blob_sha1": "be7cb4c863301f4f706b19b905e29d8629837421",
-      "sha256": "6e860ee155acf1b6c06b8effcd4309ebf9e21dc997e3c5356b1ed8cc5c91045b"
+      "bytes": 21473,
+      "git_blob_sha1": "690c71efada86de6c18cfe60b5cd86aeff1cc4d8",
+      "sha256": "8defcf7d75f77d6ca63378a6d23485b664b75ab7de7d80425987ba8443b8e964"
     },
     {
       "path": "studio/scene/standby-energy.test.ts",
@@ -4603,9 +4638,9 @@
     {
       "path": "studio/scene/transparent-renderer.ts",
       "mode": "100644",
-      "bytes": 31392,
-      "git_blob_sha1": "70a36f2ea627e077312a71b5dfb54ddafb8c8a92",
-      "sha256": "946712fb29e192253de740730daf72ba31b3218bf2efa15a622aa8561c47c348"
+      "bytes": 30605,
+      "git_blob_sha1": "f11e31cb4ecb4d61399c6a39087ecc2cdb4e8306",
+      "sha256": "c54993788e047580813d71de60341457d85a8bc2d79a32665dce9eb9059fcb2a"
     },
     {
       "path": "studio/scene/transparent-timeline.test.ts",
