@@ -120,11 +120,19 @@ test('typed HELLO has five underline slots, word mode has one, and empty strict 
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'',inputGuide:{mode:'letters',mask:'_____'}});assert.equal(strokes,5);
 });
 test('assisted reference paints one stable word rail under each target word even with empty draft',()=>{
- const card=inputCardGeometry(responsiveLayout(false)),ctx=createCanvas(1672,1000).getContext('2d'),stroke=ctx.stroke.bind(ctx);let strokes=0;ctx.stroke=(...args:any[])=>{strokes++;return Reflect.apply(stroke,ctx,args)};
+ const card=inputCardGeometry(responsiveLayout(false)),ctx=createCanvas(1672,1000).getContext('2d'),stroke=ctx.stroke.bind(ctx);let strokes=0;const spans:number[]=[];let cur:number[]=[];
+ const move=ctx.moveTo.bind(ctx),lineTo=ctx.lineTo.bind(ctx),begin=ctx.beginPath.bind(ctx);
+ ctx.beginPath=(...args:any[])=>{cur=[];return Reflect.apply(begin,ctx,args)};
+ ctx.moveTo=(x:number,y:number)=>{cur.push(x);return Reflect.apply(move,ctx,[x,y])};
+ ctx.lineTo=(x:number,y:number)=>{cur.push(x);return Reflect.apply(lineTo,ctx,[x,y])};
+ ctx.stroke=(...args:any[])=>{strokes++;if(cur.length>=2)spans.push(Math.max(...cur)-Math.min(...cur));return Reflect.apply(stroke,ctx,args)};
  const state={draft:'',referenceGuide:'Hi, everybody.',underlineMode:'words' as const,scrollLeft:0,caret:0,selectionEnd:0,inputFocused:false,composition:false,reducedMotion:true,renderTime:0};
  paintInputText(ctx as unknown as CanvasRenderingContext2D,card,state);assert.equal(strokes,2);
+ // Word rails stay short — never panel/full-width baselines across the input card.
+ assert.ok(spans.every(span=>span>8&&span<card.input.w*.35),`expected short word rails, got ${spans}`);
  // Partial draft still keeps both target rails (plus live correct underlines on matched letters).
- strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'Hi'});assert.ok(strokes>=2);
+ strokes=0;spans.length=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,draft:'Hi'});assert.ok(strokes>=2);
+ assert.ok(spans.every(span=>span<card.input.w*.35),`no full-width rails while typing, got ${spans}`);
  strokes=0;paintInputText(ctx as unknown as CanvasRenderingContext2D,card,{...state,underlineMode:'letters',referenceGuide:undefined,draft:''});assert.equal(strokes,1);
 });
 test('Enter/Check target matches keyboard/settings 44px peer and style selector does not cover editing or keyboard toggle',()=>{
