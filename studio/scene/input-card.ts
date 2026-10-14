@@ -74,7 +74,8 @@ export function inputCardGeometry(base:StudioGeometry,options:InputCardOptions={
  const paddingX=Math.max(base.portrait?8:12,6/scale),paddingY=Math.max(base.portrait?7:8,6/scale),outer=Math.max(base.portrait?8:20,6/scale),gap=Math.max(6,5/scale);
  const practiceCompact=!!(base as {practiceCompact?:boolean}).practiceCompact;
  const width=base.portrait?base.width-20:Math.min(base.width*.9,2*(base.counter.x-1/scale-base.width/2+outer)),x=(base.width-width)/2,y=base.portrait?base.console.y-4:724;
- const header=Math.max(practiceCompact?36:44,44/scale),inputLines=base.portrait?(practiceCompact?2:3):2,inputHeight=lineHeight*inputLines+paddingY*2;
+ const foldKb=practiceCompact&&base.portrait&&Number.isFinite(options.availableHeight)&&options.availableHeight!>0&&options.availableHeight!/scale+1<base.height;
+ const header=Math.max(practiceCompact?(foldKb?28:36):44,44/scale),inputLines=base.portrait?(practiceCompact?(foldKb?1:2):3):2,inputHeight=lineHeight*inputLines+paddingY*2;
  const input={x:x+outer,y:y+header,w:width-outer*2,h:inputHeight};
  const submitWidth=Math.max(touch,86/scale);
  const submit={x:x+width-outer-submitWidth,y:input.y+input.h+gap,w:submitWidth,h:touch};
@@ -125,56 +126,35 @@ export function inputCardGeometry(base:StudioGeometry,options:InputCardOptions={
    stageHeight=Math.ceil(keyboardRect.y+keyboardRect.h+gap);
   }
  }else if(practiceCompact&&base.portrait){
-  // One-screen phone: never grow the stage. Transport sits on the bottom rail;
-  // the typing card (and optional in-app keyboard) lift onto the media plate.
+  // Stacked one-screen phone: typing stays below the media plate; transport is a
+  // bottom rail. Never lift Check/transport onto the speaker face.
   const transportH=Math.max(96/scale,Math.min(108,base.player.h||108));
   stageHeight=base.height;
   playerOffsetY=0;
-  const stackBottom=visible?keyboardRect.h+gap+card.h+gap:card.h+gap;
+  const mediaBottom=base.media.y+base.media.h;
+  const minCardY=mediaBottom+gap; // hard floor: typing below picture
   playerTop=Math.max(0,stageHeight-transportH);
-  const needTop=playerTop-stackBottom;
-  const lift=card.y-needTop;
-  if(lift>0){
-   for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y-=lift;
-  }else if(lift<0){
-   // Already above the reserved band — pull the stack up onto video.
-   for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y+=lift;
-  }
-  // Keep a readable band above the very top HUD (goal/title) when possible.
-  const ceiling=Math.max(base.goal.y+base.goal.h*0.35,base.title.y+base.title.h+gap);
-  if(card.y<ceiling){
-   const push=ceiling-card.y;
-   for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y+=push;
-   // If that would collide with transport, prefer overlay over extending height.
-   const overflow=card.y+card.h+gap+transportH-stageHeight;
-   if(overflow>0)for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y-=overflow;
-   playerTop=Math.min(playerTop,Math.max(card.y+card.h+gap,stageHeight-transportH));
-  }
+  // Park the card between media and transport (may already be there from layout).
+  let targetY=Math.min(playerTop-card.h-gap,Math.max(minCardY,card.y));
+  if(targetY+card.h+gap>playerTop)targetY=Math.max(minCardY,playerTop-card.h-gap);
+  const delta=targetY-card.y;
+  if(delta)for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y+=delta;
   if(visible){
    keyboardRect.y=card.y+card.h+gap;
    keyboardRect.h=Math.min(keyboardRect.h,Math.max(96/scale,playerTop-gap-keyboardRect.y));
-   if(keyboardRect.y+keyboardRect.h>playerTop-gap){
-    const kLift=(keyboardRect.y+keyboardRect.h)-(playerTop-gap);
-    for(const rect of[card,input,submit,status,helper,toggle,modeToggle,keyboardRect])rect.y-=kLift;
-   }
   }
-  playerTop=Math.max(card.y+card.h+(visible?keyboardRect.h+gap*2:gap),stageHeight-transportH);
-  playerTop=Math.min(playerTop,stageHeight-transportH);
-  // OS soft keyboard: fold the practice stack into the remaining visual viewport
-  // by lifting onto video — still never grow stageHeight.
+  playerTop=Math.min(Math.max(card.y+card.h+(visible?keyboardRect.h+gap*2:gap),stageHeight-transportH),stageHeight-transportH);
+  // OS soft keyboard: collapse transport; park typing+Check on the visual floor.
+  // applyInputCardLayout then compacts the HUD and reflows media above this card.
   if(Number.isFinite(options.availableHeight)&&options.availableHeight!>0){
    const avail=options.availableHeight!/scale;
    if(avail+1<stageHeight){
-    const cover=stageHeight-avail;
-    for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y-=cover;
-    if(visible)keyboardRect.y-=cover;
-    playerTop=Math.max(0,playerTop-cover);
-    const floor=Math.max(8,base.goal.y+48);
-    if(card.y<floor){
-     const back=floor-card.y;
-     for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y+=back;
-     if(visible)keyboardRect.y+=back;
-    }
+    const floor=avail;
+    playerTop=floor;
+    const y=Math.max(8,floor-card.h-gap);
+    const move=y-card.y;
+    for(const rect of[card,input,submit,status,helper,toggle,modeToggle])rect.y+=move;
+    if(visible){keyboardRect.y=card.y+card.h+gap;keyboardRect.h=Math.max(0,floor-gap-keyboardRect.y);}
    }
   }
  }else{
@@ -208,21 +188,30 @@ export function applyInputCardLayout(base:StudioGeometry,options:InputCardOption
   const practiceCompact=!!(base as {practiceCompact?:boolean}).practiceCompact;
   const touch=44/scale,gap=Math.max(2/scale,Math.min(8/scale,(base.width-6*touch)/5)),left=inputCard.input.x,width=inputCard.input.w;
   if(practiceCompact&&base.portrait){
-   // Thin one-screen transport: always a fixed bottom rail. When the OS keyboard
-   // folds availableHeight, park that rail at the visual-viewport floor — never
-   // inflate the player band into the occluded region under the keyboard.
+   // Thin bottom transport when keyboard closed. When OS keyboard folds the
+   // viewport, collapse transport to a zero-height rail at the floor so seek/
+   // play never overlay the picture or the typing focus zone.
    const transportH=Math.max(96/scale,Math.min(108,base.player.h||108));
    const avail=Number.isFinite(options.availableHeight)&&options.availableHeight!>0?options.availableHeight!/scale:height;
-   const floor=avail+1<height?avail:height;
-   const top=Math.max(0,Math.min(inputCard.playerTop??(floor-transportH),floor-transportH));
-   const seekH=Math.max(36/scale, Math.min(44/scale, transportH*0.42));
-   zones.seek={x:left,y:top,w:width,h:seekH};
-   const y=Math.min(floor-touch-4/scale, top+seekH+2/scale);
-   const groupWidth=6*touch+5*gap,start=Math.max(0,(base.width-groupWidth)/2);
-   listeningDock={x:start,y,w:2*touch+gap,h:touch};
-   (['play','previous','next','mute'] as const).forEach((key,index)=>{zones[key]={x:start+(index+2)*(touch+gap),y,w:touch,h:touch}});
-   player={x:0,y:top,w:base.width,h:Math.max(transportH, y+touch-top+4/scale)};
-   // Hard gate: never grow past the portrait surface — empty bottom is a product bug.
+   const folded=avail+1<height;
+   const floor=folded?avail:height;
+   if(folded){
+    // Collapse: park hit targets just under the visual floor (invisible).
+    const top=floor;
+    zones.seek={x:left,y:top,w:width,h:0};
+    (['play','previous','next','mute'] as const).forEach((key)=>{zones[key]={x:0,y:top,w:0,h:0}});
+    listeningDock={x:0,y:top,w:0,h:0};
+    player={x:0,y:top,w:base.width,h:0};
+   }else{
+    const top=Math.max(0,Math.min(inputCard.playerTop??(floor-transportH),floor-transportH));
+    const seekH=Math.max(36/scale, Math.min(44/scale, transportH*0.42));
+    zones.seek={x:left,y:top,w:width,h:seekH};
+    const y=Math.min(floor-touch-4/scale, top+seekH+2/scale);
+    const groupWidth=6*touch+5*gap,start=Math.max(0,(base.width-groupWidth)/2);
+    listeningDock={x:start,y,w:2*touch+gap,h:touch};
+    (['play','previous','next','mute'] as const).forEach((key,index)=>{zones[key]={x:start+(index+2)*(touch+gap),y,w:touch,h:touch}});
+    player={x:0,y:top,w:base.width,h:Math.max(transportH, y+touch-top+4/scale)};
+   }
    height=base.height;
   }else{
    const top=inputCard.playerTop??player.y;
@@ -261,13 +250,36 @@ export function applyInputCardLayout(base:StudioGeometry,options:InputCardOption
    }
   }
  }
- let subtitle=base.subtitle;
+ let subtitle=base.subtitle,goal=base.goal,trend=base.trend,title=base.title,media=base.media,counter=base.counter;
  if(!!(base as {practiceCompact?:boolean}).practiceCompact&&base.portrait){
-  // Keep captions on the video just above the typing overlay (clear of transport/keys).
-  const gap=Math.max(6,5/scale),y=Math.max(8,inputCard.card.y-subtitle.h-gap);
+  const gap=Math.max(6,5/scale);
+  const avail=Number.isFinite(options.availableHeight)&&options.availableHeight!>0?options.availableHeight!/scale:height;
+  const folded=avail+1<height;
+  if(folded){
+   // Keyboard-open: compact tall charts into a short HUD strip, park media
+   // between that strip and the typing focus zone, collapse transport (above).
+   const factor=.55,gy=6;
+   goal={x:goal.x,y:gy,w:goal.w*factor,h:goal.h*factor};
+   trend={x:base.width-trend.w*factor-14,y:gy,w:trend.w*factor,h:trend.h*factor};
+   title={...title,y:2,h:Math.min(title.h,28)};
+   const flowH=Math.max(36,metrics.h*.45);
+   metrics={x:goal.x,y:goal.y+goal.h+4,w:goal.w,h:flowH};
+   const hudBottom=Math.max(metrics.y+metrics.h,trend.y+trend.h)+gap;
+   const cardTop=inputCard.card.y;
+   const maxH=Math.max(96,cardTop-hudBottom-gap);
+   let mw=base.width,mh=mw*9/16;
+   if(mh>maxH){mh=maxH;mw=mh*16/9}
+   media={x:(base.width-mw)/2,y:hudBottom,w:mw,h:mh};
+   counter={...counter,y:Math.max(hudBottom,cardTop-counter.h-4),w:counter.w*factor,h:counter.h*factor};
+   inset={...inset,y:media.y+4,w:inset.w*factor,h:inset.h*factor,x:media.x+media.w-inset.w*factor-4};
+  }
+  // Captions ride the media plate just above typing — never climb into the HUD band.
+  const mediaTop=media.y+4,mediaBot=media.y+media.h;
+  const aboveCard=inputCard.card.y-subtitle.h-gap;
+  const y=Math.max(mediaTop,Math.min(mediaBot-subtitle.h-4,aboveCard));
   subtitle={...subtitle,y};
  }
- return{...base,height,inset,metrics,subtitle,console:inputCard.card,zones,player,inputCard,listeningDock,railInset,seekThumbWidthCss:railInset*2*scale,
+ return{...base,height,inset,metrics,subtitle,goal,trend,title,media,counter,console:inputCard.card,zones,player,inputCard,listeningDock,railInset,seekThumbWidthCss:railInset*2*scale,
   style:(rect:Rect)=>({left:`${rect.x/base.width*100}%`,top:`${rect.y/height*100}%`,width:`${rect.w/base.width*100}%`,height:`${rect.h/height*100}%`}),
   timelineProgress:(clientX:number,left:number,cssWidth:number)=>Math.max(0,Math.min(1,((clientX-left)*base.width/cssWidth-zones.seek.x-railInset)/(zones.seek.w-railInset*2))),
   cueMarker:(ratio:number)=>({x:zones.seek.x+railInset+Math.max(0,Math.min(1,ratio))*(zones.seek.w-railInset*2)-22/scale,y:zones.seek.y+(compactPlayer?16/scale:13),w:44/scale,h:44/scale}),

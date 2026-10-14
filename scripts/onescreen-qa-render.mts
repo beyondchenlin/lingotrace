@@ -28,7 +28,8 @@ async function shot(name:string,opts:{portrait:boolean;height?:number;edition?:'
  const cover={w:poster.width*coverScale,h:poster.height*coverScale};
  const aspectOk=Math.abs(fit.w/fit.h-poster.width/poster.height)<1e-6;
  const notCover=fit.w+1<cover.w||fit.h+1<cover.h;
- const visual:any={layout:'lesson',fixture:false,showSubtitle:false,paused:false,reducedMotion:false,camera:'off',recording:false,recordingStarted:null,recordingBytes:0,draft:opts.draft??'',inputFocused:!!opts.draft,composition:false,caret:(opts.draft??'').length,selectionEnd:(opts.draft??'').length,scrollLeft:0,message:'',gain:0,rewardAt:0,lastResult:null,volume:.8,muted:false,ready:true,playbackTime:12,playbackDuration:72,renderTime:1800,snapshot:engine.getSnapshot(),visualEdition:opts.edition??'pro',videoSize:'native',keyboardFeedback:{visible:!!opts.keyboard,codes:[],committedUntil:0,composing:false}};
+ const cssW=opts.portrait?430:1672;
+ const visual:any={layout:'lesson',fixture:false,showSubtitle:!!opts.draft,paused:false,reducedMotion:false,camera:'off',recording:false,recordingStarted:null,recordingBytes:0,draft:opts.draft??'',inputFocused:!!opts.draft,composition:false,caret:(opts.draft??'').length,selectionEnd:(opts.draft??'').length,scrollLeft:0,message:'',gain:0,rewardAt:0,lastResult:null,volume:.8,muted:false,ready:true,playbackTime:12,playbackDuration:72,renderTime:1800,snapshot:engine.getSnapshot(),visualEdition:opts.edition??'pro',videoSize:'fit',keyboardFeedback:{visible:!!opts.keyboard,codes:[],committedUntil:0,composing:false},cameraViewport:{width:cssW,height:opts.availableHeight??height},mediaViewport:{width:cssW,height:opts.availableHeight??height}};
  const scale=opts.portrait?2:1;
  const full=createCanvas(Math.round(layout.width*scale),Math.round(layout.height*scale));
  paintTransparentScene(full as any,media,visual,opts.frame??frameStandby,opts.portrait,height);
@@ -59,13 +60,14 @@ async function shot(name:string,opts:{portrait:boolean;height?:number;edition?:'
   c.fillText('OS keyboard (visualViewport fold)', pad, ky+Math.round(18*scale));
   out=composite;
  }
- const path=`/workspace/lingotrace-contain-${name}.png`;
+ const path=`/workspace/lingotrace-occlusion-${name}.png`;
  await writeFile(path,out.toBuffer('image/png'));
- console.log(JSON.stringify({path,out:`${out.width}x${out.height}`,fit:{...fit,aspect:+(fit.w/fit.h).toFixed(5)},sourceAspect:+(poster.width/poster.height).toFixed(5),aspectOk,notCover,playerH:+layout.player.h.toFixed(1),empty:+(layout.height-(layout.player.y+layout.player.h)).toFixed(2)}));
+ const ov=(a:any,b:any)=>Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));
+ console.log(JSON.stringify({path,out:`${out.width}x${out.height}`,fit:{...fit,aspect:+(fit.w/fit.h).toFixed(5)},aspectOk,playerH:+layout.player.h.toFixed(1),mediaY:+layout.media.y.toFixed(1),cardY:+layout.inputCard.card.y.toFixed(1),ovMediaCard:ov(layout.media,layout.inputCard.card),ovMediaPlayer:ov(layout.media,layout.player),ovMediaFlow:ov(layout.media,layout.metrics),goalH:+layout.goal.h.toFixed(1)}));
 }
 
 await shot('mobile-standby',{portrait:true,height:930,keyboard:false,frame:frameStandby});
 await shot('mobile-typing',{portrait:true,height:930,keyboard:false,frame:frameTyping,draft:'Could I'});
 await shot('mobile-keyboard-open',{portrait:true,height:930,keyboard:false,availableHeight:930*0.52,frame:frameTyping,draft:'Could I have',cropToAvail:true});
 await shot('desktop-landscape',{portrait:false,keyboard:true,frame:frameTyping,draft:'Could I'});
-console.log('contain qa done');
+console.log('occlusion qa done');

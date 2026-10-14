@@ -35,9 +35,11 @@ test('portrait resolves a bounded surface and independent controls at short, def
  assert.deepEqual(portraitRects(height),{media:g.media,inset:g.inset,metrics:g.metrics,subtitle:g.subtitle});
  const movable=portraitRects(height);
  if(g.practiceCompact){
-  // Media is the full-stage backdrop; movable HUD/inset/subtitle stay above the console.
-  assert.ok(movable.media.y+movable.media.h<=g.height+1e-8);
-  for(const key of ['inset','metrics','subtitle'] as const)assert.ok(movable[key].y+movable[key].h<=portraitContentBottom(height)+1e-8,key);
+  // Stacked: 16:9 media between HUD and console; chrome stays clear of the plate.
+  assert.ok(Math.abs(movable.media.w/movable.media.h-16/9)<1e-9);
+  assert.ok(movable.media.y+movable.media.h<=g.console.y+1e-8);
+  assert.ok(movable.metrics.y+movable.metrics.h<=movable.media.y+1e-8,'flow above media');
+  for(const key of ['inset','subtitle'] as const)assert.ok(movable[key].y+movable[key].h<=portraitContentBottom(height)+1e-8,key);
  }else{
   for(const rect of Object.values(movable))assert.ok(rect.y+rect.h<=portraitContentBottom(height));
  }
@@ -134,28 +136,28 @@ test('tall portrait preserves full-width media and HUD proportions with one inte
  }
 });
 
-test('phone practice-compact portrait keeps full-scale HUD layered over media-forward stage',()=>{
+test('phone practice-compact portrait stacks HUD above 16:9 media with full-scale charts',()=>{
  for(const height of [700,800,PORTRAIT_MIN_HEIGHT,840,880,930]){
   const g=responsiveLayout(true,{},'lesson',height),scale=g.goal.w/264;
   assert.equal(g.practiceCompact,true);
   assert.equal(g.height,Math.max(PORTRAIT_MIN_HEIGHT,height));
-  assert.equal(g.media.w,430);
-  assert.ok(g.media.h>g.media.w*9/16,'media backdrop taller than 16:9 plate for overlay chrome');
-  assert.equal(g.media.y,0);
+  assert.ok(g.media.w<=430+1e-9);
+  assert.ok(Math.abs(g.media.w/g.media.h-16/9)<1e-9,'media is a 16:9 plate');
+  assert.ok(g.media.y>0,'media sits below HUD band');
   assert.ok(Math.abs(scale-.58)<1e-12,'goal keeps established HUD scale');
   for(const [key,width,tall] of [['goal',264,264],['trend',352,192]] as const){
    assert.ok(Math.abs(g[key].w/width-scale)<1e-12,key);
    assert.ok(Math.abs(g[key].h/tall-scale)<1e-12,key);
    assert.ok(g[key].w>100,`${key} must not collapse to a chip`);
   }
-  // Flow docks under goal as a full-width column panel (not a chip, not video overlay).
+  // Flow docks under goal as a full-width column panel, clear of the media plate.
   assert.ok(Math.abs(g.metrics.w-g.goal.w)<1e-6,'flow matches goal column width');
-  assert.ok(g.metrics.w>100&&g.metrics.h>=72,'flow stays a readable panel');
+  assert.ok(g.metrics.w>100&&g.metrics.h>=64,'flow stays a readable panel');
   assert.ok(g.metrics.y+1>=g.goal.y+g.goal.h,'flow docks under goal');
-  // HUD sits on the media plate (game overlay), console/transport under it.
-  assert.ok(g.goal.y+g.goal.h<=g.media.y+g.media.h+1e-6);
-  assert.ok(g.trend.y+g.trend.h<=g.media.y+g.media.h+1e-6);
-  assert.ok(g.metrics.y>=g.goal.y);
+  assert.ok(g.metrics.y+g.metrics.h<=g.media.y+1e-6,'flow stays above media');
+  assert.ok(g.goal.y+g.goal.h<=g.media.y+1e-6,'goal stays above media');
+  assert.ok(g.trend.y+g.trend.h<=g.media.y+1e-6,'trend stays above media');
+  assert.ok(g.media.y+g.media.h<=g.console.y+1e-6,'media above typing');
   assert.ok(g.console.y+g.console.h<=g.player.y+1e-6);
   assert.ok(g.player.y+g.player.h<=g.height+1e-6);
   for(const key of ['input','submit','play','previous','next','mute'] as const){
@@ -165,7 +167,7 @@ test('phone practice-compact portrait keeps full-scale HUD layered over media-fo
  }
 });
 
-test('phone one-screen stage never grows and leaves no empty bottom band',()=>{
+test('phone one-screen stage never grows; transport stays off the picture',()=>{
  for(const height of [820,844,880,930]){
   const base=responsiveLayout(true,{},'lesson',height);
   for(const keyboardVisible of [false,true]){
@@ -173,16 +175,24 @@ test('phone one-screen stage never grows and leaves no empty bottom band',()=>{
    assert.equal(g.height,base.height,`height ${height} kb=${keyboardVisible}`);
    assert.ok(g.player.y+g.player.h<=g.height+1e-6);
    assert.ok(g.player.h<=120,'transport stays a thin rail');
-   assert.ok(g.inputCard.card.y+g.inputCard.card.h<=g.player.y+1e-6 || g.inputCard.card.y<g.media.y+g.media.h,'card overlays media or sits above transport');
-   assert.equal(g.media.h,g.height,'media fills the stage backdrop');
-   assert.equal(g.media.y,0);
+   assert.ok(g.inputCard.card.y+1>=g.media.y+g.media.h-1e-6,'typing sits below media plate');
+   assert.ok(g.inputCard.card.y+g.inputCard.card.h<=g.player.y+1e-6,'typing above transport');
+   assert.ok(Math.abs(g.media.w/g.media.h-16/9)<1e-9);
+   assert.ok(g.media.y>0);
   }
   const normal=applyInputCardLayout(base,{keyboardVisible:false});
   const folded=applyInputCardLayout(base,{keyboardVisible:false,availableHeight:height*0.55});
   assert.equal(folded.height,base.height);
-  assert.ok(folded.inputCard.card.y<normal.inputCard.card.y,'OS keyboard folds stack upward onto video');
-  assert.ok(folded.player.h<=120,'folded transport stays thin (no inflate under OS keyboard)');
-  assert.ok(folded.player.y+folded.player.h<=height*0.55+1,'transport sits in the visual viewport above the OS keyboard');
+  assert.ok(folded.inputCard.card.y+folded.inputCard.card.h<=height*0.55+1,'typing stays above OS keyboard');
+  assert.equal(folded.player.h,0,'keyboard-open collapses transport off the picture');
+  assert.ok(folded.player.y>=height*0.55-1,'collapsed transport parks at visual floor');
+  // Keyboard-open: HUD charts compact; media sits between compact HUD and typing.
+  assert.ok(folded.goal.h<normal.goal.h,'HUD charts compact when keyboard open');
+  assert.ok(folded.media.y+1>=folded.metrics.y+folded.metrics.h-1e-6,'media below compact flow');
+  assert.ok(folded.media.y+folded.media.h<=folded.inputCard.card.y+1e-6,'media above typing focus zone');
+  assert.ok(folded.inputCard.card.y+1>=folded.goal.y+folded.goal.h,'typing below compact goal');
+  assert.equal(overlap(folded.media,folded.inputCard.card),0);
+  assert.equal(overlap(folded.media,folded.player),0);
  }
 });
 
@@ -201,19 +211,17 @@ test('phone practice-compact docks flow under goal and clears camera from trend'
  }
 });
 
-test('phone practice-compact media paint uses aspect-preserving contain, not cover',()=>{
+test('phone practice-compact media paint uses aspect-preserving contain on 16:9 plate',()=>{
  for(const height of[820,844,880,930]){
   const g=responsiveLayout(true,{},'lesson',height);
   assert.equal(g.practiceCompact,true);
-  assert.equal(g.media.w,430);
-  assert.equal(g.media.h,height);
+  assert.ok(g.media.w<=430+1e-9);
+  assert.ok(Math.abs(g.media.w/g.media.h-16/9)<1e-9);
   for(const source of[{w:1280,h:720},{w:1671,h:941},{w:1920,h:1080}]){
    const fit=containRect(source.w,source.h,g.media.x,g.media.y,g.media.w,g.media.h);
    assert.ok(Math.abs(fit.w/fit.h-source.w/source.h)<1e-9,'aspect preserved');
    assert.ok(fit.w<=g.media.w+1e-6&&fit.h<=g.media.h+1e-6,'fits inside plate');
    assert.ok(fit.w>=g.media.w-1||fit.h>=g.media.h-1,'max contain touches an edge');
-   const coverScale=Math.max(g.media.w/source.w,g.media.h/source.h);
-   assert.ok(fit.w+1<source.w*coverScale||fit.h+1<source.h*coverScale,'contain is smaller than cover blow-up');
    const fitted=containLearningMedia({width:source.w,height:source.h},g.media,1,'fit');
    assert.ok(Math.abs(fitted.w/fitted.h-source.w/source.h)<1e-9);
    assert.ok(fitted.w<=g.media.w+1e-6&&fitted.h<=g.media.h+1e-6);
