@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { StudioLocaleProvider, useStudioLocale } from '../i18n/react';
+import { translate, type MessageKey, type MessageParams } from '../i18n/locale';
 import { NPS_COURSE_MEDIA, NPS_MATERIAL } from '../core/builtin-material';
 import {
   createOriginalCourseMediaPool, isVerifiedCourseMediaLease,
@@ -20,7 +21,8 @@ const EMPTY: NpsTransportCheckState = {
   phase: 'idle', source: '', currentSrc: '', actualSha256: '', duration: null,
   width: 0, height: 0, currentTime: 0, error: '', nativeError: '', canvasResult: '', frameDataUrl: '',
 };
-const readableError = (error: unknown) => error instanceof Error ? error.message : '视频检查失败，请手动重试。';
+type TransportT = (key: MessageKey, params?: MessageParams) => string;
+const defaultT: TransportT = (key, params) => translate('zh-CN', key, params);
 const cueStart = Math.min(...NPS_MATERIAL.cues.map(cue => cue.start));
 const cueEnd = Math.max(...NPS_MATERIAL.cues.map(cue => cue.end));
 
@@ -29,8 +31,11 @@ export function createNpsTransportCheckController(options: {
   video: HTMLVideoElement; canvas: HTMLCanvasElement; pool: OriginalCourseMediaPool;
   changed: (state: NpsTransportCheckState) => void;
   origin?: string; documentTarget?: EventTarget; windowTarget?: EventTarget; isHidden?: () => boolean;
+  t?: TransportT;
 }) {
   const { video, canvas, pool } = options;
+  const t = options.t ?? defaultT;
+  const readableError = (error: unknown) => error instanceof Error ? error.message : t('npsTransport.errFallback');
   const origin = options.origin ?? window.location.origin;
   const expectedSrc = new URL(NPS_PLAYBACK_MEDIA.playbackVariant.url, origin).href;
   const documentTarget = options.documentTarget ?? document;
@@ -85,7 +90,7 @@ export function createNpsTransportCheckController(options: {
     const attempt = active;
     if (!attempt || !attempt.ready) return null;
     if (!sourceMatches(attempt) || !metadataMatches()) {
-      fail(attempt, new Error(`原生视频来源或时长已改变，已停止。 ${rangeDiagnostic()}`));
+      fail(attempt, new Error(t('npsTransport.errSourceOrDurationChanged', {details: rangeDiagnostic()})));
       return null;
     }
     return attempt;
@@ -102,11 +107,11 @@ export function createNpsTransportCheckController(options: {
       attempt.lease = acquired;
       publish({ actualSha256: acquired.actualSha256 ?? '' });
       if (!isVerifiedCourseMediaLease(acquired, NPS_PLAYBACK_MEDIA, origin) || !acquired.toVerifiedDirect) {
-        throw new Error(acquired.verificationError || '固定资源没有通过同源 URL、类型与 SHA-256 核验。');
+        throw new Error(acquired.verificationError || t('npsTransport.errVerifySha'));
       }
       // Conversion keeps the same holder. Releasing acquired here would invalidate direct.
       attempt.lease = acquired.toVerifiedDirect();
-      if (!verified(attempt)) throw new Error('同源直接播放凭据无效。');
+      if (!verified(attempt)) throw new Error(t('npsTransport.errDirectCreds'));
       const deadline = Date.now() + 20000;
       let timeout: ReturnType<typeof setTimeout> | null = null;
       const events: [string, EventListener][] = [];
@@ -117,22 +122,27 @@ export function createNpsTransportCheckController(options: {
       };
       const nativeFailure = () => {
         const diagnostic = reviewMediaDiagnostic('metadata', video);
-        fail(attempt, new Error(`原生视频加载或解码失败。 ${diagnostic} ${rangeDiagnostic()}`), diagnostic);
+        fail(attempt, new Error(t('npsTransport.errNativeDecodeDetails', {details: `${diagnostic} ${rangeDiagnostic()}`})), diagnostic);
       };
       const metadataTimeout = () => {
         if (!current(attempt)) return;
         if (sourceMatches(attempt, true) && video.error) { nativeFailure(); return; }
-        const reason = !sourceMatches(attempt, true) ? '原生视频来源不符。'
-          : !hasDuration() ? '等待原生时长超时，时长尚未取得，请手动重试。'
-          : video.readyState < 1 ? '等待原生元数据超时，元数据尚未就绪，请手动重试。'
-          : !metadataMatches() ? '原生视频时长、画面尺寸或片段范围不符。'
-          : '等待原生元数据超时，请手动重试。';
-        fail(attempt, new Error(`${reason} ${rangeDiagnostic()}`));
+        if (!sourceMatches(attempt, true)) {
+          fail(attempt, new Error(t('npsTransport.errSourceMismatchDetails', {details: rangeDiagnostic()})));
+        } else if (!hasDuration()) {
+          fail(attempt, new Error(`${t('npsTransport.errDurationTimeout')} ${rangeDiagnostic()}`));
+        } else if (video.readyState < 1) {
+          fail(attempt, new Error(`${t('npsTransport.errMetadataTimeoutReady')} ${rangeDiagnostic()}`));
+        } else if (!metadataMatches()) {
+          fail(attempt, new Error(t('npsTransport.errMetadataMismatchDetails', {details: rangeDiagnostic()})));
+        } else {
+          fail(attempt, new Error(`${t('npsTransport.errMetadataTimeout')} ${rangeDiagnostic()}`));
+        }
       };
       const metadata = () => {
         if (!current(attempt)) return;
         if (!sourceMatches(attempt)) {
-          fail(attempt, new Error(`原生视频来源不符。 ${rangeDiagnostic()}`));
+          fail(attempt, new Error(t('npsTransport.errSourceMismatchDetails', {details: rangeDiagnostic()})));
           return;
         }
         if (video.error) { nativeFailure(); return; }
@@ -141,7 +151,7 @@ export function createNpsTransportCheckController(options: {
         // deadline while waiting; once ready, every metadata change fails closed.
         if (!attempt.ready && (video.readyState < 1 || !hasDuration())) return;
         if (!metadataMatches()) {
-          fail(attempt, new Error(`原生视频时长、画面尺寸或片段范围不符。 ${rangeDiagnostic()}`));
+          fail(attempt, new Error(t('npsTransport.errMetadataMismatchDetails', {details: rangeDiagnostic()})));
           return;
         }
         if (attempt.ready) return;
@@ -153,14 +163,14 @@ export function createNpsTransportCheckController(options: {
       for (const event of ['loadedmetadata', 'durationchange', 'loadeddata', 'canplay']) listen(event, metadata);
       listen('error', () => {
         if (!current(attempt)) return;
-        if (!sourceMatches(attempt, true)) { fail(attempt, new Error('原生视频选择了不匹配的来源。')); return; }
+        if (!sourceMatches(attempt, true)) { fail(attempt, new Error(t('npsTransport.errSourceMismatch'))); return; }
         const error = video.error;
-        fail(attempt, new Error('原生视频加载或解码失败。'), error ? `code=${error.code}; ${error.message || '(无原生消息)'}` : '(未提供 MediaError)');
+        fail(attempt, new Error(t('npsTransport.errNativeDecode')), error ? t('npsTransport.nativeErrorCode', {code: String(error.code), message: error.message || t('npsTransport.noNativeMessage')}) : t('npsTransport.noMediaError'));
       });
       listen('play', () => {
         if (!current(attempt)) return;
         if (!attempt.ready || !sourceMatches(attempt) || !metadataMatches()) {
-          video.pause(); fail(attempt, new Error(`播放前的来源或元数据核验失败。 ${rangeDiagnostic()}`));
+          video.pause(); fail(attempt, new Error(t('npsTransport.errPreplayVerify', {details: rangeDiagnostic()})));
         }
       });
       listen('playing', () => { if (current(attempt) && ready() === attempt) publish({ phase: 'playing', error: '' }); });
@@ -169,7 +179,7 @@ export function createNpsTransportCheckController(options: {
       listen('timeupdate', () => {
         if (!current(attempt) || !attempt.ready) return;
         if (!sourceMatches(attempt) || !metadataMatches() || !Number.isFinite(video.currentTime) || video.currentTime < 0 || video.currentTime > video.duration + 0.001) {
-          fail(attempt, new Error(`播放位置、时长或来源不符。 ${rangeDiagnostic()}`)); return;
+          fail(attempt, new Error(t('npsTransport.errPlaybackPosition', {details: rangeDiagnostic()}))); return;
         }
         publish({ currentSrc: video.currentSrc, currentTime: video.currentTime });
       });
@@ -197,7 +207,7 @@ export function createNpsTransportCheckController(options: {
     const attempt = ready();
     if (!attempt) return;
     const cue = NPS_MATERIAL.cues[index === -1 ? NPS_MATERIAL.cues.length - 1 : index];
-    if (!cue || cue.start < 0 || cue.end > video.duration) { fail(attempt, new Error('定位超出已核验时长。')); return; }
+    if (!cue || cue.start < 0 || cue.end > video.duration) { fail(attempt, new Error(t('npsTransport.errSeekOutOfRange'))); return; }
     video.pause(); eraseFrame();
     try { video.currentTime = cue.start; publish({ phase: 'paused', currentTime: video.currentTime, canvasResult: '', frameDataUrl: '', error: '' }); }
     catch (error) { fail(attempt, error); }
@@ -205,17 +215,17 @@ export function createNpsTransportCheckController(options: {
   function checkCanvas() {
     const attempt = ready();
     if (!attempt) return;
-    if (video.readyState < 2 || video.seeking) { publish({ canvasResult: '当前帧尚未解码，请播放或等待定位完成后重试。', frameDataUrl: '' }); return; }
+    if (video.readyState < 2 || video.seeking) { publish({ canvasResult: t('npsTransport.canvasNotDecoded'), frameDataUrl: '' }); return; }
     try {
       canvas.width = video.videoWidth; canvas.height = video.videoHeight;
       const context = canvas.getContext('2d');
-      if (!context) throw new Error('浏览器未提供 2D 画布。');
+      if (!context) throw new Error(t('npsTransport.errNo2dCanvas'));
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
       const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
       const frameDataUrl = canvas.toDataURL('image/png');
-      if (!frameDataUrl.startsWith('data:image/png;') || pixels.data.length !== canvas.width * canvas.height * 4) throw new Error('画布读取结果不完整。');
-      publish({ canvasResult: `画布读取成功：${canvas.width} × ${canvas.height}，${video.currentTime.toFixed(3)} 秒；像素读取与 PNG 编码均完成。`, frameDataUrl });
-    } catch (error) { eraseFrame(); publish({ canvasResult: `画布读取失败：${readableError(error)}`, frameDataUrl: '' }); }
+      if (!frameDataUrl.startsWith('data:image/png;') || pixels.data.length !== canvas.width * canvas.height * 4) throw new Error(t('npsTransport.errCanvasIncomplete'));
+      publish({ canvasResult: t('npsTransport.canvasSuccess', {width: canvas.width, height: canvas.height, time: video.currentTime.toFixed(3)}), frameDataUrl });
+    } catch (error) { eraseFrame(); publish({ canvasResult: t('npsTransport.canvasFail', {details: readableError(error)}), frameDataUrl: '' }); }
   }
   const hidden = () => { if (isHidden()) stop(); };
   const pagehide = () => stop();
@@ -252,10 +262,10 @@ function NpsTransportCheckInner() {
   const [state, setState] = useState<NpsTransportCheckState>(EMPTY);
   useEffect(() => {
     if (!video.current || !canvas.current) return;
-    const current = createNpsTransportCheckController({ video: video.current, canvas: canvas.current, pool, changed: setState });
+    const current = createNpsTransportCheckController({ video: video.current, canvas: canvas.current, pool, changed: setState, t });
     controller.current = current;
     return () => { current.dispose(); if (controller.current === current) controller.current = null; };
-  }, [pool]);
+  }, [pool, t]);
   const busy = state.phase === 'verifying' || state.phase === 'loading';
   const ready = ['ready', 'playing', 'paused', 'ended'].includes(state.phase);
   const phaseText = t(PHASE_KEYS[state.phase]);

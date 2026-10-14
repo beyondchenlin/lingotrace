@@ -176,3 +176,61 @@
   .lt-card-cta:hover{transform:none}
   .lt-cards-nav button,.lt-cards-studio,.lt-card-cta{transition:none}
 }
+
+
+/* PRD continue34 cards — Depth Deck + Magnetic Reveal glass peer (optical only; Studio c15–33 frost/hairline) */
+.lt-card-carousel[data-motion=depth-deck] .lt-card{
+  border:1px solid #d7e7d828;
+  background:linear-gradient(165deg,#152229f8 0%,#0f1a20f6 52%,#0b141af9 100%);
+  box-shadow:0 22px 58px #0009,inset 0 1px 0 #ffffff10;
+  backdrop-filter:blur(18px) saturate(1.12);
+  -webkit-backdrop-filter:blur(18px) saturate(1.12);
+}
+.lt-card-carousel[data-motion=depth-deck] .lt-card.is-active{
+  border-color:#d7e7d848;
+  box-shadow:0 36px 92px #000b,0 0 0 1px #d7e7d838,inset 0 1px 0 #ffffff16;
+  backdrop-filter:blur(22px) saturate(1.15);
+  -webkit-backdrop-filter:blur(22px) saturate(1.15);
+}
+.lt-card-carousel[data-motion=depth-deck] .lt-card.is-active .lt-card-meta{
+  background:linear-gradient(180deg,#0b141a00 0%,#0b141af2 20%,#0b141afc 100%);
+  border-top:1px solid #d7e7d828;
+  box-shadow:inset 0 1px 0 #ffffff0a;
+}
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card{
+  border:1px solid #d7e7d822;
+  background:linear-gradient(165deg,#152229f8 0%,#0f1a20f6 55%,#0b141af9 100%);
+  box-shadow:0 20px 54px #0009,inset 0 1px 0 #ffffff10;
+  backdrop-filter:blur(18px) saturate(1.12);
+  -webkit-backdrop-filter:blur(18px) saturate(1.12);
+}
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active{
+  border-color:#c4fc5766;
+  box-shadow:0 0 0 1px #c4fc5777,0 34px 90px #000b,0 0 56px #c4fc5730,inset 0 1px 0 #ffffff18;
+  backdrop-filter:blur(22px) saturate(1.18);
+  -webkit-backdrop-filter:blur(22px) saturate(1.18);
+}
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active .lt-card-meta,
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active.is-revealed .lt-card-meta{
+  background:linear-gradient(180deg,#0b141a00 0%,#0b141af2 18%,#0b141afc 100%);
+  border-top:1px solid #d7e7d82e;
+  box-shadow:inset 0 1px 0 #ffffff0c;
+}
+.lt-card-carousel[data-motion=depth-deck] .lt-card-media,
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card-media{
+  box-shadow:inset 0 0 0 1px #d7e7d814;
+}
+.lt-card-carousel[data-motion=depth-deck] .lt-card-cta,
+.lt-card-carousel[data-motion=magnetic-reveal] .lt-card-cta{
+  box-shadow:0 8px 22px #c4fc5733,inset 0 1px 0 #ffffff55;
+  border:1px solid #c4fc5744;
+}
+@media(prefers-reduced-motion:reduce){
+  .lt-card-carousel[data-motion=depth-deck] .lt-card,
+  .lt-card-carousel[data-motion=magnetic-reveal] .lt-card,
+  .lt-card-carousel[data-motion=depth-deck] .lt-card.is-active,
+  .lt-card-carousel[data-motion=magnetic-reveal] .lt-card.is-active{
+    backdrop-filter:blur(14px) saturate(1.08);
+    -webkit-backdrop-filter:blur(14px) saturate(1.08);
+  }
+}

@@ -184,6 +184,7 @@ export const panelsEnglish = {
   "npsTransport.canvasFail": "Canvas read failed: {details}",
   "npsTransport.noNativeMessage": "(no native message)",
   "npsTransport.noMediaError": "(MediaError not provided)",
+  "npsTransport.nativeErrorCode": "code={code}; {message}",
 } as const;
 
 export const panelsChinese: Record<keyof typeof panelsEnglish, string> = {
@@ -371,4 +372,5 @@ export const panelsChinese: Record<keyof typeof panelsEnglish, string> = {
   "npsTransport.canvasFail": "画布读取失败：{details}",
   "npsTransport.noNativeMessage": "(无原生消息)",
   "npsTransport.noMediaError": "(未提供 MediaError)",
+  "npsTransport.nativeErrorCode": "code={code}; {message}",
 };
