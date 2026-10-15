@@ -437,38 +437,29 @@ export function keyboardKeyRects(rect:Rect):KeyboardKey[]{
 export function paintPassiveKeyboard(c:CanvasRenderingContext2D,card:InputCardGeometry,state:KeyboardFeedback|undefined,now:number,reducedMotion:boolean){
  const rect=card.keyboard;if(!rect||state?.visible===false)return;
  const pressed=new Set(state?.codes??[]),committed=!reducedMotion&&!!state&&state.committedUntil>now;
- // continue18 — passive keyboard glass weight (deeper frost plate + specular + key caps; no caption capsule).
- c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,17);c.clip();
+ c.save();c.beginPath();c.roundRect(rect.x,rect.y,rect.w,rect.h,16);c.clip();
  const plate=c.createLinearGradient(0,rect.y,0,rect.y+rect.h);
- plate.addColorStop(0,'rgba(26,40,46,.78)');plate.addColorStop(.42,'rgba(14,22,28,.60)');plate.addColorStop(1,'rgba(7,12,18,.48)');
+ plate.addColorStop(0,'rgba(24,36,42,.7)');plate.addColorStop(.45,'rgba(14,22,28,.54)');plate.addColorStop(1,'rgba(8,14,20,.42)');
  c.fillStyle=plate;c.fill();
- const vig=c.createLinearGradient(0,rect.y+rect.h*.48,0,rect.y+rect.h);
- vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,'rgba(4,10,14,.22)');
+ const vig=c.createLinearGradient(0,rect.y+rect.h*.55,0,rect.y+rect.h);
+ vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,'rgba(4,10,14,.16)');
  c.fillStyle=vig;c.fillRect(rect.x,rect.y,rect.w,rect.h);
- const spec=c.createLinearGradient(0,rect.y,0,rect.y+rect.h*.42);
- spec.addColorStop(0,'rgba(236,248,242,.18)');spec.addColorStop(.48,'rgba(236,248,242,.06)');spec.addColorStop(1,'rgba(236,248,242,0)');
- c.fillStyle=spec;c.fillRect(rect.x,rect.y,rect.w,rect.h*.42);
- // Soft side falloff — grounds the QWERTY in the glass well.
- const side=c.createLinearGradient(rect.x,0,rect.x+rect.w,0);
- side.addColorStop(0,'rgba(4,10,14,.14)');side.addColorStop(.12,'rgba(4,10,14,0)');side.addColorStop(.88,'rgba(4,10,14,0)');side.addColorStop(1,'rgba(4,10,14,.14)');
- c.fillStyle=side;c.fillRect(rect.x,rect.y,rect.w,rect.h);
+ const spec=c.createLinearGradient(0,rect.y,0,rect.y+rect.h*.38);
+ spec.addColorStop(0,'rgba(236,248,242,.14)');spec.addColorStop(.55,'rgba(236,248,242,.04)');spec.addColorStop(1,'rgba(236,248,242,0)');
+ c.fillStyle=spec;c.fillRect(rect.x,rect.y,rect.w,rect.h*.38);
  c.restore();
- c.save();c.beginPath();c.roundRect(rect.x+.5,rect.y+.5,rect.w-1,rect.h-1,17);
- c.strokeStyle=state?.composing?'#c7daefbb':committed?'#b8e7bfcc':'rgba(215,233,223,.58)';c.lineWidth=1.2;c.stroke();
- // Inner top hairline for optical rim weight.
- c.beginPath();c.moveTo(rect.x+14,rect.y+1.2);c.lineTo(rect.x+rect.w-14,rect.y+1.2);
- c.strokeStyle='rgba(245,252,248,.22)';c.lineWidth=1;c.stroke();
+ c.save();c.beginPath();c.roundRect(rect.x+.5,rect.y+.5,rect.w-1,rect.h-1,16);
+ c.strokeStyle=state?.composing?'#c7daefaa':committed?'#b8e7bfbb':'rgba(215,233,223,.52)';c.lineWidth=1.1;c.stroke();
  for(const key of keyboardKeyRects(rect)){
-  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.15:0;
-  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,7);
-  if(active){c.fillStyle='#cce6bdec';c.fill()}else{
+  const active=pressed.has(key.code),r=key.rect,dy=active&&!reducedMotion?1.1:0;
+  c.beginPath();c.roundRect(r.x,r.y+dy,r.w,r.h,6.5);
+  if(active){c.fillStyle='#cce6bde8';c.fill()}else{
    const kg=c.createLinearGradient(0,r.y+dy,0,r.y+dy+r.h);
-   kg.addColorStop(0,'rgba(236,246,238,.18)');kg.addColorStop(.55,'rgba(220,232,226,.09)');kg.addColorStop(1,'rgba(200,214,208,.05)');
+   kg.addColorStop(0,'rgba(236,246,238,.15)');kg.addColorStop(1,'rgba(220,232,226,.06)');
    c.fillStyle=kg;c.fill()}
-  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.44)';c.lineWidth=1;c.stroke();
-  if(!active){c.beginPath();c.moveTo(r.x+3.5,r.y+dy+1);c.lineTo(r.x+r.w-3.5,r.y+dy+1);c.strokeStyle='rgba(245,252,248,.10)';c.lineWidth=.8;c.stroke()}
-  c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.8/card.cssScale,r.h*.54))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#f0f5f1';
-  c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.45);
+  c.strokeStyle=active?'#ecf8e5':'rgba(214,229,226,.38)';c.lineWidth=.9;c.stroke();
+  c.font=`500 ${Math.max(10/card.cssScale,Math.min(12.5/card.cssScale,r.h*.52))}px ${STUDIO_SANS}`;c.letterSpacing='0px';c.textAlign='center';c.textBaseline='middle';c.fillStyle=active?'#16241b':'#edf3ef';
+  c.fillText(key.label,r.x+r.w/2,r.y+dy+r.h/2+.5);
  }
  c.restore();
 }
@@ -511,9 +502,8 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  const z=card.input,native=state.nativeInputDisplay?.text===state.draft?state.nativeInputDisplay:undefined;
  c.save();c.beginPath();c.roundRect(z.x,z.y,z.w,z.h,9);c.clip();
  // continue15 — soft typing well (inset glass fill only; no extra stroke — rail stroke counts stay exact). Never a second subtitle.
- // continue22 — input-card plate (deeper frost + specular; still no full-width focus rail).
- {const well=c.createLinearGradient(0,z.y,0,z.y+z.h);well.addColorStop(0,'rgba(16,26,32,.30)');well.addColorStop(.5,'rgba(10,16,22,.16)');well.addColorStop(1,'rgba(7,12,18,.24)');c.fillStyle=well;c.fillRect(z.x,z.y,z.w,z.h);
-  const sheen=c.createLinearGradient(0,z.y,0,z.y+Math.max(8,z.h*.22));sheen.addColorStop(0,'rgba(245,252,248,.12)');sheen.addColorStop(.55,'rgba(245,252,248,.04)');sheen.addColorStop(1,'rgba(245,252,248,0)');c.fillStyle=sheen;c.fillRect(z.x,z.y,z.w,Math.max(8,z.h*.22))}
+ {const well=c.createLinearGradient(0,z.y,0,z.y+z.h);well.addColorStop(0,'rgba(14,22,28,.22)');well.addColorStop(.55,'rgba(10,16,22,.12)');well.addColorStop(1,'rgba(8,14,20,.18)');c.fillStyle=well;c.fillRect(z.x,z.y,z.w,z.h);
+  const sheen=c.createLinearGradient(0,z.y,0,z.y+Math.max(8,z.h*.18));sheen.addColorStop(0,'rgba(245,252,248,.08)');sheen.addColorStop(1,'rgba(245,252,248,0)');c.fillStyle=sheen;c.fillRect(z.x,z.y,z.w,Math.max(8,z.h*.18))}
  // Match the native viewport's inner clip: padding must not reveal fragments
  // of a fourth line. Neither drawing nor recording rewraps the current page.
  if(native?.window){c.beginPath();c.rect(z.x,z.y+native.window.clipTop,z.w,native.window.clipBottom-native.window.clipTop);c.clip()}
@@ -546,9 +536,8 @@ export function paintInputText(c:CanvasRenderingContext2D,card:InputCardGeometry
  const underlineLines=guide?wrapInputText(guide.mask,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):state.referenceGuide&&mode==='words'?wrapInputText(state.referenceGuide,railWidth,text=>c.measureText(text).width).map((line,index)=>({...line,x:guidePadding,baseline:railBaseline+index*card.lineHeight})):lines;
  c.shadowColor='transparent';c.shadowBlur=0;c.shadowOffsetY=0;
  // continue15 word/letter rails: soft fill bloom + crisp stroke (stroke count = slot count).
- // continue22 — word-rail residual polish (softer bloom only; stroke count stays exact; no full-width rails).
- const railColor=guide?'#e4f6bff2':'#e4f6d9f0',railW=Math.max(1.2,1.25/card.cssScale);
- for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;const x0=z.x+line.x+left+gap-scrollX,x1=z.x+line.x+left+width-gap-scrollX,y=z.y+line.baseline+4-scrollY;c.fillStyle='#e4f6d94a';c.fillRect(x0,y-1.35/card.cssScale,Math.max(0,x1-x0),2.8/card.cssScale);c.strokeStyle=railColor;c.lineWidth=railW;c.lineCap='round';c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke()}}
+ const railColor=guide?'#e4f6bfee':'#e4f6d9ee',railW=Math.max(1.2,1.25/card.cssScale);
+ for(const line of underlineLines){const runs=mode==='words'?Array.from(line.text.matchAll(/\S+/gu),match=>({segment:match[0],index:match.index!})):visualSegments(line.text).filter(part=>!/^\s+$/u.test(part.segment));for(const part of runs){const left=c.measureText(line.text.slice(0,part.index)).width,width=c.measureText(part.segment).width,gap=mode==='letters'?Math.min(3,width*.16):0;if(!(width>0))continue;const x0=z.x+line.x+left+gap-scrollX,x1=z.x+line.x+left+width-gap-scrollX,y=z.y+line.baseline+4-scrollY;c.fillStyle='#e4f6d942';c.fillRect(x0,y-1.25/card.cssScale,Math.max(0,x1-x0),2.6/card.cssScale);c.strokeStyle=railColor;c.lineWidth=railW;c.lineCap='round';c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke()}}
  const {ranges:feedbackRanges}=inputLetterFeedback(state.draft,state.referenceGuide,state.checkedAttempt??null,state.composition);
  for(const run of lines){if(run.y+run.height<scrollY||run.y>scrollY+z.h)continue;
   const boundaries=[0,run.text.length,...feedbackRanges.flatMap(r=>[Math.max(0,Math.min(run.text.length,r.start-run.start)),Math.max(0,Math.min(run.text.length,r.end-run.start))])].sort((a,b)=>a-b);

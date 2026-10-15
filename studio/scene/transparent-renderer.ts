@@ -41,30 +41,34 @@ const hudContrastControllers=new WeakMap<HTMLCanvasElement,HudContrastController
 const hudContrastStates=new WeakMap<HTMLCanvasElement,HudContrastState['status']|'letterbox'>();
 export function readHudContrastStatus(canvas:HTMLCanvasElement){return hudContrastStates.get(canvas)??'waiting'}
 function hudBacking(c:CanvasRenderingContext2D,r:Rect,alpha:number,content:Rect,radius=16,warmLift=0){
- // continue15 market glass: deeper frost + specular + vignette + side falloff; rim inside bounds (no outer stroke — keeps shared plate rails).
+ // hud-restore: continue15 market glass + sharper edge lighting (single plate — no double-glass drift).
  c.save();
  c.beginPath();c.roundRect(r.x,r.y,r.w,r.h,radius);
  const top=8+Math.round(warmLift*30),mid=14+Math.round(warmLift*24),bot=6+Math.round(warmLift*18);
  const shade=c.createLinearGradient(0,r.y,0,r.y+r.h);
- shade.addColorStop(0,`rgba(${top+12},${mid+14},34,${Math.min(.995,alpha*1.12)})`);
- shade.addColorStop(.22,`rgba(${top+6},${mid+8},28,${Math.min(.98,alpha*1.06)})`);
- shade.addColorStop(.62,`rgba(${top+1},${mid+2},22,${alpha})`);
- shade.addColorStop(1,`rgba(${bot},${mid-4},16,${alpha*.82})`);
+ shade.addColorStop(0,`rgba(${top+14},${mid+16},36,${Math.min(.995,alpha*1.14)})`);
+ shade.addColorStop(.2,`rgba(${top+7},${mid+9},29,${Math.min(.98,alpha*1.07)})`);
+ shade.addColorStop(.58,`rgba(${top+1},${mid+2},22,${alpha})`);
+ shade.addColorStop(1,`rgba(${bot},${mid-4},15,${alpha*.8})`);
  c.fillStyle=shade;c.fill();
- c.strokeStyle=`rgba(201,226,216,${.17+alpha*.14})`;c.lineWidth=1;c.stroke();
+ // Crisp rim (inside bounds — keeps shared plate rails; no outer stroke dual-system).
+ c.strokeStyle=`rgba(201,226,216,${.2+alpha*.16})`;c.lineWidth=1.05;c.stroke();
  c.clip();
+ // Soft side falloff — cinematic depth without muddy blur.
+ const side=c.createLinearGradient(r.x,0,r.x+r.w,0);
+ side.addColorStop(0,`rgba(4,10,14,${.1+alpha*.06})`);side.addColorStop(.12,'rgba(4,10,14,0)');side.addColorStop(.88,'rgba(4,10,14,0)');side.addColorStop(1,`rgba(4,10,14,${.1+alpha*.06})`);
+ c.fillStyle=side;c.fillRect(r.x,r.y,r.w,r.h);
  // Bottom inner vignette — grounds gauges without opaque fill.
- const vig=c.createLinearGradient(0,r.y+r.h*.5,0,r.y+r.h);
- vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,`rgba(4,10,14,${.18+alpha*.1})`);
+ const vig=c.createLinearGradient(0,r.y+r.h*.48,0,r.y+r.h);
+ vig.addColorStop(0,'rgba(4,10,14,0)');vig.addColorStop(1,`rgba(4,10,14,${.2+alpha*.11})`);
  c.fillStyle=vig;c.fillRect(r.x,r.y,r.w,r.h);
- // Top specular band
- c.beginPath();c.roundRect(r.x+.6,r.y+.6,r.w-1.2,Math.max(1,r.h*.42),Math.max(4,radius-2));
- const spec=c.createLinearGradient(0,r.y,0,r.y+r.h*.44);
- spec.addColorStop(0,`rgba(240,250,246,${.15+alpha*.08})`);spec.addColorStop(.45,`rgba(220,236,230,${.05+alpha*.035})`);spec.addColorStop(1,'rgba(232,244,238,0)');
+ // Top specular band + hairline edge light
+ c.beginPath();c.roundRect(r.x+.6,r.y+.6,r.w-1.2,Math.max(1,r.h*.4),Math.max(4,radius-2));
+ const spec=c.createLinearGradient(0,r.y,0,r.y+r.h*.42);
+ spec.addColorStop(0,`rgba(245,252,248,${.18+alpha*.09})`);spec.addColorStop(.4,`rgba(220,236,230,${.06+alpha*.04})`);spec.addColorStop(1,'rgba(232,244,238,0)');
  c.fillStyle=spec;c.fill();
- // Hairline specular edge (inside bounds)
- c.beginPath();c.moveTo(r.x+radius*.65,r.y+1.15);c.lineTo(r.x+r.w-radius*.65,r.y+1.15);
- c.strokeStyle=`rgba(245,252,248,${.22+alpha*.09})`;c.lineWidth=1;c.stroke();
+ c.beginPath();c.moveTo(r.x+radius*.65,r.y+1.1);c.lineTo(r.x+r.w-radius*.65,r.y+1.1);
+ c.strokeStyle=`rgba(245,252,248,${.26+alpha*.1})`;c.lineWidth=1;c.stroke();
  c.restore()
 }
 export function transparentEntrance(now:number,enteredAt:number,changedAt:number,loading:boolean,reduced:boolean){if(reduced)return 1;const age=Math.max(0,now-(changedAt||enteredAt));return loading?1-.62*clamp(age/220):.38+.62*(1-Math.pow(1-clamp(age/720),3))}
@@ -110,55 +114,34 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  }
  // Goal is explicit configuration, not a score fabricated from the reference art.
  if(projected)mapRect(c,{x:32,y:54,w:264,h:264},geometry.goal);
- const earned=standby?.goalWords??s?.earnedWords??0,goal=24,ratio=standby?.goalFraction??Math.min(1,earned/goal),cx=164,cy=186,r=92;
- // continue19 — standby-energy bloom (visual only; sampleStandbyEnergy timing untouched).
- {const energy=standby?standby.energy:f.input.energy,idleBloom=standby&&!standby.frozen&&!v.reducedMotion;const auraR=idleBloom?128+energy*28:132;const aura=c.createRadialGradient(cx,cy,22,cx,cy,auraR);aura.addColorStop(0,idleBloom?`rgba(8,18,23,${.58+.18*energy})`:'#08121799');aura.addColorStop(.55,idleBloom?`rgba(8,18,23,${.22+.12*energy})`:'rgba(8,18,23,.35)');aura.addColorStop(1,'#08121700');c.fillStyle=aura;c.fillRect(32,54,264,264);
-  if(idleBloom){c.save();c.globalAlpha=.10+.16*energy;c.shadowColor=tone;c.shadowBlur=18+breath*10+energy*14;c.beginPath();c.arc(cx,cy,r+10+energy*8,0,Math.PI*2);c.strokeStyle=tone;c.lineWidth=1.2;c.stroke();c.restore()}}
- c.save();c.shadowColor=tone;c.shadowBlur=v.reducedMotion?5:7+breath*4+(standby&&!standby.frozen&&!v.reducedMotion?standby.energy*6:0);line(c,65,62,90,62,tone,5.5);c.restore();txt(c,t('hud.goal').toUpperCase(),portrait?103:109,portrait?Math.max(70,54+9/(geometry.goal.w/264)):70,portrait?11/(geometry.goal.w/264):15,'#d5e4df',500);
- // continue16 instrument ring — heavier majors, finer minors, clearer dial depth.
- for(let i=0;i<48;i++){const angle=-Math.PI/2+i*Math.PI/24;const major=i%4===0,half=i%2===0&&!major;const inner=major?106.2:half?107.2:108.2,outer=major?117.2:half?113.2:111.2;line(c,cx+Math.cos(angle)*inner,cy+Math.sin(angle)*inner,cx+Math.cos(angle)*outer,cy+Math.sin(angle)*outer,major?'#e4f6eeaa':half?'#d0e8e078':'#c9e4e055',major?1.65:half?1.05:.82)}
- // continue20 — goal-dial specular (rim depth + specular arc + hub polish; timing untouched).
- c.beginPath();c.arc(cx,cy,r+1.6,0,Math.PI*2);c.strokeStyle='rgba(8,14,20,.35)';c.lineWidth=4.2;c.stroke();
- c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.strokeStyle='#c5e0dc66';c.lineWidth=3.7;c.stroke();
- c.beginPath();c.arc(cx,cy,r-7,0,Math.PI*2);c.strokeStyle='#c5e0dc28';c.lineWidth=1.15;c.stroke();
- // Soft dial fill + upper-left specular highlight.
- {const dial=c.createRadialGradient(cx-18,cy-22,r*.12,cx,cy,r);dial.addColorStop(0,'rgba(236,248,242,.16)');dial.addColorStop(.32,'rgba(201,226,216,.08)');dial.addColorStop(.7,'rgba(201,226,216,.025)');dial.addColorStop(1,'rgba(201,226,216,0)');c.fillStyle=dial;c.beginPath();c.arc(cx,cy,r-2,0,Math.PI*2);c.fill();
-  c.save();c.beginPath();c.arc(cx,cy,r-3.2,-Math.PI*.92,-Math.PI*.42);c.strokeStyle='rgba(245,252,248,.22)';c.lineWidth=2.1;c.lineCap='round';c.stroke();c.restore()}
- // continue16 needle weight — heavier arc + instrument tip hub + center pivot (continue20 tip specular).
- if(ratio>0){c.save();c.shadowColor=tone;c.shadowBlur=15+breath*5;c.beginPath();c.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*ratio);c.lineWidth=7.55;c.lineCap='round';c.strokeStyle=tone;c.stroke();const theta=-Math.PI/2+Math.PI*2*ratio,tx=cx+Math.cos(theta)*r,ty=cy+Math.sin(theta)*r;c.beginPath();c.arc(tx,ty,5.55,0,Math.PI*2);c.fillStyle='#fff8de';c.fill();c.beginPath();c.arc(tx,ty,5.55,0,Math.PI*2);c.strokeStyle='#0c141866';c.lineWidth=1.15;c.stroke();c.beginPath();c.arc(tx,ty,2.35,0,Math.PI*2);c.fillStyle='#0c1418bb';c.fill();c.beginPath();c.arc(tx-1.1,ty-1.1,1.05,0,Math.PI*2);c.fillStyle='#ffffff88';c.fill();c.restore()}
- // Instrument pivot hub — continue20 dual-ring + specular bead.
- {c.save();c.beginPath();c.arc(cx,cy,4.05,0,Math.PI*2);c.fillStyle='#e8f4ee99';c.fill();c.beginPath();c.arc(cx,cy,4.05,0,Math.PI*2);c.strokeStyle='#c9e2d877';c.lineWidth=1.1;c.stroke();c.beginPath();c.arc(cx,cy,2.15,0,Math.PI*2);c.fillStyle='#0c1418cc';c.fill();c.beginPath();c.arc(cx-.7,cy-.7,.85,0,Math.PI*2);c.fillStyle='#ffffff66';c.fill();c.restore()}
- txt(c,f.restoreFailed?'—':`${Math.round(ratio*100)}%`,cx,188,46,WHITE,700,'center');txt(c,f.restoreFailed?'':`${earned} / ${goal}`,cx,218,13,'#d7e4df',500,'center');if(!standby)txt(c,t('scene.confirmedWords').toUpperCase(),cx,242,10,tone,500,'center');if(standby&&!standby.frozen){c.save();const e=standby.energy;c.globalAlpha=.36+.22*e;c.strokeStyle=tone;c.lineWidth=1.55+e*.55;c.shadowColor=tone;c.shadowBlur=v.reducedMotion?0:6+e*10;c.beginPath();const angle=-Math.PI/2+standby.sweep*Math.PI*2;c.arc(cx,cy,r+8+e*2,angle,angle+.42+.12*e);c.stroke();c.restore()}
+ const earned=standby?.goalWords??s?.earnedWords??0,goal=24,ratio=standby?.goalFraction??Math.min(1,earned/goal),cx=164,cy=186,r=92;const aura=c.createRadialGradient(cx,cy,25,cx,cy,132);aura.addColorStop(0,'#08121799');aura.addColorStop(1,'#08121700');c.fillStyle=aura;c.fillRect(32,54,264,264);c.save();c.shadowColor=tone;c.shadowBlur=v.reducedMotion?5:7+breath*4;line(c,65,62,90,62,tone,5.5);c.restore();txt(c,t('hud.goal').toUpperCase(),portrait?103:109,portrait?Math.max(70,54+9/(geometry.goal.w/264)):70,portrait?11/(geometry.goal.w/264):15,'#d5e4df',500);
+ // hud-restore: clearer instrument majors without over-dense tick mud.
+ for(let i=0;i<48;i++){const angle=-Math.PI/2+i*Math.PI/24;const major=i%4===0;line(c,cx+Math.cos(angle)*107,cy+Math.sin(angle)*107,cx+Math.cos(angle)*(major?116.5:111.5),cy+Math.sin(angle)*(major?116.5:111.5),major?'#e0f2eaad':'#c9e4e060',major?1.5:1)}
+ c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.strokeStyle='#c5e0dc62';c.lineWidth=3.5;c.stroke();
+ c.beginPath();c.arc(cx,cy,r-7,0,Math.PI*2);c.strokeStyle='#c5e0dc22';c.lineWidth=1;c.stroke();
+ // Soft dial fill + quiet upper specular — premium depth, still one plate.
+ {const dial=c.createRadialGradient(cx-14,cy-18,r*.14,cx,cy,r);dial.addColorStop(0,'rgba(236,248,242,.11)');dial.addColorStop(.45,'rgba(201,226,216,.05)');dial.addColorStop(1,'rgba(201,226,216,0)');c.fillStyle=dial;c.beginPath();c.arc(cx,cy,r-2,0,Math.PI*2);c.fill()}
+ if(ratio>0){c.save();c.shadowColor=tone;c.shadowBlur=14+breath*5;c.beginPath();c.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*ratio);c.lineWidth=7;c.lineCap='round';c.strokeStyle=tone;c.stroke();const theta=-Math.PI/2+Math.PI*2*ratio,tx=cx+Math.cos(theta)*r,ty=cy+Math.sin(theta)*r;c.beginPath();c.arc(tx,ty,5,0,Math.PI*2);c.fillStyle='#fff8de';c.fill();c.beginPath();c.arc(tx,ty,2.1,0,Math.PI*2);c.fillStyle='#0c1418aa';c.fill();c.restore()}
+ txt(c,f.restoreFailed?'—':`${Math.round(ratio*100)}%`,cx,188,46,WHITE,700,'center');txt(c,f.restoreFailed?'':`${earned} / ${goal}`,cx,218,13,'#d7e4df',500,'center');if(!standby)txt(c,t('scene.confirmedWords').toUpperCase(),cx,242,10,tone,500,'center');if(standby&&!standby.frozen){c.save();c.globalAlpha=.42;c.strokeStyle=tone;c.lineWidth=1.5;c.beginPath();const angle=-Math.PI/2+standby.sweep*Math.PI*2;c.arc(cx,cy,r+8,angle,angle+.45);c.stroke();c.restore()}
  // Kids edition: soft decorative orbs only — freeze under reduced-motion; never affect geometry/facts.
- // continue17 kids motion — larger pulse amplitude + travel offsets; freeze under reduced-motion.
- if(edition.id==='kids'){c.save();const orbs=[[cx-78,cy-62,.72],[cx+86,cy-48,.56],[cx-54,cy+78,.50],[cx+72,cy+70,.62]];for(const[ox,oy,a]of orbs){const phase=(now-f.enteredAt)/780+ox*.012;const pulse=v.reducedMotion?a:a*(.62+.38*Math.sin(phase));const dx=v.reducedMotion?0:Math.sin(phase*1.15)*3.2;const dy=v.reducedMotion?0:Math.cos(phase*.95)*2.6;c.globalAlpha=pulse;c.fillStyle=tone;c.shadowColor=tone;c.shadowBlur=v.reducedMotion?0:8;c.beginPath();c.arc(ox+dx,oy+dy,v.reducedMotion?3.5:3.5+breath*2.4,0,Math.PI*2);c.fill()}c.restore()}
+ if(edition.id==='kids'){c.save();const orbs=[[cx-78,cy-62,.55],[cx+86,cy-48,.4],[cx-54,cy+78,.35],[cx+72,cy+70,.48]];for(const[ox,oy,a]of orbs){const pulse=v.reducedMotion?a:a*(.72+.28*Math.sin((now-f.enteredAt)/900+ox*.01));c.globalAlpha=pulse;c.fillStyle=tone;c.beginPath();c.arc(ox,oy,v.reducedMotion?3.2:3.2+breath*1.6,0,Math.PI*2);c.fill()}c.restore()}
  if(projected){c.restore();mapRect(c,{x:568,y:38,w:536,h:352/3},geometry.title)}
  {
  const titleText=m.kind==='demo'?materialStageTitle(s):t('scene.localMedia').toUpperCase();
  const statusText=f.restoreFailed?t('scene.restoreFailed'):f.replay?t('scene.replay'):v.paused?t('hud.paused'):standby?t('scene.standby').toUpperCase():'30 MIN';
- // Soft title band — continue17 optical type (hairline floor, title/status hierarchy).
- // continue20 — title-band status-chip (glass pill under title; peer to continue17 band).
- c.save();c.font=`600 28px ${STUDIO_SANS}`;const tw=Math.min(528,c.measureText(titleText).width+76);c.restore();
- const band={x:836-tw/2,y:42,w:tw,h:78};
- c.save();c.beginPath();c.roundRect(band.x,band.y,band.w,band.h,18);
+ // Soft title band — continue15 hierarchy + crisper rim (no nested status-chip well).
+ c.save();c.font=`500 29px ${STUDIO_SANS}`;const tw=Math.min(520,c.measureText(titleText).width+64);c.restore();
+ const band={x:836-tw/2,y:44,w:tw,h:74};
+ c.save();c.beginPath();c.roundRect(band.x,band.y,band.w,band.h,17);
  const tg=c.createLinearGradient(0,band.y,0,band.y+band.h);
- tg.addColorStop(0,'rgba(18,28,34,.72)');tg.addColorStop(.48,'rgba(12,20,26,.50)');tg.addColorStop(1,'rgba(8,14,20,.34)');
- c.fillStyle=tg;c.fill();c.strokeStyle='rgba(201,226,216,.36)';c.lineWidth=1.1;c.stroke();
- c.beginPath();c.moveTo(band.x+22,band.y+1.15);c.lineTo(band.x+band.w-22,band.y+1.15);
- c.strokeStyle='rgba(245,252,248,.26)';c.lineWidth=1.05;c.stroke();
- // Inner bottom hairline for optical floor under status.
- c.beginPath();c.moveTo(band.x+28,band.y+band.h-1.2);c.lineTo(band.x+band.w-28,band.y+band.h-1.2);
- c.strokeStyle='rgba(201,226,216,.12)';c.lineWidth=1;c.stroke();c.restore();
- // Title sits optically high; status chip sits on the floor hairline (no second subtitle system).
- txt(c,titleText,836,69.5,23.5,WHITE,600,'center');
- line(c,836-Math.min(90,tw*.35),84.5,836+Math.min(90,tw*.35),84.5,'#c9e2d870',1.2);
- {c.save();c.font=`500 10px ${STUDIO_SANS}`;const sw=Math.min(tw-36,c.measureText(statusText).width+22);const chip={x:836-sw/2,y:94.5,w:sw,h:18.5};
-  c.beginPath();c.roundRect(chip.x,chip.y,chip.w,chip.h,9);
-  const cg=c.createLinearGradient(0,chip.y,0,chip.y+chip.h);cg.addColorStop(0,'rgba(26,40,46,.72)');cg.addColorStop(1,'rgba(10,16,22,.48)');
-  c.fillStyle=cg;c.fill();c.strokeStyle=f.restoreFailed?'rgba(255,180,140,.45)':v.paused?'rgba(201,226,216,.28)':standby?'rgba(196,252,87,.38)':'rgba(201,226,216,.40)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(chip.x+8,chip.y+1);c.lineTo(chip.x+chip.w-8,chip.y+1);c.strokeStyle='rgba(245,252,248,.16)';c.lineWidth=.85;c.stroke();c.restore();
-  txt(c,statusText,836,107.2,9.5,f.restoreFailed?'#ffd4b7':standby?'#e2fbb8':'#c9d8d4',600,'center')}
- if(f.restoreFailed)txt(c,t('scene.restoreDetail'),836,130,14,'#ffd4b7',400,'center');
+ tg.addColorStop(0,'rgba(18,28,34,.72)');tg.addColorStop(.5,'rgba(12,20,26,.48)');tg.addColorStop(1,'rgba(8,14,20,.34)');
+ c.fillStyle=tg;c.fill();c.strokeStyle='rgba(201,226,216,.38)';c.lineWidth=1.1;c.stroke();
+ c.beginPath();c.moveTo(band.x+20,band.y+1.1);c.lineTo(band.x+band.w-20,band.y+1.1);
+ c.strokeStyle='rgba(245,252,248,.26)';c.lineWidth=1;c.stroke();c.restore();
+ txt(c,titleText,836,71,24,WHITE,600,'center');
+ line(c,836-Math.min(86,tw*.34),86,836+Math.min(86,tw*.34),86,'#c9e2d868',1.1);
+ txt(c,statusText,836,106,10.5,standby?'#d6efb8':v.paused?'#c9d8d4':'#b6c4c2',500,'center');
+ if(f.restoreFailed)txt(c,t('scene.restoreDetail'),836,129,14,'#ffd4b7',400,'center');
 }
  if(projected){c.restore();mapRect(c,{x:1297,y:40,w:352,h:192},geometry.trend)}
  // Cadence is a separate ephemeral reference projection. It never becomes f.input.
@@ -166,43 +149,26 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const cadencePoints=cadence?.status==='active'?cadence.points:[];
  const displayedPoints=listening?cadencePoints:f.input.points;
  // Library trend segmentation preserves every pause/missing interval of real input.
- const panel={x:1297,y:40,w:352,h:192};
- // continue20 — trend-panel glass plate + legend hierarchy (no caption capsule).
- {c.save();c.beginPath();c.roundRect(panel.x,panel.y,panel.w,panel.h,14);
-  const pg=c.createLinearGradient(0,panel.y,0,panel.y+panel.h);pg.addColorStop(0,'rgba(18,28,34,.62)');pg.addColorStop(.5,'rgba(12,20,26,.42)');pg.addColorStop(1,'rgba(8,14,20,.28)');
-  c.fillStyle=pg;c.fill();c.strokeStyle='rgba(201,226,216,.34)';c.lineWidth=1.1;c.stroke();
-  c.beginPath();c.moveTo(panel.x+16,panel.y+1.15);c.lineTo(panel.x+panel.w-16,panel.y+1.15);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(panel.x+18,panel.y+panel.h-1.2);c.lineTo(panel.x+panel.w-18,panel.y+panel.h-1.2);c.strokeStyle='rgba(201,226,216,.12)';c.lineWidth=1;c.stroke();c.restore()}
- frame(c,panel,.42+breath*.12,palette?.frame??traceTone);line(c,1321,59,1342,59,traceTone,5.5);txt(c,(listening?t('scene.referencePace'):t('hud.trend')).toUpperCase(),1358,64,portrait?11/(geometry.trend.w/352):14,'#e0eee9',500);txt(c,listening?t('scene.estimated').toUpperCase():standby?'':t('scene.graphemes').toUpperCase(),1625,portrait?86:63,portrait?10/(geometry.trend.w/352):10,'#b8c6c4',500,'right');
+ const panel={x:1297,y:40,w:352,h:192};frame(c,panel,.4+breath*.14,palette?.frame??traceTone);line(c,1321,59,1342,59,traceTone,5.5);txt(c,(listening?t('scene.referencePace'):t('hud.trend')).toUpperCase(),1358,64,portrait?11/(geometry.trend.w/352):14,'#d8e6e1',500);txt(c,listening?t('scene.estimated').toUpperCase():standby?'':t('scene.graphemes').toUpperCase(),1625,portrait?86:63,portrait?10/(geometry.trend.w/352):10,'#aebcba',500,'right');
  const windowMs=standby?.historyWindowMs??30000,end=Math.max(windowMs,listening?(cadencePoints.length?cadence!.endMs:0):hudNow),start=end-windowMs,max=Math.max(6,Math.ceil(Math.max(0,...displayedPoints.map(p=>p.value??0))/2)*2);const meta={schemaVersion:1 as const,metricId:'live-input-gps',metricVersion:1 as const,unit:'graphemes/second' as const,source:standby?'fixture' as const:'input-event' as const,quality:standby?'estimated' as const:'measured' as const,observedAtMs:now,sourceEventIds:[],state:{status:'ready' as const}};
  const trend:TrendMetric={...meta,kind:'trend',domain:{startMs:start,endMs:end,min:0,max},points:f.input.points.map(p=>({atMs:p.atMs,value:p.value,quality:p.value===null?'unmeasured':standby?'estimated':'measured',sourceEventIds:[],state:p.value===null?'missing':'active'}))};
  const plotTop=portrait?104:90,plotBottom=portrait?198:200,plotHeight=portrait?94:110;
- // continue16 trend tick density — 5 horizontal bands + spine ticks + denser time ticks (continue20 clearer majors).
- {const bands=4;for(let i=0;i<=bands;i++){const y=plotTop+i*(plotHeight/bands),major=i===0||i===bands;c.setLineDash(major?[]:[3,5]);line(c,1344,y,1627,y,major?'#d2e6e4a8':'#d2e6e46c');c.setLineDash([]);line(c,1344,y,1344+(major?7.5:4.2),y,major?'#e4f6eebb':'#d2e6e492',major?1.35:.9)}
-  for(let i=0;i<=6;i++){const x=1344+i*(283/6);line(c,x,plotBottom,x,plotBottom+(i%3===0?5.5:3.2),'#d2e6e478',i%3===0?1.15:.85)}}
- line(c,1344,portrait?104:87,1344,plotBottom,'#ddf6f2bb');txt(c,String(max),1328,portrait?110:96,16,WHITE,500,'right');txt(c,'0',1328,201,16,'#e8f0ec',500,'right');txt(c,`${Math.round(start/1000)}s`,1344,220,13,'#c9d8d4');txt(c,`${Math.round(end/1000)}s`,1627,220,13,'#c9d8d4',400,'right');
+ for(let i=0;i<3;i++){const y=plotTop+i*(portrait?47:55);c.setLineDash(i<2?[4,5]:[]);line(c,1344,y,1627,y,'#d2e6e485');c.setLineDash([])}line(c,1344,portrait?104:87,1344,plotBottom,'#ddf6f2aa');txt(c,String(max),1328,portrait?110:96,16,WHITE,400,'right');txt(c,'0',1328,201,16,WHITE,400,'right');txt(c,`${Math.round(start/1000)}s`,1344,220,13);txt(c,`${Math.round(end/1000)}s`,1627,220,13,WHITE,400,'right');
  c.save();c.beginPath();c.rect(1343,portrait?103:86,285,portrait?96:115);c.clip();
  for(const segment of listening?(cadencePoints.length?[cadencePoints]:[]):trendSegments(trend,1500)){
    const points=segment.map(p=>({x:1344+(p.atMs-start)/windowMs*283,y:plotBottom-p.value!/max*plotHeight}));
    c.beginPath();for(const curve of monotoneCurve(points)){c.moveTo(curve.from.x,curve.from.y);c.bezierCurveTo(curve.c1.x,curve.c1.y,curve.c2.x,curve.c2.y,curve.to.x,curve.to.y)}
-   c.strokeStyle=traceTone;c.lineWidth=2.75;c.lineCap='round';c.lineJoin='round';c.shadowColor=traceTone;c.shadowBlur=6;c.stroke();
-   const last=points.at(-1);if(last){c.beginPath();c.arc(last.x,last.y,4.8,0,Math.PI*2);c.fillStyle=traceTone+'38';c.fill();c.beginPath();c.arc(last.x,last.y,2.9,0,Math.PI*2);c.fillStyle=traceTone;c.fill();c.beginPath();c.arc(last.x-.6,last.y-.6,1,0,Math.PI*2);c.fillStyle='#ffffff55';c.fill()}
+   c.strokeStyle=traceTone;c.lineWidth=2.45;c.lineCap='round';c.lineJoin='round';c.shadowColor=traceTone;c.shadowBlur=4.5;c.stroke();
+   const last=points.at(-1);if(last){c.beginPath();c.arc(last.x,last.y,4.2,0,Math.PI*2);c.fillStyle=traceTone+'33';c.fill();c.beginPath();c.arc(last.x,last.y,2.6,0,Math.PI*2);c.fillStyle=traceTone;c.fill()}
  }c.restore();
  if(!displayedPoints.some(p=>p.value!==null))txt(c,listening?(listening.hidden?t('scene.hidden'):v.reducedMotion?t('scene.reducedMotion'):cadence?.status==='paused'?t('hud.paused'):t('scene.awaitingPlayback')):f.replay?t('scene.replayPaused'):t('scene.typeToTrace'),1485,portrait?159:153,15,'#e0e9e7c9',400,'center');
  if(projected)c.restore();
  // Compact camera entry is presentation-only; enabled/split/course inset stays original.
  const cameraControl=cameraControlGeometry(geometry,v.camera,v.layout,{fixture:v.fixture,cssWidth:v.cameraViewport?.width,cssHeight:v.cameraViewport?.height});
  if(cameraControl.compact){
-  // Bare camera line-art — same 20px / 1.5 stroke peer as keyboard/settings/Enter (size locked).
-  // continue29 — camera glyph peer polish only; size stays 20px locked (not inset enlarge).
-  // continue21 — camera-inset frame (soft glass well behind peer glyph; do not enlarge icon).
-  const r=cameraControl.visual;
-  {c.save();c.beginPath();c.roundRect(r.x-2,r.y-2,r.w+4,r.h+4,8);
-   const cg=c.createLinearGradient(0,r.y-2,0,r.y+r.h+2);cg.addColorStop(0,'rgba(18,28,34,.55)');cg.addColorStop(1,'rgba(8,14,20,.28)');
-   c.fillStyle=cg;c.fill();c.strokeStyle='rgba(201,226,216,.32)';c.lineWidth=1;c.stroke();
-   c.beginPath();c.moveTo(r.x+2,r.y-1);c.lineTo(r.x+r.w-2,r.y-1);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.85;c.stroke();c.restore()}
-  c.save();c.translate(r.x,r.y);c.scale(r.w/20,r.h/20);
-  c.strokeStyle=v.camera==='on'||v.camera==='requesting'?'#eafad6':'#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
+  // Bare camera line-art — same 20px / 1.5 stroke peer as keyboard/settings/Enter.
+  const r=cameraControl.visual;c.save();c.translate(r.x,r.y);c.scale(r.w/20,r.h/20);
+  c.strokeStyle='#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
   c.beginPath();c.roundRect(2,5,11,10,2);c.stroke();
   c.beginPath();c.moveTo(13,7);c.lineTo(18,4);c.lineTo(18,16);c.lineTo(13,13);c.closePath();c.stroke();
   if(v.camera==='requesting')txt(c,'…',10,3,7,WHITE,600,'center');
@@ -213,29 +179,14 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
   if(v.recording){if(portrait)mapRect(c,{x:1374,y:292,w:240,h:152},geometry.inset);const inset=portrait?{x:1374,y:292,w:240,h:152}:geometry.inset;const sec=Math.max(0,(f.wallNowMs-(v.recordingStarted??f.wallNowMs))/1000);txt(c,`● REC ${format(sec)}`,inset.x+12,inset.y+inset.h-6,12,'#ffb3a2');if(portrait)c.restore()}
  }else{
  // Camera icon is transparent until explicit permission and a real stream exist.
- if(portrait)mapRect(c,{x:1374,y:292,w:240,h:152},geometry.inset);const inset=portrait?{x:1374,y:292,w:240,h:152}:geometry.inset;if(v.layout==='camera')media(c,m,v,{...inset,h:inset.h-25},false,(v.cameraViewport?.width??W)/W);else if(v.camera==='on'){media(c,m,v,{...inset,h:inset.h-25},true)}else{const x=inset.x+inset.w/2,y=inset.y+inset.h*.45;c.strokeStyle='#edf2ee';c.lineWidth=1.7;c.lineCap='round';c.lineJoin='round';c.beginPath();c.roundRect(x-27,y-20,43,37,8);c.stroke();c.beginPath();c.moveTo(x+17,y-12);c.lineTo(x+34,y-19);c.lineTo(x+34,y+16);c.lineTo(x+17,y+10);c.stroke();txt(c,v.camera==='requesting'?t('scene.cameraPermission'):v.camera==='error'?t('hud.cameraError'):t('hud.cameraOff'),x,y+51,portrait?Math.max(21,12/(geometry.inset.w/240)):21,WHITE,400,'center')}
- // continue21 — camera-inset frame rim depth + soft inner vignette (geometry size unchanged).
- {c.save();c.beginPath();c.roundRect(inset.x+.6,inset.y+.6,inset.w-1.2,inset.h-1.2,12);c.strokeStyle='rgba(201,226,216,.38)';c.lineWidth=1.15;c.stroke();
-  c.beginPath();c.roundRect(inset.x+2.2,inset.y+2.2,inset.w-4.4,inset.h-4.4,10);c.strokeStyle='rgba(8,14,20,.28)';c.lineWidth=2.4;c.stroke();
-  const vig=c.createLinearGradient(0,inset.y,0,inset.y+inset.h);vig.addColorStop(0,'rgba(4,10,14,.18)');vig.addColorStop(.22,'rgba(4,10,14,0)');vig.addColorStop(.78,'rgba(4,10,14,0)');vig.addColorStop(1,'rgba(4,10,14,.22)');
-  c.fillStyle=vig;c.fillRect(inset.x,inset.y,inset.w,inset.h);
-  c.beginPath();c.moveTo(inset.x+14,inset.y+1.2);c.lineTo(inset.x+inset.w-14,inset.y+1.2);c.strokeStyle='rgba(245,252,248,.18)';c.lineWidth=1;c.stroke();c.restore()}
- frame(c,inset,.72,palette?.frame);if(v.recording||v.camera==='on'||v.layout==='camera'){const sec=Math.max(0,(f.wallNowMs-(v.recordingStarted??f.wallNowMs))/1000);txt(c,v.recording?`● REC ${format(sec)}`:t('scene.localOnly'),inset.x+12,inset.y+inset.h-6,12,v.recording?'#ffb3a2':WHITE)}
+ if(portrait)mapRect(c,{x:1374,y:292,w:240,h:152},geometry.inset);const inset=portrait?{x:1374,y:292,w:240,h:152}:geometry.inset;if(v.layout==='camera')media(c,m,v,{...inset,h:inset.h-25},false,(v.cameraViewport?.width??W)/W);else if(v.camera==='on'){media(c,m,v,{...inset,h:inset.h-25},true)}else{const x=inset.x+inset.w/2,y=inset.y+inset.h*.45;c.strokeStyle='#edf2ee';c.lineWidth=2;c.beginPath();c.roundRect(x-27,y-20,43,37,8);c.stroke();c.beginPath();c.moveTo(x+17,y-12);c.lineTo(x+34,y-19);c.lineTo(x+34,y+16);c.lineTo(x+17,y+10);c.stroke();txt(c,v.camera==='requesting'?t('scene.cameraPermission'):v.camera==='error'?t('hud.cameraError'):t('hud.cameraOff'),x,y+51,portrait?Math.max(21,12/(geometry.inset.w/240)):21,WHITE,400,'center')}
+ frame(c,inset,.7,palette?.frame);if(v.recording||v.camera==='on'||v.layout==='camera'){const sec=Math.max(0,(f.wallNowMs-(v.recordingStarted??f.wallNowMs))/1000);txt(c,v.recording?`● REC ${format(sec)}`:t('scene.localOnly'),inset.x+12,inset.y+inset.h-6,12,v.recording?'#ffb3a2':WHITE)}
  if(portrait)c.restore();
  }
  // Each genuine input event keeps a stable height and flows left with its timestamp.
- const pulseRect=geometry.metrics;const dockedFlow=!!geometry.practiceCompact&&portrait;c.save();c.translate(pulseRect.x,pulseRect.y);c.scale(pulseRect.w/309,pulseRect.h/168);
- // continue19 — flow-panel chrome (glass plate + optical hierarchy + denser trough; no caption capsule).
- {const fp={x:0,y:0,w:309,h:168};c.save();c.beginPath();c.roundRect(fp.x,fp.y,fp.w,fp.h,14);
-  const fg=c.createLinearGradient(0,0,0,168);fg.addColorStop(0,'rgba(18,28,34,.62)');fg.addColorStop(.5,'rgba(12,20,26,.42)');fg.addColorStop(1,'rgba(8,14,20,.28)');
-  c.fillStyle=fg;c.fill();c.strokeStyle='rgba(201,226,216,.34)';c.lineWidth=1.1;c.stroke();
-  c.beginPath();c.moveTo(14,1.15);c.lineTo(295,1.15);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(18,166.8);c.lineTo(291,166.8);c.strokeStyle='rgba(201,226,216,.12)';c.lineWidth=1;c.stroke();c.restore()}
- frame(c,{x:0,y:0,w:309,h:168},.42+breath*.12,palette?.frame??AQUA);line(c,14,27,34,27,tone,5.5);txt(c,t('hud.flow').toUpperCase(),49,32,portrait?11/(pulseRect.w/309):15,'#e0eee9',500);const count=f.replay||f.restoreFailed?'—':String(f.input.commits10s),countSize=Math.min(dockedFlow?32:36,92/(count.length*.62));c.save();c.font=`600 ${countSize}px ${STUDIO_SEMIBOLD}`;const countW=c.measureText(count).width,labelX=Math.min(220,Math.max(dockedFlow?64:75,16+countW+10));c.restore();txt(c,count,16,dockedFlow?78:75,countSize,WHITE,600,'left',STUDIO_SEMIBOLD);if(portrait&&!standby&&count.length<=3){const unit=10/(pulseRect.w/309);txt(c,t('scene.committedEvents').toUpperCase(),labelX,64,unit,'#e8f0ec',400,'left',STUDIO_SANS,298-labelX);txt(c,'/ 10s',labelX,84,unit,'#c5d2cd',400,'left',STUDIO_SANS,298-labelX)}else txt(c,standby?'':count.length>3?t('scene.events'):`${t('scene.committedEvents').toUpperCase()} / 10s`,labelX,73,15,'#e0ebe7',400,'left',STUDIO_SANS,298-labelX);line(c,12,138,300,138,'#9debe666');
- // continue16 flow tick density — 10s window subdivided for glanceable event pacing.
- for(let i=0;i<=10;i++){const x=12+i*28.8,major=i%5===0;line(c,x,138,x,138+(major?6.5:3.8),major?'#9debe698':'#9debe650',major?1.2:.85)}
+ const pulseRect=geometry.metrics;const dockedFlow=!!geometry.practiceCompact&&portrait;c.save();c.translate(pulseRect.x,pulseRect.y);c.scale(pulseRect.w/309,pulseRect.h/168);frame(c,{x:0,y:0,w:309,h:168},.4,palette?.frame??AQUA);line(c,14,27,34,27,tone,5.5);txt(c,t('hud.flow').toUpperCase(),49,32,portrait?11/(pulseRect.w/309):15,'#d8e6e1',500);const count=f.replay||f.restoreFailed?'—':String(f.input.commits10s),countSize=Math.min(dockedFlow?32:36,92/(count.length*.62));c.save();c.font=`600 ${countSize}px ${STUDIO_SEMIBOLD}`;const countW=c.measureText(count).width,labelX=Math.min(220,Math.max(dockedFlow?64:75,16+countW+10));c.restore();txt(c,count,16,dockedFlow?78:75,countSize,WHITE,600,'left',STUDIO_SEMIBOLD);if(portrait&&!standby&&count.length<=3){const unit=10/(pulseRect.w/309);txt(c,t('scene.committedEvents').toUpperCase(),labelX,64,unit,WHITE,400,'left',STUDIO_SANS,298-labelX);txt(c,'/ 10s',labelX,84,unit,WHITE,400,'left',STUDIO_SANS,298-labelX)}else txt(c,standby?'':count.length>3?t('scene.events'):`${t('scene.committedEvents').toUpperCase()} / 10s`,labelX,73,15,WHITE,400,'left',STUDIO_SANS,298-labelX);line(c,12,138,300,138,'#9debe655');
  const bars=eventBars(f.input.pulses,hudNow,10000);c.save();c.beginPath();c.rect(12,92,288,56);c.clip();
- for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.22+.68*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.35,138-height,2.7,height,1.35);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.5*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=8;c.beginPath();c.roundRect(x-2.2,138-height-1.2,4.4,height+2.4,2.2);c.fill();c.restore()}}
+ for(const bar of bars){const x=12+bar.position*288,height=5+bar.amplitude*35;c.globalAlpha=.2+.65*bar.position;c.fillStyle=tone;c.beginPath();c.roundRect(x-1.2,138-height,2.4,height,1.2);c.fill();if(!v.reducedMotion&&!f.input.frozen&&bar.ageMs<450){c.save();c.globalAlpha*=.45*(1-bar.ageMs/450);c.shadowColor=tone;c.shadowBlur=6;c.beginPath();c.roundRect(x-2,138-height-1,4,height+2,2);c.fill();c.restore()}}
  c.restore();c.restore();
 
  // No video-overlay caption capsule. Assisted reference lives only in the typing card
@@ -246,28 +197,13 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const card=geometry.inputCard,header=inputHeaderControls(card);
  const activeReward=feedback&&feedback.attemptId===v.rewardAttemptId&&now-v.rewardAt>=0&&now-v.rewardAt<1300;
  // Mode controls use native DOM; the recorded scene carries the same concise label.
- // continue22 — input-card plate hairline rim/floor on the typing card (peer to flow/trend plates).
- {const pc=card.card;c.save();c.beginPath();c.roundRect(pc.x+.5,pc.y+.5,pc.w-1,pc.h-1,14);
-  c.strokeStyle='rgba(201,226,216,.30)';c.lineWidth=1.05;c.stroke();
-  c.beginPath();c.moveTo(pc.x+16,pc.y+1.15);c.lineTo(pc.x+pc.w-16,pc.y+1.15);c.strokeStyle='rgba(245,252,248,.16)';c.lineWidth=.9;c.stroke();
-  c.beginPath();c.moveTo(pc.x+18,pc.y+pc.h-1.2);c.lineTo(pc.x+pc.w-18,pc.y+pc.h-1.2);c.strokeStyle='rgba(201,226,216,.10)';c.lineWidth=.9;c.stroke();c.restore()}
  if(!v.listeningDisplay?.active)txt(c,v.referenceGuideUnavailable?t('scene.referenceUnavailable'):v.referenceGuide?t('scene.referenceActionCompact'):t('scene.dictationActionCompact'),header.reference.x,card.helper.y+card.helper.h*.75,Math.max(12,12/card.cssScale),'#c8d8d2');
  if(listening){if(!listening.hidden)paintInputText(c,card,{...v,draft:listening.text,caret:listening.text.length,selectionEnd:listening.text.length,inputFocused:false,composition:false,nativeInputDisplay:undefined,inputGuide:undefined,referenceGuide:undefined,scrollLeft:0,scrollTop:0});paintPassiveKeyboard(c,card,{visible:v.keyboardFeedback?.visible!==false,codes:listening.hidden||!listening.targetKey?[]:[listening.targetKey],committedUntil:0,composing:false},now,v.reducedMotion)}else{paintInputText(c,card,{...v,checkedAttempt:feedback});paintPassiveKeyboard(c,card,v.keyboardFeedback,now,v.reducedMotion)}
  const status=m.kind!=='demo'?`${t('hud.localPreview')} · ${t('hud.noReference')}`:v.paused?t('hud.paused'):'';
  const button=card.submit;if(!listening){
-  // continue22 — Check-hit glass well under Enter glyph (glyph stays 1.5 stroke peer; no filled circle CTA).
-  // continue28 — submit-hit residual specular/press polish (Enter glyph stays).
-  {c.save();c.beginPath();c.roundRect(button.x+1,button.y+1,button.w-2,button.h-2,12);
-   const ok=feedback?.errors===0,cg=c.createLinearGradient(0,button.y,0,button.y+button.h);
-   cg.addColorStop(0,ok?'rgba(196,252,87,.20)':'rgba(18,28,34,.62)');cg.addColorStop(.55,ok?'rgba(20,36,22,.40)':'rgba(12,20,26,.42)');cg.addColorStop(1,ok?'rgba(14,28,18,.36)':'rgba(8,14,20,.32)');
-   c.fillStyle=cg;c.fill();c.strokeStyle=ok?'rgba(196,252,87,.48)':'rgba(201,226,216,.38)';c.lineWidth=1.05;c.stroke();
-   c.beginPath();c.moveTo(button.x+8,button.y+2);c.lineTo(button.x+button.w-8,button.y+2);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=.9;c.stroke();
-   c.beginPath();c.moveTo(button.x+10,button.y+button.h-2.1);c.lineTo(button.x+button.w-10,button.y+button.h-2.1);c.strokeStyle=ok?'rgba(196,252,87,.18)':'rgba(201,226,216,.12)';c.lineWidth=.85;c.stroke();
-   // Soft inner specular rim (presentation only; press optical via CSS :active).
-   c.beginPath();c.roundRect(button.x+3,button.y+3,button.w-6,button.h-6,10);c.strokeStyle='rgba(255,255,255,.06)';c.lineWidth=.7;c.stroke();c.restore()}
   // Bare line-art Enter/Return — same weight as keyboard/settings HudGlyph (no plate/circle).
   const cx=button.x+button.w/2,cy=button.y+button.h/2,icon=Math.min(button.w,button.h)*20/44,sw=1.5*icon/20;
-  c.save();c.strokeStyle=feedback?.errors===0?'#eafad6':'#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
+  c.save();c.strokeStyle='#edf4ef';c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;c.beginPath();
   if(feedback?.errors===0){c.moveTo(cx-icon*.28,cy);c.lineTo(cx+icon*.28,cy);c.moveTo(cx+icon*.08,cy-icon*.24);c.lineTo(cx+icon*.28,cy);c.lineTo(cx+icon*.08,cy+icon*.24)}
   else{c.moveTo(cx+icon*.26,cy-icon*.34);c.lineTo(cx+icon*.26,cy+icon*.14);c.lineTo(cx-icon*.30,cy+icon*.14);c.moveTo(cx-icon*.12,cy+icon*.14-icon*.16);c.lineTo(cx-icon*.30,cy+icon*.14);c.lineTo(cx-icon*.12,cy+icon*.14+icon*.16)}
   c.stroke();c.restore();
@@ -288,123 +224,27 @@ export function paintTransparentScene(canvas:HTMLCanvasElement,m:SceneMedia,v:Sc
  const movement=timelineMotion(now,f.enteredAt,v.reducedMotion||!!f.standbyPaused,idleTimeline,!!f.mediaInteracted);
  const iconScale=Math.max(1,16/(18*card.cssScale)),railScale=(portrait||card.cssScale<1)?1/card.cssScale:1;
  const playX=zones.play.x+zones.play.w/2+movement.playOffsetPx,centerY=zones.play.y+zones.play.h/2;
- // continue21 — transport-rail glyphs (1.5 stroke peer to keyboard/Enter; idle/active tone).
- // continue27 — play-hit glass well peer to Check-hit/fullscreen-hit (glyph stroke stays 1.5; glass/specular only).
- {const playing=!m.lesson.paused&&m.kind!=='image',glyph=idleTimeline?tone:'#edf4ef',sw=1.5*iconScale,pz=zones.play;
-  c.save();c.beginPath();c.roundRect(pz.x+2,pz.y+3,pz.w-4,pz.h-6,10);
-  const pg=c.createLinearGradient(0,pz.y,0,pz.y+pz.h);
-  pg.addColorStop(0,playing?'rgba(196,252,87,.14)':'rgba(18,28,34,.55)');
-  pg.addColorStop(1,playing?'rgba(14,28,18,.32)':'rgba(8,14,20,.28)');
-  c.fillStyle=pg;c.fill();c.strokeStyle=playing?'rgba(196,252,87,.38)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(pz.x+8,pz.y+4.2);c.lineTo(pz.x+pz.w-8,pz.y+4.2);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.8;c.stroke();
-  c.strokeStyle=glyph;c.fillStyle=glyph;c.lineWidth=sw;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
-  if(playing){c.beginPath();c.moveTo(playX-5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX-5.2*iconScale,centerY+8.5*iconScale);c.moveTo(playX+5.2*iconScale,centerY-8.5*iconScale);c.lineTo(playX+5.2*iconScale,centerY+8.5*iconScale);c.stroke()}
-  else{c.beginPath();c.moveTo(playX-4.8*iconScale,centerY-8.2*iconScale);c.lineTo(playX+8.2*iconScale,centerY);c.lineTo(playX-4.8*iconScale,centerY+8.2*iconScale);c.closePath();c.stroke()}
-  c.restore()}
- // continue26 — prev/next residual polish peer to transport-rail (stroke/optical only; no new navigation).
- for(const [z,direction,enabled] of[[zones.previous,-1,markers.some(p=>p.cueIndex===transportCueIndex-1)],[zones.next,1,markers.some(p=>p.cueIndex===transportCueIndex+1)]] as const){
-  const x=z.x+z.w/2,y=centerY;
-  c.save();c.globalAlpha*=enabled?1:.34;
-  c.beginPath();c.roundRect(z.x+2,z.y+3,z.w-4,z.h-6,10);
-  const pg=c.createLinearGradient(0,z.y,0,z.y+z.h);pg.addColorStop(0,'rgba(18,28,34,.50)');pg.addColorStop(1,'rgba(8,14,20,.26)');
-  c.fillStyle=pg;c.fill();c.strokeStyle=enabled?'rgba(201,226,216,.34)':'rgba(201,226,216,.18)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(z.x+8,z.y+4.2);c.lineTo(z.x+z.w-8,z.y+4.2);c.strokeStyle='rgba(245,252,248,.12)';c.lineWidth=.8;c.stroke();
-  c.translate(x,y);c.scale(iconScale,iconScale);c.translate(-x,-y);
-  c.strokeStyle='#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
-  c.beginPath();c.moveTo(x-direction*4.2,y-7.2);c.lineTo(x+direction*3.2,y);c.lineTo(x-direction*4.2,y+7.2);
-  c.moveTo(x-direction*8.2,y-7.2);c.lineTo(x-direction*8.2,y+7.2);c.stroke();c.restore()}
+ c.fillStyle=idleTimeline?tone:WHITE;
+ if(!m.lesson.paused&&m.kind!=='image'){c.fillRect(playX-7*iconScale,centerY-9*iconScale,4*iconScale,18*iconScale);c.fillRect(playX+3*iconScale,centerY-9*iconScale,4*iconScale,18*iconScale)}else{c.beginPath();c.moveTo(playX-5*iconScale,centerY-9*iconScale);c.lineTo(playX+9*iconScale,centerY);c.lineTo(playX-5*iconScale,centerY+9*iconScale);c.closePath();c.fill()}
+ for(const [z,direction,enabled] of[[zones.previous,-1,markers.some(p=>p.cueIndex===transportCueIndex-1)],[zones.next,1,markers.some(p=>p.cueIndex===transportCueIndex+1)]] as const){const x=z.x+z.w/2;c.save();c.translate(x,centerY);c.scale(iconScale,iconScale);c.translate(-x,-centerY);c.globalAlpha*=enabled?1:.35;line(c,x-direction*4,centerY-7,x+direction*3,centerY,WHITE,1.7);line(c,x+direction*3,centerY,x-direction*4,centerY+7,WHITE,1.7);line(c,x-direction*8,centerY-7,x-direction*8,centerY+7,WHITE,1.4);c.restore()}
  const railLeft=zones.seek.x+geometry.railInset,railWidth=zones.seek.w-geometry.railInset*2,railY=zones.seek.y+(portrait?34:26)*railScale;
  {
-  // continue17 timeline — heavier progress head, clearer ticks, denser trough rim.
-  // continue25 — seek-scrubber denser trough + stronger progress head + hairline ticks (timing untouched).
-  const trackH=Math.max(3.85,4.35*railScale);
-  c.save();c.beginPath();c.roundRect(railLeft,railY-trackH/2-1.85,railWidth,trackH+3.7,trackH+1.2);
-  c.fillStyle='#060e146e';c.fill();
+  // continue15 timeline — deeper trough, progress bloom, dual-tone head, crisp ticks.
+  const trackH=Math.max(3.4,3.8*railScale);
+  c.save();c.beginPath();c.roundRect(railLeft,railY-trackH/2-1.2,railWidth,trackH+2.4,trackH);
+  c.fillStyle='#08121855';c.fill();
   c.beginPath();c.roundRect(railLeft,railY-trackH/2,railWidth,trackH,trackH);
-  const trough=c.createLinearGradient(0,railY-trackH/2,0,railY+trackH/2);
-  trough.addColorStop(0,'#e4f4ef38');trough.addColorStop(.55,'#d4e7e328');trough.addColorStop(1,'#a8c4bc22');
-  c.fillStyle=trough;c.fill();
-  c.strokeStyle='#e8f6f148';c.lineWidth=1.05;c.stroke();
-  // Hairline floor under trough (presentation only).
-  c.beginPath();c.moveTo(railLeft+6,railY+trackH/2+2.1);c.lineTo(railLeft+railWidth-6,railY+trackH/2+2.1);
-  c.strokeStyle='#c9e2d822';c.lineWidth=.85;c.stroke();c.restore();
+  c.fillStyle='#d4e7e328';c.fill();
+  c.strokeStyle='#d4e7e338';c.lineWidth=.8;c.stroke();c.restore();
   const progress=idleTimeline?movement.progressFraction:duration?clamp(v.playbackTime/duration):0,headX=railLeft+railWidth*progress;
-  if(progress>0){c.save();c.shadowColor=traceTone;c.shadowBlur=14;c.beginPath();c.roundRect(railLeft,railY-trackH/2,Math.max(trackH,railWidth*progress),trackH,trackH);c.fillStyle=traceTone;c.globalAlpha=.98;c.fill();
-    c.beginPath();c.moveTo(railLeft+4,railY-trackH/2+.55);c.lineTo(railLeft+Math.max(trackH,railWidth*progress)-4,railY-trackH/2+.55);
-    c.strokeStyle='#ffffff55';c.lineWidth=.9;c.stroke();c.restore()}
-  for(const marker of markers){const x=railLeft+marker.ratio*railWidth,selected=marker.cueIndex===transportCueIndex;
-    // Hairline tick stems (optical only; cue indices unchanged).
-    line(c,x,railY-(selected?7.8:4.6),x,railY+(selected?7.8:4.6),selected?tone:'#d8e6e0c0',selected?2.7:1.05);
-    c.save();c.beginPath();c.moveTo(x-.5,railY+(selected?7.8:4.6)+.4);c.lineTo(x+.5,railY+(selected?7.8:4.6)+.4);
-    c.strokeStyle=selected?'#c4fc5766':'#c9e2d828';c.lineWidth=.7;c.stroke();c.restore();
-    txt(c,String(marker.cueIndex+1).padStart(2,'0'),x,zones.seek.y+(portrait?53:45)*railScale,Math.max(10,10/card.cssScale),selected?tone:'#c5d2cdc0',selected?650:400,'center')}
-  // continue17 timeline head weight — dual ring + tip hub + stronger idle bloom.
-  // continue19 — standby-energy idle head bloom (presentation only).
-  // continue25 — stronger progress head specular (timing untouched).
-  c.save();c.shadowBlur=idleTimeline&&!v.reducedMotion?(20+(standby?standby.energy*10:0)):8;c.shadowColor=tone;
-  c.beginPath();c.arc(headX,railY,5.55,0,Math.PI*2);c.fillStyle=idleTimeline?tone:WHITE;c.fill();
-  c.beginPath();c.arc(headX,railY,5.55,0,Math.PI*2);c.strokeStyle='#0c141888';c.lineWidth=1.25;c.stroke();
-  c.beginPath();c.arc(headX,railY,3.95,0,Math.PI*2);c.strokeStyle='#ffffff44';c.lineWidth=.85;c.stroke();
-  c.beginPath();c.arc(headX,railY,2.7,0,Math.PI*2);c.fillStyle='#0c1418cc';c.fill();
-  c.beginPath();c.arc(headX,railY,1.15,0,Math.PI*2);c.fillStyle=idleTimeline?'#fff6d8':'#e8f4ee';c.fill();
-  c.restore();
+  if(progress>0){c.save();c.shadowColor=traceTone;c.shadowBlur=8;c.beginPath();c.roundRect(railLeft,railY-trackH/2,Math.max(trackH,railWidth*progress),trackH,trackH);c.fillStyle=traceTone;c.globalAlpha=.95;c.fill();c.restore()}
+  for(const marker of markers){const x=railLeft+marker.ratio*railWidth,selected=marker.cueIndex===transportCueIndex;line(c,x,railY-(selected?6.5:4),x,railY+(selected?6.5:4),selected?tone:'#d8e6e0a8',selected?2.35:1.1);txt(c,String(marker.cueIndex+1).padStart(2,'0'),x,zones.seek.y+(portrait?53:45)*railScale,Math.max(10,10/card.cssScale),selected?tone:'#c5d2cdb8',selected?600:400,'center')}
+  c.save();c.shadowBlur=idleTimeline&&!v.reducedMotion?12:4;c.shadowColor=tone;c.beginPath();c.arc(headX,railY,4.3,0,Math.PI*2);c.fillStyle=idleTimeline?tone:WHITE;c.fill();c.beginPath();c.arc(headX,railY,1.7,0,Math.PI*2);c.fillStyle='#0c1418bb';c.fill();c.restore();
   const timeLabel=m.kind==='image'?t('scene.imageNoTimeline'):duration?`${format(v.playbackTime)} / ${format(duration)}`:t('scene.mediaWaiting');
   txt(c,timeLabel,railLeft,zones.seek.y+(portrait?13:12)*railScale,Math.max(11,10.5/card.cssScale),'#e8efec',500);txt(c,m.kind!=='demo'?t('scene.noCueMarkers'):'',railLeft+railWidth,zones.seek.y+(portrait?-2:12)*railScale,Math.max(11,10/card.cssScale),MUTED,400,'right');
 }
- // continue21 — mute-volume cluster (glass well + 1.5 stroke peer + volume ticks).
- // continue28 — mute-hit residual glass peer to play-hit continue27 (stroke/glass only).
- {const mz=zones.mute;const cluster={x:mz.x-2,y:mz.y+2,w:mz.w+56,h:mz.h-4};
-  c.save();c.beginPath();c.roundRect(cluster.x,cluster.y,cluster.w,cluster.h,11);
-  const mg=c.createLinearGradient(0,cluster.y,0,cluster.y+cluster.h);mg.addColorStop(0,'rgba(18,28,34,.58)');mg.addColorStop(1,'rgba(8,14,20,.30)');
-  c.fillStyle=mg;c.fill();c.strokeStyle=v.muted?'rgba(255,180,140,.36)':'rgba(201,226,216,.34)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(cluster.x+8,cluster.y+1.05);c.lineTo(cluster.x+cluster.w-8,cluster.y+1.05);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.85;c.stroke();c.restore();
-  // Mute hit residual well (peer play-hit glass; cluster chrome retained).
-  {c.save();c.beginPath();c.roundRect(mz.x+2,mz.y+3,mz.w-4,mz.h-6,10);
-   const ug=c.createLinearGradient(0,mz.y,0,mz.y+mz.h);
-   ug.addColorStop(0,v.muted?'rgba(255,180,140,.16)':'rgba(18,28,34,.48)');
-   ug.addColorStop(1,v.muted?'rgba(40,20,14,.30)':'rgba(8,14,20,.24)');
-   c.fillStyle=ug;c.fill();c.strokeStyle=v.muted?'rgba(255,180,140,.40)':'rgba(201,226,216,.30)';c.lineWidth=1;c.stroke();
-   c.beginPath();c.moveTo(mz.x+8,mz.y+4.2);c.lineTo(mz.x+mz.w-8,mz.y+4.2);c.strokeStyle='rgba(245,252,248,.14)';c.lineWidth=.8;c.stroke();c.restore()}
-  const speaker=mz.x+mz.w/2;c.save();c.translate(speaker,centerY);c.scale(iconScale,iconScale);c.translate(-speaker,-centerY);
-  c.strokeStyle=v.muted?'#ffd2bb':'#edf4ef';c.lineWidth=1.5;c.lineCap='round';c.lineJoin='round';c.shadowColor='#06101699';c.shadowBlur=2;
-  c.beginPath();c.moveTo(speaker-9.5,centerY-3.8);c.lineTo(speaker-5,centerY-3.8);c.lineTo(speaker+.8,centerY-8.5);c.lineTo(speaker+.8,centerY+8.5);c.lineTo(speaker-5,centerY+3.8);c.lineTo(speaker-9.5,centerY+3.8);c.closePath();c.stroke();
-  if(!v.muted){c.beginPath();c.arc(speaker+1,centerY,7.4,-.85,.85);c.stroke();if((v.volume??.8)>.55){c.beginPath();c.arc(speaker+1,centerY,11.2,-.72,.72);c.stroke()}}
-  else{c.beginPath();c.moveTo(speaker-7.5,centerY-8.5);c.lineTo(speaker+10.5,centerY+8.5);c.stroke()}
-  c.restore();
-  // continue25 — volume-slider glass well + fill + hairline (peer mute-volume cluster; no size invent).
-  {const vx=mz.x+mz.w+6,vy=centerY,vol=v.muted?0:Math.max(0,Math.min(1,v.volume??.8));
-   const trackW=34,trackH=5.2,thumbR=4.4;
-   c.save();c.beginPath();c.roundRect(vx-1.5,vy-trackH/2-2.2,trackW+3,trackH+4.4,6);
-   c.fillStyle='rgba(10,18,24,.42)';c.fill();
-   c.strokeStyle='rgba(201,226,216,.28)';c.lineWidth=.9;c.stroke();
-   c.beginPath();c.roundRect(vx,vy-trackH/2,trackW,trackH,trackH);
-   c.fillStyle='#c9e2d828';c.fill();
-   c.strokeStyle='#c9e2d838';c.lineWidth=.75;c.stroke();
-   if(vol>0){c.beginPath();c.roundRect(vx,vy-trackH/2,Math.max(trackH,trackW*vol),trackH,trackH);
-     c.fillStyle=v.muted?'#ffd2bb99':'#c4fc57cc';c.fill();
-     c.beginPath();c.moveTo(vx+2,vy-trackH/2+.55);c.lineTo(vx+Math.max(trackH,trackW*vol)-2,vy-trackH/2+.55);
-     c.strokeStyle='#ffffff44';c.lineWidth=.7;c.stroke()}
-   const tx=vx+trackW*vol;
-   c.beginPath();c.arc(tx,vy,thumbR,0,Math.PI*2);c.fillStyle=v.muted?'#ffd2bb':'#edf4ef';c.fill();
-   c.beginPath();c.arc(tx,vy,thumbR,0,Math.PI*2);c.strokeStyle='#0c141888';c.lineWidth=1.05;c.stroke();
-   c.beginPath();c.arc(tx,vy,1.35,0,Math.PI*2);c.fillStyle='#0c1418aa';c.fill();
-   // Keep 5 optical level marks under the well (peer continue21 ticks; presentation only).
-   for(let i=0;i<5;i++){const on=vol>(i+.15)/5;c.fillStyle=on?'#c4fc5766':'#c9e2d822';
-     c.beginPath();c.roundRect(vx+i*(trackW/5)+1.2,vy+trackH/2+2.4,2.4,1.15,.6);c.fill()}
-   c.restore()}
- }
+ const speaker=zones.mute.x+zones.mute.w/2;c.save();c.translate(speaker,centerY);c.scale(iconScale,iconScale);c.translate(-speaker,-centerY);c.strokeStyle=WHITE;c.lineWidth=1.7;c.beginPath();c.moveTo(speaker-10,centerY-4);c.lineTo(speaker-5,centerY-4);c.lineTo(speaker+1,centerY-9);c.lineTo(speaker+1,centerY+9);c.lineTo(speaker-5,centerY+4);c.lineTo(speaker-10,centerY+4);c.closePath();c.stroke();if(!v.muted){c.beginPath();c.arc(speaker+1,centerY,8,-.85,.85);c.stroke()}else line(c,speaker-8,centerY-9,speaker+11,centerY+9,WHITE,1.7);c.restore();
 
  if(projected)mapRect(c,{x:1575,y:845,w:69,h:65},geometry.counter);
- // continue18 — cue-counter numeral optical (taller glass plate, tabular weight, hairline floor).
- {const cr={x:1575,y:845,w:69,h:65};c.save();c.beginPath();c.roundRect(cr.x,cr.y,cr.w,cr.h,13);
-  const cg=c.createLinearGradient(0,cr.y,0,cr.y+cr.h);cg.addColorStop(0,'rgba(20,32,38,.68)');cg.addColorStop(.55,'rgba(12,20,26,.48)');cg.addColorStop(1,'rgba(8,14,20,.32)');
-  c.fillStyle=cg;c.fill();c.strokeStyle='rgba(201,226,216,.36)';c.lineWidth=1.1;c.stroke();
-  c.beginPath();c.moveTo(cr.x+10,cr.y+1.1);c.lineTo(cr.x+cr.w-10,cr.y+1.1);c.strokeStyle='rgba(245,252,248,.20)';c.lineWidth=1;c.stroke();
-  c.beginPath();c.moveTo(cr.x+12,cr.y+cr.h-1.15);c.lineTo(cr.x+cr.w-12,cr.y+cr.h-1.15);c.strokeStyle='rgba(201,226,216,.14)';c.lineWidth=1;c.stroke();
-  c.restore();
-  const cueLabel=String(transportCueIndex+1).padStart(2,'0');
-  // Optical sit: numeral slightly high in the plate; muted cue caption on the floor hairline.
-  txt(c,cueLabel,1610,878,27,'#e8f2eef0',600,'center',STUDIO_SEMIBOLD);
-  txt(c,'CUE',1610,900,8.5,'#aebcbaaa',500,'center');
-  frame(c,cr,.36,palette?.frame??AQUA)}if(projected)c.restore();c.restore();c.restore();return presentation.mode;
+ {const cr={x:1575,y:845,w:69,h:65};c.save();c.beginPath();c.roundRect(cr.x,cr.y,cr.w,cr.h,12);const cg=c.createLinearGradient(0,cr.y,0,cr.y+cr.h);cg.addColorStop(0,'rgba(18,28,34,.55)');cg.addColorStop(1,'rgba(8,14,20,.28)');c.fillStyle=cg;c.fill();c.strokeStyle='rgba(201,226,216,.28)';c.lineWidth=1;c.stroke();c.restore();txt(c,String(transportCueIndex+1).padStart(2,'0'),1610,891,26,'#d2e2e0c8',500,'center');frame(c,cr,.32,palette?.frame??AQUA)}if(projected)c.restore();c.restore();c.restore();return presentation.mode;
 }
